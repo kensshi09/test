@@ -12,16 +12,16 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background-color: #f5f5f5;
+            background-color: #1a1a1a;
             color: #333;
             line-height: 1.6;
             padding-top: 100px; /* отступ под фиксированный хедер */
         }
         header { /* нав-бар */
-            background-color: #2c3e50;
+            background-color: #151515;
             padding: 15px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             position: fixed; /* фиксация нав-бара */
             top: 0;
@@ -87,7 +87,7 @@
         }
         .hero {
             text-align: center;
-            padding: 80px 20px;
+            padding: 200px 20px;
             background: linear-gradient(to bottom, #ff5500, #2980b9);
             color: white; /* цвет текста */
         }
@@ -100,14 +100,19 @@
             margin-bottom: 30px;
         }
         .hero button {
-            padding: 15px 30px;
-            font-size: 18px;
-            background-color: #ff5500;
-            color: white;
-            border: none;
-            border-radius: 5px;
+            background-color: #ffaa00; /* Желтый цвет кнопки */
+            color: #1a1a1a; /* цвет текста в самой кнопке */
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 25px;
+            font-size: 16px;
             cursor: pointer;
+            width: 250px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
+
         .hero button:hover {
             background-color: #c0392b;
         }
@@ -120,14 +125,165 @@
             font-size: 36px;
             margin-bottom: 40px;
         }
-        .service-grid, .gallery-grid, .price-grid, .team-grid {
+        .gallery-grid, .price-grid, .team-grid {
             display: flex;
             justify-content: center;
             gap: 30px;
             flex-wrap: wrap;
         }
+
+        .service-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            background-color: #1a1a1a; /* Темный фон */
+            padding: 20px;
+        }
+
+        /* Стили для ряда карточек */
+        .service-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Стили для карточек */
+        .service-card {
+            background-color: #2a2a2a; /* Темный фон карточки */
+            border-radius: 15px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            display: flex; /* Добавляем flex для карточки */
+            flex-direction: column; /* Вертикальное расположение */
+            height: 500px; /* Фиксированная высота карточки */
+        }
+
+        .service-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #ff5500; /* Оранжевая линия под изображением */
+        }
+
+        .service-content {
+            padding: 20px;
+            text-align: left;
+            color: #fff;
+            display: flex; /* Используем flex для содержимого */
+            flex-direction: column; /* Вертикальное расположение */
+            flex-grow: 1; /* Растягиваем содержимое */
+        }
+
+        .service-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ff5500; /* Оранжевый цвет заголовка */
+        }
+
+        .service-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #ccc; /* Светло-серый текст */
+            flex-grow: 1; /* Текст растягивается, чтобы занять доступное пространство */
+        }
+
+        .service-button {
+            background-color: #ffaa00; /* Желтый цвет кнопки */
+            color: #1a1a1a; /* цвет текста в самой кнопке */
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: auto; /* Прижимаем кнопку к низу */
+        }
+
+        .service-button:hover {
+            background-color: #e69500; /* Темнее при наведении */
+        }
+
+        /* Стили для горизонтальной карточки */
+        .horizontal-card {
+            display: flex;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 960px; /* 3 карточки по 300px + отступы */
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .horizontal-card img {
+            width: 40%;
+            height: 200px;
+            object-fit: cover;
+            padding: 10px; /* Добавляем отступы со всех сторон */
+            box-sizing: border-box; /* Учитываем padding в ширине */
+            border-radius: 30px; /* Закругляем углы изображения */
+
+        }
+
+        .horizontal-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            width: 60%;
+        }
+
+        .horizontal-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .horizontal-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .horizontal-button {
+            background-color: #ffaa00;
+            color: #1a1a1a;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .horizontal-button:hover {
+            background-color: #e69500;
+        }
+
+
+        /* Удаляем старые стили для service-item, так как они больше не нужны */
+        .service-item {
+            display: none; /* Скрываем старые стили */
+        }
+
         .gallery-grid {
-            background-color: #ff5500;
+            background-color: black;
+            padding: 10px;
         }
         .service-item, .price-item, .team-item {
             background-color: white;
@@ -148,7 +304,7 @@
         }
 
         #reviews {
-            padding: 90px 20px;
+            padding: 10px 20px;
             background-color: #111;
             color: #fff;
             text-align: center;
@@ -190,9 +346,10 @@
             height: auto;
             display: block;
         }
+        
 
         footer {
-            background-color: #2c3e50;
+            background-color: #151515;
             color: white;
             text-align: center;
             padding: 20px;
@@ -212,10 +369,14 @@
                 font-size: 36px;
             }
 
+            header {
+                justify-content: space-between;
+            }
+
             .nav-links {
                 display: flex;
                 flex-direction: column;
-                background-color: #2c3e50;
+                background-color: #151515;
                 position: absolute;
                 top: 100%;
                 left: 0;
@@ -228,8 +389,8 @@
             }
 
             .nav-links a {
-                margin: 10px 0;
-                padding: 10px;
+                margin: 1px 0;
+                padding: 5px;
             }
 
             .nav-links.active {
@@ -256,9 +417,53 @@
                 }
 
             nav.active {
-                max-height: 300px; /* подбирается по высоте контента */
+                max-height: 150px; /* подбирается по высоте контента */
                 opacity: 1;
                 }
+
+            #reviews {
+                padding: 90px 20px;
+                background-color: #111;
+                color: #fff;
+                text-align: center;
+                }
+
+            .service-card {
+                width: 100%;
+                max-width: 300px;
+                height: auto; /* На мобильных устройствах высота авто */
+                }
+
+            .service-grid {
+                padding: 10px;
+                }
+
+            .horizontal-card {
+                flex-direction: column;
+                max-width: 300px;
+                }
+            
+            .horizontal-card img{
+                width: 100%; /* Изображение занимает всю ширину */
+                height: 150px;
+                padding: 10px; /* Убираем padding, чтобы изображение было на всю ширину */
+                border-radius: 20px; /* Закругляем только верхние углы */
+                }
+
+            .horizontal-content {
+                width: 100%;
+                text-align: center;
+                padding: 20px; /* Сохраняем отступы для текста */
+                }
+
+            .horizontal-button {
+                margin: 0 auto;
+                }
+
+
+            .hero {
+                padding: 80px 20px;
+            }
         }
     </style>
 </head>
@@ -295,24 +500,102 @@
     </section>
 
     <section class="section" id="home">
-        <h2>О нас</h2>
-        <p>Мы — команда chotam_astana, эксперты в создании незабываемых событий в Астане. Мы организовали более 300 мероприятий — от уютных семейных праздников до масштабных корпоративных конференций. Наша миссия — сделать каждый момент особенным!</p>
+        <h2>Что значит сотрудничать вместе с CHOTAM! SHOW?</h2>
+        <div class="team-grid">
+        <div class="team-item">
+            <h3>Формат</h3>
+            <p>Мы предлагаем провести ваше мероприятие в современном формате.</p>
+        </div>
+        <div class="team-item">
+            <h3>Игры</h3>
+            <p>Ваши гости точно не заскучают играя в наши игры.</p>
+        </div>
+        <div class="team-item">
+            <h3>Актуальный ведущий</h3>
+            <p>Полное сопровождение мероприятия.</p>
+        </div>
+    </div>
     </section>
 
     <section class="section" id="services">
-        <h2>Наши услуги</h2>
+        <h2>Мы поможем организовать мероприятие любого формата</h2>
         <div class="service-grid">
-            <div class="service-item">
-                <h3>Корпоративные события</h3>
-                <p>От тимбилдингов до новогодних вечеринок — создадим атмосферу для вашей команды.</p>
+            <!-- Первый ряд: 3 карточки -->
+            <div class="service-row">
+                <div class="service-card">
+                    <img src="templates/logo.jpeg" alt="День рождения">
+                    <div class="service-content">
+                        <h3>День рождения</h3>
+                        <p>Мероприятие с нестандартной программой и харизматичным ведущим: подарите праздник себе и близким. С размахом отметьте главный праздник в году!</p>
+                        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+                            <button class="service-button">Принять участие</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="templates/logo.jpeg" alt="Корпоратив">
+                    <div class="service-content">
+                        <h3>Корпоратив</h3>
+                        <p>Отличите от рабочей рутины и организуйте незабываемый вечер для коллег. Ваш праздник еще долго будут обсуждать!</p>
+                        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+                            <button class="service-button">Принять участие</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="templates/logo.jpeg" alt="Свадьба">
+                    <div class="service-content">
+                        <h3>Свадьба</h3>
+                        <p>Сделайте свой день особенным и любим всем: устройте вечер по мотивам известных телепередач и уникальному сценарию.</p>
+                        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+                            <button class="service-button">Принять участие</button>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="service-item">
-                <h3>Дни рождения</h3>
-                <p>Сделаем ваш день особенным, продумав каждую деталь.</p>
+            <!-- Второй ряд: 3 карточки -->
+            <div class="service-row">
+                <div class="service-card">
+                    <img src="templates/logo.jpeg" alt="Конференции">
+                    <div class="service-content">
+                        <h3>Конференции</h3>
+                        <p>Организация деловых мероприятий с высоким уровнем сервиса.</p>
+                        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+                            <button class="service-button">Принять участие</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="templates/logo.jpeg" alt="Детский праздник">
+                    <div class="service-content">
+                        <h3>Детский праздник</h3>
+                        <p>Организуем праздник для ваших маленьких детишек.</p>
+                        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+                            <button class="service-button">Принять участие</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <img src="templates/logo.jpeg" alt="Новый год">
+                    <div class="service-content">
+                        <h3>Новый год</h3>
+                        <p>Отметьте главный праздник зимы в нескучном формате.</p>
+                        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+                            <button class="service-button">Принять участие</button>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="service-item">
-                <h3>Конференции</h3>
-                <p>Организация деловых мероприятий с высоким уровнем сервиса.</p>
+            <!-- Горизонтальная карточка -->
+            <div class="horizontal-card">
+                <img src="templates/party.jpg" alt="Команда">
+                <div class="horizontal-content">
+                    <h3>У вас другой повод?</h3>
+                    <p>Без проблем! Создадим сценарий и подберем площадку для мероприятия, чтобы вы провели время ярко и с пользой.</p>
+                    <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+                        <button class="horizontal-button">Обсудить мероприятие</button>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -341,25 +624,33 @@
                 <div class="review-card">
                     <img src="templates/otzyv3.png" alt="Отзыв 3">
                 </div>
-                <!-- Добавь больше отзывов по мере необходимости -->
+                <!-- можно еще добавить отзывов и сделать динамическое обновление -->
             </div>
         </div>
     </section>    
 
     <section class="section" id="price">
-        <h2>Цена</h2>
+        <h2>Актуальные пакеты мероприятий</h2>
         <div class="price-grid">
             <div class="price-item">
-                <h3>Пакет "S"</h3>
+                <h3>Пакет "XS"</h3>
                 <p>До 50 человек — от 150,000 тг</p>
             </div>
             <div class="price-item">
-                <h3>Пакет "M"</h3>
+                <h3>Пакет "S"</h3>
                 <p>50-200 человек — от 300,000 тг</p>
             </div>
             <div class="price-item">
-                <h3>Пакет "L"</h3>
+                <h3>Пакет "M"</h3>
                 <p>200+ человек — от 500,000 тг</p>
+            </div>
+            <div class="price-item">
+            <h3>Пакет "L"</h3>
+                <p>До 50 человек — от 150,000 тг</p>
+            </div>
+            <div class="price-item">
+            <h3>Пакет "XL"</h3>
+                <p>До 50 человек — от 150,000 тг</p>
             </div>
         </div>
     </section>
