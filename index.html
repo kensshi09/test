@@ -2,7 +2,7 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
     <title>CHOTAM! SHOW</title>
     <style>
       * {
@@ -87,24 +87,55 @@
       .hero {
         justify-content: center;
         text-align: center;
-        padding: 240px 20px;
+        padding: 200px 20px;
         background: linear-gradient(to bottom, #ff5500, #2980b9);
+        background-image: url(templates/background2.png);
+        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
+        background-position: center; /* Центрирует изображение */
+        background-repeat: no-repeat; /* Предотвращает повторение изображения */
+        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          z-index: 1; /* Размещает затемнение позади контента */
       }
       .hero h1 {
-        font-size: 45px;
+        font-size: 40px;
         margin-bottom: 20px;
         color: white;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+
       }
       .hero h2 {
         font-size: 30px;
         margin-bottom: 20px;
         color: white;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+
       }
       .hero p {
         font-size: 30px;
         margin-bottom: 30px;
-        color: white;
+        color: #ffaa00;
         font-weight: bold;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+
+
       }
       .hero button {
         background-color: #ffaa00; /* Желтый цвет кнопки */
@@ -118,30 +149,57 @@
         text-transform: uppercase;
         font-weight: bold;
         transition: background-color 0.3s ease;
+        z-index: 2;
+        position: relative;
       }
+
+      /* Иконка WhatsApp (опционально) */
+      .hero button::before {
+            content: '';
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+            background-repeat: no-repeat;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
       .hero button:hover {
-        background-color: #c0392b;
+        background-color: #25D366;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        text-decoration: none; /* Убедимся, что подчеркивания нет */
       }
       .section {
         padding: 50px 20px;
         text-align: center;
         scroll-margin-top: 80px; /* отступ при скролле по якорю, равный высоте header'а */
+        z-index: 2;
       }
       .section h2 {
         color: #ffaa00; /* цвет текста h2 */
         font-size: 56px;
-        margin-bottom: 10px;
+        margin-bottom: 1px;
+        z-index: 2;
+        position: relative;
+        padding-bottom: 1px;
       }
 
       section h6 {
         color: #ffffff; /* цвет текста h2 */
         font-size: 36px;
-        margin-bottom: 30px;
+        margin-bottom: 35px;
+        z-index: 2;
+        position: relative;
       }
       .section h5 {
         color: #ffffff; /* цвет текста h2 */
         font-size: 36px;
-        margin-bottom: 40px;
+        margin-bottom: 15px;
+        margin-top: 1px;
+        padding-top: 1px;
+        z-index: 2;
+        position: relative;
       }
 
       section h7 {
@@ -156,7 +214,8 @@
         gap: 30px;
         flex-wrap: wrap;
       }
-      .service-grid {
+
+      #services {
         display: flex;
         flex-direction: column;
         gap: 30px;
@@ -168,8 +227,10 @@
         background-repeat: no-repeat; /* Предотвращает повторение изображения */
         overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
         position: relative;
+        z-index: 2;
       }
-      .service-grid::before {
+
+      #services::before {
           content: '';
           position: absolute;
           top: 0;
@@ -178,6 +239,12 @@
           height: 100%;
           background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
           z-index: 1; /* Размещает затемнение позади контента */
+      }
+      .service-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        position: relative;
       }
       /* Стили для ряда карточек */
       .service-row {
@@ -207,7 +274,6 @@
         width: 100%;
         height: 200px;
         object-fit: cover;
-        border-bottom: 2px solid #ff5500; /* Оранжевая линия под изображением */
       }
       .service-content {
         padding: 20px;
@@ -225,8 +291,9 @@
       .service-content p {
         font-size: 16px;
         margin-bottom: 20px;
-        color: #ccc; /* Светло-серый текст */
+        color: #ffffff; /* Светло-серый текст */
         flex-grow: 1; /* Текст растягивается, чтобы занять доступное пространство */
+        font-weight: bold;
       }
       .service-button {
         background-color: #ffaa00; /* Желтый цвет кнопки */
@@ -302,8 +369,22 @@
         font-weight: bold;
         transition: background-color 0.3s ease;
       }
+
+      .horizontal-button::before {
+            content: '';
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+            background-repeat: no-repeat;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
       .horizontal-button:hover {
-        background-color: #e69500;
+        background-color: #25D366;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        text-decoration: none; /* Убедимся, что подчеркивания нет */
       }
       /* Удаляем старые стили для service-item, так как они больше не нужны */
       .service-item {
@@ -333,20 +414,35 @@
         font-size: 56px;
         margin-bottom: 10px;
         text-transform: uppercase; /* Добавляем заглавные буквы */
+        z-index: 2;
       }
 
       .section-gal {
         color: #ffffff; /* Белый цвет подзаголовка */
         font-size: 36px;
         margin-bottom: 40px;
+        position: relative; /* Добавляем для корректного z-index */
       }
 
       #gallery {
         background-color: #111; /* Темный фон секции */
-        padding: 50px 20px;
         position: relative;
+        background-image: url(templates/background2.png);
+        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
+        background-position: center; /* Центрирует изображение */
+        background-repeat: no-repeat; /* Предотвращает повторение изображения */
+        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
       }
-
+      #gallery::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          z-index: 0; /* Размещает затемнение позади контента */
+      }
       .gallery-grid {
         display: grid; /* Используем grid вместо flex для точной сетки */
         grid-template-columns: repeat(4, 1fr); /* 4 столбца на десктопе */
@@ -354,6 +450,7 @@
         justify-items: center;
         max-width: 1200px; /* Ограничиваем ширину для центрирования */
         margin: 0 auto;
+        position: relative; /* Добавляем для корректного z-index */
       }
 
       .gallery-item {
@@ -364,6 +461,8 @@
         border-radius: 1px;
         box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
         overflow: visible;
+        position: relative;
+        z-index: 2;
       }
 
             /* Эффект лампочек */
@@ -376,6 +475,7 @@
         bottom: -5px;
         border: 1px solid #ffaa00; /* Желтая рамка */
         border-radius: 14px;
+        z-index: 2;
         box-shadow: 
           0 0 10px 3px #ffaa00, /* Внешнее свечение */
           0 0 20px 6px rgba(255, 170, 0, 0.6), /* Более мягкое свечение */
@@ -413,49 +513,140 @@
         font-weight: bold;
         margin-top: 40px;
         transition: background-color 0.3s ease;
+        position: relative;
+        z-index: 2;
       }
 
       .gallery-button:hover {
         background-color: #e69500; /* Темнее при наведении */
       }
+
       #reviews {
-        padding: 10px 20px;
-        background-color: #111;
+        padding: 40px 20px;
+        background-color: #020202;
         color: #fff;
         text-align: center;
       }
+
       #reviews h2 {
-        padding-top: 50px;
-        font-size: 36px;
+        font-size: 48px;
         margin-bottom: 10px;
-        color: #ffaa00;
+        color: #ffd700;
       }
-      #reviews .subtitle {
-        font-size: 36px;
+
+      #reviews h6 {
+        font-size: 18px;
         margin-bottom: 40px;
         color: #fff;
       }
+
       .reviews-gallery {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, auto);
         gap: 20px;
         justify-content: center;
         align-items: stretch;
+        max-width: 1200px;
+        margin: 0 auto;
       }
+
+      /* Fixed sizes for cards */
       .review-card {
-        background-color: #1a1a1a;
+        background-color: #fff;
         border-radius: 12px;
         overflow: hidden;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         transition: transform 0.3s;
       }
+
       .review-card:hover {
         transform: scale(1.03);
       }
+
+      /* Small cards (1, 3, 4, 5, 8) */
+      .card-1, .card-3, .card-4, .card-5, .card-8, .card-9 {
+        width: 280px;
+        height: 400px;
+      }
+
+      /* Wide cards (2, 6, 7) */
+      .card-2, .card-6, .card-7 {
+        width: 580px;
+        height: 400px;
+      }
+
+      /* Position the cards */
+      .card-1 {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+
+      .card-2 {
+        grid-column: 2 / 4;
+        grid-row: 1 / 2;
+      }
+
+      .card-3 {
+        grid-column: 4 / 5;
+        grid-row: 1 / 2;
+      }
+
+      .card-4 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+
+      .card-5 {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+      }
+
+      .card-6 {
+        grid-column: 3 / 5;
+        grid-row: 2 / 3;
+      }
+
+      .card-7 {
+        grid-column: 1 / 3;
+        grid-row: 3 / 4;
+      }
+
+      .card-8 {
+        grid-column: 3 / 4;
+        grid-row: 3 / 4;
+      }
+
+      .card-9 {
+        grid-column: 4 / 4;
+        grid-row: 3 / 4;
+      }
+
+      /* Ensure images fit within the card dimensions */
       .review-card img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
         display: block;
+      }
+
+      /* More Reviews button styles */
+      .more-reviews-btn {
+        display: none; /* Hidden by default on desktop */
+        background-color: #ffd700;
+        color: #000;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 20px auto;
+        transition: background-color 0.3s;
+      }
+
+      .more-reviews-btn:hover {
+        background-color: #e6c200;
       }
       footer {
         background-color: #151515;
@@ -521,9 +712,14 @@
             margin-right: 5px;
         }
         .package-description {
+            height: 470px;
             width: 500px; /* Фиксированная ширина для блока с описанием */
             color: #fff;
             text-align: left;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            padding-left: 30px;
+            padding-top: 20px;
         }
         .package-info {
             display: none;
@@ -566,12 +762,42 @@
             width: 180px; /* Фиксированная ширина кнопок */
         }
         .action-button.participate {
-            background-color: #ffaa00;
-            color: #1a1a1a;
-            width: 400px;
+          width: 400px;
+          display: inline-block;
+          padding: 12px 30px;
+          background-color: #ffaa00; 
+          color: #1a1a1a;
+          text-decoration: none; /* Убираем подчеркивание */
+          border-radius: 30px;
+          font-weight: bold;
+          font-size: 18px;
+          text-transform: uppercase;
+          transition: all 0.3s ease;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
         }
         .action-button.participate:hover {
-            background-color: #e69500;
+          background-color: #25D366; /* Темнее при наведении */
+          transform: translateY(-2px);
+          box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+          text-decoration: none; /* Убедимся, что подчеркивания нет */
+        }
+
+        .action-button.participate:active {
+          transform: translateY(0);
+        }
+
+        /* Иконка WhatsApp (опционально) */
+        .action-button.participate::before {
+            content: '';
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+            background-repeat: no-repeat;
+            margin-right: 10px;
+            vertical-align: middle;
         }
         .package-buttons {
             padding-top: 40px;
@@ -621,7 +847,7 @@
         justify-content: center;
         gap: 30px;
         flex-wrap: wrap;
-        background-color: #1a1a1a; /* Темный фон */
+        background-color: #020202; /* Темный фон */
         padding: 20px;
         animation: fadeIn 2s ease-in-out; /* Анимация появления */
       }
@@ -677,15 +903,60 @@
       .carousel-next {
         right: 10px;
       }
+
+      .whatsapp-order {
+        text-align: center;
+        margin-top: 40px;
+        padding-bottom: 30px;
+      }
+
+      .whatsapp-button {
+        background-color: #ffaa00; 
+        color: #1a1a1a;
+        padding: 15px 40px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+        text-transform: uppercase;
+        display: inline-block;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .whatsapp-button:hover {
+        background-color: #25D366; /* Темный цвет WhatsApp */
+        transform: translateY(-3px);
+        box-shadow: 0 7px 20px rgba(37, 211, 102, 0.4);
+      }
+
+      .whatsapp-button:active {
+        transform: translateY(1px);
+      }
+
+      /* Иконка WhatsApp (опционально) */
+      .whatsapp-button::before {
+        content: '';
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
       .what-is-show {
         width: auto;
         height: auto;
-        background-image: url(templates/background2.png);
+        background-image: url(templates/background3.png);
         background-size: cover; /* Растягивает изображение, сохраняя пропорции */
         background-position: center; /* Центрирует изображение */
         background-repeat: no-repeat; /* Предотвращает повторение изображения */
         background-color: #1a1a1a;
-        padding: 80px 20px;
+        padding: 200px 20px;
         position: relative;
         overflow: hidden;
       }
@@ -696,7 +967,7 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          background-color: rgba(0, 0, 0, 0); /* Затемнение: цвет и прозрачность */
           z-index: 1; /* Размещает затемнение позади контента */
       }
       .what-is-show .container {
@@ -804,6 +1075,19 @@
           z-index: 1;
           filter: blur(10px);
       }
+
+      .ribbon-bg1 {
+          position: relative;
+          bottom: 0px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 120%;
+          height: 100px;
+          background: linear-gradient(to right, transparent, #A0884A 40%, #D4B867 90%, #A0884A 80%, transparent);
+          opacity: 0.6;
+          z-index: 1;
+          filter: blur(10px);
+      }
       /* Анимация появления */
       @keyframes fadeIn {
         0% {
@@ -817,12 +1101,35 @@
       }
       html {
         scroll-behavior: smooth;
+        touch-action: manipulation;
       }
       /* Мобильная версия */
       @media (max-width: 768px) {
         .menu-toggle {
+          background-color: rgba(255, 255, 255, 0.1);
+          border: none;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          padding: 0;
+          position: relative; /* Добавляем для псевдоэлемента */
+          font-size: 32px;
+          padding-bottom: 5px;
+        }
+
+        .menu-toggle::before {
+          content: ""; /* Используем псевдоэлемент для иконки */
+          font-size: 32px;
           display: block;
-          font-size: 36px;
+          line-height: 1; /* Убираем лишнее пространство */
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%); /* Точное центрирование */
         }
 
         header {
@@ -878,10 +1185,50 @@
         }
 
         #reviews {
-          padding: 5px 20px;
-          background-color: #111;
-          color: #fff;
-          text-align: center;
+          padding: 20px 10px;
+        }
+
+        #reviews h2 {
+          font-size: 32px;
+          margin-bottom: 8px;
+        }
+
+        #reviews h6 {
+          font-size: 14px;
+          margin-bottom: 20px;
+        }
+
+        .reviews-gallery {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+          gap: 15px;
+          max-width: 100%;
+        }
+
+        /* Initially hide additional reviews on mobile */
+        .hidden-reviews {
+          display: none;
+        }
+
+        /* Show the More Reviews button on mobile */
+        .more-reviews-btn {
+          display: block;
+        }
+
+        /* Reset card positions for stacking */
+        .card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9 {
+          grid-column: 1 / 2;
+          grid-row: auto;
+          width: 100%;
+          max-width: 340px;
+          height: 380px;
+          margin: 0 auto;
+        }
+
+        .review-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
         .service-card {
@@ -914,6 +1261,13 @@
 
         .horizontal-button {
           margin: 0 auto;
+        }
+        .horizontal-button {
+          font-size: 14px;
+        }
+        .horizontal-button::before {
+          width: 20px;
+          height: 20px;
         }
 
         .hero {
@@ -951,18 +1305,25 @@
             width: 100%;
             max-width: 300px;
             text-align: left;
+            height: 430px;            
         }
 
         .package-buttons {
             padding-top: 20px;
-            justify-content: center; /* В мобильной версии центрируем кнопки */
+            margin: 0 auto; /* Remove vertical margin to avoid extra spacing */
+            justify-content: center; /* Center buttons horizontally */
             width: 100%;
-            max-width: 300px;
-        }
+            max-width: 300px; /* Match the max-width of other elements for consistency */
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-sizing: border-box; /* Ensure padding doesn't affect width */
+          }
 
         .package-button {
             width: 120px; /* Уменьшаем ширину кнопок для мобильной версии */
-            font-size: 12px;
+            font-size: 16px;
             padding: 8px 0;
         }
 
@@ -975,6 +1336,10 @@
         .action-button {
             width: 100%;
             max-width: 300px;
+        }
+
+        #team {
+          padding-top: 200px;
         }
 
         .team-grid {
@@ -1075,34 +1440,46 @@
              opacity: 0.4;
         }
         .what-is-show {
-        width: auto;
-        height: auto;
-        background-image: url(templates/background2.png);
-        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения */
-        background-color: #1a1a1a;
-        padding: 80px 20px;
-        position: relative;
-        overflow: hidden;
+          width: auto;
+          height: auto;
+          background-image: url(templates/background4.png);
+          background-size: cover; /* Растягивает изображение, сохраняя пропорции */
+          background-position: center; /* Центрирует изображение */
+          background-repeat: no-repeat; /* Предотвращает повторение изображения */
+          background-color: #1a1a1a;
+          padding: 80px 20px;
+          position: relative;
+          overflow: hidden;
         }
-      .what-is-show::before {
+        .what-is-show::before {
           content: '';
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          background-color: rgba(0, 0, 0, 0.0); /* Затемнение: цвет и прозрачность */
           z-index: 1; /* Размещает затемнение позади контента */
         }
         .section h2 {
             font-size: 30px;
+            color: #ffaa00;
         }
         .section h6 {
           font-size: 20px;
+          color: #ffffff;
         }
 
+        .section h4 {
+          color: #ffffff;
+          font-size: 40px;
+        }
+
+        .package-info h4 {
+            font-size: 18px;
+            color: #ffaa00;
+            margin-bottom: 15px;
+        }
         .gallery-grid {
             grid-template-columns: repeat(2, 1fr); /* 2 столбца на мобильных */
             gap: 20px;
@@ -1117,6 +1494,10 @@
           .gallery-button {
             padding: 10px 30px;
             font-size: 18px;
+          }
+
+          .action-button.participate {
+            font-size: 15px;
           }
       }
     </style>
@@ -1173,7 +1554,7 @@
 
     <section class="hero">
       <h1>CHOTAM! SHOW - Лучшая организация мероприятий</h1>
-      <p>Организуем мероприятия любого масштаба с душой и профессионализмом</p>
+      <p>Организуем мероприятие любого масштаба под ключ!</p>
       <h2>Более 1000 довольных клиентов</h2>
       <a
         href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
@@ -1184,7 +1565,7 @@
 
     <section class="section what-is-show" id="home">
       <div class="container">
-          <h2>ЧТО ЗНАЧИТ СОТРУДНИЧАТЬ ВМЕСТЕ С<br><h4>CHOTAM! SHOW?</h4></h2>
+          <h2>ЧТО ТАКОЕ<br><h4>CHOTAM! SHOW?</h4></h2>
           <div class="info-columns">
               <div class="column">
                   <div class="svg-placeholder">
@@ -1213,7 +1594,7 @@
                   </div>
               </div>
           </div>
-           <div class="ribbon-bg"></div>
+           <!-- <div class="ribbon-bg"></div> -->
       </div>
   </section>
 
@@ -1223,7 +1604,7 @@
         <!-- Первый ряд: 3 карточки -->
         <div class="service-row">
           <div class="service-card">
-            <img src="templates/logo.jpeg" alt="День рождения" />
+            <img src="templates/birthday.jpeg" alt="День рождения" />
             <div class="service-content">
               <h3>День рождения</h3>
               <p>
@@ -1240,7 +1621,7 @@
             </div>
           </div>
           <div class="service-card">
-            <img src="templates/logo.jpeg" alt="Корпоратив" />
+            <img src="templates/teambuilding.jpeg" alt="Корпоратив" />
             <div class="service-content">
               <h3>Корпоративы и тимбилдинги</h3>
               <p>
@@ -1256,7 +1637,7 @@
             </div>
           </div>
           <div class="service-card">
-            <img src="templates/logo.jpeg" alt="Свадьба" />
+            <img src="templates/wedding.jpeg" alt="Свадьба" />
             <div class="service-content">
               <h3>Свадьбы и выпускные</h3>
               <p>
@@ -1275,10 +1656,10 @@
         <!-- Второй ряд: 3 карточки -->
         <div class="service-row">
           <div class="service-card">
-            <img src="templates/logo.jpeg" alt="Конференции" />
+            <img src="templates/partyparty.jpeg" alt="Конференции" />
             <div class="service-content">
-              <h3>Конференции</h3>
-              <p>Организация деловых мероприятий с высоким уровнем сервиса.</p>
+              <h3>Вечеринки</h3>
+              <p>Незабываемое шоу, игры и веселье, организуем праздник по вашему заказу</p>
               <a
                 href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
                 target="_blank">
@@ -1287,7 +1668,7 @@
             </div>
           </div>
           <div class="service-card">
-            <img src="templates/logo.jpeg" alt="Детский праздник" />
+            <img src="templates/kidsparty.jpeg" alt="Детский праздник" />
             <div class="service-content">
               <h3>Детский праздник</h3>
               <p>Организуем праздник для ваших маленьких детишек.</p>
@@ -1299,7 +1680,7 @@
             </div>
           </div>
           <div class="service-card">
-            <img src="templates/logo.jpeg" alt="Новый год" />
+            <img src="templates/newyear.jpeg" alt="Новый год" />
             <div class="service-content">
               <h3>Новый год</h3>
               <p>Отметьте главный праздник зимы в нескучном формате.</p>
@@ -1332,8 +1713,9 @@
     </section>
 
     <section class="section" id="gallery">
+      <div class="ribbon-bg1"></div>
       <h2>ГАЛЕРЕЯ</h2>
-      <h5>Улыбки наших гостей говорят что праздник удался на славу!</h5>
+      <h6>Улыбки наших гостей говорят что праздник удался на славу!</h6>
       <div class="gallery-grid">
         <div class="gallery-item">
           <img src="templates/logo.jpeg" alt="Свадьба" />
@@ -1363,22 +1745,44 @@
       <button class="gallery-button">СМОТРЕТЬ ДАЛЬШЕ!</button>
     </section>
 
-    <section class="section "id="reviews">
+    <section class="section" id="reviews">
       <h2>БОЛЕЕ 1000 ДОВОЛЬНЫХ КЛИЕНТОВ</h2>
-      <h6 class="subtitle">Прочитайте, что пишут о нас наши клиенты</h6>
+      <h6>Прочитайте, что пишут о нас наши клиенты</h6>
       <div class="container">
         <div class="reviews-gallery">
-          <div class="review-card">
+          <!-- Initial two reviews visible on mobile -->
+          <div class="review-card card-1">
             <img src="templates/otzyv1.png" alt="Отзыв 1" />
           </div>
-          <div class="review-card">
+          <div class="review-card card-2">
             <img src="templates/otzyv2.png" alt="Отзыв 2" />
           </div>
-          <div class="review-card">
-            <img src="templates/otzyv3.png" alt="Отзыв 3" />
+          <!--<div class="hidden-reviews"> -->
+            <div class="review-card card-3">
+              <img src="templates/otzyv3.png" alt="Отзыв 3" />
+            </div>
+            <div class="review-card card-4">
+              <img src="templates/otzyv1.png" alt="Отзыв 4" />
+            </div>
+            <div class="review-card card-5">
+              <img src="templates/otzyv2.png" alt="Отзыв 5" />
+            </div>
+            <div class="review-card card-6">
+              <img src="templates/otzyv3.png" alt="Отзыв 6" />
+            </div>
+            <div class="review-card card-7">
+              <img src="templates/otzyv1.png" alt="Отзыв 7" />
+            </div>
+            <div class="review-card card-8">
+              <img src="templates/otzyv2.png" alt="Отзыв 8" />
+            </div>
+            <div class="review-card card-9">
+              <img src="templates/otzyv3.png" alt="Отзыв 9" />
+            </div>
           </div>
-          <!-- можно еще добавить отзывов и сделать динамическое обновление -->
         </div>
+        <!-- More Reviews button, visible only on mobile -->
+        <button id="more-reviews-btn" class="more-reviews-btn">БОЛЬШЕ ОТЗЫВОВ</button>
       </div>
     </section>
 
@@ -1430,56 +1834,60 @@
                     </div>
                 </div>
                 <div class="package-actions">
-                    <button class="action-button participate">Обсудить мероприятие</button>
-                </div>
+                  <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие" 
+                     target="_blank" 
+                     class="action-button participate">
+                      Обсудить мероприятие
+                  </a>
+              </div>
             </div>
             <div class="package-description">
                 <div class="package-info active" data-package="klassika">
                     <h3>Пакет XS</h3>
                     <h4>Лайтовый формат</h4>
-                    <p>Быстрое вовлечение гостей и заряд настроения</p>
-                    <p>Компактный формат для легкого старта</p>
-                    <p>3-5 веселых игр для незабываемого отдыха!</p>
+                    <p>Быстрое вовлечение гостей и заряд настроения ⚡️</p>
+                    <p>Компактный формат для легкого старта 👑</p>
+                    <p>3-5 веселых игр для незабываемого отдыха! 🤩</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
                 <div class="package-info" data-package="kids">
                     <h3>Пакет S</h3>
                     <h4>Универсальный формат</h4>
-                    <p>Динамика, азарт и максимум взаимодействия</p>
-                    <p>Больше игр, больше эмоций, больше веселья</p>
-                    <p>Интересный формат с 4-7 увлекательными играми</p>
+                    <p>Динамика, азарт и максимум взаимодействия 💥</p>
+                    <p>Больше игр, больше эмоций, больше веселья 😎</p>
+                    <p>Интересный формат с 4-7 увлекательными играми 💃</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
                 <div class="package-info" data-package="battle-show">
                     <h3>Пакет M</h3>
-                    <h4>Лайтовый формат</h4>
-                    <p>Быстрое вовлечение гостей и заряд настроения</p>
-                    <p>Компактный формат для легкого старта</p>
-                    <p>3-5 веселых игр для незабываемого отдыха!</p>
+                    <h4>Продвинутый формат</h4>
+                    <p>Баланс активных и интеллектуальных игр 💃</p>
+                    <p>Идеальный ритм для яркого мероприятия ⚡️</p>
+                    <p>Полноценная программа с 5-8 играми 🎲</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
                 <div class="package-info" data-package="black">
                     <h3>Пакет L</h3>
-                    <h4>Лайтовый формат</h4>
-                    <p>Быстрое вовлечение гостей и заряд настроения</p>
-                    <p>Компактный формат для легкого старта</p>
-                    <p>3-5 веселых игр для незабываемого отдыха!</p>
+                    <h4>Премиум формат</h4>
+                    <p>Настоящее шоу с драйвом и эмоциями 🔥</p>
+                    <p>Интерактив, который не даст заскучать 🎉</p>
+                    <p>Расширенный формат с 7-10 разнообразными играми 🎲</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
                 <div class="package-info" data-package="music">
                     <h3>Пакет XL</h3>
-                    <h4>Лайтовый формат</h4>
-                    <p>Быстрое вовлечение гостей и заряд настроения</p>
-                    <p>Компактный формат для легкого старта</p>
-                    <p>3-5 веселых игр для незабываемого отдыха!</p>
+                    <h4>Эксклюзивный формат</h4>
+                    <p>Яркий праздник с полным погружением гостей 🎊</p>
+                    <p>Максимум возможностей для незабываемого вечера 🥇</p>
+                    <p>Полный контроль за атмосферой и эмоциями ⭐️</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
                 <div class="package-info" data-package="quiz">
                     <h3>Пакет XXL</h3>
-                    <h4>Лайтовый формат</h4>
-                    <p>Быстрое вовлечение гостей и заряд настроения</p>
-                    <p>Компактный формат для легкого старта</p>
-                    <p>3-5 веселых игр для незабываемого отдыха!</p>
+                    <h4>Масштабный формат</h4>
+                    <p>Полный фарш! Лучшая организация мероприятия!</p>
+                    <p>Воспоминания от этого праздника останутся на долго!</p>
+                    <p>Максимум веселья, максимум эмоций!</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
                 <div class="package-buttons">
@@ -1518,6 +1926,11 @@
             &#10095;
           </button>
         </div>
+      </div>
+      <div class="whatsapp-order">
+        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." class="whatsapp-button">
+          Заказать мероприятие!
+        </a>
       </div>
     </section>
 
@@ -1594,6 +2007,12 @@
       }
       // Показываем первый элемент при загрузке
       showTeamMember(currentIndex);
+
+      document.getElementById('more-reviews-btn').addEventListener('click', function() {
+        const hiddenReviews = document.querySelector('.hidden-reviews');
+        hiddenReviews.style.display = 'block'; // Show hidden reviews
+        this.style.display = 'none'; // Hide the button after clicking
+      });
     </script>
   </body>
 </html>
