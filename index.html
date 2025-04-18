@@ -30,6 +30,33 @@
         right: 0;
         z-index: 1000;
       }
+
+      /* WhatsApp Button Styles */
+    .whatsapp-button1 {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25D366; /* WhatsApp green */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 1000; /* Ensure it stays above other content */
+      transition: transform 0.3s, background-color 0.3s;
+    }
+
+    .whatsapp-button1:hover {
+      background-color: #20b358; /* Slightly darker green on hover */
+      transform: scale(1.2);
+    }
+
+    .whatsapp-button1 img {
+      width: 36px;
+      height: 36px;
+    }
       .menu-toggle {
         display: none;
         font-size: 26px;
@@ -110,21 +137,35 @@
       }
       .hero h1 {
         font-size: 40px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         color: white;
         z-index: 2;
         position: relative;
         text-transform: uppercase;
-
       }
+      
       .hero h2 {
         font-size: 30px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         color: white;
         z-index: 2;
         position: relative;
         text-transform: uppercase;
+        padding-bottom: 40px;
+      }
 
+      .hero h8.highligted {
+        display: inline; /* Чтобы элемент занимал только необходимую ширину */
+        background-color: #ffaa00; /* Задаем желтый фон */
+        font-size: 30px;
+        margin-bottom: 30px;
+        color: #000;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+        border: 5px solid #ffaa00;
+        border-radius: 25px;
+        padding: 5px 10px; /* Небольшие внутренние отступы */
       }
       .hero p {
         font-size: 30px;
@@ -202,12 +243,6 @@
         position: relative;
       }
 
-      section h7 {
-        color: #ffaa00; /* цвет текста h2 */
-        font-size: 36px;
-        margin-bottom: 30px;
-      }
-
       .price-grid {
         display: flex;
         justify-content: center;
@@ -266,6 +301,7 @@
         display: flex; /* Добавляем flex для карточки */
         flex-direction: column; /* Вертикальное расположение */
         height: 500px; /* Фиксированная высота карточки */
+        border: 2px solid #ff5500; /* Желтая рамка */
       }
       .service-card:hover {
         transform: scale(1.03);
@@ -274,6 +310,7 @@
         width: 100%;
         height: 200px;
         object-fit: cover;
+        border: 2px solid #ff5500; /* Желтая рамка */
       }
       .service-content {
         padding: 20px;
@@ -324,17 +361,17 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         transition: transform 0.3s ease;
         z-index: 2;
+        border: 2px solid #ff5500; /* Желтая рамка */
       }
       .horizontal-card:hover {
         transform: scale(1.03);
       }
       .horizontal-card img {
-        width: 40%;
-        height: 200px;
+        width: 50%;
+        height: 300px;
         object-fit: cover;
-        padding: 10px; /* Добавляем отступы со всех сторон */
-        box-sizing: border-box; /* Учитываем padding в ширине */
-        border-radius: 30px; /* Закругляем углы изображения */
+        border-radius: 10px; /* Закругляем углы изображения */
+        border: 2px solid #ff5500; /* Желтая рамка */
       }
       .horizontal-content {
         text-align: left;
@@ -348,12 +385,13 @@
       .horizontal-content h3 {
         font-size: 24px;
         margin-bottom: 15px;
-        color: #fff;
+        color: #ff5500;
       }
       .horizontal-content p {
         font-size: 16px;
         margin-bottom: 20px;
-        color: #ccc;
+        color: #ffffff;
+        font-weight: bold;
       }
       .horizontal-button {
         background-color: #ffaa00;
@@ -373,8 +411,8 @@
       .horizontal-button::before {
             content: '';
             display: inline-block;
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
             background-repeat: no-repeat;
             margin-right: 10px;
@@ -425,6 +463,8 @@
       }
 
       #gallery {
+        padding-top: 25px;
+        padding-bottom: 200px;
         background-color: #111; /* Темный фон секции */
         position: relative;
         background-image: url(templates/background2.png);
@@ -446,16 +486,18 @@
       .gallery-grid {
         display: grid; /* Используем grid вместо flex для точной сетки */
         grid-template-columns: repeat(4, 1fr); /* 4 столбца на десктопе */
-        gap: 40px;
+        gap: 30px;
         justify-items: center;
         max-width: 1200px; /* Ограничиваем ширину для центрирования */
         margin: 0 auto;
         position: relative; /* Добавляем для корректного z-index */
+        justify-items: center;
+        align-items: center;
       }
 
       .gallery-item {
         position: relative;
-        width: 250px; /* Размер контейнера для изображения */
+        width: 280px; /* Размер контейнера для изображения */
         height: 200px;
         background: #000; /* Черный фон под изображением */
         border-radius: 1px;
@@ -463,6 +505,7 @@
         overflow: visible;
         position: relative;
         z-index: 2;
+        margin-bottom: 10px;
       }
 
             /* Эффект лампочек */
@@ -478,16 +521,16 @@
         z-index: 2;
         box-shadow: 
           0 0 10px 3px #ffaa00, /* Внешнее свечение */
-          0 0 20px 6px rgba(255, 170, 0, 0.6), /* Более мягкое свечение */
+          0 0 20px 6px rgba(255, 170, 0, 0.5), /* Более мягкое свечение */
           inset 0 0 10px 3px #ffaa00, /* Внутреннее свечение */
-          inset 0 0 20px 6px rgba(255, 170, 0, 0.6); /* Мягкое внутреннее свечение */
+          inset 0 0 20px 6px rgba(255, 170, 0, 0.5); /* Мягкое внутреннее свечение */
         z-index: 1; /* Псевдоэлемент ниже изображения */
         background: repeating-linear-gradient(
           45deg,
           transparent,
           transparent 10px,
-          rgba(255, 170, 0, 0.3) 10px,
-          rgba(255, 170, 0, 0.3) 20px
+          rgba(255, 170, 0, 0.2) 10px,
+          rgba(255, 170, 0, 0.2) 10px
         ); /* Эффект прерывистой гирлянды */
       }
 
@@ -529,66 +572,96 @@
       }
 
       #reviews h2 {
-        font-size: 48px;
-        margin-bottom: 10px;
-        color: #ffd700;
+        font-size: 56px;
+        margin-bottom: 1px;
+        color: #ffaa00;
       }
 
       #reviews h6 {
-        font-size: 18px;
-        margin-bottom: 40px;
+        font-size: 36px;
+        margin-bottom: 30px;
         color: #fff;
       }
 
       .reviews-gallery {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(3, auto);
+        grid-template-columns: 360px 300px 360px; /* First and third columns wider, middle narrower */
         gap: 20px;
-        justify-content: center;
-        align-items: stretch;
-        max-width: 1200px;
+        max-width: 1095px; /* Sum of column widths + gaps */
         margin: 0 auto;
+        padding: 20px;
       }
 
-      /* Fixed sizes for cards */
       .review-card {
         background-color: #fff;
-        border-radius: 12px;
+        border-radius: 15px;
         overflow: hidden;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         transition: transform 0.3s;
+        width: 100%;
+        height: 400px; /* Fixed height for all cards except the last in third column */
+        position: relative;
+        border: 3px solid #ffaa00; /* Желтая рамка */
       }
 
       .review-card:hover {
         transform: scale(1.03);
       }
 
-      /* Small cards (1, 3, 4, 5, 8) */
-      .card-1, .card-3, .card-4, .card-5, .card-8, .card-9 {
-        width: 280px;
-        height: 400px;
+      .review-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures images fill the card without white space */
+        display: block;
       }
 
-      /* Wide cards (2, 6, 7) */
-      .card-2, .card-6, .card-7 {
-        width: 580px;
-        height: 400px;
+      /* Blur effect for the bottom of last row cards */
+      .card-7, .card-8, .card-9 {
+        overflow: hidden;
       }
 
-      /* Position the cards */
+      .card-7::before, .card-8::before, .card-9::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 120px; /* Height of the blur effect */
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
+        backdrop-filter: blur(8px); /* Static blur effect */
+        z-index: 1;
+      }
+
+      /* Reflection effect for last row cards */
+      .card-7::after, .card-8::after, .card-9::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 120px; /* Height of the reflection */
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+        transform: scaleY(-1); /* Flip vertically for reflection */
+        background-image: inherit; /* Attempt to inherit the image */
+        background-size: 100% 100%;
+        background-position: bottom;
+        z-index: -1;
+        opacity: 0.6; /* Slightly faded reflection */
+      }
+
+      /* Desktop layout */
       .card-1 {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
       }
 
       .card-2 {
-        grid-column: 2 / 4;
+        grid-column: 2 / 3;
         grid-row: 1 / 2;
       }
 
       .card-3 {
-        grid-column: 4 / 5;
+        grid-column: 3 / 4;
         grid-row: 1 / 2;
       }
 
@@ -603,51 +676,52 @@
       }
 
       .card-6 {
-        grid-column: 3 / 5;
+        grid-column: 3 / 4;
         grid-row: 2 / 3;
       }
 
       .card-7 {
-        grid-column: 1 / 3;
+        grid-column: 1 / 2;
         grid-row: 3 / 4;
       }
 
       .card-8 {
-        grid-column: 3 / 4;
+        grid-column: 2 / 3;
         grid-row: 3 / 4;
       }
 
       .card-9 {
-        grid-column: 4 / 4;
+        grid-column: 3 / 4;
         grid-row: 3 / 4;
+        height: 400px; /* Slightly taller to align bottom with first and third columns */
       }
 
-      /* Ensure images fit within the card dimensions */
-      .review-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      /* More Reviews button styles */
-      .more-reviews-btn {
-        display: none; /* Hidden by default on desktop */
-        background-color: #ffd700;
+      .more-reviews-btn,
+      .less-reviews-btn {
+        height: 50px;
+        width: 300px;
+        background-color: #ffaa00;
         color: #000;
         border: none;
-        padding: 12px 24px;
+        padding: 10px 20px;
         border-radius: 25px;
-        font-size: 16px;
+        font-size: 20px;
         font-weight: bold;
         cursor: pointer;
-        margin: 20px auto;
+        margin: 10px auto;
+        display: block;
         transition: background-color 0.3s;
       }
 
-      .more-reviews-btn:hover {
-        background-color: #e6c200;
+      .more-reviews-btn:hover,
+      .less-reviews-btn:hover {
+        background-color: #e69500;
       }
+
+      .less-reviews-btn {
+        display: none; /* Hidden by default on desktop */
+      }
+
       footer {
         background-color: #151515;
         color: white;
@@ -848,7 +922,7 @@
         gap: 30px;
         flex-wrap: wrap;
         background-color: #020202; /* Темный фон */
-        padding: 20px;
+        padding: 5px;
         animation: fadeIn 2s ease-in-out; /* Анимация появления */
       }
       .team-carousel {
@@ -877,6 +951,16 @@
         color: #fff;
         text-transform: uppercase;
       }
+      .team-member h7 {
+        color: #ffaa00;
+        font-size: 42px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      .team h6 {
+        margin-bottom: 5px;
+      }
+
       /* Стили для кнопок карусели */
       .carousel-prev,
       .carousel-next {
@@ -956,7 +1040,7 @@
         background-position: center; /* Центрирует изображение */
         background-repeat: no-repeat; /* Предотвращает повторение изображения */
         background-color: #1a1a1a;
-        padding: 200px 20px;
+        padding: 185px 20px;
         position: relative;
         overflow: hidden;
       }
@@ -979,7 +1063,7 @@
 
       .what-is-show h2 {
         color: #ffffff;
-        font-size: 48px;
+        font-size: 56px;
         font-weight: bold;
         text-align: center;
         line-height: 1.0;
@@ -987,7 +1071,7 @@
       }
       .what-is-show h4 {
         color: #ffaa00;
-        font-size: 48px;
+        font-size: 56px;
         font-weight: bold;
         text-align: center;
         margin-bottom: 70px;
@@ -1060,7 +1144,78 @@
         font-weight: bold;
         font-size: 16px;
         line-height: 1.5;
-        margin-bottom: 0; /* Убираем нижний отступ у параграфа */
+        margin-bottom: 0;
+      }
+
+      /* Styles for the new section below */
+      .additional-content {
+        margin-top: 10px;
+      }
+
+      .additional-content h2 {
+        margin-bottom: 70px;
+        font-size: 56px;
+        color: #ffffff;
+      }
+
+      .additional-content h2 span {
+        color: #ffaa00;
+        font-size: 56px;
+      }
+
+      .additional-columns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .additional-column {
+        flex: 1;
+        max-width: 200px;
+        text-align: center;
+        color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .additional-svg-placeholder {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .additional-column-icon-svg {
+        display: block;
+        width: 100px;
+        height: 100px;
+        fill: #e0c56e;
+      }
+
+      .additional-column-content {
+        background-color: #020202;
+        border: none;
+        padding: 0;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .additional-column h3 {
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      .additional-column p {
+        display: none;
       }
       /* Стилизация фона-ленты (оставляем как было) */
       .ribbon-bg {
@@ -1121,6 +1276,18 @@
           padding-bottom: 5px;
         }
 
+        .whatsapp-button1 {
+          width: 55px;
+          height: 55px;
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .whatsapp-button1 img {
+          width: 30px;
+          height: 30px;
+        }
+
         .menu-toggle::before {
           content: ""; /* Используем псевдоэлемент для иконки */
           font-size: 32px;
@@ -1134,6 +1301,7 @@
 
         header {
           justify-content: space-between;
+          padding: 7px;
         }
 
         .nav-links {
@@ -1184,13 +1352,8 @@
           opacity: 1;
         }
 
-        #reviews {
-          padding: 20px 10px;
-        }
-
         #reviews h2 {
-          font-size: 32px;
-          margin-bottom: 8px;
+          font-size: 28px;
         }
 
         #reviews h6 {
@@ -1200,35 +1363,37 @@
 
         .reviews-gallery {
           grid-template-columns: 1fr;
-          grid-template-rows: auto;
-          gap: 15px;
-          max-width: 100%;
+          gap: 10px;
         }
 
-        /* Initially hide additional reviews on mobile */
-        .hidden-reviews {
+        .review-card {
+          grid-column: auto;
+          grid-row: auto;
+        }
+
+        /* Hide all but first two reviews by default on mobile */
+        .review-card:nth-child(n+3) {
           display: none;
         }
 
-        /* Show the More Reviews button on mobile */
+        .reviews-gallery.show-all .review-card {
+          display: block;
+        }
+
         .more-reviews-btn {
           display: block;
         }
 
-        /* Reset card positions for stacking */
-        .card-1, .card-2, .card-3, .card-4, .card-5, .card-6, .card-7, .card-8, .card-9 {
-          grid-column: 1 / 2;
-          grid-row: auto;
-          width: 100%;
-          max-width: 340px;
-          height: 380px;
-          margin: 0 auto;
+        .less-reviews-btn {
+          display: none;
         }
 
-        .review-card img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        .reviews-gallery.show-all ~ .more-reviews-btn {
+          display: none;
+        }
+
+        .reviews-gallery.show-all ~ .less-reviews-btn {
+          display: block;
         }
 
         .service-card {
@@ -1249,8 +1414,7 @@
         .horizontal-card img {
           width: 100%; /* Изображение занимает всю ширину */
           height: 150px;
-          padding: 10px; /* Убираем padding, чтобы изображение было на всю ширину */
-          border-radius: 20px; /* Закругляем только верхние углы */
+          border-radius: 10px; /* Закругляем только верхние углы */
         }
 
         .horizontal-content {
@@ -1263,7 +1427,7 @@
           margin: 0 auto;
         }
         .horizontal-button {
-          font-size: 14px;
+          font-size: 13px;
         }
         .horizontal-button::before {
           width: 20px;
@@ -1271,22 +1435,26 @@
         }
 
         .hero {
-          padding: 90px 20px;
+          padding: 50px 80px;
         }
         
         .hero h1 { /* chotam! show */
-            font-size: 35px;
+            font-size: 30px;
+            max-width: 800px;
         }
 
         .hero p { /* организуем мероприятия */
-            font-size: 25px;
+            font-size: 20px;
             font-weight: bold;
         }
 
         .hero h2 { /* более 1000 довольных */
-            font-size: 25px;
+            font-size: 18px;
         }
-
+        .hero h8.highligted{
+          font-size: 18px;
+          padding: 2px 2px; /* Небольшие внутренние отступы */
+        }
         .package-container {
             flex-direction: column;
             align-items: center;
@@ -1400,6 +1568,7 @@
         }
 
         .what-is-show h2 {
+          margin-top: 220px;
           font-size: 32px;
           margin-bottom: 5px;
         }
@@ -1407,11 +1576,12 @@
         .info-columns {
           flex-direction: column;
           align-items: center;
-          gap: 40px;
+          gap: 5px;
         }
 
         .column {
           max-width: 90%;
+          margin-bottom: 5px;
         }
 
         /* Уменьшаем иконку/плейсхолдер на мобильных */
@@ -1426,7 +1596,8 @@
              /* height: 60px; */
         }
         .column-content {
-            padding: 20px; /* Уменьшаем padding */
+          margin-top: 1px; /* Уменьшаем отступ сверху */
+          padding: 15px; /* Уменьшаем padding */
         }
         .column h3 {
           font-size: 20px;
@@ -1437,7 +1608,7 @@
         .ribbon-bg {
             bottom: 20%;
             height: 100px;
-             opacity: 0.4;
+            opacity: 0.4;
         }
         .what-is-show {
           width: auto;
@@ -1461,6 +1632,46 @@
           background-color: rgba(0, 0, 0, 0.0); /* Затемнение: цвет и прозрачность */
           z-index: 1; /* Размещает затемнение позади контента */
         }
+        .additional-content {
+          margin-top: 50px; 
+        }
+        .section.additional-content h2 {
+          font-size: 25px; 
+          margin-bottom: 40px;
+          color: #ffffff;
+        }
+        .additional-content h2 span {
+          font-size: 30px;
+          color: #ffaa00;
+        }
+        .additional-columns {
+          flex-direction: column; 
+          align-items: center;
+          gap: 30px; 
+        }
+
+        .additional-column {
+          max-width: 100%; /* Full width for columns */
+        }
+
+        .additional-svg-placeholder {
+          width: 80px; /* Smaller SVG icons */
+          height: 80px;
+          margin-bottom: 15px;
+        }
+
+        .additional-column-icon-svg {
+          width: 80px;
+          height: 80px;
+        }
+
+        .additional-column h3 {
+          font-size: 16px; /* Smaller text */
+        }
+
+
+
+
         .section h2 {
             font-size: 30px;
             color: #ffaa00;
@@ -1483,7 +1694,6 @@
         .gallery-grid {
             grid-template-columns: repeat(2, 1fr); /* 2 столбца на мобильных */
             gap: 20px;
-            padding: 20px;
           }
 
           .gallery-item {
@@ -1555,7 +1765,7 @@
     <section class="hero">
       <h1>CHOTAM! SHOW - Лучшая организация мероприятий</h1>
       <p>Организуем мероприятие любого масштаба под ключ!</p>
-      <h2>Более 1000 довольных клиентов</h2>
+      <h2><h8 class="highligted">Более 1000</h8> довольных клиентов</h2>
       <a
         href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
         target="_blank">
@@ -1565,38 +1775,75 @@
 
     <section class="section what-is-show" id="home">
       <div class="container">
-          <h2>ЧТО ТАКОЕ<br><h4>CHOTAM! SHOW?</h4></h2>
-          <div class="info-columns">
-              <div class="column">
-                  <div class="svg-placeholder">
-                       </div>
-                  <div class="column-content">
-                      <h3>ФОРМАТ</h3>
-                      <p>МЫ ПРЕДЛАГАЕМ ПРОВЕСТИ ВАШЕ МЕРОПРИЯТИЕ В СОВРЕМЕННОМ ФОРМАТЕ</p>
-                  </div>
-              </div>
-
-              <div class="column">
-                 <div class="svg-placeholder">
-                      </div>
-                   <div class="column-content">
-                      <h3>ИГРЫ</h3>
-                      <p>ВАШИ ГОСТИ ТОЧНО НЕ ЗАСКУЧАЮТ ИГРАЯ В НАШИ ИГРЫ</p>
-                  </div>
-              </div>
-
-              <div class="column">
-                  <div class="svg-placeholder">
-                       </div>
-                   <div class="column-content">
-                      <h3>ВЕДУЩИЙ</h3>
-                      <p>ПОЛНОЕ СОПРОВОЖДЕНИЕ МЕРОПРИЯТИЯ</p>
-                  </div>
-              </div>
+        <h2>ЧТО ТАКОЕ<br><h4>CHOTAM! SHOW?</h4></h2>
+        <div class="info-columns">
+          <div class="column">
+            <div class="svg-placeholder"></div>
+            <div class="column-content">
+              <h3>ФОРМАТ</h3>
+              <p>МЫ ПРЕДЛАГАЕМ ПРОВЕСТИ ВАШЕ МЕРОПРИЯТИЕ В СОВРЕМЕННОМ ФОРМАТЕ</p>
+            </div>
           </div>
-           <!-- <div class="ribbon-bg"></div> -->
+          <div class="column">
+            <div class="svg-placeholder"></div>
+            <div class="column-content">
+              <h3>ИГРЫ</h3>
+              <p>ВАШИ ГОСТИ ТОЧНО НЕ ЗАСКУЧАЮТ ИГРАЯ В НАШИ ИГРЫ</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="svg-placeholder"></div>
+            <div class="column-content">
+              <h3>ВЕДУЩИЙ</h3>
+              <p>ПОЛНОЕ СОПРОВОЖДЕНИЕ МЕРОПРИЯТИЯ</p>
+            </div>
+          </div>
+        </div>
       </div>
-  </section>
+    </section>
+
+    <section class="section additional-content" id="additionally">
+      <div class="additional-content">
+        <h2>МОЖЕМ ВЗЯТЬ НА СЕБЯ ОРГАНИЗАЦИЮ ПРАЗДНИКА <span>«ПОД КЛЮЧ»</span></h2>
+        <div class="additional-columns">
+          <div class="additional-column">
+            <div class="additional-svg-placeholder">
+              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"></svg>
+            </div>
+            <div class="additional-column-content">
+              <h3>Индивидуальный сценарий</h3>
+            </div>
+          </div>
+          <div class="additional-column">
+            <div class="additional-svg-placeholder">
+              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              </svg>
+            </div>
+            <div class="additional-column-content">
+              <h3>Фотозона</h3>
+            </div>
+          </div>
+          <div class="additional-column">
+            <div class="additional-svg-placeholder">
+              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              </svg>
+            </div>
+            <div class="additional-column-content">
+              <h3>Диджей</h3>
+            </div>
+          </div>
+          <div class="additional-column">
+            <div class="additional-svg-placeholder">
+              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              </svg>
+            </div>
+            <div class="additional-column-content">
+              <h3>Фото и видеосъемка</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="section" id="services">
       <h2>МЫ ОРГАНИЗУЕМ ЛЮБОЕ МЕРОПРИЯТИЕ</h2>
@@ -1713,7 +1960,7 @@
     </section>
 
     <section class="section" id="gallery">
-      <div class="ribbon-bg1"></div>
+      <!-- <div class="ribbon-bg1"></div> -->
       <h2>ГАЛЕРЕЯ</h2>
       <h6>Улыбки наших гостей говорят что праздник удался на славу!</h6>
       <div class="gallery-grid">
@@ -1750,39 +1997,36 @@
       <h6>Прочитайте, что пишут о нас наши клиенты</h6>
       <div class="container">
         <div class="reviews-gallery">
-          <!-- Initial two reviews visible on mobile -->
           <div class="review-card card-1">
             <img src="templates/otzyv1.png" alt="Отзыв 1" />
           </div>
           <div class="review-card card-2">
             <img src="templates/otzyv2.png" alt="Отзыв 2" />
           </div>
-          <!--<div class="hidden-reviews"> -->
-            <div class="review-card card-3">
-              <img src="templates/otzyv3.png" alt="Отзыв 3" />
-            </div>
-            <div class="review-card card-4">
-              <img src="templates/otzyv1.png" alt="Отзыв 4" />
-            </div>
-            <div class="review-card card-5">
-              <img src="templates/otzyv2.png" alt="Отзыв 5" />
-            </div>
-            <div class="review-card card-6">
-              <img src="templates/otzyv3.png" alt="Отзыв 6" />
-            </div>
-            <div class="review-card card-7">
-              <img src="templates/otzyv1.png" alt="Отзыв 7" />
-            </div>
-            <div class="review-card card-8">
-              <img src="templates/otzyv2.png" alt="Отзыв 8" />
-            </div>
-            <div class="review-card card-9">
-              <img src="templates/otzyv3.png" alt="Отзыв 9" />
-            </div>
+          <div class="review-card card-3">
+            <img src="templates/otzyv3.png" alt="Отзыв 3" />
+          </div>
+          <div class="review-card card-4">
+            <img src="templates/otzyv1.png" alt="Отзыв 4" />
+          </div>
+          <div class="review-card card-5">
+            <img src="templates/otzyv2.png" alt="Отзыв 5" />
+          </div>
+          <div class="review-card card-6">
+            <img src="templates/otzyv3.png" alt="Отзыв 6" />
+          </div>
+          <div class="review-card card-7">
+            <img src="templates/otzyv1.png" alt="Отзыв 7" />
+          </div>
+          <div class="review-card card-8">
+            <img src="templates/otzyv2.png" alt="Отзыв 8" />
+          </div>
+          <div class="review-card card-9">
+            <img src="templates/otzyv3.png" alt="Отзыв 9" />
           </div>
         </div>
-        <!-- More Reviews button, visible only on mobile -->
         <button id="more-reviews-btn" class="more-reviews-btn">БОЛЬШЕ ОТЗЫВОВ</button>
+        <button id="less-reviews-btn" class="less-reviews-btn">МЕНЬШЕ ОТЗЫВОВ</button>
       </div>
     </section>
 
@@ -1834,9 +2078,7 @@
                     </div>
                 </div>
                 <div class="package-actions">
-                  <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие" 
-                     target="_blank" 
-                     class="action-button participate">
+                  <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие" target="_blank" class="action-button participate">
                       Обсудить мероприятие
                   </a>
               </div>
@@ -1933,6 +2175,10 @@
         </a>
       </div>
     </section>
+    
+    <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank" class="whatsapp-button1">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
     <footer>
       <p>© 2025 chotam_astana. Все права защищены.</p>
@@ -2005,13 +2251,25 @@
           (currentIndex - 1 + teamMembers.length) % teamMembers.length;
         showTeamMember(currentIndex);
       }
-      // Показываем первый элемент при загрузке
+      // показываем первый элемент при загрузке
       showTeamMember(currentIndex);
 
-      document.getElementById('more-reviews-btn').addEventListener('click', function() {
-        const hiddenReviews = document.querySelector('.hidden-reviews');
-        hiddenReviews.style.display = 'block'; // Show hidden reviews
-        this.style.display = 'none'; // Hide the button after clicking
+
+      // действие кнопки "больше/меньше отзывов" в отзывах
+      document.addEventListener('DOMContentLoaded', () => {
+        const moreBtn = document.getElementById('more-reviews-btn');
+        const lessBtn = document.getElementById('less-reviews-btn');
+        const gallery = document.querySelector('.reviews-gallery');
+        const reviewsSection = document.getElementById('reviews');
+
+        moreBtn.addEventListener('click', () => {
+          gallery.classList.add('show-all');
+        });
+
+        lessBtn.addEventListener('click', () => {
+          gallery.classList.remove('show-all');
+          reviewsSection.scrollIntoView({ behavior: 'smooth' });
+        });
       });
     </script>
   </body>
