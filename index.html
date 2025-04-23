@@ -20,7 +20,7 @@
       header {
         /* нав-бар */
         background-color: #151515;
-        padding: 15px;
+        padding: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -32,31 +32,31 @@
       }
 
       /* WhatsApp Button Styles */
-    .whatsapp-button1 {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #25D366; /* WhatsApp green */
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      z-index: 1000; /* Ensure it stays above other content */
-      transition: transform 0.3s, background-color 0.3s;
-    }
+      .whatsapp-button1 {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #25D366; /* WhatsApp green */
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000; /* Ensure it stays above other content */
+        transition: transform 0.3s, background-color 0.3s;
+      }
 
-    .whatsapp-button1:hover {
-      background-color: #20b358; /* Slightly darker green on hover */
-      transform: scale(1.2);
-    }
+      .whatsapp-button1:hover {
+        background-color: #20b358; /* Slightly darker green on hover */
+        transform: scale(1.2);
+      }
 
-    .whatsapp-button1 img {
-      width: 36px;
-      height: 36px;
-    }
+      .whatsapp-button1 img {
+        width: 36px;
+        height: 36px;
+      }
       .menu-toggle {
         display: none;
         font-size: 26px;
@@ -83,7 +83,7 @@
         color: #ffaa00;
       }
       header img {
-        height: 80px; /* размер лого на десктоп */
+        height: 70px; /* размер лого на десктоп */
         align-items: left;
       }
       nav {
@@ -114,12 +114,12 @@
       .hero {
         justify-content: center;
         text-align: center;
-        padding: 200px 20px;
+        padding: 200px 0px;
         background: linear-gradient(to bottom, #ff5500, #2980b9);
-        background-image: url(templates/background2.png);
+        background-image: url(templates/background6.png);
         background-size: cover; /* Растягивает изображение, сохраняя пропорции */
         background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения */
+        background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
         overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
         position: relative;
         z-index: 2;
@@ -142,6 +142,7 @@
         z-index: 2;
         position: relative;
         text-transform: uppercase;
+        font-weight: 900;
       }
       
       .hero h2 {
@@ -151,9 +152,8 @@
         z-index: 2;
         position: relative;
         text-transform: uppercase;
-        padding-bottom: 40px;
+        padding-bottom: 10px;
       }
-
       .hero h8.highligted {
         display: inline; /* Чтобы элемент занимал только необходимую ширину */
         background-color: #ffaa00; /* Задаем желтый фон */
@@ -164,7 +164,21 @@
         position: relative;
         text-transform: uppercase;
         border: 5px solid #ffaa00;
-        border-radius: 25px;
+        border-radius: 35px;
+        padding: 5px 10px; /* Небольшие внутренние отступы */
+        font-weight: bold;
+      }
+      .hero h8.highligted1 {
+        display: inline; /* Чтобы элемент занимал только необходимую ширину */
+        background-color: #ffaa00; /* Задаем желтый фон */
+        font-size: 40px;
+        margin-bottom: 30px;
+        color: #000;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+        border: 5px solid #ffaa00;
+        border-radius: 35px;
         padding: 5px 10px; /* Небольшие внутренние отступы */
       }
       .hero p {
@@ -219,11 +233,12 @@
       }
       .section h2 {
         color: #ffaa00; /* цвет текста h2 */
-        font-size: 56px;
+        font-size: 52px;
         margin-bottom: 1px;
         z-index: 2;
         position: relative;
         padding-bottom: 1px;
+        width: 100%;
       }
 
       section h6 {
@@ -255,9 +270,9 @@
         flex-direction: column;
         gap: 30px;
         background-color: #1a1a1a; /* Темный фон */
-        padding: 20px;
-        background-image: url(templates/background2.png);
-        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
+        padding: 100px;
+        background-image: url(templates/background6.png);
+        background-size: auto; /* Растягивает изображение, сохраняя пропорции */
         background-position: center; /* Центрирует изображение */
         background-repeat: no-repeat; /* Предотвращает повторение изображения */
         overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
@@ -314,7 +329,7 @@
       }
       .service-content {
         padding: 20px;
-        text-align: left;
+        text-align: center;
         color: #fff;
         display: flex; /* Используем flex для содержимого */
         flex-direction: column; /* Вертикальное расположение */
@@ -362,13 +377,14 @@
         transition: transform 0.3s ease;
         z-index: 2;
         border: 2px solid #ff5500; /* Желтая рамка */
+        height: 210px;
       }
       .horizontal-card:hover {
         transform: scale(1.03);
       }
       .horizontal-card img {
         width: 50%;
-        height: 300px;
+        height: 210px;
         object-fit: cover;
         border-radius: 10px; /* Закругляем углы изображения */
         border: 2px solid #ff5500; /* Желтая рамка */
@@ -463,11 +479,11 @@
       }
 
       #gallery {
-        padding-top: 25px;
+        padding-top: 75px;
         padding-bottom: 200px;
-        background-color: #111; /* Темный фон секции */
+        background-color: #111; 
         position: relative;
-        background-image: url(templates/background2.png);
+        background-image: url(templates/background6.png);
         background-size: cover; /* Растягивает изображение, сохраняя пропорции */
         background-position: center; /* Центрирует изображение */
         background-repeat: no-repeat; /* Предотвращает повторение изображения */
@@ -479,7 +495,7 @@
           top: 0;
           left: 0;
           width: 100%;
-          height: 100%;
+          height: 94%;
           background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
           z-index: 0; /* Размещает затемнение позади контента */
       }
@@ -569,6 +585,29 @@
         background-color: #020202;
         color: #fff;
         text-align: center;
+        background-image: url(templates/background6.png);
+
+
+
+
+
+        background-size: auto; /* Растягивает изображение, сохраняя пропорции */
+        background-position: center; /* Центрирует изображение */
+        background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
+        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+        position: relative;
+        z-index: 2;
+      }
+
+      #reviews::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          z-index: 1; /* Размещает затемнение позади контента */
       }
 
       #reviews h2 {
@@ -590,6 +629,8 @@
         max-width: 1095px; /* Sum of column widths + gaps */
         margin: 0 auto;
         padding: 20px;
+        position: relative;
+        z-index: 2;
       }
 
       .review-card {
@@ -711,6 +752,8 @@
         margin: 10px auto;
         display: block;
         transition: background-color 0.3s;
+        position: relative;
+        z-index: 2;
       }
 
       .more-reviews-btn:hover,
@@ -730,6 +773,31 @@
         position: relative;
         bottom: 0;
         width: 100%;
+        border-top-left-radius: 50px; /* Закругление верхнего левого угла */
+        border-top-right-radius: 50px; /* Закругление верхнего правого угла */
+        border: 1px solid #ffaa00;
+      }
+
+
+      #packages {
+        background-image: url(templates/background6.png);
+        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
+        background-position: center; /* Центрирует изображение */
+        background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
+        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+        position: relative;
+        z-index: 2;
+      }
+
+      #packages::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          z-index: 1; /* Размещает затемнение позади контента */
       }
         /* Обновленные стили для секции packages */
         .section-subtitle {
@@ -737,6 +805,8 @@
             color: #ffffff;
             text-align: center;
             margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
         }
         .package-container {
             display: flex;
@@ -746,12 +816,16 @@
             max-width: 960px;
             margin: 0 auto;
             flex-direction: row; /* Убедимся, что на ПК-версии блоки идут в ряд */
+            position: relative;
+            z-index: 2;
         }
         .package-display {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 400px; /* Фиксированная ширина для блока с изображением */
+            position: relative;
+            z-index: 2;
         }
         .package-image {
             display: none;
@@ -786,7 +860,7 @@
             margin-right: 5px;
         }
         .package-description {
-            height: 470px;
+            height: 440px;
             width: 500px; /* Фиксированная ширина для блока с описанием */
             color: #fff;
             text-align: left;
@@ -874,7 +948,7 @@
             vertical-align: middle;
         }
         .package-buttons {
-            padding-top: 40px;
+            padding-top: 20px;
             display: flex;
             justify-content: flex-start;
             gap: 10px;
@@ -916,109 +990,134 @@
             padding: 2px 5px;
             border-radius: 10px;
         }
-      .team-grid {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        flex-wrap: wrap;
-        background-color: #020202; /* Темный фон */
-        padding: 5px;
-        animation: fadeIn 2s ease-in-out; /* Анимация появления */
-      }
-      .team-carousel {
-        display: flex;
-        position: relative;
-        width: 100%;
-        max-width: 960px;
-        margin: 0 auto;
-        gap: 40px;
-      }
-      .team-member {
-        text-align: center;
-        color: #fff;
-      }
-      .team-member img {
-        width: 300px;
-        height: 300px;
-        object-fit: cover;
-        border-radius: 15px;
-        border: 5px solid #ffaa00; /* Желтый ободок */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      }
-      .team-member h3 {
-        font-size: 24px;
-        margin-top: 15px;
-        color: #fff;
-        text-transform: uppercase;
-      }
-      .team-member h7 {
-        color: #ffaa00;
-        font-size: 42px;
-        text-transform: uppercase;
-        font-weight: bold;
-      }
-      .team h6 {
-        margin-bottom: 5px;
-      }
 
-      /* Стили для кнопок карусели */
-      .carousel-prev,
-      .carousel-next {
-        display: none; /* Скрываем кнопки по умолчанию */
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border: none;
-        padding: 10px;
-        font-size: 24px;
-        cursor: pointer;
-        border-radius: 50%;
-        transition: background-color 0.3s ease;
-      }
-      .carousel-prev:hover,
-      .carousel-next:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-      }
-      .carousel-prev {
-        left: 10px;
-      }
-      .carousel-next {
-        right: 10px;
-      }
+        #team {
+          background-image: url(templates/background6.png);
+          background-size: cover; /* Растягивает изображение, сохраняя пропорции */
+          background-position: center; /* Центрирует изображение */
+          background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
+          overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+          position: relative;
+          z-index: 2;
+        }
+        #team::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          z-index: 1; /* Размещает затемнение позади контента */
+        }
+        .team-grid {
+          display: flex;
+          justify-content: center;
+          gap: 30px;
+          flex-wrap: wrap;
+          padding: 5px;
+          animation: fadeIn 2s ease-in-out; /* Анимация появления */
+          position: relative;
+          z-index: 2;
+        }
+        .team-carousel {
+          display: flex;
+          position: relative;
+          width: 100%;
+          max-width: 960px;
+          margin: 0 auto;
+          gap: 40px;
+        }
+        .team-member {
+          text-align: center;
+          color: #fff;
+          position: relative;
+          z-index: 2;
+        }
+        .team-member img {
+          width: 300px;
+          height: 300px;
+          object-fit: cover;
+          border-radius: 15px;
+          border: 5px solid #ffaa00; /* Желтый ободок */
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .team-member h3 {
+          font-size: 24px;
+          margin-top: 15px;
+          color: #fff;
+          text-transform: uppercase;
+        }
+        .team-member h7 {
+          color: #ffaa00;
+          font-size: 42px;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
+        .team h6 {
+          margin-bottom: 5px;
+        }
 
-      .whatsapp-order {
-        text-align: center;
-        margin-top: 40px;
-        padding-bottom: 30px;
-      }
+        /* Стили для кнопок карусели */
+        .carousel-prev,
+        .carousel-next {
+          display: none; /* Скрываем кнопки по умолчанию */
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background-color: rgba(0, 0, 0, 0.5);
+          color: #fff;
+          border: none;
+          padding: 10px;
+          font-size: 24px;
+          cursor: pointer;
+          border-radius: 50%;
+          transition: background-color 0.3s ease;
+        }
+        .carousel-prev:hover,
+        .carousel-next:hover {
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+        .carousel-prev {
+          left: 10px;
+        }
+        .carousel-next {
+          right: 10px;
+        }
 
-      .whatsapp-button {
-        background-color: #ffaa00; 
-        color: #1a1a1a;
-        padding: 15px 40px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 18px;
-        text-transform: uppercase;
-        display: inline-block;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        position: relative;
-        overflow: hidden;
-      }
+        .whatsapp-order {
+          text-align: center;
+          margin-top: 40px;
+          padding-bottom: 30px;
+          position: relative;
+          z-index: 2;
+        }
 
-      .whatsapp-button:hover {
-        background-color: #25D366; /* Темный цвет WhatsApp */
-        transform: translateY(-3px);
-        box-shadow: 0 7px 20px rgba(37, 211, 102, 0.4);
-      }
+        .whatsapp-button {
+          background-color: #ffaa00; 
+          color: #1a1a1a;
+          padding: 15px 40px;
+          border-radius: 30px;
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 18px;
+          text-transform: uppercase;
+          display: inline-block;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+          position: relative;
+          overflow: hidden;
+        }
 
-      .whatsapp-button:active {
-        transform: translateY(1px);
-      }
+        .whatsapp-button:hover {
+          background-color: #25D366; /* Темный цвет WhatsApp */
+          transform: translateY(-3px);
+          box-shadow: 0 7px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-button:active {
+          transform: translateY(1px);
+        }
 
       /* Иконка WhatsApp (опционально) */
       .whatsapp-button::before {
@@ -1136,7 +1235,7 @@
         font-size: 22px;
         font-weight: bold;
         margin-top: 0; /* Убираем верхний отступ, т.к. есть отступ у .svg-placeholder */
-        margin-bottom: 15px;
+        margin-bottom: 25px;
         text-transform: uppercase;
       }
       .column p {
@@ -1146,21 +1245,56 @@
         line-height: 1.5;
         margin-bottom: 0;
       }
-
+      #additionally {
+        background-image: url(templates/background6.png);
+        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
+        background-position: center; /* Центрирует изображение */
+        background-repeat: no-repeat; /* Предотвращает повторение изображения */
+        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+        position: relative;
+        z-index: 2;
+        padding-bottom: 250px;
+      }
+      .overlay-image {
+        position: relative;
+        top: 270px;
+        left: -20px;
+        width: 120%;
+        height: 100%;
+      }
+      #additionally::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
+          z-index: 1; /* Размещает затемнение позади контента */
+      }
       /* Styles for the new section below */
       .additional-content {
         margin-top: 10px;
       }
 
       .additional-content h2 {
-        margin-bottom: 70px;
+        margin-bottom: 10px;
         font-size: 56px;
         color: #ffffff;
       }
 
       .additional-content h2 span {
-        color: #ffaa00;
+        display: inline; /* Чтобы элемент занимал только необходимую ширину */
+        background-color: #ffaa00; /* Задаем желтый фон */
         font-size: 56px;
+        margin-bottom: 30px;
+        color: #000;
+        z-index: 2;
+        position: relative;
+        text-transform: uppercase;
+        border: 5px solid #ffaa00;
+        border-radius: 45px;
+        padding: 5px 20px; /* Небольшие внутренние отступы */
       }
 
       .additional-columns {
@@ -1180,12 +1314,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        background-color: none;
       }
 
       .additional-svg-placeholder {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 25px;
+        width: 200px;
+        height: 200px;
+        margin-bottom: 1px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1195,23 +1330,27 @@
         display: block;
         width: 100px;
         height: 100px;
-        fill: #e0c56e;
+        fill: #ff5500;
+        justify-content: center;
+        align-items: center;
       }
-
-      .additional-column-content {
+      #additionally {
         background-color: #020202;
+      }
+      .additional-column-content {
+        background-color: none;
         border: none;
         padding: 0;
         width: 100%;
         box-sizing: border-box;
+        justify-content: center;
+        align-items: flex-start;
       }
 
       .additional-column h3 {
         color: #ffffff;
         font-size: 20px;
         font-weight: bold;
-        margin-top: 0;
-        margin-bottom: 0;
       }
 
       .additional-column p {
@@ -1256,7 +1395,7 @@
       }
       html {
         scroll-behavior: smooth;
-        touch-action: manipulation;
+        touch-action: block;
       }
       /* Мобильная версия */
       @media (max-width: 768px) {
@@ -1397,7 +1536,7 @@
         }
 
         .service-card {
-          width: 100%;
+          width: 300px;
           max-width: 300px;
           height: auto; /* На мобильных устройствах высота авто */
         }
@@ -1409,6 +1548,7 @@
         .horizontal-card {
           flex-direction: column;
           max-width: 300px;
+          height: 430px;
         }
 
         .horizontal-card img {
@@ -1439,22 +1579,32 @@
         }
         
         .hero h1 { /* chotam! show */
-            font-size: 30px;
+            font-size: 20px;
             max-width: 800px;
         }
 
         .hero p { /* организуем мероприятия */
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
         }
 
         .hero h2 { /* более 1000 довольных */
-            font-size: 18px;
+            font-size: 16px;
         }
-        .hero h8.highligted{
+        .hero h8.highligted { 
           font-size: 18px;
           padding: 2px 2px; /* Небольшие внутренние отступы */
         }
+
+        .hero h8.highligted1 { /* h1 */
+          font-size: 20px;
+          padding: 3px 3px; /* Небольшие внутренние отступы */
+        }
+
+        #packages {
+          padding-bottom: 200px;
+        }
+
         .package-container {
             flex-direction: column;
             align-items: center;
@@ -1477,28 +1627,27 @@
         }
 
         .package-buttons {
-            padding-top: 20px;
-            margin: 0 auto; /* Remove vertical margin to avoid extra spacing */
-            justify-content: center; /* Center buttons horizontally */
+            padding-top: 10px;
+            justify-content: flex-start; /* Center buttons horizontally */
             width: 100%;
             max-width: 300px; /* Match the max-width of other elements for consistency */
             align-items: center;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            box-sizing: border-box; /* Ensure padding doesn't affect width */
+            box-sizing: border-box;
           }
 
         .package-button {
             width: 120px; /* Уменьшаем ширину кнопок для мобильной версии */
             font-size: 16px;
-            padding: 8px 0;
         }
 
         .package-actions {
             flex-direction: column;
             gap: 10px;
             width: 300px;
+            align-items: center;
         }
 
         .action-button {
@@ -1507,7 +1656,8 @@
         }
 
         #team {
-          padding-top: 200px;
+          padding-top: 50px;
+
         }
 
         .team-grid {
@@ -1539,7 +1689,7 @@
         .carousel-prev,
         .carousel-next {
           display: block; /* Показываем кнопки в мобильной версии */
-          top: 40%; /* Центрируем кнопки относительно изображения (примерно середина карточки) */
+          top: 35%; 
           transform: translateY(-50%);
           background-color: #8b4513; /* Коричневый фон, как на скриншоте */
           color: #fff;
@@ -1552,14 +1702,17 @@
           line-height: 1; /* Центрируем стрелку */
           cursor: pointer;
           transition: background-color 0.3s ease;
+          z-index: 10;
         }
 
         .carousel-prev {
           left: -20px; /* Смещаем кнопку ближе к краю рамки */
+          z-index: 10;
         }
 
         .carousel-next {
           right: -20px; /* Смещаем кнопку ближе к краю рамки */
+          z-index: 10;
         }
 
         .carousel-prev:hover,
@@ -1601,6 +1754,7 @@
         }
         .column h3 {
           font-size: 20px;
+          margin-bottom: 50px;
         }
         .column p {
             font-size: 15px;
@@ -1613,14 +1767,14 @@
         .what-is-show {
           width: auto;
           height: auto;
-          background-image: url(templates/background4.png);
+          background-image: url(templates/background_mobile.png);
           background-size: cover; /* Растягивает изображение, сохраняя пропорции */
           background-position: center; /* Центрирует изображение */
           background-repeat: no-repeat; /* Предотвращает повторение изображения */
           background-color: #1a1a1a;
-          padding: 80px 20px;
           position: relative;
           overflow: hidden;
+          padding: 0px;
         }
         .what-is-show::before {
           content: '';
@@ -1633,7 +1787,7 @@
           z-index: 1; /* Размещает затемнение позади контента */
         }
         .additional-content {
-          margin-top: 50px; 
+          margin-top: 50px;
         }
         .section.additional-content h2 {
           font-size: 25px; 
@@ -1641,13 +1795,14 @@
           color: #ffffff;
         }
         .additional-content h2 span {
-          font-size: 30px;
-          color: #ffaa00;
+          font-size: 25px;
+          color: #000;
+          padding: 1px 10px;
         }
         .additional-columns {
           flex-direction: column; 
           align-items: center;
-          gap: 30px; 
+          gap: 30px;
         }
 
         .additional-column {
@@ -1666,7 +1821,8 @@
         }
 
         .additional-column h3 {
-          font-size: 16px; /* Smaller text */
+          font-size: 18px; /* Smaller text */
+          font-weight: bold;
         }
 
 
@@ -1709,6 +1865,15 @@
           .action-button.participate {
             font-size: 15px;
           }
+
+          #services {
+            padding: 0px;
+            background-repeat: repeat; /* Предотвращает повторение изображения */
+          }
+          #gallery {
+            padding-top: 100px;
+            padding-bottom: 10px;
+          }
       }
     </style>
   </head>
@@ -1734,8 +1899,7 @@
             height="16"
             fill="currentColor"
             class="bi bi-instagram"
-            viewBox="0 0 16 16"
-          >
+            viewBox="0 0 16 16">
             <path
               d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
             />
@@ -1763,7 +1927,7 @@
     </header>
 
     <section class="hero">
-      <h1>CHOTAM! SHOW - Лучшая организация мероприятий</h1>
+      <h1><h8 class="highligted1">CHOTAM! SHOW</h8> - Лучшая организация мероприятий</h1>
       <p>Организуем мероприятие любого масштаба под ключ!</p>
       <h2><h8 class="highligted">Более 1000</h8> довольных клиентов</h2>
       <a
@@ -1781,7 +1945,7 @@
             <div class="svg-placeholder"></div>
             <div class="column-content">
               <h3>ФОРМАТ</h3>
-              <p>МЫ ПРЕДЛАГАЕМ ПРОВЕСТИ ВАШЕ МЕРОПРИЯТИЕ В СОВРЕМЕННОМ ФОРМАТЕ</p>
+              <p>ПРОВЕДЕМ ВАШЕ МЕРОПРИЯТИЕ В СОВРЕМЕННОМ ФОРМАТЕ</p>
             </div>
           </div>
           <div class="column">
@@ -1795,7 +1959,7 @@
             <div class="svg-placeholder"></div>
             <div class="column-content">
               <h3>ВЕДУЩИЙ</h3>
-              <p>ПОЛНОЕ СОПРОВОЖДЕНИЕ МЕРОПРИЯТИЯ</p>
+              <p>УКРАСИТ ВАШЕ МЕРОПРИЯТИЕ ПРИЯТНОЙ АТМОСФЕРОЙ</p>
             </div>
           </div>
         </div>
@@ -1804,49 +1968,68 @@
 
     <section class="section additional-content" id="additionally">
       <div class="additional-content">
-        <h2>МОЖЕМ ВЗЯТЬ НА СЕБЯ ОРГАНИЗАЦИЮ ПРАЗДНИКА <span>«ПОД КЛЮЧ»</span></h2>
+        <h2>ОРГАНИЗУЕМ ВАШЕ МЕРОПРИЯТИЕ</br><span>ПОД КЛЮЧ</span></br></h2>
         <div class="additional-columns">
           <div class="additional-column">
             <div class="additional-svg-placeholder">
-              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"></svg>
+              <svg id='Notepad_24' width='130' height='130' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+                <g transform="matrix(0.51 0 0 0.51 12 12)" >  
+                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,85,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-24, -23.49)" d="M 16.976562 3.9785156 C 16.148901352253777 3.9914459713938664 15.488126980398594 4.672323509009937 15.5 5.500000000000002 L 15.5 7 L 12.5 7 C 10.032499 7 8 9.0324991 8 11.5 L 8 38.5 C 8 40.967501 10.032499 43 12.5 43 L 35.5 43 C 37.967501 43 40 40.967501 40 38.5 L 40 11.5 C 40 9.0324991 37.967501 7 35.5 7 L 34.5 7 L 34.5 10 L 35.5 10 C 36.346499 10 37 10.653501 37 11.5 L 37 38.5 C 37 39.346499 36.346499 40 35.5 40 L 12.5 40 C 11.653501 40 11 39.346499 11 38.5 L 11 11.5 C 11 10.653501 11.653501 10 12.5 10 L 15.5 10 L 15.5 11.5 C 15.492349565681769 12.040953874866357 15.776562944253993 12.544122046857417 16.243809274571493 12.816831582229785 C 16.711055604888994 13.089541117602154 17.28894439511101 13.089541117602153 17.756190725428507 12.816831582229785 C 18.223437055746007 12.544122046857417 18.507650434318233 12.040953874866355 18.5 11.5 L 18.5 5.5 C 18.50581863731553 5.094381277315419 18.347119004885432 4.703696988759657 18.06008976756276 4.417035827012122 C 17.77306053024009 4.130374665264587 17.382172922358524 3.9721764836618982 16.976562 3.9785156 z M 23.976562 3.9785156 C 23.148901352253777 3.9914459713938664 22.488126980398594 4.672323509009937 22.5 5.500000000000002 L 22.5 7 L 20.5 7 L 20.5 10 L 22.5 10 L 22.5 11.5 C 22.492349565681767 12.040953874866357 22.776562944253993 12.544122046857417 23.243809274571493 12.816831582229785 C 23.711055604888994 13.089541117602154 24.28894439511101 13.089541117602153 24.756190725428507 12.816831582229785 C 25.223437055746007 12.544122046857417 25.507650434318233 12.040953874866355 25.5 11.5 L 25.5 5.5 C 25.50581863731553 5.094381277315419 25.347119004885432 4.703696988759657 25.06008976756276 4.417035827012122 C 24.77306053024009 4.130374665264587 24.382172922358524 3.9721764836618982 23.976562 3.9785156 z M 30.976562 3.9785156 C 30.148901352253777 3.9914459713938664 29.488126980398594 4.672323509009937 29.5 5.500000000000002 L 29.5 7 L 27.5 7 L 27.5 10 L 29.5 10 L 29.5 11.5 C 29.492349565681767 12.040953874866357 29.776562944253993 12.544122046857417 30.243809274571493 12.816831582229785 C 30.711055604888994 13.089541117602154 31.28894439511101 13.089541117602153 31.756190725428507 12.816831582229785 C 32.22343705574601 12.544122046857417 32.50765043431823 12.040953874866355 32.5 11.5 L 32.5 5.5 C 32.50581863731553 5.094381277315419 32.347119004885435 4.703696988759657 32.06008976756276 4.417035827012122 C 31.77306053024009 4.130374665264587 31.382172922358524 3.9721764836618982 30.976562 3.9785156 z M 16.5 17 C 15.959046125133643 16.992349565681767 15.455877953142583 17.276562944253993 15.183168417770215 17.743809274571493 C 14.910458882397847 18.211055604888994 14.910458882397846 18.788944395111006 15.183168417770215 19.256190725428507 C 15.455877953142583 19.723437055746007 15.959046125133643 20.007650434318233 16.5 20 L 31.5 20 C 32.040953874866354 20.007650434318233 32.54412204685742 19.723437055746007 32.81683158222979 19.256190725428507 C 33.08954111760215 18.788944395111006 33.08954111760215 18.211055604888994 32.81683158222979 17.743809274571493 C 32.54412204685742 17.276562944253993 32.040953874866354 16.992349565681767 31.5 17 L 16.5 17 z M 16.5 25 C 15.959046125133643 24.992349565681767 15.455877953142583 25.276562944253993 15.183168417770215 25.743809274571493 C 14.910458882397847 26.211055604888994 14.910458882397846 26.788944395111006 15.183168417770215 27.256190725428507 C 15.455877953142583 27.723437055746007 15.959046125133643 28.007650434318233 16.5 28 L 23.5 28 C 24.040953874866357 28.007650434318233 24.544122046857417 27.723437055746007 24.816831582229785 27.256190725428507 C 25.089541117602153 26.788944395111006 25.089541117602153 26.211055604888994 24.816831582229785 25.743809274571493 C 24.544122046857417 25.276562944253993 24.040953874866357 24.992349565681767 23.5 25 L 16.5 25 z M 16.5 33 C 15.959046125133643 32.99234956568177 15.455877953142583 33.27656294425399 15.183168417770215 33.74380927457149 C 14.910458882397847 34.21105560488899 14.910458882397846 34.78894439511101 15.183168417770215 35.25619072542851 C 15.455877953142583 35.723437055746004 15.959046125133643 36.00765043431823 16.5 36 L 27.5 36 C 28.040953874866357 36.00765043431823 28.544122046857417 35.72343705574601 28.816831582229785 35.25619072542851 C 29.089541117602153 34.78894439511101 29.089541117602153 34.21105560488899 28.816831582229785 33.74380927457149 C 28.544122046857417 33.27656294425399 28.040953874866357 32.99234956568177 27.5 33 L 16.5 33 z" stroke-linecap="round" />
+                </g>
+                </svg>
             </div>
             <div class="additional-column-content">
-              <h3>Индивидуальный сценарий</h3>
+              <h3>Индивидуальный<br>сценарий</br></h3>
             </div>
           </div>
           <div class="additional-column">
             <div class="additional-svg-placeholder">
-              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-              </svg>
+              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="150" height="150"><path
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"></svg>
             </div>
             <div class="additional-column-content">
-              <h3>Фотозона</h3>
+              <h3>Оформление<br>фотозоны</br></h3>
             </div>
           </div>
           <div class="additional-column">
             <div class="additional-svg-placeholder">
-              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="150" height="150"><path
+                d="M 21.5625 0.171875 L 10.453125 3.570313 C 9.105469 3.953125 8.015625 5.355469 8.015625 6.703125 L 8.015625 18.261719 C 8.015625 18.261719 8.015625 18.417969 8.015625 18.421875 C 8.015625 18.421875 7.210938 17.878906 5.417969 18.132813 C 2.785156 18.507813 0.648438 20.527344 0.648438 22.648438 C 0.648438 24.769531 2.785156 26.066406 5.417969 25.691406 C 8.054688 25.320313 9.984375 23.363281 9.984375 21.242188 C 9.984375 21.242188 9.984375 12.175781 9.984375 11.234375 C 9.984375 10.296875 11.113281 9.890625 11.113281 9.890625 L 20.9375 6.8125 C 20.9375 6.8125 22.023438 6.449219 22.023438 7.453125 C 22.023438 8.460938 22.023438 15.484375 22.023438 15.484375 C 22.023438 15.484375 22.023438 15.488281 22.023438 15.492188 C 22.023438 15.492188 21.023438 14.914063 19.230469 15.132813 C 16.597656 15.453125 14.460938 17.429688 14.460938 19.550781 C 14.460938 21.671875 16.597656 23.011719 19.230469 22.691406 C 21.863281 22.375 24 20.394531 24 18.273438 L 24 1.910156 C 24 0.566406 22.90625 -0.214844 21.5625 0.171875 Z" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="additional-column-content">
-              <h3>Диджей</h3>
+              <h3>Услуги<br>диджея</br></h3>
             </div>
           </div>
           <div class="additional-column">
             <div class="additional-svg-placeholder">
-              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-              </svg>
+              <svg id='camera_24' width='130' height='130' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+                <g transform="matrix(1 0 0 1 12 12)" >
+                <g style="" >
+                <g transform="matrix(1 0 0 1 0 0)" >
+                <path style="stroke: none; stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 0 0 L 24 0 L 24 24 L 0 24 z" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 0)" >
+                <path style="stroke: rgb(255,85,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 5 7 L 6 7 C 7.1045694996615865 7 8 6.1045694996615865 8 5 C 8 4.447715250169207 8.447715250169207 4 9 4 L 15 4 C 15.552284749830793 4 16 4.447715250169207 16 5 C 16 6.1045694996615865 16.895430500338414 7 18 7 L 19 7 C 20.104569499661586 7 21 7.895430500338413 21 9 L 21 18 C 21 19.104569499661586 20.104569499661586 20 19 20 L 5 20 C 3.895430500338413 20 3 19.104569499661586 3 18 L 3 9 C 3 7.8954305003384135 3.895430500338413 7 5 7" stroke-linecap="round" />
+                </g>
+                <g transform="matrix(1 0 0 1 0 1)" >
+                <circle style="stroke: rgb(255,85,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" cx="0" cy="0" r="3" />
+                </g>
+                </g>
+                </g>
+                </svg>
             </div>
             <div class="additional-column-content">
-              <h3>Фото и видеосъемка</h3>
+              <h3>Фото и<br>видеосъемка</br></h3>
             </div>
           </div>
         </div>
       </div>
+      <!--<img src="templates/line.png" class="overlay-image"> -->
     </section>
 
     <section class="section" id="services">
-      <h2>МЫ ОРГАНИЗУЕМ ЛЮБОЕ МЕРОПРИЯТИЕ</h2>
+      <h2>МЫ ПРОВОДИМ МЕРОПРИЯТИЯ ЛЮБОГО ФОРМАТА</h2>
       <div class="service-grid">
         <!-- Первый ряд: 3 карточки -->
         <div class="service-row">
@@ -2181,7 +2364,7 @@
     </a>
 
     <footer>
-      <p>© 2025 chotam_astana. Все права защищены.</p>
+      <p>© 2025 chotam_astana. Все права защищены</p>
     </footer>
 
     <script>
