@@ -85,6 +85,7 @@
       header img {
         height: 70px; /* размер лого на десктоп */
         align-items: left;
+        border-radius: 50%;
       }
       nav {
         display: flex;
@@ -101,7 +102,18 @@
       }
       .social-icon {
         margin-left: 20px;
-        display: inline-block;
+        display: inline-flex; /* Используем flex для центрирования */
+        align-items: center;
+        justify-content: center;
+        width: 45px; 
+        height: 45px; 
+        background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый */
+        border-radius: 50%; 
+        transition: all 0.3s ease; /* Плавные переходы */
+      }
+
+      .social-icon:hover {
+        background-color: rgba(255, 255, 255, 0.5); /* Увеличиваем прозрачность при наведении */
       }
       .social-icon svg {
         width: 26px;
@@ -115,12 +127,11 @@
         justify-content: center;
         text-align: center;
         padding: 200px 0px;
-        background: linear-gradient(to bottom, #ff5500, #2980b9);
         background-image: url(templates/background6.png);
-        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
-        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        overflow: hidden; 
         position: relative;
         z-index: 2;
       }
@@ -133,7 +144,7 @@
           width: 100%;
           height: 100%;
           background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
+          z-index: 1; 
       }
       .hero h1 {
         font-size: 40px;
@@ -155,7 +166,7 @@
         padding-bottom: 10px;
       }
       .hero h8.highligted {
-        display: inline; /* Чтобы элемент занимал только необходимую ширину */
+        display: inline; 
         background-color: #ffaa00; /* Задаем желтый фон */
         font-size: 30px;
         margin-bottom: 30px;
@@ -307,25 +318,26 @@
 
       /* Стили для карточек */
       .service-card {
-        background-color: #2a2a2a; /* Темный фон карточки */
-        border-radius: 15px;
+        background-color: rgba(88, 75, 45, 0.7); /* Очень легкий фон для выделения блока */
         overflow: hidden;
         width: 350px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         transition: transform 0.3s ease;
         display: flex; /* Добавляем flex для карточки */
         flex-direction: column; /* Вертикальное расположение */
-        height: 500px; /* Фиксированная высота карточки */
+        height: 550px; /* Фиксированная высота карточки */
         border: 2px solid #ff5500; /* Желтая рамка */
+        border-radius: 25px;
       }
       .service-card:hover {
         transform: scale(1.03);
       }
       .service-card img {
         width: 100%;
-        height: 200px;
+        height: 250px;
         object-fit: cover;
-        border: 2px solid #ff5500; /* Желтая рамка */
+        padding: 12px;
+        border-radius: 25px;
       }
       .service-content {
         padding: 20px;
@@ -367,8 +379,8 @@
       /* Стили для горизонтальной карточки */
       .horizontal-card {
         display: flex;
-        background-color: #2a2a2a;
-        border-radius: 15px;
+        background-color: rgba(88, 75, 45, 0.7); /* Очень легкий фон для выделения блока */
+        border-radius: 25px;
         overflow: hidden;
         width: 100%;
         max-width: 1100px; /* 3 карточки по 300px + отступы */
@@ -387,7 +399,8 @@
         height: 210px;
         object-fit: cover;
         border-radius: 10px; /* Закругляем углы изображения */
-        border: 2px solid #ff5500; /* Желтая рамка */
+        border-radius: 25px;
+        padding: 12px;
       }
       .horizontal-content {
         text-align: left;
@@ -776,6 +789,7 @@
         border-top-left-radius: 50px; /* Закругление верхнего левого угла */
         border-top-right-radius: 50px; /* Закругление верхнего правого угла */
         border: 1px solid #ffaa00;
+        font-weight: bold;
       }
 
 
@@ -842,6 +856,9 @@
             width: 100%;
             height: 300px;
             object-fit: cover;
+            padding: 20px;
+            padding-bottom: 0px;
+            border-radius: 35px;
         }
         .package-details {
             display: flex;
@@ -1139,9 +1156,10 @@
         background-position: center; /* Центрирует изображение */
         background-repeat: no-repeat; /* Предотвращает повторение изображения */
         background-color: #1a1a1a;
-        padding: 185px 20px;
         position: relative;
         overflow: hidden;
+        padding-top: 350px;
+        padding-bottom: 30px;
       }
       .what-is-show::before {
           content: '';
@@ -1190,35 +1208,24 @@
         max-width: 300px;
         text-align: center;
         color: #ffffff;
-        display: flex; /* Используем flex для вертикального расположения svg и контента */
-        flex-direction: column; /* Направление: вертикальное */
-        align-items: center; /* Центрируем элементы по горизонтали */
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
       }
-      /* Убираем стили для старых иконок <img> */
-      /*
-      .column-icon {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 25px;
-        object-fit: contain;
-      }
-      */
       /* Стили для контейнера SVG */
       .svg-placeholder {
-          width: 80px; /* Ширина контейнера = ширине иконки */
-          height: 80px; /* Высота контейнера = высоте иконки */
-          margin-bottom: 25px; /* Отступ снизу, как был у иконки */
-          display: flex; /* Центрирование SVG внутри, если он будет добавлен */
+          width: 80px; 
+          height: 80px; 
+          margin-bottom: 25px; 
+          display: flex; 
           justify-content: center;
           align-items: center;
       }
-      /* Базовые стили для SVG, который вы можете вставить */
       .column-icon-svg {
-          display: block; /* Убирает лишние отступы под SVG */
-          /* Размеры width/height можно задать прямо в SVG теге или здесь */
-          /* width: 80px; */
-          /* height: 80px; */
-          /* fill: #E0C56E; /* Цвет заливки по умолчанию, можно переопределить в SVG */
+          display: block; 
+          width: 80px;
+          height: 80px;
+          fill: #E0C56E; 
       }
       /* Стили для блока с текстом ("квадрата") */
       .column-content {
@@ -1552,9 +1559,9 @@
         }
 
         .horizontal-card img {
-          width: 100%; /* Изображение занимает всю ширину */
+          width: 100%; 
           height: 150px;
-          border-radius: 10px; /* Закругляем только верхние углы */
+          border-radius: 25px; 
         }
 
         .horizontal-content {
@@ -1574,22 +1581,30 @@
           height: 20px;
         }
 
+        body {
+          padding-top: 0px;
+        }
         .hero {
-          padding: 50px 80px;
+          padding: 220px 20px;
+          background-size: contain;
+          background-repeat: repeat;
         }
         
         .hero h1 { /* chotam! show */
-            font-size: 20px;
+            font-size: 22px;
             max-width: 800px;
+            margin-bottom: 50px;
         }
 
         .hero p { /* организуем мероприятия */
-            font-size: 18px;
+            font-size: 14px;
             font-weight: bold;
+            margin-bottom: 50px;
         }
 
         .hero h2 { /* более 1000 довольных */
             font-size: 16px;
+            margin-bottom: 50px;
         }
         .hero h8.highligted { 
           font-size: 18px;
@@ -1597,8 +1612,13 @@
         }
 
         .hero h8.highligted1 { /* h1 */
-          font-size: 20px;
+          font-size: 22px;
           padding: 3px 3px; /* Небольшие внутренние отступы */
+        }
+
+        .hero button {
+          margin-top: 100px;
+          margin-bottom: 100px;
         }
 
         #packages {
@@ -1721,7 +1741,7 @@
         }
 
         .what-is-show h2 {
-          margin-top: 220px;
+          margin-top: 280px;
           font-size: 32px;
           margin-bottom: 5px;
         }
@@ -1768,10 +1788,10 @@
           width: auto;
           height: auto;
           background-image: url(templates/background_mobile.png);
-          background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-          background-position: center; /* Центрирует изображение */
+          background-size: contain; /* Растягивает изображение, сохраняя пропорции */
+          background-position: top; /* Центрирует изображение */
           background-repeat: no-repeat; /* Предотвращает повторение изображения */
-          background-color: #1a1a1a;
+          background-color: #020202;
           position: relative;
           overflow: hidden;
           padding: 0px;
@@ -1785,6 +1805,11 @@
           height: 100%;
           background-color: rgba(0, 0, 0, 0.0); /* Затемнение: цвет и прозрачность */
           z-index: 1; /* Размещает затемнение позади контента */
+        }
+
+        #additionally {
+          background-size: contain;
+          background-repeat: repeat;
         }
         .additional-content {
           margin-top: 50px;
@@ -2187,25 +2212,25 @@
             <img src="templates/otzyv2.png" alt="Отзыв 2" />
           </div>
           <div class="review-card card-3">
-            <img src="templates/otzyv3.png" alt="Отзыв 3" />
+            <img src="templates/otzyv8.jpg" alt="Отзыв 3" />
           </div>
           <div class="review-card card-4">
-            <img src="templates/otzyv1.png" alt="Отзыв 4" />
+            <img src="templates/otzyv7.jpg" alt="Отзыв 4" />
           </div>
           <div class="review-card card-5">
-            <img src="templates/otzyv2.png" alt="Отзыв 5" />
+            <img src="templates/otzyv3.png" alt="Отзыв 5" />
           </div>
           <div class="review-card card-6">
-            <img src="templates/otzyv3.png" alt="Отзыв 6" />
+            <img src="templates/otzyv6.jpg" alt="Отзыв 6" />
           </div>
           <div class="review-card card-7">
-            <img src="templates/otzyv1.png" alt="Отзыв 7" />
+            <img src="templates/otzyv4.jpg" alt="Отзыв 7" />
           </div>
           <div class="review-card card-8">
-            <img src="templates/otzyv2.png" alt="Отзыв 8" />
+            <img src="templates/otzyv5.jpg" alt="Отзыв 8" />
           </div>
           <div class="review-card card-9">
-            <img src="templates/otzyv3.png" alt="Отзыв 9" />
+            <img src="templates/otzyv9.jpg" alt="Отзыв 9" />
           </div>
         </div>
         <button id="more-reviews-btn" class="more-reviews-btn">БОЛЬШЕ ОТЗЫВОВ</button>
@@ -2218,43 +2243,43 @@
         <h6>Выберите тот, который подходит именно вам</h6>
         <div class="package-container">
             <div class="package-display">
-                <div class="package-image active" data-package="klassika">
-                    <img src="templates/logo.jpeg" alt="Классика">
+                <div class="package-image active" data-package="xs">
+                    <img src="templates/logo.jpeg" alt="xs">
                     <div class="package-details">
                         <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
                         <span class="detail-item"><span class="icon">✔</span> до 1 часа</span>
                     </div>
                 </div>
-                <div class="package-image" data-package="kids">
-                    <img src="templates/logo.jpeg" alt="Kids">
+                <div class="package-image" data-package="s">
+                    <img src="templates/logo.jpeg" alt="s">
                     <div class="package-details">
                         <span class="detail-item"><span class="icon">✔</span> от 6 человек</span>
                         <span class="detail-item"><span class="icon">✔</span> до 1,5 часов</span>
                     </div>
                 </div>
-                <div class="package-image" data-package="battle-show">
-                    <img src="templates/logo.jpeg" alt="Battle Show">
+                <div class="package-image" data-package="m">
+                    <img src="templates/logo.jpeg" alt="m">
                     <div class="package-details">
                         <span class="detail-item"><span class="icon">✔</span> от 10 человек</span>
                         <span class="detail-item"><span class="icon">✔</span> до 2 часов</span>
                     </div>
                 </div>
-                <div class="package-image" data-package="black">
-                    <img src="templates/logo.jpeg" alt="Black">
+                <div class="package-image" data-package="l">
+                    <img src="templates/logo.jpeg" alt="l">
                     <div class="package-details">
                         <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
                         <span class="detail-item"><span class="icon">✔</span> до 3 часов</span>
                     </div>
                 </div>
-                <div class="package-image" data-package="music">
-                    <img src="templates/logo.jpeg" alt="Музыкальный">
+                <div class="package-image" data-package="xl">
+                    <img src="templates/logo.jpeg" alt="xl">
                     <div class="package-details">
                         <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
                         <span class="detail-item"><span class="icon">✔</span> до 5 часов</span>
                     </div>
                 </div>
-                <div class="package-image" data-package="quiz">
-                    <img src="templates/logo.jpeg" alt="Квиз Мафия">
+                <div class="package-image" data-package="xxl">
+                    <img src="templates/logo.jpeg" alt="xxl">
                     <div class="package-details">
                         <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
                         <span class="detail-item"><span class="icon">✔</span> от 60 минут</span>
@@ -2267,7 +2292,7 @@
               </div>
             </div>
             <div class="package-description">
-                <div class="package-info active" data-package="klassika">
+                <div class="package-info active" data-package="xs">
                     <h3>Пакет XS</h3>
                     <h4>Лайтовый формат</h4>
                     <p>Быстрое вовлечение гостей и заряд настроения ⚡️</p>
@@ -2275,7 +2300,7 @@
                     <p>3-5 веселых игр для незабываемого отдыха! 🤩</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
-                <div class="package-info" data-package="kids">
+                <div class="package-info" data-package="s">
                     <h3>Пакет S</h3>
                     <h4>Универсальный формат</h4>
                     <p>Динамика, азарт и максимум взаимодействия 💥</p>
@@ -2283,7 +2308,7 @@
                     <p>Интересный формат с 4-7 увлекательными играми 💃</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
-                <div class="package-info" data-package="battle-show">
+                <div class="package-info" data-package="m">
                     <h3>Пакет M</h3>
                     <h4>Продвинутый формат</h4>
                     <p>Баланс активных и интеллектуальных игр 💃</p>
@@ -2291,7 +2316,7 @@
                     <p>Полноценная программа с 5-8 играми 🎲</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
-                <div class="package-info" data-package="black">
+                <div class="package-info" data-package="l">
                     <h3>Пакет L</h3>
                     <h4>Премиум формат</h4>
                     <p>Настоящее шоу с драйвом и эмоциями 🔥</p>
@@ -2299,7 +2324,7 @@
                     <p>Расширенный формат с 7-10 разнообразными играми 🎲</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
-                <div class="package-info" data-package="music">
+                <div class="package-info" data-package="xl">
                     <h3>Пакет XL</h3>
                     <h4>Эксклюзивный формат</h4>
                     <p>Яркий праздник с полным погружением гостей 🎊</p>
@@ -2307,7 +2332,7 @@
                     <p>Полный контроль за атмосферой и эмоциями ⭐️</p>
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
-                <div class="package-info" data-package="quiz">
+                <div class="package-info" data-package="xxl">
                     <h3>Пакет XXL</h3>
                     <h4>Масштабный формат</h4>
                     <p>Полный фарш! Лучшая организация мероприятия!</p>
@@ -2316,12 +2341,12 @@
                     <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
                 </div>
                 <div class="package-buttons">
-                    <button class="package-button active" data-package="klassika">Пакет XS</button>
-                    <button class="package-button" data-package="kids">Пакет S</button>
-                    <button class="package-button" data-package="battle-show">Пакет M</button>
-                    <button class="package-button" data-package="black">Пакет L</button>
-                    <button class="package-button" data-package="music">Пакет XL</button>
-                    <button class="package-button new" data-package="quiz">Пакет XXL</button>
+                    <button class="package-button active" data-package="xs">Пакет XS</button>
+                    <button class="package-button" data-package="s">Пакет S</button>
+                    <button class="package-button" data-package="m">Пакет M</button>
+                    <button class="package-button" data-package="l">Пакет L</button>
+                    <button class="package-button" data-package="xl">Пакет XL</button>
+                    <button class="package-button new" data-package="xxl">Пакет XXL</button>
                 </div>
             </div>
         </div>
@@ -2364,7 +2389,8 @@
     </a>
 
     <footer>
-      <p>© 2025 chotam_astana. Все права защищены</p>
+      <p>Copyright 2025 © Все права защищены</p>
+      <a>Политика конфиденциальности</a>
     </footer>
 
     <script>
