@@ -1,2495 +1,2838 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"/>
-    <title>CHOTAM! SHOW</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-      }
-      body {
-        background-color: #020202; /* было #1a1a1a; */
-        color: #333;
-        line-height: 1.6;
-        padding-top: 100px; /* отступ под фиксированный хедер */
-      }
-      header {
-        /* нав-бар */
-        background-color: #151515;
-        padding: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        position: fixed; /* фиксация нав-бара */
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-      }
 
-      /* WhatsApp Button Styles */
-      .whatsapp-button1 {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background-color: #25D366; /* WhatsApp green */
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        z-index: 1000; /* Ensure it stays above other content */
-        transition: transform 0.3s, background-color 0.3s;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <title>CHOTAM! SHOW</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-      .whatsapp-button1:hover {
-        background-color: #20b358; /* Slightly darker green on hover */
-        transform: scale(1.2);
-      }
+    body {
+      background-color: #020202;
+      /* было #1a1a1a; */
+      color: #333;
+      line-height: 1.6;
+      padding-top: 100px;
+      /* отступ под фиксированный хедер */
+    }
 
-      .whatsapp-button1 img {
-        width: 36px;
-        height: 36px;
-      }
-      .menu-toggle {
-        display: none;
-        font-size: 26px;
-        color: white;
-        background: none;
-        border: none;
-        cursor: pointer;
-      }
-      .nav-links {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: center; /* Центрирование ссылок */
-        flex-grow: 1; /* Растягиваем ссылки, чтобы они заняли доступное пространство по центру */
-        margin-left: -100px;
-        gap: 10px;
-      }
-      .nav-links a {
-        color: white;
-        font-size: 20px;
-        font-weight: bold;
-      }
-      .nav-links a:hover {
-        color: #ffaa00;
-      }
-      header img {
-        height: 70px; /* размер лого на десктоп */
-        align-items: left;
-        border-radius: 50%;
-      }
-      nav {
-        display: flex;
-        align-items: center;
-      }
-      nav a {
-        color: white;
-        text-decoration: none;
-        margin-left: 20px;
-        font-size: 16px;
-      }
-      nav a:hover {
-        color: #ffaa00;
-      }
-      .social-icon {
-        margin-left: 20px;
-        display: inline-flex; /* Используем flex для центрирования */
-        align-items: center;
-        justify-content: center;
-        width: 45px; 
-        height: 45px; 
-        background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый */
-        border-radius: 50%; 
-        transition: all 0.3s ease; /* Плавные переходы */
-      }
+    header {
+      /* нав-бар */
+      background-color: rgba(255, 255, 255, 0.2);
+      /*#151515;*/
+      backdrop-filter: blur(10px);
+      /* Размытие фона под хедером */
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      /* фиксация нав-бара */
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      border-radius: 50px;
+      width: 85%;
+      margin: 0 auto;
+    }
 
-      .social-icon:hover {
-        background-color: rgba(255, 255, 255, 0.5); /* Увеличиваем прозрачность при наведении */
-      }
-      .social-icon svg {
-        width: 26px;
-        height: 26px;
-        fill: white;
-      }
-      .social-icon:hover svg {
-        fill: #ffaa00;
-      }
-      .hero {
-        justify-content: center;
-        text-align: center;
-        padding: 200px 0px;
-        background-image: url(templates/background6.png);
-        background-size: cover; 
-        background-position: center; 
-        background-repeat: no-repeat; 
-        overflow: hidden; 
-        position: relative;
-        z-index: 2;
-      }
+    /* WhatsApp Button Styles */
+    .whatsapp-button1 {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25D366;
+      /* WhatsApp green */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 1001;
+      /* Ensure it stays above other content */
+      transition: transform 0.3s, background-color 0.3s;
+    }
 
-      .hero::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 1; 
-      }
-      .hero h1 {
-        font-size: 40px;
-        margin-bottom: 30px;
-        color: white;
-        z-index: 2;
-        position: relative;
-        text-transform: uppercase;
-        font-weight: 900;
-      }
-      
-      .hero h2 {
-        font-size: 30px;
-        margin-bottom: 30px;
-        color: white;
-        z-index: 2;
-        position: relative;
-        text-transform: uppercase;
-        padding-bottom: 10px;
-      }
-      .hero h8.highligted {
-        display: inline; 
-        background-color: #ffaa00; /* Задаем желтый фон */
-        font-size: 30px;
-        margin-bottom: 30px;
-        color: #000;
-        z-index: 2;
-        position: relative;
-        text-transform: uppercase;
-        border: 5px solid #ffaa00;
-        border-radius: 35px;
-        padding: 5px 10px; /* Небольшие внутренние отступы */
-        font-weight: bold;
-      }
-      .hero h8.highligted1 {
-        display: inline; /* Чтобы элемент занимал только необходимую ширину */
-        background-color: #ffaa00; /* Задаем желтый фон */
-        font-size: 40px;
-        margin-bottom: 30px;
-        color: #000;
-        z-index: 2;
-        position: relative;
-        text-transform: uppercase;
-        border: 5px solid #ffaa00;
-        border-radius: 35px;
-        padding: 5px 10px; /* Небольшие внутренние отступы */
-      }
-      .hero p {
-        font-size: 30px;
-        margin-bottom: 30px;
-        color: #ffaa00;
-        font-weight: bold;
-        z-index: 2;
-        position: relative;
-        text-transform: uppercase;
+    .whatsapp-button1:hover {
+      background-color: #20b358;
+      /* Slightly darker green on hover */
+      transform: scale(1.2);
+    }
 
+    .whatsapp-button1 img {
+      width: 36px;
+      height: 36px;
+    }
 
-      }
-      .hero button {
-        background-color: #ffaa00; /* Желтый цвет кнопки */
-        color: #1a1a1a; /* цвет текста в самой кнопке */
-        padding: 12px 20px;
-        border: 0;
-        border-radius: 25px;
-        font-size: 16px;
-        cursor: pointer;
-        width: 250px;
-        text-transform: uppercase;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-        z-index: 2;
-        position: relative;
-      }
+    .menu-toggle {
+      display: none;
+      font-size: 26px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
 
-      /* Иконка WhatsApp (опционально) */
-      .hero button::before {
-            content: '';
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
-            background-repeat: no-repeat;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-      .hero button:hover {
-        background-color: #25D366;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-        text-decoration: none; /* Убедимся, что подчеркивания нет */
-      }
-      .section {
-        padding: 50px 20px;
-        text-align: center;
-        scroll-margin-top: 80px; /* отступ при скролле по якорю, равный высоте header'а */
-        z-index: 2;
-      }
-      .section h2 {
-        color: #ffaa00; /* цвет текста h2 */
-        font-size: 52px;
-        margin-bottom: 1px;
-        z-index: 2;
-        position: relative;
-        padding-bottom: 1px;
-        width: 100%;
-      }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      /* Центрирование ссылок */
+      flex-grow: 1;
+      /* Растягиваем ссылки, чтобы они заняли доступное пространство по центру */
+      margin-left: -100px;
+      gap: 10px;
+    }
 
-      section h6 {
-        color: #ffffff; /* цвет текста h2 */
-        font-size: 36px;
-        margin-bottom: 35px;
-        z-index: 2;
-        position: relative;
-      }
-      .section h5 {
-        color: #ffffff; /* цвет текста h2 */
-        font-size: 36px;
-        margin-bottom: 15px;
-        margin-top: 1px;
-        padding-top: 1px;
-        z-index: 2;
-        position: relative;
-      }
+    .nav-links a {
+      color: white;
+      font-size: 16px;
+      /* font-weight: bold; */
+    }
 
-      .price-grid {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        flex-wrap: wrap;
-      }
+    .nav-links a:hover {
+      color: #ffaa00;
+    }
 
-      #services {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        background-color: #1a1a1a; /* Темный фон */
-        padding: 100px;
-        background-image: url(templates/background6.png);
-        background-size: auto; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения */
-        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
-        position: relative;
-        z-index: 2;
-      }
+    header img {
+      height: 50px;
+      /* размер лого на десктоп */
+      align-items: left;
+      margin-left: 10px;
+    }
 
-      #services::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
-      }
-      .service-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        position: relative;
-      }
-      /* Стили для ряда карточек */
-      .service-row {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        flex-wrap: wrap;
-        z-index: 2;
-      }
+    nav {
+      display: flex;
+      align-items: center;
+    }
 
-      /* Стили для карточек */
-      .service-card {
-        background-color: rgba(88, 75, 45, 0.7); /* Очень легкий фон для выделения блока */
-        overflow: hidden;
-        width: 350px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease;
-        display: flex; /* Добавляем flex для карточки */
-        flex-direction: column; /* Вертикальное расположение */
-        height: 550px; /* Фиксированная высота карточки */
-        border: 2px solid #ff5500; /* Желтая рамка */
-        border-radius: 25px;
-      }
-      .service-card:hover {
-        transform: scale(1.03);
-      }
-      .service-card img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-        padding: 12px;
-        border-radius: 25px;
-      }
-      .service-content {
-        padding: 20px;
-        text-align: center;
-        color: #fff;
-        display: flex; /* Используем flex для содержимого */
-        flex-direction: column; /* Вертикальное расположение */
-        flex-grow: 1; /* Растягиваем содержимое */
-      }
-      .service-content h3 {
-        font-size: 24px;
-        margin-bottom: 15px;
-        color: #ff5500; /* Оранжевый цвет заголовка */
-      }
-      .service-content p {
-        font-size: 16px;
-        margin-bottom: 20px;
-        color: #ffffff; /* Светло-серый текст */
-        flex-grow: 1; /* Текст растягивается, чтобы занять доступное пространство */
-        font-weight: bold;
-      }
-      .service-button {
-        background-color: #ffaa00; /* Желтый цвет кнопки */
-        color: #1a1a1a; /* цвет текста в самой кнопке */
-        padding: 12px 20px;
-        border: none;
-        border-radius: 25px;
-        font-size: 16px;
-        cursor: pointer;
-        width: 100%;
-        text-transform: uppercase;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-        margin-top: auto; /* Прижимаем кнопку к низу */
-      }
-      .service-button:hover {
-        background-color: #e69500; /* Темнее при наведении */
-      }
-      /* Стили для горизонтальной карточки */
-      .horizontal-card {
-        display: flex;
-        background-color: rgba(88, 75, 45, 0.7); /* Очень легкий фон для выделения блока */
-        border-radius: 25px;
-        overflow: hidden;
-        width: 100%;
-        max-width: 1100px; /* 3 карточки по 300px + отступы */
-        margin: 0 auto;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease;
-        z-index: 2;
-        border: 2px solid #ff5500; /* Желтая рамка */
-        height: 210px;
-      }
-      .horizontal-card:hover {
-        transform: scale(1.03);
-      }
-      .horizontal-card img {
-        width: 50%;
-        height: 210px;
-        object-fit: cover;
-        border-radius: 10px; /* Закругляем углы изображения */
-        border-radius: 25px;
-        padding: 12px;
-      }
-      .horizontal-content {
-        text-align: left;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        color: #fff;
-        width: 60%;
-      }
-      .horizontal-content h3 {
-        font-size: 24px;
-        margin-bottom: 15px;
-        color: #ff5500;
-      }
-      .horizontal-content p {
-        font-size: 16px;
-        margin-bottom: 20px;
-        color: #ffffff;
-        font-weight: bold;
-      }
-      .horizontal-button {
-        background-color: #ffaa00;
-        color: #1a1a1a;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 25px;
-        font-size: 16px;
-        cursor: pointer;
-        width: 100%;
-        max-width: 300px;
-        text-transform: uppercase;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-      }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
 
-      .horizontal-button::before {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
-            background-repeat: no-repeat;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-      .horizontal-button:hover {
-        background-color: #25D366;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-        text-decoration: none; /* Убедимся, что подчеркивания нет */
-      }
-      /* Удаляем старые стили для service-item, так как они больше не нужны */
-      .service-item {
-        display: none; /* Скрываем старые стили */
-      }
-      .service-item,
-      .price-item {
-        background-color: white;
-        padding: 20px;
-        width: 300px;
-        border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      .service-item h3,
-      .price-item h3 {
-        margin-bottom: 15px;
-        color: #ff5500; /* цвет заголовка текста в квадратах */
-      }
-      .section {
-        padding: 50px 20px;
-        text-align: center;
-        scroll-margin-top: 80px;
-      }
+    nav a:hover {
+      color: #ffaa00;
+    }
 
-      .section-gal {
-        color: #ffaa00; /* Желтый цвет заголовка */
-        font-size: 56px;
-        margin-bottom: 10px;
-        text-transform: uppercase; /* Добавляем заглавные буквы */
-        z-index: 2;
-      }
+    .social-icon {
+      margin-left: 20px;
+      display: inline-flex;
+      /* Используем flex для центрирования */
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background-color: rgba(255, 255, 255, 0.2);
+      /* Полупрозрачный белый */
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      /* Плавные переходы */
+    }
 
-      .section-gal {
-        color: #ffffff; /* Белый цвет подзаголовка */
-        font-size: 36px;
-        margin-bottom: 40px;
-        position: relative; /* Добавляем для корректного z-index */
-      }
+    .social-icon:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+      /* Увеличиваем прозрачность при наведении */
+    }
 
-      #gallery {
-        padding-top: 75px;
-        padding-bottom: 200px;
-        background-color: #111; 
-        position: relative;
-        background-image: url(templates/background6.png);
-        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения */
-        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
-      }
-      #gallery::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 94%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 0; /* Размещает затемнение позади контента */
-      }
-      .gallery-grid {
-        display: grid; /* Используем grid вместо flex для точной сетки */
-        grid-template-columns: repeat(4, 1fr); /* 4 столбца на десктопе */
-        gap: 30px;
-        justify-items: center;
-        max-width: 1200px; /* Ограничиваем ширину для центрирования */
-        margin: 0 auto;
-        position: relative; /* Добавляем для корректного z-index */
-        justify-items: center;
-        align-items: center;
-      }
+    .social-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: white;
+    }
 
-      .gallery-item {
-        position: relative;
-        width: 280px; /* Размер контейнера для изображения */
-        height: 200px;
-        background: #000; /* Черный фон под изображением */
-        border-radius: 1px;
-        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
-        overflow: visible;
-        position: relative;
-        z-index: 2;
-        margin-bottom: 10px;
-      }
+    .social-icon:hover svg {
+      fill: #ffaa00;
+    }
 
-            /* Эффект лампочек */
-      .gallery-item::before {
-        content: '';
-        position: absolute;
-        top: -5px; /* Увеличиваем отступ, чтобы рамка была шире изображения */
-        left: -5px;
-        right: -5px;
-        bottom: -5px;
-        border: 1px solid #ffaa00; /* Желтая рамка */
-        border-radius: 14px;
-        z-index: 2;
-        box-shadow: 
-          0 0 10px 3px #ffaa00, /* Внешнее свечение */
-          0 0 20px 6px rgba(255, 170, 0, 0.5), /* Более мягкое свечение */
-          inset 0 0 10px 3px #ffaa00, /* Внутреннее свечение */
-          inset 0 0 20px 6px rgba(255, 170, 0, 0.5); /* Мягкое внутреннее свечение */
-        z-index: 1; /* Псевдоэлемент ниже изображения */
-        background: repeating-linear-gradient(
-          45deg,
+    .hero {
+      justify-content: center;
+      text-align: center;
+      padding: 150px 0px;
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 40px;
+      margin-bottom: 1px;
+      color: white;
+      z-index: 2;
+      position: relative;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .hero h2 {
+      font-size: 20px;
+      margin-bottom: 1px;
+      color: white;
+      z-index: 2;
+      position: relative;
+      text-transform: uppercase;
+      padding-bottom: 10px;
+    }
+
+    .hero h8.highligted {
+      display: inline;
+      background-color: #ffaa00;
+      /* Задаем желтый фон */
+      font-size: 30px;
+      margin-bottom: 30px;
+      color: #000;
+      z-index: 2;
+      position: relative;
+      text-transform: uppercase;
+      border: 5px solid #ffaa00;
+      border-radius: 35px;
+      padding: 5px 10px;
+      /* Небольшие внутренние отступы */
+      font-weight: bold;
+    }
+
+    .hero h8.highligted1 {
+      display: inline;
+      /* Чтобы элемент занимал только необходимую ширину */
+      background-color: #ffaa00;
+      /* Задаем желтый фон */
+      font-size: 40px;
+      margin-bottom: 30px;
+      color: #000;
+      z-index: 2;
+      position: relative;
+      text-transform: uppercase;
+      border: 5px solid #ffaa00;
+      border-radius: 35px;
+      padding: 5px 10px;
+      /* Небольшие внутренние отступы */
+    }
+
+    .hero p {
+      font-size: 30px;
+      margin-bottom: 100px;
+      color: #ffaa00;
+      font-weight: bold;
+      z-index: 2;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .hero button {
+      background-color: #ffaa00;
+      /* Желтый цвет кнопки */
+      color: #1a1a1a;
+      /* цвет текста в самой кнопке */
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 250px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      z-index: 2;
+      position: relative;
+      margin-top: 1px;
+    }
+
+    /* Иконка WhatsApp (опционально) */
+    .hero button::before {
+      content: '';
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+      background-repeat: no-repeat;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .hero button:hover {
+      background-color: #25D366;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+      text-decoration: none;
+      /* Убедимся, что подчеркивания нет */
+    }
+
+    .section {
+      padding: 50px 20px;
+      text-align: center;
+      scroll-margin-top: 80px;
+      /* отступ при скролле по якорю, равный высоте header'а */
+      z-index: 2;
+    }
+
+    .section h2 {
+      color: #ffaa00;
+      /* цвет текста h2 */
+      font-size: 52px;
+      margin-bottom: 1px;
+      z-index: 2;
+      position: relative;
+      padding-bottom: 1px;
+      width: 100%;
+    }
+
+    section h6 {
+      color: #ffffff;
+      /* цвет текста h2 */
+      font-size: 36px;
+      margin-bottom: 35px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .section h5 {
+      color: #ffffff;
+      /* цвет текста h2 */
+      font-size: 36px;
+      margin-bottom: 15px;
+      margin-top: 1px;
+      padding-top: 1px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .price-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    #services {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      background-color: #1a1a1a;
+      /* Темный фон */
+      padding: 100px;
+      background-image: url(templates/background6.png);
+      background-size: auto;
+      /* Растягивает изображение, сохраняя пропорции */
+      background-position: center;
+      /* Центрирует изображение */
+      background-repeat: no-repeat;
+      /* Предотвращает повторение изображения */
+      overflow: hidden;
+      /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+      position: relative;
+      z-index: 2;
+    }
+
+    #services::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 1;
+      /* Размещает затемнение позади контента */
+    }
+
+    .service-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      position: relative;
+    }
+
+    /* Стили для ряда карточек */
+    .service-row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    /* Стили для карточек */
+    .service-card {
+      background-color: rgba(255, 255, 255, 0.2);
+      /*rgba(88, 75, 45, 0.7); */
+      /* Очень легкий фон для выделения блока */
+      overflow: hidden;
+      width: 370px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      display: flex;
+      /* Добавляем flex для карточки */
+      flex-direction: column;
+      /* Вертикальное расположение */
+      height: 590px;
+      /* Фиксированная высота карточки */
+      border: 2px solid #ffaa00;
+      /* Желтая рамка */
+      border-radius: 25px;
+    }
+
+    .service-card:hover {
+      transform: scale(1.03);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      padding: 12px;
+      border-radius: 25px;
+      /*background-color: #febb3d; */
+      /* фон карточки, чтобы не было пустоты */
+
+    }
+
+    .service-content {
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+      display: flex;
+      /* Используем flex для содержимого */
+      flex-direction: column;
+      /* Вертикальное расположение */
+      flex-grow: 1;
+      /* Растягиваем содержимое */
+    }
+
+    .service-content h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ffaa00;
+      /* Оранжевый цвет заголовка */
+    }
+
+    .service-content p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #ffffff;
+      /* Светло-серый текст */
+      flex-grow: 1;
+      /* Текст растягивается, чтобы занять доступное пространство */
+      font-weight: bold;
+    }
+
+    .service-button {
+      background-color: #ffaa00;
+      /* Желтый цвет кнопки */
+      color: #1a1a1a;
+      /* цвет текста в самой кнопке */
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      cursor: pointer;
+      width: 100%;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin-top: auto;
+      /* Прижимаем кнопку к низу */
+    }
+
+    .service-button:hover {
+      background-color: #e69500;
+      /* Темнее при наведении */
+    }
+
+    /* Стили для горизонтальной карточки */
+    .horizontal-card {
+      display: flex;
+      background-color: rgba(255, 255, 255, 0.2);
+      /* Очень легкий фон для выделения блока */
+      border-radius: 25px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 1170px;
+      /* 3 карточки по 300px + отступы */
+      margin: 0 auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      z-index: 2;
+      border: 2px solid #ffaa00;
+      /* Желтая рамка */
+      height: 210px;
+    }
+
+    .horizontal-card:hover {
+      transform: scale(1.03);
+    }
+
+    .horizontal-card img {
+      width: 50%;
+      height: 210px;
+      object-fit: cover;
+      border-radius: 10px;
+      /* Закругляем углы изображения */
+      border-radius: 25px;
+      padding: 12px;
+    }
+
+    .horizontal-content {
+      text-align: left;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #fff;
+      width: 60%;
+    }
+
+    .horizontal-content h3 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ffaa00;
+    }
+
+    .horizontal-content p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .horizontal-button {
+      background-color: #ffaa00;
+      color: #1a1a1a;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .horizontal-button::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+      background-repeat: no-repeat;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .horizontal-button:hover {
+      background-color: #25D366;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+      text-decoration: none;
+      /* Убедимся, что подчеркивания нет */
+    }
+
+    /* Удаляем старые стили для service-item, так как они больше не нужны */
+    .service-item {
+      display: none;
+      /* Скрываем старые стили */
+    }
+
+    .service-item,
+    .price-item {
+      background-color: white;
+      padding: 20px;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-item h3,
+    .price-item h3 {
+      margin-bottom: 15px;
+      color: #ff5500;
+      /* цвет заголовка текста в квадратах */
+    }
+
+    .section {
+      padding: 50px 20px;
+      text-align: center;
+      scroll-margin-top: 80px;
+    }
+
+    .section-gal {
+      color: #ffaa00;
+      /* Желтый цвет заголовка */
+      font-size: 56px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      /* Добавляем заглавные буквы */
+      z-index: 2;
+    }
+
+    .section-gal {
+      color: #ffffff;
+      /* Белый цвет подзаголовка */
+      font-size: 36px;
+      margin-bottom: 40px;
+      position: relative;
+      /* Добавляем для корректного z-index */
+    }
+
+    #gallery {
+      padding-top: 75px;
+      padding-bottom: 200px;
+      background-color: #111;
+      position: relative;
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      /* Растягивает изображение, сохраняя пропорции */
+      background-position: center;
+      /* Центрирует изображение */
+      background-repeat: no-repeat;
+      /* Предотвращает повторение изображения */
+      overflow: hidden;
+      /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+    }
+
+    #gallery::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 94%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 0;
+      /* Размещает затемнение позади контента */
+    }
+
+    .gallery-grid {
+      display: grid;
+      /* Используем grid вместо flex для точной сетки */
+      grid-template-columns: repeat(4, 1fr);
+      /* 4 столбца на десктопе */
+      gap: 30px;
+      justify-items: center;
+      max-width: 1200px;
+      /* Ограничиваем ширину для центрирования */
+      margin: 0 auto;
+      position: relative;
+      /* Добавляем для корректного z-index */
+      justify-items: center;
+      align-items: center;
+    }
+
+    .gallery-item {
+      position: relative;
+      width: 280px;
+      /* Размер контейнера для изображения */
+      height: 200px;
+      background: #000;
+      /* Черный фон под изображением */
+      border-radius: 1px;
+      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.3);
+      overflow: visible;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 10px;
+    }
+
+    /* Эффект лампочек */
+    .gallery-item::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      /* Увеличиваем отступ, чтобы рамка была шире изображения */
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border: 1px solid #ffaa00;
+      /* Желтая рамка */
+      border-radius: 14px;
+      z-index: 2;
+      box-shadow:
+        0 0 10px 3px #ffaa00,
+        /* Внешнее свечение */
+        0 0 20px 6px rgba(255, 170, 0, 0.5),
+        /* Более мягкое свечение */
+        inset 0 0 10px 3px #ffaa00,
+        /* Внутреннее свечение */
+        inset 0 0 20px 6px rgba(255, 170, 0, 0.5);
+      /* Мягкое внутреннее свечение */
+      z-index: 1;
+      /* Псевдоэлемент ниже изображения */
+      background: repeating-linear-gradient(45deg,
           transparent,
           transparent 10px,
           rgba(255, 170, 0, 0.2) 10px,
-          rgba(255, 170, 0, 0.2) 10px
-        ); /* Эффект прерывистой гирлянды */
-      }
+          rgba(255, 170, 0, 0.2) 10px);
+      /* Эффект прерывистой гирлянды */
+    }
 
-      .gallery-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 10px;
-        position: relative;
-        z-index: 2; /* Изображение выше псевдоэлемента с лампочками */
-      }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      position: relative;
+      z-index: 2;
+      /* Изображение выше псевдоэлемента с лампочками */
+    }
 
-      /* Стили для кнопки "Смотреть дальше" */
-      .gallery-button {
-        background-color: #ffaa00; /* Желтый цвет кнопки */
-        color: #1a1a1a; /* Черный цвет текста */
-        padding: 12px 40px;
-        border: none;
-        border-radius: 25px;
-        font-size: 20px;
-        cursor: pointer;
-        text-transform: uppercase;
-        font-weight: bold;
-        margin-top: 40px;
-        transition: background-color 0.3s ease;
-        position: relative;
-        z-index: 2;
-      }
+    /* Стили для кнопки "Смотреть дальше" */
+    .gallery-button {
+      background-color: #ffaa00;
+      /* Желтый цвет кнопки */
+      color: #1a1a1a;
+      /* Черный цвет текста */
+      padding: 12px 40px;
+      border: none;
+      border-radius: 25px;
+      font-size: 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-top: 40px;
+      transition: background-color 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
 
-      .gallery-button:hover {
-        background-color: #e69500; /* Темнее при наведении */
-      }
+    .gallery-button:hover {
+      background-color: #e69500;
+      /* Темнее при наведении */
+    }
 
-      #reviews {
-        padding: 40px 20px;
-        background-color: #020202;
-        color: #fff;
-        text-align: center;
-        background-image: url(templates/background6.png);
-
-
-
+    #reviews {
+      padding: 40px 20px;
+      background-color: #020202;
+      color: #fff;
+      text-align: center;
+      background-image: url(templates/background6.png);
 
 
-        background-size: auto; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
+
+
+
+      background-size: auto;
+      /* Растягивает изображение, сохраняя пропорции */
+      background-position: center;
+      /* Центрирует изображение */
+      background-repeat: no-repeat;
+      /* Предотвращает повторение изображения *additional-column/
         overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
-        position: relative;
-        z-index: 2;
+      position: relative;
+      z-index: 2;
+    }
+
+    #reviews::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 1;
+      /* Размещает затемнение позади контента */
+    }
+
+    #reviews h2 {
+      font-size: 56px;
+      margin-bottom: 1px;
+      color: #ffaa00;
+    }
+
+    #reviews h6 {
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .reviews-gallery {
+      display: grid;
+      grid-template-columns: 360px 300px 360px;
+      /* First and third columns wider, middle narrower */
+      gap: 20px;
+      max-width: 1095px;
+      /* Sum of column widths + gaps */
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .review-card {
+      background-color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s;
+      width: 100%;
+      height: 400px;
+      /* Fixed height for all cards except the last in third column */
+      position: relative;
+      border: 3px solid #ffaa00;
+      /* Желтая рамка */
+    }
+
+    .review-card:hover {
+      transform: scale(1.03);
+    }
+
+    .review-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Ensures images fill the card without white space */
+      display: block;
+    }
+
+    /* Blur effect for the bottom of last row cards */
+    .card-7,
+    .card-8,
+    .card-9 {
+      overflow: hidden;
+    }
+
+    .card-7::before,
+    .card-8::before,
+    .card-9::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      /* Height of the blur effect */
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
+      backdrop-filter: blur(8px);
+      /* Static blur effect */
+      z-index: 1;
+    }
+
+    /* Reflection effect for last row cards */
+    .card-7::after,
+    .card-8::after,
+    .card-9::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      /* Height of the reflection */
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+      transform: scaleY(-1);
+      /* Flip vertically for reflection */
+      background-image: inherit;
+      /* Attempt to inherit the image */
+      background-size: 100% 100%;
+      background-position: bottom;
+      z-index: -1;
+      opacity: 0.6;
+      /* Slightly faded reflection */
+    }
+
+    /* Desktop layout */
+    .card-1 {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+
+    .card-2 {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .card-3 {
+      grid-column: 3 / 4;
+      grid-row: 1 / 2;
+    }
+
+    .card-4 {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+
+    .card-5 {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+    }
+
+    .card-6 {
+      grid-column: 3 / 4;
+      grid-row: 2 / 3;
+    }
+
+    .card-7 {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
+
+    .card-8 {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+
+    .card-9 {
+      grid-column: 3 / 4;
+      grid-row: 3 / 4;
+      height: 400px;
+      /* Slightly taller to align bottom with first and third columns */
+    }
+
+    .more-reviews-btn,
+    .less-reviews-btn {
+      height: 50px;
+      width: 300px;
+      background-color: #ffaa00;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 10px auto;
+      display: block;
+      transition: background-color 0.3s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .more-reviews-btn:hover,
+    .less-reviews-btn:hover {
+      background-color: #e69500;
+    }
+
+    .less-reviews-btn {
+      display: none;
+      /* Hidden by default on desktop */
+    }
+
+    footer {
+      background-color: rgba(255, 255, 255, 0.2);
+      /*#151515;*/
+      backdrop-filter: blur(10px);
+      /* Размытие фона под хедером */
+      /*#151515*/
+      ;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      border-top-left-radius: 50px;
+      /* Закругление верхнего левого угла */
+      border-top-right-radius: 50px;
+      /* Закругление верхнего правого угла */
+      border: 1px solid #ffaa00;
+      font-weight: bold;
+      z-index: 1000;
+    }
+
+
+    #packages {
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      /* Растягивает изображение, сохраняя пропорции */
+      background-position: center;
+      /* Центрирует изображение */
+      background-repeat: no-repeat;
+      /* Предотвращает повторение изображения *additional-column/
+        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+      position: relative;
+      z-index: 2;
+    }
+
+    #packages::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 1;
+      /* Размещает затемнение позади контента */
+    }
+
+    /* Обновленные стили для секции packages */
+    .section-subtitle {
+      font-size: 18px;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .package-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 960px;
+      margin: 0 auto;
+      flex-direction: row;
+      /* Убедимся, что на ПК-версии блоки идут в ряд */
+      position: relative;
+      z-index: 2;
+    }
+
+    .package-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 400px;
+      /* Фиксированная ширина для блока с изображением */
+      position: relative;
+      z-index: 2;
+    }
+
+    .package-image {
+      display: none;
+      width: 100%;
+      background-color: #2a2a2a;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .package-image.active {
+      display: block;
+    }
+
+    .package-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      padding: 20px;
+      padding-bottom: 0px;
+      border-radius: 35px;
+    }
+
+    .package-details {
+      display: flex;
+      gap: 20px;
+      padding: 15px;
+      justify-content: center;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .detail-item .icon {
+      color: #ffaa00;
+      margin-right: 5px;
+    }
+
+    .package-description {
+      height: 440px;
+      width: 500px;
+      /* Фиксированная ширина для блока с описанием */
+      color: #fff;
+      text-align: left;
+      background-color: #2a2a2a;
+      border-radius: 15px;
+      padding-left: 30px;
+      padding-top: 20px;
+    }
+
+    .package-info {
+      display: none;
+    }
+
+    .package-info.active {
+      display: block;
+    }
+
+    .package-info h3 {
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .package-info h4 {
+      font-size: 18px;
+      color: #ffaa00;
+      margin-bottom: 15px;
+    }
+
+    .package-info p {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .package-actions {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      max-width: 700px;
+    }
+
+    .action-button {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      width: 180px;
+      /* Фиксированная ширина кнопок */
+    }
+
+    .action-button.participate {
+      width: 400px;
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #ffaa00;
+      color: #1a1a1a;
+      text-decoration: none;
+      /* Убираем подчеркивание */
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    }
+
+    .action-button.participate:hover {
+      background-color: #25D366;
+      /* Темнее при наведении */
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+      text-decoration: none;
+      /* Убедимся, что подчеркивания нет */
+    }
+
+    .action-button.participate:active {
+      transform: translateY(0);
+    }
+
+    /* Иконка WhatsApp (опционально) */
+    .action-button.participate::before {
+      content: '';
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+      background-repeat: no-repeat;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .package-buttons {
+      padding-top: 20px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      width: 100%;
+      /* Устанавливаем ширину на 100%, чтобы кнопки растянулись по ширине контейнера */
+      max-width: 960px;
+      /* Ограничиваем максимальную ширину */
+    }
+
+    .package-button {
+      background-color: #2a2a2a;
+      color: #fff;
+      border: 1px solid #ffaa00;
+      padding: 10px 0;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      position: relative;
+      width: 140px;
+      /* Фиксированная ширина для каждой кнопки */
+      text-align: center;
+      /* Центрируем текст внутри кнопки */
+    }
+
+    .package-button.active {
+      background-color: #ffaa00;
+      color: #1a1a1a;
+      font-weight: bold;
+    }
+
+    .package-button:hover {
+      background-color: #ffaa00;
+      color: #1a1a1a;
+    }
+
+    .package-button.new::after {
+      content: "NEW";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #ff0000;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 10px;
+    }
+
+    .package-button.xit::after {
+      content: "ХИТ";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: #ff0000;
+      color: #fff;
+      font-size: 10px;
+      padding: 2px 5px;
+      border-radius: 10px;
+    }
+
+    #team {
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      /* Растягивает изображение, сохраняя пропорции */
+      background-position: center;
+      /* Центрирует изображение */
+      background-repeat: no-repeat;
+      /* Предотвращает повторение изображения *additional-column/
+          overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+      position: relative;
+      z-index: 2;
+    }
+
+    #team::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 1;
+      /* Размещает затемнение позади контента */
+    }
+
+    .team-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      padding: 5px;
+      animation: fadeIn 2s ease-in-out;
+      /* Анимация появления */
+      position: relative;
+      z-index: 2;
+    }
+
+    .team-carousel {
+      display: flex;
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+
+    .team-member {
+      text-align: center;
+      color: #fff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .team-member img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 5px solid #ffaa00;
+      /* Желтый ободок */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .team-member h3 {
+      font-size: 24px;
+      margin-top: 15px;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .team-member h7 {
+      color: #ffaa00;
+      font-size: 42px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .team h6 {
+      margin-bottom: 5px;
+    }
+
+    /* Стили для кнопок карусели */
+    .carousel-prev,
+    .carousel-next {
+      display: none;
+      /* Скрываем кнопки по умолчанию */
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+
+    .carousel-prev:hover,
+    .carousel-next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    .carousel-prev {
+      left: 10px;
+    }
+
+    .carousel-next {
+      right: 10px;
+    }
+
+    .whatsapp-order {
+      text-align: center;
+      margin-top: 40px;
+      padding-bottom: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .whatsapp-button {
+      background-color: #ffaa00;
+      color: #1a1a1a;
+      padding: 15px 40px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .whatsapp-button:hover {
+      background-color: #25D366;
+      /* Темный цвет WhatsApp */
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    .whatsapp-button:active {
+      transform: translateY(1px);
+    }
+
+    /* Иконка WhatsApp (опционально) */
+    .whatsapp-button::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .what-is-show {
+      width: auto;
+      height: auto;
+      background-image: url(templates/background3.png);
+      background-size: cover;
+      /* Растягивает изображение, сохраняя пропорции */
+      background-position: center;
+      /* Центрирует изображение */
+      background-repeat: no-repeat;
+      /* Предотвращает повторение изображения */
+      background-color: #1a1a1a;
+      position: relative;
+      overflow: hidden;
+      padding-top: 350px;
+      padding-bottom: 30px;
+    }
+
+    .what-is-show::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 1;
+      /* Размещает затемнение позади контента */
+    }
+
+    .what-is-show .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .what-is-show h2 {
+      color: #ffffff;
+      font-size: 56px;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.0;
+      text-transform: uppercase;
+    }
+
+    .what-is-show h4 {
+      color: #ffaa00;
+      font-size: 56px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 70px;
+      line-height: 1.0;
+      text-transform: uppercase;
+    }
+
+    .info-columns {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      /* Выравнивание по верху колонок */
+      gap: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .column {
+      flex: 1;
+      max-width: 300px;
+      text-align: center;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Стили для контейнера SVG */
+    .svg-placeholder {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .column-icon-svg {
+      display: block;
+      width: 80px;
+      height: 80px;
+      fill: #E0C56E;
+    }
+
+    /* Стили для блока с текстом ("квадрата") */
+    .column-content {
+      background-color: rgba(255, 255, 255, 0.05);
+      /* Очень легкий фон для выделения блока */
+      border: 2px solid rgba(255, 170, 0, 1);
+      padding: 25px;
+      /* Внутренние отступы */
+      border-radius: 16px;
+      /* Небольшое скругление углов */
+      width: 350px;
+      /* Фиксированная ширина */
+      height: 270px;
+      /* Фиксированная высота */
+      box-sizing: border-box;
+      /* Чтобы padding не увеличивал общую ширину */
+    }
+
+    .column h3 {
+      color: #ffaa00;
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 0;
+      /* Убираем верхний отступ, т.к. есть отступ у .svg-placeholder */
+      margin-bottom: 25px;
+      text-transform: uppercase;
+    }
+
+    .column p {
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    #additionally {
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      /* Растягивает изображение, сохраняя пропорции */
+      background-position: center;
+      /* Центрирует изображение */
+      background-repeat: no-repeat;
+      /* Предотвращает повторение изображения */
+      overflow: hidden;
+      /* Обрезаем псевдоэлемент, если он выходит за границы блока */
+      position: relative;
+      z-index: 2;
+      padding-bottom: 250px;
+    }
+
+    .overlay-image {
+      position: relative;
+      top: 270px;
+      left: -20px;
+      width: 120%;
+      height: 100%;
+    }
+
+    #additionally::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: 1;
+      /* Размещает затемнение позади контента */
+    }
+
+    /* Styles for the new section below */
+    .additional-content {
+      margin-top: 10px;
+    }
+
+    .additional-content h2 {
+      margin-bottom: 10px;
+      font-size: 56px;
+      color: #ffffff;
+    }
+
+    .additional-content h2 span {
+      display: inline;
+      /* Чтобы элемент занимал только необходимую ширину */
+      background-color: #ffaa00;
+      /* Задаем желтый фон */
+      font-size: 56px;
+      margin-bottom: 30px;
+      color: #000;
+      z-index: 2;
+      position: relative;
+      text-transform: uppercase;
+      border: 5px solid #ffaa00;
+      border-radius: 45px;
+      padding: 5px 20px;
+      /* Небольшие внутренние отступы */
+    }
+
+    .additional-columns {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .additional-column {
+      flex: 1;
+      max-width: 200px;
+      text-align: center;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: none;
+    }
+
+    .additional-svg-placeholder {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .additional-column-icon-svg {
+      display: block;
+      width: 100px;
+      height: 100px;
+      fill: #ffaa00;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #additionally {
+      background-color: #020202;
+    }
+
+    .additional-column-content {
+      background-color: none;
+      border: none;
+      padding: 0;
+      width: 100%;
+      box-sizing: border-box;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .additional-column h3 {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .additional-column p {
+      display: none;
+    }
+
+    /* Стилизация фона-ленты (оставляем как было) */
+    .ribbon-bg {
+      position: absolute;
+      bottom: 350px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 150px;
+      background: linear-gradient(to right, transparent, #A0884A 20%, #D4B867 50%, #A0884A 80%, transparent);
+      opacity: 0.6;
+      z-index: 1;
+      filter: blur(10px);
+    }
+
+    .ribbon-bg1 {
+      position: relative;
+      bottom: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 100px;
+      background: linear-gradient(to right, transparent, #A0884A 40%, #D4B867 90%, #A0884A 80%, transparent);
+      opacity: 0.6;
+      z-index: 1;
+      filter: blur(10px);
+    }
+
+    /* Анимация появления */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
       }
 
-      #reviews::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+      touch-action: block;
+    }
+
+    /* Мобильная версия */
+    @media (max-width: 768px) {
+
+      footer {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .menu-toggle {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        position: relative;
+        /* Добавляем для псевдоэлемента */
+        font-size: 32px;
+        padding-bottom: 5px;
+      }
+
+      .whatsapp-button1 {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .whatsapp-button1 img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .menu-toggle::before {
+        content: "";
+        /* Используем псевдоэлемент для иконки */
+        font-size: 32px;
+        display: block;
+        line-height: 1;
+        /* Убираем лишнее пространство */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* Точное центрирование */
+      }
+
+      header {
+        justify-content: space-between;
+        padding: 5px;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(255, 255, 255, 0.2);
+        /*#151515;*/
+        backdrop-filter: blur(10px);
+        /* Размытие фона под хедером */
+        /*#151515*/
+        ;
+        position: absolute;
+        top: 100%;
+        left: 100px;
+        width: 100%;
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        border-radius: 20px;
+      }
+
+      .nav-links a {
+        margin: 1px 0;
+        padding: 5px;
+      }
+
+      .nav-links.active {
+        transform: scaleY(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      header img {
+        height: 40px;
+        /* размер лого в мобилке */
+      }
+
+      nav {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+        padding: 0;
+        margin: 0;
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        flex-direction: column;
+      }
+
+      nav.active {
+        max-height: 150px;
+        /* подбирается по высоте контента */
+        opacity: 1;
       }
 
       #reviews h2 {
-        font-size: 56px;
-        margin-bottom: 1px;
-        color: #ffaa00;
+        font-size: 28px;
       }
 
       #reviews h6 {
-        font-size: 36px;
-        margin-bottom: 30px;
-        color: #fff;
+        font-size: 14px;
+        margin-bottom: 20px;
       }
 
       .reviews-gallery {
-        display: grid;
-        grid-template-columns: 360px 300px 360px; /* First and third columns wider, middle narrower */
-        gap: 20px;
-        max-width: 1095px; /* Sum of column widths + gaps */
-        margin: 0 auto;
-        padding: 20px;
-        position: relative;
-        z-index: 2;
+        grid-template-columns: 1fr;
+        gap: 10px;
       }
 
       .review-card {
-        background-color: #fff;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-        transition: transform 0.3s;
-        width: 100%;
-        height: 400px; /* Fixed height for all cards except the last in third column */
-        position: relative;
-        border: 3px solid #ffaa00; /* Желтая рамка */
+        grid-column: auto;
+        grid-row: auto;
       }
 
-      .review-card:hover {
-        transform: scale(1.03);
+      /* Hide all but first two reviews by default on mobile */
+      .review-card:nth-child(n+3) {
+        display: none;
       }
 
-      .review-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Ensures images fill the card without white space */
+      .reviews-gallery.show-all .review-card {
         display: block;
       }
 
-      /* Blur effect for the bottom of last row cards */
-      .card-7, .card-8, .card-9 {
-        overflow: hidden;
+      .more-reviews-btn {
+        display: block;
       }
 
-      .card-7::before, .card-8::before, .card-9::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 120px; /* Height of the blur effect */
-        background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
-        backdrop-filter: blur(8px); /* Static blur effect */
-        z-index: 1;
-      }
-
-      /* Reflection effect for last row cards */
-      .card-7::after, .card-8::after, .card-9::after {
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        height: 120px; /* Height of the reflection */
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
-        transform: scaleY(-1); /* Flip vertically for reflection */
-        background-image: inherit; /* Attempt to inherit the image */
-        background-size: 100% 100%;
-        background-position: bottom;
-        z-index: -1;
-        opacity: 0.6; /* Slightly faded reflection */
-      }
-
-      /* Desktop layout */
-      .card-1 {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-      }
-
-      .card-2 {
-        grid-column: 2 / 3;
-        grid-row: 1 / 2;
-      }
-
-      .card-3 {
-        grid-column: 3 / 4;
-        grid-row: 1 / 2;
-      }
-
-      .card-4 {
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-      }
-
-      .card-5 {
-        grid-column: 2 / 3;
-        grid-row: 2 / 3;
-      }
-
-      .card-6 {
-        grid-column: 3 / 4;
-        grid-row: 2 / 3;
-      }
-
-      .card-7 {
-        grid-column: 1 / 2;
-        grid-row: 3 / 4;
-      }
-
-      .card-8 {
-        grid-column: 2 / 3;
-        grid-row: 3 / 4;
-      }
-
-      .card-9 {
-        grid-column: 3 / 4;
-        grid-row: 3 / 4;
-        height: 400px; /* Slightly taller to align bottom with first and third columns */
-      }
-
-      .more-reviews-btn,
       .less-reviews-btn {
-        height: 50px;
+        display: none;
+      }
+
+      .reviews-gallery.show-all~.more-reviews-btn {
+        display: none;
+      }
+
+      .reviews-gallery.show-all~.less-reviews-btn {
+        display: block;
+      }
+
+      .service-card {
         width: 300px;
-        background-color: #ffaa00;
-        color: #000;
-        border: none;
-        padding: 10px 20px;
+        max-width: 300px;
+        height: auto;
+        /* На мобильных устройствах высота авто */
+      }
+
+      .service-grid {
+        padding: 10px;
+      }
+
+      .horizontal-card {
+        flex-direction: column;
+        max-width: 300px;
+        height: 430px;
+      }
+
+      .horizontal-card img {
+        width: 100%;
+        height: 150px;
         border-radius: 25px;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
-        margin: 10px auto;
-        display: block;
-        transition: background-color 0.3s;
-        position: relative;
-        z-index: 2;
       }
 
-      .more-reviews-btn:hover,
-      .less-reviews-btn:hover {
-        background-color: #e69500;
-      }
-
-      .less-reviews-btn {
-        display: none; /* Hidden by default on desktop */
-      }
-
-      footer {
-        background-color: #151515;
-        color: white;
+      .horizontal-content {
+        width: 100%;
         text-align: center;
         padding: 20px;
-        position: relative;
-        bottom: 0;
-        width: 100%;
-        border-top-left-radius: 50px; /* Закругление верхнего левого угла */
-        border-top-right-radius: 50px; /* Закругление верхнего правого угла */
-        border: 1px solid #ffaa00;
-        font-weight: bold;
+        /* Сохраняем отступы для текста */
       }
 
+      .horizontal-button {
+        margin: 0 auto;
+      }
+
+      .horizontal-button {
+        font-size: 13px;
+      }
+
+      .horizontal-button::before {
+        width: 20px;
+        height: 20px;
+      }
+
+      body {
+        padding-top: 0px;
+      }
+
+      .hero {
+        padding: 200px 20px;
+        background-size: contain;
+        background-repeat: repeat;
+      }
+
+      .hero h1 {
+        /* chotam! show */
+        font-size: 22px;
+        max-width: 800px;
+        margin-bottom: 50px;
+      }
+
+      .hero p {
+        /* организуем мероприятия */
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 50px;
+      }
+
+      .hero h2 {
+        /* более 1000 довольных */
+        font-size: 16px;
+        margin-bottom: 50px;
+      }
+
+      .hero h8.highligted {
+        font-size: 18px;
+        padding: 2px 2px;
+        /* Небольшие внутренние отступы */
+      }
+
+      .hero h8.highligted1 {
+        /* h1 */
+        font-size: 22px;
+        padding: 3px 3px;
+        /* Небольшие внутренние отступы */
+      }
+
+      .hero button {
+        margin-top: 20px;
+        margin-bottom: 100px;
+      }
 
       #packages {
-        background-image: url(templates/background6.png);
-        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
-        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
-        position: relative;
-        z-index: 2;
+        padding-bottom: 200px;
       }
 
-      #packages::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
+      .package-container {
+        flex-direction: column;
+        align-items: center;
       }
-        /* Обновленные стили для секции packages */
-        .section-subtitle {
-            font-size: 18px;
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
-        .package-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 960px;
-            margin: 0 auto;
-            flex-direction: row; /* Убедимся, что на ПК-версии блоки идут в ряд */
-            position: relative;
-            z-index: 2;
-        }
-        .package-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 400px; /* Фиксированная ширина для блока с изображением */
-            position: relative;
-            z-index: 2;
-        }
-        .package-image {
-            display: none;
-            width: 100%;
-            background-color: #2a2a2a;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        .package-image.active {
-            display: block;
-        }
-        .package-image img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            padding: 20px;
-            padding-bottom: 0px;
-            border-radius: 35px;
-        }
-        .package-details {
-            display: flex;
-            gap: 20px;
-            padding: 15px;
-            justify-content: center;
-        }
-        .detail-item {
-            display: flex;
-            align-items: center;
-            font-size: 16px;
-            color: #fff;
-        }
-        .detail-item .icon {
-            color: #ffaa00;
-            margin-right: 5px;
-        }
-        .package-description {
-            height: 440px;
-            width: 500px; /* Фиксированная ширина для блока с описанием */
-            color: #fff;
-            text-align: left;
-            background-color: #2a2a2a;
-            border-radius: 15px;
-            padding-left: 30px;
-            padding-top: 20px;
-        }
-        .package-info {
-            display: none;
-        }
-        .package-info.active {
-            display: block;
-        }
-        .package-info h3 {
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-        .package-info h4 {
-            font-size: 18px;
-            color: #ffaa00;
-            margin-bottom: 15px;
-        }
-        .package-info p {
-            font-size: 16px;
-            color: #fff;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .package-actions {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-            max-width: 700px;
-        }
-        .action-button {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            width: 180px; /* Фиксированная ширина кнопок */
-        }
-        .action-button.participate {
-          width: 400px;
-          display: inline-block;
-          padding: 12px 30px;
-          background-color: #ffaa00; 
-          color: #1a1a1a;
-          text-decoration: none; /* Убираем подчеркивание */
-          border-radius: 30px;
-          font-weight: bold;
-          font-size: 18px;
-          text-transform: uppercase;
-          transition: all 0.3s ease;
-          border: none;
-          cursor: pointer;
-          box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-        }
-        .action-button.participate:hover {
-          background-color: #25D366; /* Темнее при наведении */
-          transform: translateY(-2px);
-          box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-          text-decoration: none; /* Убедимся, что подчеркивания нет */
-        }
 
-        .action-button.participate:active {
-          transform: translateY(0);
-        }
-
-        /* Иконка WhatsApp (опционально) */
-        .action-button.participate::before {
-            content: '';
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
-            background-repeat: no-repeat;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-        .package-buttons {
-            padding-top: 20px;
-            display: flex;
-            justify-content: flex-start;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-            width: 100%; /* Устанавливаем ширину на 100%, чтобы кнопки растянулись по ширине контейнера */
-            max-width: 960px; /* Ограничиваем максимальную ширину */
-        }
-        .package-button {
-            background-color: #2a2a2a;
-            color: #fff;
-            border: 1px solid #ffaa00;
-            padding: 10px 0;
-            border-radius: 25px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            position: relative;
-            width: 140px; /* Фиксированная ширина для каждой кнопки */
-            text-align: center; /* Центрируем текст внутри кнопки */
-        }
-        .package-button.active {
-            background-color: #ffaa00;
-            color: #1a1a1a;
-            font-weight: bold;
-        }
-        .package-button:hover {
-            background-color: #ffaa00;
-            color: #1a1a1a;
-        }
-        .package-button.new::after {
-            content: "NEW";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #ff0000;
-            color: #fff;
-            font-size: 10px;
-            padding: 2px 5px;
-            border-radius: 10px;
-        }
-        .package-button.xit::after {
-            content: "ХИТ";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background-color: #ff0000;
-            color: #fff;
-            font-size: 10px;
-            padding: 2px 5px;
-            border-radius: 10px;
-        }
-
-        #team {
-          background-image: url(templates/background6.png);
-          background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-          background-position: center; /* Центрирует изображение */
-          background-repeat: no-repeat; /* Предотвращает повторение изображения *additional-column/
-          overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
-          position: relative;
-          z-index: 2;
-        }
-        #team::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
-        }
-        .team-grid {
-          display: flex;
-          justify-content: center;
-          gap: 30px;
-          flex-wrap: wrap;
-          padding: 5px;
-          animation: fadeIn 2s ease-in-out; /* Анимация появления */
-          position: relative;
-          z-index: 2;
-        }
-        .team-carousel {
-          display: flex;
-          position: relative;
-          width: 100%;
-          max-width: 960px;
-          margin: 0 auto;
-          gap: 40px;
-        }
-        .team-member {
-          text-align: center;
-          color: #fff;
-          position: relative;
-          z-index: 2;
-        }
-        .team-member img {
-          width: 300px;
-          height: 300px;
-          object-fit: cover;
-          border-radius: 15px;
-          border: 5px solid #ffaa00; /* Желтый ободок */
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        .team-member h3 {
-          font-size: 24px;
-          margin-top: 15px;
-          color: #fff;
-          text-transform: uppercase;
-        }
-        .team-member h7 {
-          color: #ffaa00;
-          font-size: 42px;
-          text-transform: uppercase;
-          font-weight: bold;
-        }
-        .team h6 {
-          margin-bottom: 5px;
-        }
-
-        /* Стили для кнопок карусели */
-        .carousel-prev,
-        .carousel-next {
-          display: none; /* Скрываем кнопки по умолчанию */
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background-color: rgba(0, 0, 0, 0.5);
-          color: #fff;
-          border: none;
-          padding: 10px;
-          font-size: 24px;
-          cursor: pointer;
-          border-radius: 50%;
-          transition: background-color 0.3s ease;
-        }
-        .carousel-prev:hover,
-        .carousel-next:hover {
-          background-color: rgba(0, 0, 0, 0.8);
-        }
-        .carousel-prev {
-          left: 10px;
-        }
-        .carousel-next {
-          right: 10px;
-        }
-
-        .whatsapp-order {
-          text-align: center;
-          margin-top: 40px;
-          padding-bottom: 30px;
-          position: relative;
-          z-index: 2;
-        }
-
-        .whatsapp-button {
-          background-color: #ffaa00; 
-          color: #1a1a1a;
-          padding: 15px 40px;
-          border-radius: 30px;
-          text-decoration: none;
-          font-weight: bold;
-          font-size: 18px;
-          text-transform: uppercase;
-          display: inline-block;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .whatsapp-button:hover {
-          background-color: #25D366; /* Темный цвет WhatsApp */
-          transform: translateY(-3px);
-          box-shadow: 0 7px 20px rgba(37, 211, 102, 0.4);
-        }
-
-        .whatsapp-button:active {
-          transform: translateY(1px);
-        }
-
-      /* Иконка WhatsApp (опционально) */
-      .whatsapp-button::before {
-        content: '';
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
-        background-repeat: no-repeat;
-        background-size: contain;
-        margin-right: 10px;
-        vertical-align: middle;
+      .package-display {
+        width: 100%;
+        max-width: 300px;
       }
-      .what-is-show {
-        width: auto;
+
+      .package-image img {
+        height: 200px;
+      }
+
+      .package-description {
+        width: 100%;
+        max-width: 300px;
+        text-align: left;
+        height: 430px;
+      }
+
+      .package-buttons {
+        padding-top: 10px;
+        justify-content: flex-start;
+        /* Center buttons horizontally */
+        width: 100%;
+        max-width: 300px;
+        /* Match the max-width of other elements for consistency */
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        box-sizing: border-box;
+      }
+
+      .package-button {
+        width: 120px;
+        /* Уменьшаем ширину кнопок для мобильной версии */
+        font-size: 16px;
+      }
+
+      .package-actions {
+        flex-direction: column;
+        gap: 10px;
+        width: 300px;
+        align-items: center;
+      }
+
+      .action-button {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      #team {
+        padding-top: 50px;
+
+      }
+
+      .team-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .team-member img {
+        width: 100%;
+        max-width: 300px;
         height: auto;
-        background-image: url(templates/background3.png);
-        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения */
-        background-color: #1a1a1a;
+      }
+
+      .team-carousel {
         position: relative;
-        overflow: hidden;
-        padding-top: 350px;
-        padding-bottom: 30px;
+        width: 100%;
+        max-width: 300px;
+        display: block;
       }
-      .what-is-show::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
+
+      .team-member {
+        display: none;
+        /* Скрываем все элементы по умолчанию */
       }
-      .what-is-show .container {
-          max-width: 1100px;
-          margin: 0 auto;
-          position: relative;
-          z-index: 2;
+
+      .team-member.active {
+        display: block;
+        /* Показываем только активный элемент */
+      }
+
+      .carousel-prev,
+      .carousel-next {
+        display: block;
+        /* Показываем кнопки в мобильной версии */
+        top: 35%;
+        transform: translateY(-50%);
+        background-color: #8b4513;
+        /* Коричневый фон, как на скриншоте */
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        /* Уменьшаем размер кнопок */
+        font-size: 18px;
+        /* Уменьшаем размер стрелок */
+        border-radius: 50%;
+        width: 40px;
+        /* Фиксированная ширина кнопки */
+        height: 40px;
+        /* Фиксированная высота кнопки */
+        line-height: 1;
+        /* Центрируем стрелку */
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        z-index: 10;
+      }
+
+      .carousel-prev {
+        left: -20px;
+        /* Смещаем кнопку ближе к краю рамки */
+        z-index: 10;
+      }
+
+      .carousel-next {
+        right: -20px;
+        /* Смещаем кнопку ближе к краю рамки */
+        z-index: 10;
+      }
+
+      .carousel-prev:hover,
+      .carousel-next:hover {
+        background-color: #654321;
+        /* Темнее при наведении */
       }
 
       .what-is-show h2 {
-        color: #ffffff;
-        font-size: 56px;
-        font-weight: bold;
-        text-align: center;
-        line-height: 1.0;
-        text-transform: uppercase;
-      }
-      .what-is-show h4 {
-        color: #ffaa00;
-        font-size: 56px;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 70px;
-        line-height: 1.0;
-        text-transform: uppercase;
-      }
-      .info-columns {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-start; /* Выравнивание по верху колонок */
-        gap: 30px;
-        position: relative;
-        z-index: 2;
-      }
-      .column {
-        flex: 1;
-        max-width: 300px;
-        text-align: center;
-        color: #ffffff;
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-      }
-      /* Стили для контейнера SVG */
-      .svg-placeholder {
-          width: 80px; 
-          height: 80px; 
-          margin-bottom: 25px; 
-          display: flex; 
-          justify-content: center;
-          align-items: center;
-      }
-      .column-icon-svg {
-          display: block; 
-          width: 80px;
-          height: 80px;
-          fill: #E0C56E; 
-      }
-      /* Стили для блока с текстом ("квадрата") */
-      .column-content {
-          background-color: rgba(255, 255, 255, 0.05); /* Очень легкий фон для выделения блока */
-          border: 2px solid rgba(255, 170, 0, 1); 
-          padding: 25px; /* Внутренние отступы */
-          border-radius: 16px; /* Небольшое скругление углов */
-          width: 350px; /* Фиксированная ширина */
-          height: 270px; /* Фиксированная высота */
-          box-sizing: border-box; /* Чтобы padding не увеличивал общую ширину */
-      }
-      .column h3 {
-        color: #ffaa00;
-        font-size: 22px;
-        font-weight: bold;
-        margin-top: 0; /* Убираем верхний отступ, т.к. есть отступ у .svg-placeholder */
-        margin-bottom: 25px;
-        text-transform: uppercase;
-      }
-      .column p {
-        color: #ffffff;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 1.5;
-        margin-bottom: 0;
-      }
-      #additionally {
-        background-image: url(templates/background6.png);
-        background-size: cover; /* Растягивает изображение, сохраняя пропорции */
-        background-position: center; /* Центрирует изображение */
-        background-repeat: no-repeat; /* Предотвращает повторение изображения */
-        overflow: hidden; /* Обрезаем псевдоэлемент, если он выходит за границы блока */
-        position: relative;
-        z-index: 2;
-        padding-bottom: 250px;
-      }
-      .overlay-image {
-        position: relative;
-        top: 270px;
-        left: -20px;
-        width: 120%;
-        height: 100%;
-      }
-      #additionally::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.9); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
-      }
-      /* Styles for the new section below */
-      .additional-content {
-        margin-top: 10px;
+        margin-top: 280px;
+        font-size: 32px;
+        margin-bottom: 5px;
       }
 
-      .additional-content h2 {
-        margin-bottom: 10px;
-        font-size: 56px;
+      .info-columns {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .column {
+        max-width: 90%;
+        margin-bottom: 5px;
+      }
+
+      /* Уменьшаем иконку/плейсхолдер на мобильных */
+      .svg-placeholder {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+      }
+
+      /* Если будете использовать SVG через класс .column-icon-svg */
+      .column-icon-svg {
+        /* width: 60px; */
+        /* height: 60px; */
+      }
+
+      .column-content {
+        margin-top: 1px;
+        /* Уменьшаем отступ сверху */
+        padding: 15px;
+        /* Уменьшаем padding */
+      }
+
+      .column h3 {
+        font-size: 20px;
+        margin-bottom: 50px;
+      }
+
+      .column p {
+        font-size: 15px;
+      }
+
+      .ribbon-bg {
+        bottom: 20%;
+        height: 100px;
+        opacity: 0.4;
+      }
+
+      .what-is-show {
+        width: auto;
+        height: auto;
+        background-image: url(templates/background_mobile.png);
+        background-size: contain;
+        /* Растягивает изображение, сохраняя пропорции */
+        background-position: top;
+        /* Центрирует изображение */
+        background-repeat: no-repeat;
+        /* Предотвращает повторение изображения */
+        background-color: #020202;
+        position: relative;
+        overflow: hidden;
+        padding: 0px;
+      }
+
+      .what-is-show::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.0);
+        /* Затемнение: цвет и прозрачность */
+        z-index: 1;
+        /* Размещает затемнение позади контента */
+      }
+
+      #additionally {
+        background-size: contain;
+        background-repeat: repeat;
+      }
+
+      .additional-content {
+        margin-top: 50px;
+      }
+
+      .section.additional-content h2 {
+        font-size: 25px;
+        margin-bottom: 40px;
         color: #ffffff;
       }
 
       .additional-content h2 span {
-        display: inline; /* Чтобы элемент занимал только необходимую ширину */
-        background-color: #ffaa00; /* Задаем желтый фон */
-        font-size: 56px;
-        margin-bottom: 30px;
+        font-size: 25px;
         color: #000;
-        z-index: 2;
-        position: relative;
-        text-transform: uppercase;
-        border: 5px solid #ffaa00;
-        border-radius: 45px;
-        padding: 5px 20px; /* Небольшие внутренние отступы */
+        padding: 1px 10px;
       }
 
       .additional-columns {
-        display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-        gap: 10px;
-        position: relative;
-        z-index: 2;
+        gap: 30px;
       }
 
       .additional-column {
-        flex: 1;
-        max-width: 200px;
-        text-align: center;
-        color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: none;
+        max-width: 100%;
+        /* Full width for columns */
       }
 
       .additional-svg-placeholder {
-        width: 200px;
-        height: 200px;
-        margin-bottom: 1px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        width: 80px;
+        /* Smaller SVG icons */
+        height: 80px;
+        margin-bottom: 15px;
       }
 
       .additional-column-icon-svg {
-        display: block;
-        width: 100px;
-        height: 100px;
-        fill: #ff5500;
-        justify-content: center;
-        align-items: center;
-      }
-      #additionally {
-        background-color: #020202;
-      }
-      .additional-column-content {
-        background-color: none;
-        border: none;
-        padding: 0;
-        width: 100%;
-        box-sizing: border-box;
-        justify-content: center;
-        align-items: flex-start;
+        width: 80px;
+        height: 80px;
       }
 
       .additional-column h3 {
-        color: #ffffff;
-        font-size: 20px;
+        font-size: 18px;
+        /* Smaller text */
         font-weight: bold;
       }
 
-      .additional-column p {
-        display: none;
-      }
-      /* Стилизация фона-ленты (оставляем как было) */
-      .ribbon-bg {
-          position: absolute;
-          bottom: 350px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 120%;
-          height: 150px;
-          background: linear-gradient(to right, transparent, #A0884A 20%, #D4B867 50%, #A0884A 80%, transparent);
-          opacity: 0.6;
-          z-index: 1;
-          filter: blur(10px);
+      .section h2 {
+        font-size: 30px;
+        color: #ffaa00;
       }
 
-      .ribbon-bg1 {
-          position: relative;
-          bottom: 0px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 120%;
-          height: 100px;
-          background: linear-gradient(to right, transparent, #A0884A 40%, #D4B867 90%, #A0884A 80%, transparent);
-          opacity: 0.6;
-          z-index: 1;
-          filter: blur(10px);
+      .section h6 {
+        font-size: 20px;
+        color: #ffffff;
       }
-      /* Анимация появления */
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
+
+      .section h4 {
+        color: #ffffff;
+        font-size: 40px;
       }
-      html {
-        scroll-behavior: smooth;
-        touch-action: block;
+
+      .package-info h4 {
+        font-size: 18px;
+        color: #ffaa00;
+        margin-bottom: 15px;
       }
-      /* Мобильная версия */
-      @media (max-width: 768px) {
-        .menu-toggle {
-          background-color: rgba(255, 255, 255, 0.1);
-          border: none;
-          border-radius: 50%;
-          width: 50px;
-          height: 50px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          padding: 0;
-          position: relative; /* Добавляем для псевдоэлемента */
-          font-size: 32px;
-          padding-bottom: 5px;
-        }
 
-        .whatsapp-button1 {
-          width: 55px;
-          height: 55px;
-          bottom: 20px;
-          right: 20px;
-        }
-
-        .whatsapp-button1 img {
-          width: 30px;
-          height: 30px;
-        }
-
-        .menu-toggle::before {
-          content: ""; /* Используем псевдоэлемент для иконки */
-          font-size: 32px;
-          display: block;
-          line-height: 1; /* Убираем лишнее пространство */
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%); /* Точное центрирование */
-        }
-
-        header {
-          justify-content: space-between;
-          padding: 7px;
-        }
-
-        .nav-links {
-          display: flex;
-          flex-direction: column;
-          background-color: #151515;
-          position: absolute;
-          top: 100%;
-          left: 100px;
-          width: 100%;
-          transform: scaleY(0);
-          transform-origin: top;
-          opacity: 0;
-          pointer-events: none;
-          transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-        }
-
-        .nav-links a {
-          margin: 1px 0;
-          padding: 5px;
-        }
-
-        .nav-links.active {
-          transform: scaleY(1);
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        header img {
-          height: 70px; /* размер лого в мобилке */
-        }
-
-        nav {
-          list-style: none;
-          display: flex;
-          gap: 20px;
-          padding: 0;
-          margin: 0;
-          transition: max-height 0.3s ease, opacity 0.3s ease;
-          overflow: hidden;
-          max-height: 0;
-          opacity: 0;
-          flex-direction: column;
-        }
-
-        nav.active {
-          max-height: 150px; /* подбирается по высоте контента */
-          opacity: 1;
-        }
-
-        #reviews h2 {
-          font-size: 28px;
-        }
-
-        #reviews h6 {
-          font-size: 14px;
-          margin-bottom: 20px;
-        }
-
-        .reviews-gallery {
-          grid-template-columns: 1fr;
-          gap: 10px;
-        }
-
-        .review-card {
-          grid-column: auto;
-          grid-row: auto;
-        }
-
-        /* Hide all but first two reviews by default on mobile */
-        .review-card:nth-child(n+3) {
-          display: none;
-        }
-
-        .reviews-gallery.show-all .review-card {
-          display: block;
-        }
-
-        .more-reviews-btn {
-          display: block;
-        }
-
-        .less-reviews-btn {
-          display: none;
-        }
-
-        .reviews-gallery.show-all ~ .more-reviews-btn {
-          display: none;
-        }
-
-        .reviews-gallery.show-all ~ .less-reviews-btn {
-          display: block;
-        }
-
-        .service-card {
-          width: 300px;
-          max-width: 300px;
-          height: auto; /* На мобильных устройствах высота авто */
-        }
-
-        .service-grid {
-          padding: 10px;
-        }
-
-        .horizontal-card {
-          flex-direction: column;
-          max-width: 300px;
-          height: 430px;
-        }
-
-        .horizontal-card img {
-          width: 100%; 
-          height: 150px;
-          border-radius: 25px; 
-        }
-
-        .horizontal-content {
-          width: 100%;
-          text-align: center;
-          padding: 20px; /* Сохраняем отступы для текста */
-        }
-
-        .horizontal-button {
-          margin: 0 auto;
-        }
-        .horizontal-button {
-          font-size: 13px;
-        }
-        .horizontal-button::before {
-          width: 20px;
-          height: 20px;
-        }
-
-        body {
-          padding-top: 0px;
-        }
-        .hero {
-          padding: 220px 20px;
-          background-size: contain;
-          background-repeat: repeat;
-        }
-        
-        .hero h1 { /* chotam! show */
-            font-size: 22px;
-            max-width: 800px;
-            margin-bottom: 50px;
-        }
-
-        .hero p { /* организуем мероприятия */
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 50px;
-        }
-
-        .hero h2 { /* более 1000 довольных */
-            font-size: 16px;
-            margin-bottom: 50px;
-        }
-        .hero h8.highligted { 
-          font-size: 18px;
-          padding: 2px 2px; /* Небольшие внутренние отступы */
-        }
-
-        .hero h8.highligted1 { /* h1 */
-          font-size: 22px;
-          padding: 3px 3px; /* Небольшие внутренние отступы */
-        }
-
-        .hero button {
-          margin-top: 100px;
-          margin-bottom: 100px;
-        }
-
-        #packages {
-          padding-bottom: 200px;
-        }
-
-        .package-container {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .package-display {
-            width: 100%;
-            max-width: 300px;
-        }
-
-        .package-image img {
-            height: 200px;
-        }
-
-        .package-description {
-            width: 100%;
-            max-width: 300px;
-            text-align: left;
-            height: 430px;            
-        }
-
-        .package-buttons {
-            padding-top: 10px;
-            justify-content: flex-start; /* Center buttons horizontally */
-            width: 100%;
-            max-width: 300px; /* Match the max-width of other elements for consistency */
-            align-items: center;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            box-sizing: border-box;
-          }
-
-        .package-button {
-            width: 120px; /* Уменьшаем ширину кнопок для мобильной версии */
-            font-size: 16px;
-        }
-
-        .package-actions {
-            flex-direction: column;
-            gap: 10px;
-            width: 300px;
-            align-items: center;
-        }
-
-        .action-button {
-            width: 100%;
-            max-width: 300px;
-        }
-
-        #team {
-          padding-top: 50px;
-
-        }
-
-        .team-grid {
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .team-member img {
-          width: 100%;
-          max-width: 300px;
-          height: auto;
-        }
-
-        .team-carousel {
-          position: relative;
-          width: 100%;
-          max-width: 300px;
-          display: block;
-        }
-
-        .team-member {
-          display: none; /* Скрываем все элементы по умолчанию */
-        }
-
-        .team-member.active {
-          display: block; /* Показываем только активный элемент */
-        }
-
-        .carousel-prev,
-        .carousel-next {
-          display: block; /* Показываем кнопки в мобильной версии */
-          top: 35%; 
-          transform: translateY(-50%);
-          background-color: #8b4513; /* Коричневый фон, как на скриншоте */
-          color: #fff;
-          border: none;
-          padding: 8px 12px; /* Уменьшаем размер кнопок */
-          font-size: 18px; /* Уменьшаем размер стрелок */
-          border-radius: 50%;
-          width: 40px; /* Фиксированная ширина кнопки */
-          height: 40px; /* Фиксированная высота кнопки */
-          line-height: 1; /* Центрируем стрелку */
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-          z-index: 10;
-        }
-
-        .carousel-prev {
-          left: -20px; /* Смещаем кнопку ближе к краю рамки */
-          z-index: 10;
-        }
-
-        .carousel-next {
-          right: -20px; /* Смещаем кнопку ближе к краю рамки */
-          z-index: 10;
-        }
-
-        .carousel-prev:hover,
-        .carousel-next:hover {
-          background-color: #654321; /* Темнее при наведении */
-        }
-
-        .what-is-show h2 {
-          margin-top: 280px;
-          font-size: 32px;
-          margin-bottom: 5px;
-        }
-
-        .info-columns {
-          flex-direction: column;
-          align-items: center;
-          gap: 5px;
-        }
-
-        .column {
-          max-width: 90%;
-          margin-bottom: 5px;
-        }
-
-        /* Уменьшаем иконку/плейсхолдер на мобильных */
-        .svg-placeholder {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 15px;
-        }
-        /* Если будете использовать SVG через класс .column-icon-svg */
-        .column-icon-svg {
-             /* width: 60px; */
-             /* height: 60px; */
-        }
-        .column-content {
-          margin-top: 1px; /* Уменьшаем отступ сверху */
-          padding: 15px; /* Уменьшаем padding */
-        }
-        .column h3 {
-          font-size: 20px;
-          margin-bottom: 50px;
-        }
-        .column p {
-            font-size: 15px;
-        }
-        .ribbon-bg {
-            bottom: 20%;
-            height: 100px;
-            opacity: 0.4;
-        }
-        .what-is-show {
-          width: auto;
-          height: auto;
-          background-image: url(templates/background_mobile.png);
-          background-size: contain; /* Растягивает изображение, сохраняя пропорции */
-          background-position: top; /* Центрирует изображение */
-          background-repeat: no-repeat; /* Предотвращает повторение изображения */
-          background-color: #020202;
-          position: relative;
-          overflow: hidden;
-          padding: 0px;
-        }
-        .what-is-show::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.0); /* Затемнение: цвет и прозрачность */
-          z-index: 1; /* Размещает затемнение позади контента */
-        }
-
-        #additionally {
-          background-size: contain;
-          background-repeat: repeat;
-        }
-        .additional-content {
-          margin-top: 50px;
-        }
-        .section.additional-content h2 {
-          font-size: 25px; 
-          margin-bottom: 40px;
-          color: #ffffff;
-        }
-        .additional-content h2 span {
-          font-size: 25px;
-          color: #000;
-          padding: 1px 10px;
-        }
-        .additional-columns {
-          flex-direction: column; 
-          align-items: center;
-          gap: 30px;
-        }
-
-        .additional-column {
-          max-width: 100%; /* Full width for columns */
-        }
-
-        .additional-svg-placeholder {
-          width: 80px; /* Smaller SVG icons */
-          height: 80px;
-          margin-bottom: 15px;
-        }
-
-        .additional-column-icon-svg {
-          width: 80px;
-          height: 80px;
-        }
-
-        .additional-column h3 {
-          font-size: 18px; /* Smaller text */
-          font-weight: bold;
-        }
-
-
-
-
-        .section h2 {
-            font-size: 30px;
-            color: #ffaa00;
-        }
-        .section h6 {
-          font-size: 20px;
-          color: #ffffff;
-        }
-
-        .section h4 {
-          color: #ffffff;
-          font-size: 40px;
-        }
-
-        .package-info h4 {
-            font-size: 18px;
-            color: #ffaa00;
-            margin-bottom: 15px;
-        }
-        .gallery-grid {
-            grid-template-columns: repeat(2, 1fr); /* 2 столбца на мобильных */
-            gap: 20px;
-          }
-
-          .gallery-item {
-            width: 170px; 
-            height: 150px;
-          }
-
-          .gallery-button {
-            padding: 10px 30px;
-            font-size: 18px;
-          }
-
-          .action-button.participate {
-            font-size: 15px;
-          }
-
-          #services {
-            padding: 0px;
-            background-repeat: repeat; /* Предотвращает повторение изображения */
-          }
-          #gallery {
-            padding-top: 100px;
-            padding-bottom: 10px;
-          }
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 столбца на мобильных */
+        gap: 20px;
       }
-    </style>
-  </head>
-  <body>
-    <header>
-      <img src="/templates/logo.jpeg" alt="Логотип" />
-      <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
-      <nav class="nav-links">
-        <a href="#home">О нас</a>
-        <a href="#services">Услуги</a>
-        <a href="#gallery">Галерея</a>
-        <a href="#reviews">Отзывы</a>
-        <a href="#packages">Цена</a>
-        <a href="#team">Команда</a>
-        <a
-          href="https://instagram.com/chotam_astana"
-          class="social-icon"
-          target="_blank"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-instagram"
-            viewBox="0 0 16 16">
-            <path
-              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-          class="social-icon"
-          target="_blank"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-whatsapp"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"
-            />
-          </svg>
-        </a>
-      </nav>
-    </header>
 
-    <section class="hero">
-      <h1><h8 class="highligted1">CHOTAM! SHOW</h8> - Лучшая организация мероприятий</h1>
-      <p>Организуем мероприятие любого масштаба под ключ!</p>
-      <h2><h8 class="highligted">Более 1000</h8> довольных клиентов</h2>
-      <a
-        href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-        target="_blank">
-        <button>Связаться с нами</button>
+      .gallery-item {
+        width: 170px;
+        height: 150px;
+      }
+
+      .gallery-button {
+        padding: 10px 30px;
+        font-size: 18px;
+      }
+
+      .action-button.participate {
+        font-size: 15px;
+      }
+
+      #services {
+        padding: 0px;
+        background-repeat: repeat;
+        /* Предотвращает повторение изображения */
+      }
+
+      #gallery {
+        padding-top: 100px;
+        padding-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="/templates/logo_white.PNG" alt="Логотип" />
+    <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
+    <nav class="nav-links">
+      <a href="#home">О нас</a>
+      <a href="#services">Услуги</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#packages">Цена</a>
+      <a href="#team">Команда</a>
+      <a href="https://instagram.com/chotam_astana" class="social-icon" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+        </svg>
       </a>
-    </section>
+      <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." class="social-icon"
+        target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp"
+          viewBox="0 0 16 16">
+          <path
+            d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+        </svg>
+      </a>
+    </nav>
+  </header>
 
-    <section class="section what-is-show" id="home">
-      <div class="container">
-        <h2>ЧТО ТАКОЕ<br><h4>CHOTAM! SHOW?</h4></h2>
-        <div class="info-columns">
-          <div class="column">
-            <div class="svg-placeholder"></div>
-            <div class="column-content">
-              <h3>ФОРМАТ</h3>
-              <p>Проведем ваше мероприятие в современном формате акцентируя внимание на настроении и веселье, завлекаем всех гостей принимать участие в празднике</p>
-            </div>
+  <section class="hero">
+    <h1>
+      <h8 class="highligted1">CHOTAM! SHOW</h8> - Лучшая организация мероприятий
+    </h1>
+    <p>Развлекательные программы для любых мероприятий и вечеринок</p>
+    <h2>Организуем мероприятие любого масштаба под ключ!</h2>
+    <p>
+      <h8 class="highligted">Более 4000</h8> довольных клиентов
+    </p>
+    <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+      <button>Связаться с нами</button>
+    </a>
+  </section>
+
+  <section class="section what-is-show" id="home">
+    <div class="container">
+      <h2>ЧТО ТАКОЕ<br>
+        <h4>CHOTAM! SHOW?</h4>
+      </h2>
+      <div class="info-columns">
+        <div class="column">
+          <div class="svg-placeholder"></div>
+          <div class="column-content">
+            <h3>ФОРМАТ</h3>
+            <p>Проведем ваше мероприятие в современном формате акцентируя внимание на настроении и веселье, завлекаем
+              всех гостей принимать участие в празднике</p>
           </div>
-          <div class="column">
-            <div class="svg-placeholder"></div>
-            <div class="column-content">
-              <h3>ИГРЫ</h3>
-              <p>Современные, трендовые игры которые не заставят скучать ваших гостей</p>
-            </div>
+        </div>
+        <div class="column">
+          <div class="svg-placeholder"></div>
+          <div class="column-content">
+            <h3>ИГРЫ</h3>
+            <p>Современные, трендовые игры которые не заставят скучать ваших гостей</p>
           </div>
-          <div class="column">
-            <div class="svg-placeholder"></div>
-            <div class="column-content">
-              <h3>ВЕДУЩИЙ</h3>
-              <p>Только опытные и веселые ведущие, которые найдут подход к любому гостю и создадут атмосферу праздника</p>
-            </div>
+        </div>
+        <div class="column">
+          <div class="svg-placeholder"></div>
+          <div class="column-content">
+            <h3>ВЕДУЩИЙ</h3>
+            <p>Только опытные и веселые ведущие, которые найдут подход к любому гостю и создадут атмосферу праздника</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section additional-content" id="additionally">
-      <div class="additional-content">
-        <h2><span>под ключ</span> КАК ОТДЕЛЬНЫЙ ФОРМАТ</h2>
-        <div class="additional-columns">
-          <div class="additional-column">
-            <div class="additional-svg-placeholder">
-              <svg id='Notepad_24' width='130' height='130' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
-                <g transform="matrix(0.51 0 0 0.51 12 12)" >  
-                <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,85,0); fill-rule: nonzero; opacity: 1;" transform=" translate(-24, -23.49)" d="M 16.976562 3.9785156 C 16.148901352253777 3.9914459713938664 15.488126980398594 4.672323509009937 15.5 5.500000000000002 L 15.5 7 L 12.5 7 C 10.032499 7 8 9.0324991 8 11.5 L 8 38.5 C 8 40.967501 10.032499 43 12.5 43 L 35.5 43 C 37.967501 43 40 40.967501 40 38.5 L 40 11.5 C 40 9.0324991 37.967501 7 35.5 7 L 34.5 7 L 34.5 10 L 35.5 10 C 36.346499 10 37 10.653501 37 11.5 L 37 38.5 C 37 39.346499 36.346499 40 35.5 40 L 12.5 40 C 11.653501 40 11 39.346499 11 38.5 L 11 11.5 C 11 10.653501 11.653501 10 12.5 10 L 15.5 10 L 15.5 11.5 C 15.492349565681769 12.040953874866357 15.776562944253993 12.544122046857417 16.243809274571493 12.816831582229785 C 16.711055604888994 13.089541117602154 17.28894439511101 13.089541117602153 17.756190725428507 12.816831582229785 C 18.223437055746007 12.544122046857417 18.507650434318233 12.040953874866355 18.5 11.5 L 18.5 5.5 C 18.50581863731553 5.094381277315419 18.347119004885432 4.703696988759657 18.06008976756276 4.417035827012122 C 17.77306053024009 4.130374665264587 17.382172922358524 3.9721764836618982 16.976562 3.9785156 z M 23.976562 3.9785156 C 23.148901352253777 3.9914459713938664 22.488126980398594 4.672323509009937 22.5 5.500000000000002 L 22.5 7 L 20.5 7 L 20.5 10 L 22.5 10 L 22.5 11.5 C 22.492349565681767 12.040953874866357 22.776562944253993 12.544122046857417 23.243809274571493 12.816831582229785 C 23.711055604888994 13.089541117602154 24.28894439511101 13.089541117602153 24.756190725428507 12.816831582229785 C 25.223437055746007 12.544122046857417 25.507650434318233 12.040953874866355 25.5 11.5 L 25.5 5.5 C 25.50581863731553 5.094381277315419 25.347119004885432 4.703696988759657 25.06008976756276 4.417035827012122 C 24.77306053024009 4.130374665264587 24.382172922358524 3.9721764836618982 23.976562 3.9785156 z M 30.976562 3.9785156 C 30.148901352253777 3.9914459713938664 29.488126980398594 4.672323509009937 29.5 5.500000000000002 L 29.5 7 L 27.5 7 L 27.5 10 L 29.5 10 L 29.5 11.5 C 29.492349565681767 12.040953874866357 29.776562944253993 12.544122046857417 30.243809274571493 12.816831582229785 C 30.711055604888994 13.089541117602154 31.28894439511101 13.089541117602153 31.756190725428507 12.816831582229785 C 32.22343705574601 12.544122046857417 32.50765043431823 12.040953874866355 32.5 11.5 L 32.5 5.5 C 32.50581863731553 5.094381277315419 32.347119004885435 4.703696988759657 32.06008976756276 4.417035827012122 C 31.77306053024009 4.130374665264587 31.382172922358524 3.9721764836618982 30.976562 3.9785156 z M 16.5 17 C 15.959046125133643 16.992349565681767 15.455877953142583 17.276562944253993 15.183168417770215 17.743809274571493 C 14.910458882397847 18.211055604888994 14.910458882397846 18.788944395111006 15.183168417770215 19.256190725428507 C 15.455877953142583 19.723437055746007 15.959046125133643 20.007650434318233 16.5 20 L 31.5 20 C 32.040953874866354 20.007650434318233 32.54412204685742 19.723437055746007 32.81683158222979 19.256190725428507 C 33.08954111760215 18.788944395111006 33.08954111760215 18.211055604888994 32.81683158222979 17.743809274571493 C 32.54412204685742 17.276562944253993 32.040953874866354 16.992349565681767 31.5 17 L 16.5 17 z M 16.5 25 C 15.959046125133643 24.992349565681767 15.455877953142583 25.276562944253993 15.183168417770215 25.743809274571493 C 14.910458882397847 26.211055604888994 14.910458882397846 26.788944395111006 15.183168417770215 27.256190725428507 C 15.455877953142583 27.723437055746007 15.959046125133643 28.007650434318233 16.5 28 L 23.5 28 C 24.040953874866357 28.007650434318233 24.544122046857417 27.723437055746007 24.816831582229785 27.256190725428507 C 25.089541117602153 26.788944395111006 25.089541117602153 26.211055604888994 24.816831582229785 25.743809274571493 C 24.544122046857417 25.276562944253993 24.040953874866357 24.992349565681767 23.5 25 L 16.5 25 z M 16.5 33 C 15.959046125133643 32.99234956568177 15.455877953142583 33.27656294425399 15.183168417770215 33.74380927457149 C 14.910458882397847 34.21105560488899 14.910458882397846 34.78894439511101 15.183168417770215 35.25619072542851 C 15.455877953142583 35.723437055746004 15.959046125133643 36.00765043431823 16.5 36 L 27.5 36 C 28.040953874866357 36.00765043431823 28.544122046857417 35.72343705574601 28.816831582229785 35.25619072542851 C 29.089541117602153 34.78894439511101 29.089541117602153 34.21105560488899 28.816831582229785 33.74380927457149 C 28.544122046857417 33.27656294425399 28.040953874866357 32.99234956568177 27.5 33 L 16.5 33 z" stroke-linecap="round" />
-                </g>
-                </svg>
-            </div>
-            <div class="additional-column-content">
-              <h3>Индивидуальный<br>сценарий</br></h3>
-            </div>
+  <section class="section additional-content" id="additionally">
+    <div class="additional-content">
+      <h2>ФОРМАТ <span>под ключ</span></h2>
+      <div class="additional-columns">
+        <div class="additional-column">
+          <div class="additional-svg-placeholder">
+            <svg id='Notepad_24' width='130' height='130' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+              xmlns:xlink='http://www.w3.org/1999/xlink'>
+              <rect width='24' height='24' stroke='none' fill='#000000' opacity='0' />
+              <g transform="matrix(0.51 0 0 0.51 12 12)">
+                <path
+                  style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255,169,3); fill-rule: nonzero; opacity: 1;"
+                  transform=" translate(-24, -23.49)"
+                  d="M 16.976562 3.9785156 C 16.148901352253777 3.9914459713938664 15.488126980398594 4.672323509009937 15.5 5.500000000000002 L 15.5 7 L 12.5 7 C 10.032499 7 8 9.0324991 8 11.5 L 8 38.5 C 8 40.967501 10.032499 43 12.5 43 L 35.5 43 C 37.967501 43 40 40.967501 40 38.5 L 40 11.5 C 40 9.0324991 37.967501 7 35.5 7 L 34.5 7 L 34.5 10 L 35.5 10 C 36.346499 10 37 10.653501 37 11.5 L 37 38.5 C 37 39.346499 36.346499 40 35.5 40 L 12.5 40 C 11.653501 40 11 39.346499 11 38.5 L 11 11.5 C 11 10.653501 11.653501 10 12.5 10 L 15.5 10 L 15.5 11.5 C 15.492349565681769 12.040953874866357 15.776562944253993 12.544122046857417 16.243809274571493 12.816831582229785 C 16.711055604888994 13.089541117602154 17.28894439511101 13.089541117602153 17.756190725428507 12.816831582229785 C 18.223437055746007 12.544122046857417 18.507650434318233 12.040953874866355 18.5 11.5 L 18.5 5.5 C 18.50581863731553 5.094381277315419 18.347119004885432 4.703696988759657 18.06008976756276 4.417035827012122 C 17.77306053024009 4.130374665264587 17.382172922358524 3.9721764836618982 16.976562 3.9785156 z M 23.976562 3.9785156 C 23.148901352253777 3.9914459713938664 22.488126980398594 4.672323509009937 22.5 5.500000000000002 L 22.5 7 L 20.5 7 L 20.5 10 L 22.5 10 L 22.5 11.5 C 22.492349565681767 12.040953874866357 22.776562944253993 12.544122046857417 23.243809274571493 12.816831582229785 C 23.711055604888994 13.089541117602154 24.28894439511101 13.089541117602153 24.756190725428507 12.816831582229785 C 25.223437055746007 12.544122046857417 25.507650434318233 12.040953874866355 25.5 11.5 L 25.5 5.5 C 25.50581863731553 5.094381277315419 25.347119004885432 4.703696988759657 25.06008976756276 4.417035827012122 C 24.77306053024009 4.130374665264587 24.382172922358524 3.9721764836618982 23.976562 3.9785156 z M 30.976562 3.9785156 C 30.148901352253777 3.9914459713938664 29.488126980398594 4.672323509009937 29.5 5.500000000000002 L 29.5 7 L 27.5 7 L 27.5 10 L 29.5 10 L 29.5 11.5 C 29.492349565681767 12.040953874866357 29.776562944253993 12.544122046857417 30.243809274571493 12.816831582229785 C 30.711055604888994 13.089541117602154 31.28894439511101 13.089541117602153 31.756190725428507 12.816831582229785 C 32.22343705574601 12.544122046857417 32.50765043431823 12.040953874866355 32.5 11.5 L 32.5 5.5 C 32.50581863731553 5.094381277315419 32.347119004885435 4.703696988759657 32.06008976756276 4.417035827012122 C 31.77306053024009 4.130374665264587 31.382172922358524 3.9721764836618982 30.976562 3.9785156 z M 16.5 17 C 15.959046125133643 16.992349565681767 15.455877953142583 17.276562944253993 15.183168417770215 17.743809274571493 C 14.910458882397847 18.211055604888994 14.910458882397846 18.788944395111006 15.183168417770215 19.256190725428507 C 15.455877953142583 19.723437055746007 15.959046125133643 20.007650434318233 16.5 20 L 31.5 20 C 32.040953874866354 20.007650434318233 32.54412204685742 19.723437055746007 32.81683158222979 19.256190725428507 C 33.08954111760215 18.788944395111006 33.08954111760215 18.211055604888994 32.81683158222979 17.743809274571493 C 32.54412204685742 17.276562944253993 32.040953874866354 16.992349565681767 31.5 17 L 16.5 17 z M 16.5 25 C 15.959046125133643 24.992349565681767 15.455877953142583 25.276562944253993 15.183168417770215 25.743809274571493 C 14.910458882397847 26.211055604888994 14.910458882397846 26.788944395111006 15.183168417770215 27.256190725428507 C 15.455877953142583 27.723437055746007 15.959046125133643 28.007650434318233 16.5 28 L 23.5 28 C 24.040953874866357 28.007650434318233 24.544122046857417 27.723437055746007 24.816831582229785 27.256190725428507 C 25.089541117602153 26.788944395111006 25.089541117602153 26.211055604888994 24.816831582229785 25.743809274571493 C 24.544122046857417 25.276562944253993 24.040953874866357 24.992349565681767 23.5 25 L 16.5 25 z M 16.5 33 C 15.959046125133643 32.99234956568177 15.455877953142583 33.27656294425399 15.183168417770215 33.74380927457149 C 14.910458882397847 34.21105560488899 14.910458882397846 34.78894439511101 15.183168417770215 35.25619072542851 C 15.455877953142583 35.723437055746004 15.959046125133643 36.00765043431823 16.5 36 L 27.5 36 C 28.040953874866357 36.00765043431823 28.544122046857417 35.72343705574601 28.816831582229785 35.25619072542851 C 29.089541117602153 34.78894439511101 29.089541117602153 34.21105560488899 28.816831582229785 33.74380927457149 C 28.544122046857417 33.27656294425399 28.040953874866357 32.99234956568177 27.5 33 L 16.5 33 z"
+                  stroke-linecap="round" />
+              </g>
+            </svg>
           </div>
-          <div class="additional-column">
-            <div class="additional-svg-placeholder">
-              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="150" height="150"><path
-                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"></svg>
-            </div>
-            <div class="additional-column-content">
-              <h3>Оформление<br>фотозоны</br></h3>
-            </div>
+          <div class="additional-column-content">
+            <h3>Индивидуальный<br>сценарий</br></h3>
           </div>
-          <div class="additional-column">
-            <div class="additional-svg-placeholder">
-              <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="150" height="150"><path
-                d="M 21.5625 0.171875 L 10.453125 3.570313 C 9.105469 3.953125 8.015625 5.355469 8.015625 6.703125 L 8.015625 18.261719 C 8.015625 18.261719 8.015625 18.417969 8.015625 18.421875 C 8.015625 18.421875 7.210938 17.878906 5.417969 18.132813 C 2.785156 18.507813 0.648438 20.527344 0.648438 22.648438 C 0.648438 24.769531 2.785156 26.066406 5.417969 25.691406 C 8.054688 25.320313 9.984375 23.363281 9.984375 21.242188 C 9.984375 21.242188 9.984375 12.175781 9.984375 11.234375 C 9.984375 10.296875 11.113281 9.890625 11.113281 9.890625 L 20.9375 6.8125 C 20.9375 6.8125 22.023438 6.449219 22.023438 7.453125 C 22.023438 8.460938 22.023438 15.484375 22.023438 15.484375 C 22.023438 15.484375 22.023438 15.488281 22.023438 15.492188 C 22.023438 15.492188 21.023438 14.914063 19.230469 15.132813 C 16.597656 15.453125 14.460938 17.429688 14.460938 19.550781 C 14.460938 21.671875 16.597656 23.011719 19.230469 22.691406 C 21.863281 22.375 24 20.394531 24 18.273438 L 24 1.910156 C 24 0.566406 22.90625 -0.214844 21.5625 0.171875 Z" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="additional-column-content">
-              <h3>Услуги<br>диджея</br></h3>
-            </div>
+        </div>
+        <div class="additional-column">
+          <div class="additional-svg-placeholder">
+            <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="150"
+              height="150">
+              <path
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334">
+            </svg>
           </div>
-          <div class="additional-column">
-            <div class="additional-svg-placeholder">
-              <svg id='camera_24' width='130' height='130' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
-                <g transform="matrix(1 0 0 1 12 12)" >
-                <g style="" >
-                <g transform="matrix(1 0 0 1 0 0)" >
-                <path style="stroke: none; stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 0 0 L 24 0 L 24 24 L 0 24 z" stroke-linecap="round" />
+          <div class="additional-column-content">
+            <h3>Оформление<br>фотозоны</br></h3>
+          </div>
+        </div>
+        <div class="additional-column">
+          <div class="additional-svg-placeholder">
+            <svg class="additional-column-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="150"
+              height="150">
+              <path
+                d="M 21.5625 0.171875 L 10.453125 3.570313 C 9.105469 3.953125 8.015625 5.355469 8.015625 6.703125 L 8.015625 18.261719 C 8.015625 18.261719 8.015625 18.417969 8.015625 18.421875 C 8.015625 18.421875 7.210938 17.878906 5.417969 18.132813 C 2.785156 18.507813 0.648438 20.527344 0.648438 22.648438 C 0.648438 24.769531 2.785156 26.066406 5.417969 25.691406 C 8.054688 25.320313 9.984375 23.363281 9.984375 21.242188 C 9.984375 21.242188 9.984375 12.175781 9.984375 11.234375 C 9.984375 10.296875 11.113281 9.890625 11.113281 9.890625 L 20.9375 6.8125 C 20.9375 6.8125 22.023438 6.449219 22.023438 7.453125 C 22.023438 8.460938 22.023438 15.484375 22.023438 15.484375 C 22.023438 15.484375 22.023438 15.488281 22.023438 15.492188 C 22.023438 15.492188 21.023438 14.914063 19.230469 15.132813 C 16.597656 15.453125 14.460938 17.429688 14.460938 19.550781 C 14.460938 21.671875 16.597656 23.011719 19.230469 22.691406 C 21.863281 22.375 24 20.394531 24 18.273438 L 24 1.910156 C 24 0.566406 22.90625 -0.214844 21.5625 0.171875 Z"
+                stroke-linecap="round" />
+            </svg>
+          </div>
+          <div class="additional-column-content">
+            <h3>Услуги<br>диджея</br></h3>
+          </div>
+        </div>
+        <div class="additional-column">
+          <div class="additional-svg-placeholder">
+            <svg id='camera_24' width='130' height='130' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'
+              xmlns:xlink='http://www.w3.org/1999/xlink'>
+              <rect width='24' height='24' stroke='none' fill='#000000' opacity='0' />
+              <g transform="matrix(1 0 0 1 12 12)">
+                <g style="">
+                  <g transform="matrix(1 0 0 1 0 0)">
+                    <path
+                      style="stroke: none; stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                      transform=" translate(-12, -12)" d="M 0 0 L 24 0 L 24 24 L 0 24 z" stroke-linecap="round" />
+                  </g>
+                  <g transform="matrix(1 0 0 1 0 0)">
+                    <path
+                      style="stroke: rgb(255,169,3); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                      transform=" translate(-12, -12)"
+                      d="M 5 7 L 6 7 C 7.1045694996615865 7 8 6.1045694996615865 8 5 C 8 4.447715250169207 8.447715250169207 4 9 4 L 15 4 C 15.552284749830793 4 16 4.447715250169207 16 5 C 16 6.1045694996615865 16.895430500338414 7 18 7 L 19 7 C 20.104569499661586 7 21 7.895430500338413 21 9 L 21 18 C 21 19.104569499661586 20.104569499661586 20 19 20 L 5 20 C 3.895430500338413 20 3 19.104569499661586 3 18 L 3 9 C 3 7.8954305003384135 3.895430500338413 7 5 7"
+                      stroke-linecap="round" />
+                  </g>
+                  <g transform="matrix(1 0 0 1 0 1)">
+                    <circle
+                      style="stroke: rgb(255,169, 3); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;"
+                      cx="0" cy="0" r="3" />
+                  </g>
                 </g>
-                <g transform="matrix(1 0 0 1 0 0)" >
-                <path style="stroke: rgb(255,85,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 5 7 L 6 7 C 7.1045694996615865 7 8 6.1045694996615865 8 5 C 8 4.447715250169207 8.447715250169207 4 9 4 L 15 4 C 15.552284749830793 4 16 4.447715250169207 16 5 C 16 6.1045694996615865 16.895430500338414 7 18 7 L 19 7 C 20.104569499661586 7 21 7.895430500338413 21 9 L 21 18 C 21 19.104569499661586 20.104569499661586 20 19 20 L 5 20 C 3.895430500338413 20 3 19.104569499661586 3 18 L 3 9 C 3 7.8954305003384135 3.895430500338413 7 5 7" stroke-linecap="round" />
-                </g>
-                <g transform="matrix(1 0 0 1 0 1)" >
-                <circle style="stroke: rgb(255,85,0); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" cx="0" cy="0" r="3" />
-                </g>
-                </g>
-                </g>
-                </svg>
-            </div>
-            <div class="additional-column-content">
-              <h3>Услуги фотографа<br>и мобилографа</br></h3>
-            </div>
+              </g>
+            </svg>
+          </div>
+          <div class="additional-column-content">
+            <h3>Услуги фото-видео съемки</h3>
           </div>
         </div>
       </div>
-      <!--<img src="templates/line.png" class="overlay-image"> -->
-    </section>
+    </div>
+    <!--<img src="templates/line.png" class="overlay-image"> -->
+  </section>
 
-    <section class="section" id="services">
-      <h2>МЫ ПРОВОДИМ МЕРОПРИЯТИЯ ЛЮБОГО ФОРМАТА</h2>
-      <div class="service-grid">
-        <!-- Первый ряд: 3 карточки -->
-        <div class="service-row">
-          <div class="service-card">
-            <img src="templates/birthday.jpeg" alt="День рождения" />
-            <div class="service-content">
-              <h3>День рождения</h3>
-              <p>
-                Мероприятие с нестандартной программой и харизматичным ведущим:
-                подарите праздник себе и близким. С размахом отметьте главный
-                праздник в году!
-              </p>
-              <a
-                href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-                target="_blank"
-              >
-                <button class="service-button">Принять участие</button>
-              </a>
-            </div>
-          </div>
-          <div class="service-card">
-            <img src="templates/teambuilding.jpeg" alt="Корпоратив" />
-            <div class="service-content">
-              <h3>Корпоративы и тимбилдинги</h3>
-              <p>
-                Отличите от рабочей рутины и организуйте незабываемый вечер для
-                коллег. Ваш праздник еще долго будут обсуждать!
-              </p>
-              <a
-                href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-                target="_blank"
-              >
-                <button class="service-button">Принять участие</button>
-              </a>
-            </div>
-          </div>
-          <div class="service-card">
-            <img src="templates/wedding.jpeg" alt="Свадьба" />
-            <div class="service-content">
-              <h3>Свадьбы и выпускные</h3>
-              <p>
-                Сделайте свой день особенным и любим всем: устройте вечер по
-                мотивам известных телепередач и уникальному сценарию.
-              </p>
-              <a
-                href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-                target="_blank"
-              >
-                <button class="service-button">Принять участие</button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <!-- Второй ряд: 3 карточки -->
-        <div class="service-row">
-          <div class="service-card">
-            <img src="templates/partyparty.jpeg" alt="Конференции" />
-            <div class="service-content">
-              <h3>Вечеринки</h3>
-              <p>Незабываемое шоу, игры и веселье, организуем праздник по вашему заказу</p>
-              <a
-                href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-                target="_blank">
-                <button class="service-button">Принять участие</button>
-              </a>
-            </div>
-          </div>
-          <div class="service-card">
-            <img src="templates/kidsparty.jpeg" alt="Детский праздник" />
-            <div class="service-content">
-              <h3>Детский праздник</h3>
-              <p>Организуем праздник для ваших маленьких детишек.</p>
-              <a
-                href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-                target="_blank">
-                <button class="service-button">Принять участие</button>
-              </a>
-            </div>
-          </div>
-          <div class="service-card">
-            <img src="templates/newyear.jpeg" alt="Новый год" />
-            <div class="service-content">
-              <h3>Новый год</h3>
-              <p>Отметьте главный праздник зимы в нескучном формате.</p>
-              <a
-                href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-                target="_blank"
-              >
-                <button class="service-button">Принять участие</button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="horizontal-card">
-          <img src="templates/party.jpg" alt="Команда"/>
-          <div class="horizontal-content">
-            <h3>У вас другой повод?</h3>
+  <section class="section" id="services">
+    <h2>МЫ ПРОВОДИМ МЕРОПРИЯТИЯ ЛЮБОГО ФОРМАТА</h2>
+    <div class="service-grid">
+      <!-- Первый ряд: 3 карточки -->
+      <div class="service-row">
+        <div class="service-card">
+          <img src="templates/service_happybirthday.png" alt="День рождения" />
+          <div class="service-content">
+            <h3>День рождения</h3>
             <p>
-              Без проблем! Создадим сценарий для мероприятия, чтобы вы провели время ярко и с пользой.
+              Мероприятие с нестандартной программой и харизматичным ведущим:
+              подарите праздник себе и близким. С размахом отметьте главный
+              праздник в году!
             </p>
-            <a
-              href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."
-              target="_blank"
-            >
-              <button class="horizontal-button">Обсудить мероприятие</button>
+            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+              <button class="service-button">Получить консультацию</button>
+            </a>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="templates/service_teambuilding.png" alt="Корпоратив" />
+          <div class="service-content">
+            <h3>Корпоративы и тимбилдинги</h3>
+            <p>
+              Отличите от рабочей рутины и организуйте незабываемый вечер для
+              коллег. Ваш праздник еще долго будут обсуждать!
+            </p>
+            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+              <button class="service-button">Получить консультацию</button>
+            </a>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="templates/service_wedding.png" alt="Свадьба" />
+          <div class="service-content">
+            <h3>Свадьбы</h3>
+            <p>
+              Мы превратим ваш особенный день в незабываемое событие, которое гости будут вспоминать с восторгом, а вы –
+              пересматривать, как любимый сериал</p>
+            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+              <button class="service-button">Получить консультацию</button>
             </a>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="section" id="gallery">
-      <!-- <div class="ribbon-bg1"></div> -->
-      <h2>ГАЛЕРЕЯ</h2>
-      <h6>Улыбки наших гостей говорят что праздник удался на славу!</h6>
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="templates/gallery1.jpg" alt="Свадьба" />
-        </div>
-        <div class="gallery-item">
-          <img src="templates/gallery2.jpg" alt="Корпоратив" />
-        </div>
-        <div class="gallery-item">
-          <img src="templates/gallery3.jpg" alt="Конференция" />
-        </div>
-        <div class="gallery-item">
-          <img src="templates/gallery4.jpg" alt="Конференция" />
-        </div>
-        <div class="gallery-item">
-          <img src="templates/gallery5.jpg" alt="Конференция" />
-        </div>
-        <div class="gallery-item">
-          <img src="templates/gallery6.jpg" alt="Конференция" />
-        </div>
-        <div class="gallery-item">
-          <img src="templates/gallery7.jpg" alt="Конференция" />
-        </div>
-        <div class="gallery-item">
-          <img src="templates/gallery8.jpg" alt="Конференция" />
-        </div>
-      </div>
-      <button class="gallery-button">СМОТРЕТЬ ДАЛЬШЕ!</button>
-    </section>
-
-    <section class="section" id="reviews">
-      <h2>БОЛЕЕ 1000 ДОВОЛЬНЫХ КЛИЕНТОВ</h2>
-      <h6>Прочитайте, что пишут о нас наши клиенты</h6>
-      <div class="container">
-        <div class="reviews-gallery">
-          <div class="review-card card-1">
-            <img src="templates/otzyv1.png" alt="Отзыв 1" />
-          </div>
-          <div class="review-card card-2">
-            <img src="templates/otzyv2.png" alt="Отзыв 2" />
-          </div>
-          <div class="review-card card-3">
-            <img src="templates/otzyv8.jpg" alt="Отзыв 3" />
-          </div>
-          <div class="review-card card-4">
-            <img src="templates/otzyv7.jpg" alt="Отзыв 4" />
-          </div>
-          <div class="review-card card-5">
-            <img src="templates/otzyv3.png" alt="Отзыв 5" />
-          </div>
-          <div class="review-card card-6">
-            <img src="templates/otzyv6.jpg" alt="Отзыв 6" />
-          </div>
-          <div class="review-card card-7">
-            <img src="templates/otzyv4.jpg" alt="Отзыв 7" />
-          </div>
-          <div class="review-card card-8">
-            <img src="templates/otzyv5.jpg" alt="Отзыв 8" />
-          </div>
-          <div class="review-card card-9">
-            <img src="templates/otzyv9.jpg" alt="Отзыв 9" />
+      <!-- Второй ряд: 3 карточки -->
+      <div class="service-row">
+        <div class="service-card">
+          <img src="templates/service_party.png" alt="Конференции" />
+          <div class="service-content">
+            <h3>Вечеринки</h3>
+            <p>Вечеринки по вашим предпочтениям. Незабываемое шоу, игры и веселье, организуем праздник по вашему заказу
+            </p>
+            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+              <button class="service-button">Получить консультацию</button>
+            </a>
           </div>
         </div>
-        <button id="more-reviews-btn" class="more-reviews-btn">БОЛЬШЕ ОТЗЫВОВ</button>
-        <button id="less-reviews-btn" class="less-reviews-btn">МЕНЬШЕ ОТЗЫВОВ</button>
-      </div>
-    </section>
-
-    <section class="section" id="packages">
-        <h2>АКТУАЛЬНЫЕ ПАКЕТЫ МЕРОПРИЯТИЙ</h2>
-        <h6>Выберите тот, который подходит именно вам 👇</h6>
-        <div class="package-container">
-            <div class="package-display">
-                <div class="package-image active" data-package="xs">
-                    <img src="templates/logo.jpeg" alt="xs">
-                    <div class="package-details">
-                        <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
-                        <span class="detail-item"><span class="icon">✔</span> до 1 часа</span>
-                    </div>
-                </div>
-                <div class="package-image" data-package="s">
-                    <img src="templates/logo.jpeg" alt="s">
-                    <div class="package-details">
-                        <span class="detail-item"><span class="icon">✔</span> от 6 человек</span>
-                        <span class="detail-item"><span class="icon">✔</span> до 1,5 часов</span>
-                    </div>
-                </div>
-                <div class="package-image" data-package="m">
-                    <img src="templates/logo.jpeg" alt="m">
-                    <div class="package-details">
-                        <span class="detail-item"><span class="icon">✔</span> от 10 человек</span>
-                        <span class="detail-item"><span class="icon">✔</span> до 2 часов</span>
-                    </div>
-                </div>
-                <div class="package-image" data-package="l">
-                    <img src="templates/logo.jpeg" alt="l">
-                    <div class="package-details">
-                        <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
-                        <span class="detail-item"><span class="icon">✔</span> до 3 часов</span>
-                    </div>
-                </div>
-                <div class="package-image" data-package="xl">
-                    <img src="templates/logo.jpeg" alt="xl">
-                    <div class="package-details">
-                        <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
-                        <span class="detail-item"><span class="icon">✔</span> до 5 часов</span>
-                    </div>
-                </div>
-                <div class="package-image" data-package="xxl">
-                    <img src="templates/logo.jpeg" alt="xxl">
-                    <div class="package-details">
-                        <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
-                        <span class="detail-item"><span class="icon">✔</span> от 60 минут</span>
-                    </div>
-                </div>
-                <div class="package-actions">
-                  <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие" target="_blank" class="action-button participate">
-                      Обсудить мероприятие
-                  </a>
-              </div>
-            </div>
-            <div class="package-description">
-                <div class="package-info active" data-package="xs">
-                    <h3>Пакет XS</h3>
-                    <h4>Лайтовый формат</h4>
-                    <p>Быстрое вовлечение гостей и заряд настроения ⚡️</p>
-                    <p>Компактный формат для легкого старта 👑</p>
-                    <p>3-5 веселых игр для незабываемого отдыха! 🤩</p>
-                    <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
-                </div>
-                <div class="package-info" data-package="s">
-                    <h3>Пакет S</h3>
-                    <h4>Универсальный формат</h4>
-                    <p>Динамика, азарт и максимум взаимодействия 💥</p>
-                    <p>Больше игр, больше эмоций, больше веселья 😎</p>
-                    <p>Интересный формат с 4-6 увлекательными играми 💃</p>
-                    <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
-                </div>
-                <div class="package-info" data-package="m">
-                    <h3>Пакет M</h3>
-                    <h4>Продвинутый формат</h4>
-                    <p>Баланс активных и интеллектуальных игр 💃</p>
-                    <p>Идеальный ритм для яркого мероприятия ⚡️</p>
-                    <p>Полноценная программа с 5-7 играми 🎲</p>
-                    <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
-                </div>
-                <div class="package-info" data-package="l">
-                    <h3>Пакет L</h3>
-                    <h4>Премиум формат</h4>
-                    <p>Настоящее шоу с драйвом и эмоциями 🔥</p>
-                    <p>Интерактив, который не даст заскучать 🎉</p>
-                    <p>Расширенный формат с 6-10 разнообразными играми 🎲</p>
-                    <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
-                </div>
-                <div class="package-info" data-package="xl">
-                    <h3>Пакет XL</h3>
-                    <h4>Эксклюзивный формат</h4>
-                    <p>Яркий праздник с полным погружением гостей 🎊</p>
-                    <p>Максимум возможностей для незабываемого вечера 🥇</p>
-                    <p>Полный контроль за атмосферой и эмоциями ⭐️</p>
-                    <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
-                </div>
-                <div class="package-info" data-package="xxl">
-                    <h3>Пакет XXL</h3>
-                    <h4>Масштабный формат</h4>
-                    <p>Полный фарш! Лучшая организация мероприятия!</p>
-                    <p>Воспоминания от этого праздника останутся на долго!</p>
-                    <p>Максимум веселья, максимум эмоций!</p>
-                    <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
-                </div>
-                <div class="package-buttons">
-                    <button class="package-button active" data-package="xs">Пакет XS</button>
-                    <button class="package-button" data-package="s">Пакет S</button>
-                    <button class="package-button xit" data-package="m">Пакет M</button>
-                    <button class="package-button" data-package="l">Пакет L</button>
-                    <button class="package-button" data-package="xl">Пакет XL</button>
-                    <button class="package-button new" data-package="xxl">Пакет XXL</button>
-                </div>
-            </div>
+        <div class="service-card">
+          <img src="templates/service_kidsparty.png" alt="Детский праздник" />
+          <div class="service-content">
+            <h3>Детскиe(ChoTam Kids)</h3>
+            <p>Долой скучный и банальный день рождения. Супер интересный и новый формат для детских мероприятий,
+              программа которая понравится каждому ребенку!</p>
+            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+              <button class="service-button">Получить консультацию</button>
+            </a>
+          </div>
         </div>
-    </section>
-
-    <section class="section" id="team">
-      <h2>КОМАНДА</h2>
-      <h6>Доверьте проведение вашего мероприятия профессионалам</h6>
-      <div class="team-grid">
-        <div class="team-carousel">
-          <button class="carousel-prev" onclick="prevTeamMember()">
-            &#10094;
-          </button>
-          <div class="team-member active">
-            <img src="templates/logo.jpeg" alt="Ведущий" />
-            <h3>Мирас<br><h7>ВЕДУЩИЙ</h7></br></h3>
+        <div class="service-card">
+          <img src="templates/service_newyear.png" alt="Новый год" />
+          <div class="service-content">
+            <h3>Новый год</h3>
+            <p>Устроим зажигательный джингл беллс на новогоднем корпоративе. Отметим самый большой праздник года в
+              лучшем настроении</p>
+            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+              <button class="service-button">Получить консультацию</button>
+            </a>
           </div>
-          <div class="team-member">
-            <img src="templates/logo.jpeg" alt="Ведущий" />
-            <h3>Тамерлан<br><h7>ВЕДУЩИЙ</h7></br></h3>
-          </div>
-          <div class="team-member">
-            <img src="templates/logo.jpeg" alt="Ведущий" />
-            <h3>Бекзат<br><h7>ДИДЖЕЙ</h7></br></h3>
-          </div>
-          <button class="carousel-next" onclick="nextTeamMember()">
-            &#10095;
-          </button>
         </div>
       </div>
-      <div class="whatsapp-order">
-        <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." class="whatsapp-button">
-          Заказать мероприятие!
-        </a>
+      <div class="horizontal-card">
+        <img src="templates/povod1.jpg" alt="Команда" />
+        <div class="horizontal-content">
+          <h3>У вас другой повод?</h3>
+          <p>
+            Без проблем! Создадим сценарий для мероприятия, чтобы вы провели время ярко и с пользой.
+          </p>
+          <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+            <button class="horizontal-button">Обсудить мероприятие</button>
+          </a>
+        </div>
       </div>
-    </section>
-    
-    <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank" class="whatsapp-button1">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
+    </div>
+  </section>
 
-    <footer>
-      <p>Copyright 2025 © Все права защищены</p>
-      <a>Политика конфиденциальности</a>
-    </footer>
+  <section class="section" id="gallery">
+    <!-- <div class="ribbon-bg1"></div> -->
+    <h2>ГАЛЕРЕЯ</h2>
+    <h6>Улыбки наших гостей говорят что праздник удался на славу!</h6>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="templates/gallery1.jpg" alt="Свадьба" />
+      </div>
+      <div class="gallery-item">
+        <img src="templates/gallery2.jpg" alt="Корпоратив" />
+      </div>
+      <div class="gallery-item">
+        <img src="templates/gallery3.jpg" alt="Конференция" />
+      </div>
+      <div class="gallery-item">
+        <img src="templates/gallery4.jpg" alt="Конференция" />
+      </div>
+      <div class="gallery-item">
+        <img src="templates/gallery5.jpg" alt="Конференция" />
+      </div>
+      <div class="gallery-item">
+        <img src="templates/gallery6.jpg" alt="Конференция" />
+      </div>
+      <div class="gallery-item">
+        <img src="templates/gallery7.jpg" alt="Конференция" />
+      </div>
+      <div class="gallery-item">
+        <img src="templates/gallery8.jpg" alt="Конференция" />
+      </div>
+    </div>
+    <button class="gallery-button">СМОТРЕТЬ ДАЛЬШЕ!</button>
+  </section>
 
-    <script>
-      const toggleButton = document.querySelector(".menu-toggle");
-      const navLinks = document.querySelector(".nav-links");
+  <section class="section" id="reviews">
+    <h2>БОЛЕЕ 1000 ДОВОЛЬНЫХ КЛИЕНТОВ</h2>
+    <h6>Прочитайте, что пишут о нас наши клиенты</h6>
+    <div class="container">
+      <div class="reviews-gallery">
+        <div class="review-card card-1">
+          <img src="templates/otzyv1.png" alt="Отзыв 1" />
+        </div>
+        <div class="review-card card-2">
+          <img src="templates/otzyv2.png" alt="Отзыв 2" />
+        </div>
+        <div class="review-card card-3">
+          <img src="templates/otzyv8.jpg" alt="Отзыв 3" />
+        </div>
+        <div class="review-card card-4">
+          <img src="templates/otzyv7.jpg" alt="Отзыв 4" />
+        </div>
+        <div class="review-card card-5">
+          <img src="templates/otzyv3.png" alt="Отзыв 5" />
+        </div>
+        <div class="review-card card-6">
+          <img src="templates/otzyv6.jpg" alt="Отзыв 6" />
+        </div>
+        <div class="review-card card-7">
+          <img src="templates/otzyv4.jpg" alt="Отзыв 7" />
+        </div>
+        <div class="review-card card-8">
+          <img src="templates/otzyv5.jpg" alt="Отзыв 8" />
+        </div>
+        <div class="review-card card-9">
+          <img src="templates/otzyv9.jpg" alt="Отзыв 9" />
+        </div>
+      </div>
+      <button id="more-reviews-btn" class="more-reviews-btn">БОЛЬШЕ ОТЗЫВОВ</button>
+      <button id="less-reviews-btn" class="less-reviews-btn">МЕНЬШЕ ОТЗЫВОВ</button>
+    </div>
+  </section>
 
-      toggleButton.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
+  <section class="section" id="packages">
+    <h2>АКТУАЛЬНЫЕ ПАКЕТЫ МЕРОПРИЯТИЙ</h2>
+    <h6>Выберите тот, который подходит именно вам 👇</h6>
+    <div class="package-container">
+      <div class="package-display">
+        <div class="package-image active" data-package="xs">
+          <img src="templates/logo.jpeg" alt="xs">
+          <div class="package-details">
+            <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
+            <span class="detail-item"><span class="icon">✔</span> до 1 часа</span>
+          </div>
+        </div>
+        <div class="package-image" data-package="s">
+          <img src="templates/logo.jpeg" alt="s">
+          <div class="package-details">
+            <span class="detail-item"><span class="icon">✔</span> от 6 человек</span>
+            <span class="detail-item"><span class="icon">✔</span> до 1,5 часов</span>
+          </div>
+        </div>
+        <div class="package-image" data-package="m">
+          <img src="templates/logo.jpeg" alt="m">
+          <div class="package-details">
+            <span class="detail-item"><span class="icon">✔</span> от 10 человек</span>
+            <span class="detail-item"><span class="icon">✔</span> до 2 часов</span>
+          </div>
+        </div>
+        <div class="package-image" data-package="l">
+          <img src="templates/logo.jpeg" alt="l">
+          <div class="package-details">
+            <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
+            <span class="detail-item"><span class="icon">✔</span> до 3 часов</span>
+          </div>
+        </div>
+        <div class="package-image" data-package="xl">
+          <img src="templates/logo.jpeg" alt="xl">
+          <div class="package-details">
+            <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
+            <span class="detail-item"><span class="icon">✔</span> до 5 часов</span>
+          </div>
+        </div>
+        <div class="package-image" data-package="xxl">
+          <img src="templates/logo.jpeg" alt="xxl">
+          <div class="package-details">
+            <span class="detail-item"><span class="icon">✔</span> от 8 человек</span>
+            <span class="detail-item"><span class="icon">✔</span> от 60 минут</span>
+          </div>
+        </div>
+        <div class="package-actions">
+          <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие" target="_blank"
+            class="action-button participate">
+            Обсудить мероприятие
+          </a>
+        </div>
+      </div>
+      <div class="package-description">
+        <div class="package-info active" data-package="xs">
+          <h3>Пакет XS</h3>
+          <h4>Лайтовый формат</h4>
+          <p>Быстрое вовлечение гостей и заряд настроения ⚡️</p>
+          <p>Компактный формат для легкого старта 👑</p>
+          <p>3-5 веселых игр для незабываемого отдыха! 🤩</p>
+          <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
+        </div>
+        <div class="package-info" data-package="s">
+          <h3>Пакет S</h3>
+          <h4>Универсальный формат</h4>
+          <p>Динамика, азарт и максимум взаимодействия 💥</p>
+          <p>Больше игр, больше эмоций, больше веселья 😎</p>
+          <p>Интересный формат с 4-6 увлекательными играми 💃</p>
+          <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
+        </div>
+        <div class="package-info" data-package="m">
+          <h3>Пакет M</h3>
+          <h4>Продвинутый формат</h4>
+          <p>Баланс активных и интеллектуальных игр 💃</p>
+          <p>Идеальный ритм для яркого мероприятия ⚡️</p>
+          <p>Полноценная программа с 5-7 играми 🎲</p>
+          <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
+        </div>
+        <div class="package-info" data-package="l">
+          <h3>Пакет L</h3>
+          <h4>Премиум формат</h4>
+          <p>Настоящее шоу с драйвом и эмоциями 🔥</p>
+          <p>Интерактив, который не даст заскучать 🎉</p>
+          <p>Расширенный формат с 6-10 разнообразными играми 🎲</p>
+          <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
+        </div>
+        <div class="package-info" data-package="xl">
+          <h3>Пакет XL</h3>
+          <h4>Эксклюзивный формат</h4>
+          <p>Яркий праздник с полным погружением гостей 🎊</p>
+          <p>Максимум возможностей для незабываемого вечера 🥇</p>
+          <p>Полный контроль за атмосферой и эмоциями ⭐️</p>
+          <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
+        </div>
+        <div class="package-info" data-package="xxl">
+          <h3>Пакет XXL</h3>
+          <h4>Масштабный формат</h4>
+          <p>Полный фарш! Лучшая организация мероприятия!</p>
+          <p>Воспоминания от этого праздника останутся на долго!</p>
+          <p>Максимум веселья, максимум эмоций!</p>
+          <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
+        </div>
+        <div class="package-buttons">
+          <button class="package-button active" data-package="xs">Пакет XS</button>
+          <button class="package-button" data-package="s">Пакет S</button>
+          <button class="package-button xit" data-package="m">Пакет M</button>
+          <button class="package-button" data-package="l">Пакет L</button>
+          <button class="package-button" data-package="xl">Пакет XL</button>
+          <button class="package-button new" data-package="xxl">Пакет XXL</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="team">
+    <h2>КОМАНДА</h2>
+    <h6>Доверьте проведение вашего мероприятия профессионалам</h6>
+    <div class="team-grid">
+      <div class="team-carousel">
+        <button class="carousel-prev" onclick="prevTeamMember()">
+          &#10094;
+        </button>
+        <div class="team-member active">
+          <img src="templates/logo.jpeg" alt="Ведущий" />
+          <h3>Мирас<br>
+            <h7>ВЕДУЩИЙ</h7></br>
+          </h3>
+        </div>
+        <div class="team-member">
+          <img src="templates/logo.jpeg" alt="Ведущий" />
+          <h3>Тамерлан<br>
+            <h7>ВЕДУЩИЙ</h7></br>
+          </h3>
+        </div>
+        <div class="team-member">
+          <img src="templates/logo.jpeg" alt="Ведущий" />
+          <h3>Бекзат<br>
+            <h7>ДИДЖЕЙ</h7></br>
+          </h3>
+        </div>
+        <button class="carousel-next" onclick="nextTeamMember()">
+          &#10095;
+        </button>
+      </div>
+    </div>
+    <div class="whatsapp-order">
+      <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." class="whatsapp-button">
+        Заказать мероприятие!
+      </a>
+    </div>
+  </section>
+
+  <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank"
+    class="whatsapp-button1">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+  <footer>
+    <p>Copyright 2025 © Все права защищены</p>
+    <a>Политика конфиденциальности</a>
+  </footer>
+
+  <script>
+    const toggleButton = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    toggleButton.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    navItems.forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href").substring(1);
+        const targetElement = document.getElementById(targetId);
+
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+          navLinks.classList.remove("active"); // скрываем меню после перехода
+        }
       });
+    });
 
-      const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+    // Переключение пакетов в секции "Актуальные пакеты мероприятий"
+    const packageButtons = document.querySelectorAll('.package-button');
+    const packageImages = document.querySelectorAll('.package-image');
+    const packageInfos = document.querySelectorAll('.package-info');
 
-      navItems.forEach((link) => {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          const targetId = this.getAttribute("href").substring(1);
-          const targetElement = document.getElementById(targetId);
+    packageButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Удаляем класс active у всех кнопок, изображений и описаний
+        packageButtons.forEach(btn => btn.classList.remove('active'));
+        packageImages.forEach(img => img.classList.remove('active'));
+        packageInfos.forEach(info => info.classList.remove('active'));
 
-          if (targetElement) {
-            targetElement.scrollIntoView({ behavior: "smooth" });
-            navLinks.classList.remove("active"); // скрываем меню после перехода
-          }
-        });
+        // Добавляем класс active к выбранной кнопке, изображению и описанию
+        button.classList.add('active');
+        const packageType = button.getAttribute('data-package');
+        const selectedImage = document.querySelector(`.package-image[data-package="${packageType}"]`);
+        const selectedInfo = document.querySelector(`.package-info[data-package="${packageType}"]`);
+        selectedImage.classList.add('active');
+        selectedInfo.classList.add('active');
       });
+    });
 
-        // Переключение пакетов в секции "Актуальные пакеты мероприятий"
-        const packageButtons = document.querySelectorAll('.package-button');
-        const packageImages = document.querySelectorAll('.package-image');
-        const packageInfos = document.querySelectorAll('.package-info');
+    let currentIndex = 0;
+    const teamMembers = document.querySelectorAll(".team-member");
 
-        packageButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Удаляем класс active у всех кнопок, изображений и описаний
-                packageButtons.forEach(btn => btn.classList.remove('active'));
-                packageImages.forEach(img => img.classList.remove('active'));
-                packageInfos.forEach(info => info.classList.remove('active'));
+    function showTeamMember(index) {
+      teamMembers.forEach((member, i) => {
+        member.classList.remove("active");
+        if (i === index) {
+          member.classList.add("active");
+        }
+      });
+    }
 
-                // Добавляем класс active к выбранной кнопке, изображению и описанию
-                button.classList.add('active');
-                const packageType = button.getAttribute('data-package');
-                const selectedImage = document.querySelector(`.package-image[data-package="${packageType}"]`);
-                const selectedInfo = document.querySelector(`.package-info[data-package="${packageType}"]`);
-                selectedImage.classList.add('active');
-                selectedInfo.classList.add('active');
-            });
-        });
-
-      let currentIndex = 0;
-      const teamMembers = document.querySelectorAll(".team-member");
-
-      function showTeamMember(index) {
-        teamMembers.forEach((member, i) => {
-          member.classList.remove("active");
-          if (i === index) {
-            member.classList.add("active");
-          }
-        });
-      }
-
-      function nextTeamMember() {
-        currentIndex = (currentIndex + 1) % teamMembers.length;
-        showTeamMember(currentIndex);
-      }
-
-      function prevTeamMember() {
-        currentIndex =
-          (currentIndex - 1 + teamMembers.length) % teamMembers.length;
-        showTeamMember(currentIndex);
-      }
-      // показываем первый элемент при загрузке
+    function nextTeamMember() {
+      currentIndex = (currentIndex + 1) % teamMembers.length;
       showTeamMember(currentIndex);
+    }
+
+    function prevTeamMember() {
+      currentIndex =
+        (currentIndex - 1 + teamMembers.length) % teamMembers.length;
+      showTeamMember(currentIndex);
+    }
+    // показываем первый элемент при загрузке
+    showTeamMember(currentIndex);
 
 
-      // действие кнопки "больше/меньше отзывов" в отзывах
-      document.addEventListener('DOMContentLoaded', () => {
-        const moreBtn = document.getElementById('more-reviews-btn');
-        const lessBtn = document.getElementById('less-reviews-btn');
-        const gallery = document.querySelector('.reviews-gallery');
-        const reviewsSection = document.getElementById('reviews');
+    // действие кнопки "больше/меньше отзывов" в отзывах
+    document.addEventListener('DOMContentLoaded', () => {
+      const moreBtn = document.getElementById('more-reviews-btn');
+      const lessBtn = document.getElementById('less-reviews-btn');
+      const gallery = document.querySelector('.reviews-gallery');
+      const reviewsSection = document.getElementById('reviews');
 
-        moreBtn.addEventListener('click', () => {
-          gallery.classList.add('show-all');
-        });
-
-        lessBtn.addEventListener('click', () => {
-          gallery.classList.remove('show-all');
-          reviewsSection.scrollIntoView({ behavior: 'smooth' });
-        });
+      moreBtn.addEventListener('click', () => {
+        gallery.classList.add('show-all');
       });
-    </script>
-  </body>
+
+      lessBtn.addEventListener('click', () => {
+        gallery.classList.remove('show-all');
+        reviewsSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+
 </html>
