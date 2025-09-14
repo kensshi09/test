@@ -45,6 +45,13 @@
       border: 1px solid #ffaa00;
     }
 
+    header img {
+      height: 50px;
+      /* размер лого на десктоп */
+      align-items: left;
+      margin-left: 10px;
+    }
+
     /* WhatsApp Button Styles */
     .whatsapp-button1 {
       position: fixed;
@@ -104,13 +111,6 @@
 
     .nav-links a:hover {
       color: #ffaa00;
-    }
-
-    header img {
-      height: 50px;
-      /* размер лого на десктоп */
-      align-items: left;
-      margin-left: 10px;
     }
 
     nav {
@@ -462,7 +462,7 @@
       transition: background-color 0.3s ease;
       margin-top: auto;
       /* Прижимаем кнопку к низу */
-      
+
     }
 
     .service-button:hover {
@@ -941,14 +941,15 @@
       background-color: rgba(255, 255, 255, 0.2);
       /*#151515;*/
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(8px);
       /* Размытие фона под хедером */
       /*#151515*/
       color: white;
-      text-align: center;
-      padding: 5px;
+      text-align: space-between;
+      padding: 10px;
       position: relative;
       bottom: 0;
-      width: 100%;
+      width: 85%;
       border-top-left-radius: 50px;
       /* Закругление верхнего левого угла */
       border-top-right-radius: 50px;
@@ -956,8 +957,18 @@
       border: 1px solid #ffaa00;
       font-weight: bold;
       z-index: 1000;
+      align-items: space-between;
+      display: flex;
+      margin: 0 auto;
+      justify-content: space-between;
     }
 
+    footer img {
+      height: 50px;
+      /* размер лого на десктоп */
+      align-items: left;
+      margin-left: 10px;
+    }
 
     #packages {
       background-image: url(templates/background6.png);
@@ -1073,6 +1084,7 @@
 
     .package-info {
       display: none;
+      border-radius: 25px;
     }
 
     .package-info.active {
@@ -1772,6 +1784,111 @@
       cursor: pointer;
     }
 
+    .application-section {
+      width: 85%;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: rgba(0, 0, 0, 0.85);
+      border: 1px solid #ffaa00;
+      border-radius: 20px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .application-section select {
+      background: #fff url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 10px center;
+      background-size: 28px;
+      padding-right: 40px;
+      /* место под иконку */
+    }
+
+    .application-section h2 {
+      color: #ffaa00;
+      margin-bottom: 30px;
+      font-size: 32px;
+      text-transform: uppercase;
+    }
+
+    .application-section form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .application-section label {
+      font-weight: bold;
+      color: #ffaa00;
+      font-size: 16px;
+      text-align: left;
+    }
+
+    .application-section input,
+    .application-section select,
+    .application-section textarea {
+      width: 100%;
+      max-width: 500px;
+      height: 50px;
+      /* одинаковые отступы и стиль */
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: none;
+      background-color: #444;
+      color: #ffffff;
+      font-size: 16px;
+      outline: none;
+
+      box-sizing: border-box;
+      /* ✅ одинаковый учёт padding */
+      line-height: 1.4;
+      transition: box-shadow 0.2s ease;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+
+    /* чтобы textarea совпадала по толщине с инпутами */
+    .application-section textarea {
+      min-height: 50px;
+      /* почти как input */
+      resize: vertical;
+      /* можно тянуть вниз */
+    }
+
+    /* при фокусе */
+    .application-section input:focus,
+    .application-section select:focus,
+    .application-section textarea:focus {
+      box-shadow: 0 0 0 2px #ffaa00;
+    }
+
+    /* плейсхолдеры — серые */
+    .application-section input::placeholder,
+    .application-section textarea::placeholder {
+      color: #888;
+      /* ✅ светло-серый */
+    }
+
+    .application-section button {
+      padding: 16px;
+      background: linear-gradient(90deg, #ffaa00, #ffaa00);
+      color: #1a1a1a;
+      border: none;
+      border-radius: 8px;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.2s, background 0.3s;
+      border-radius: 50px;
+      width: 500px;
+    }
+
+    .application-section button:hover {
+      transform: scale(1.02);
+      background: linear-gradient(90deg, #ff8800, #ffaa00);
+    }
+
     /* Мобильная версия */
     @media (max-width: 768px) {
 
@@ -2368,6 +2485,33 @@
       .close {
         font-size: 26px;
       }
+
+      .application-section {
+        width: 95%;
+        padding: 20px;
+      }
+
+      .application-section h2 {
+        font-size: 24px;
+      }
+
+      .application-section label {
+        font-size: 14px;
+      }
+
+      .application-section input,
+      .application-section select,
+      .application-section textarea {
+        font-size: 14px;
+        padding: 10px;
+        width: 100%;
+      }
+
+      .application-section button {
+        font-size: 16px;
+        padding: 14px;
+        width: auto;
+      }
     }
   </style>
 </head>
@@ -2546,7 +2690,7 @@
               праздник в году!
             </p>
             <a>
-              <button class="service-button">Получить консультацию</button>
+              <button class="service-button" data-event="День рождения">Получить консультацию</button>
             </a>
           </div>
         </div>
@@ -2559,7 +2703,7 @@
               коллег. Ваш праздник еще долго будут обсуждать!
             </p>
             <a>
-              <button class="service-button">Получить консультацию</button>
+              <button class="service-button" data-event="Корпоративы и тимбилдинги">Получить консультацию</button>
             </a>
           </div>
         </div>
@@ -2571,7 +2715,7 @@
               Мы превратим ваш особенный день в незабываемое событие, которое гости будут вспоминать с восторгом, а вы –
               пересматривать, как любимый сериал</p>
             <a>
-              <button class="service-button">Получить консультацию</button>
+              <button class="service-button" data-event="Свадьба">Получить консультацию</button>
             </a>
           </div>
         </div>
@@ -2585,7 +2729,7 @@
             <p>Вечеринки по вашим предпочтениям. Незабываемое шоу, игры и веселье, организуем праздник по вашему заказу
             </p>
             <a>
-              <button class="service-button">Получить консультацию</button>
+              <button class="service-button" data-event="Вечеринка">Получить консультацию</button>
             </a>
           </div>
         </div>
@@ -2596,7 +2740,7 @@
             <p>Супер интересный и новый формат для детских мероприятий,
               программа которая понравится каждому ребенку!</p>
             <a>
-              <button class="service-button">Получить консультацию</button>
+              <button class="service-button" data-event="Детский праздник">Получить консультацию</button>
             </a>
           </div>
         </div>
@@ -2607,7 +2751,7 @@
             <p>Устроим зажигательный джингл беллс на новогоднем корпоративе. Отметим самый большой праздник года в
               лучшем настроении</p>
             <a>
-              <button class="service-button">Получить консультацию</button>
+              <button class="service-button" data-event="Новый год">Получить консультацию</button>
             </a>
           </div>
         </div>
@@ -2857,10 +3001,51 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
+  <section id="application" class="application-section">
+    <h2>ПОНРАВИЛСЯ НАШ ФОРМАТ?</h2>
+    <h6>ТОГДА СКОРЕЕ ПИШИ НАМ ⬇️</h6>
+    <form id="applicationForm">
+      <label for="appName">ИМЯ</label>
+      <input type="text" id="appName" placeholder="Ваше имя" required>
+
+      <label for="appEvent">ТИП МЕРОПРИЯТИЯ:</label>
+      <select id="appEvent" required>
+        <option value="">Выберите тип...</option>
+        <option value="День рождения">День рождения</option>
+        <option value="Свадьба">Свадьба</option>
+        <option value="Корпоратив">Корпоратив</option>
+        <option value="Юбилей">Юбилей</option>
+        <option value="Выпускной">Выпускной</option>
+        <option value="Другое">Другое</option>
+      </select>
+
+      <label for="appDate">ДАТА МЕРОПРИЯТИЯ:</label>
+      <input type="date" id="appDate" required>
+
+      <label for="appPackage">ПАКЕТ МЕРОПРИЯТИЯ:</label>
+      <select id="appPackage" required>
+        <option value="">Выберите пакет...</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+
+      <label for="appMessage">СООБЩЕНИЕ</label>
+      <textarea id="appMessage" placeholder="Ваше сообщение (по желанию)"></textarea>
+
+      <button type="submit">ОТПРАВИТЬ ЗАЯВКУ!</button>
+    </form>
+  </section>
+
+
   <footer>
+    <img src="/templates/logo_white.PNG" alt="Логотип" />
+    <p>Copyright 2025 © Все права защищены</p>
     <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."> Политика
       конфиденциальности</a>
-    <p>Copyright 2025 © Все права защищены</p>
   </footer>
 
   <!-- Модальное окно -->
@@ -2882,9 +3067,9 @@
         <select id="eventType" required>
           <option value="">Выберите...</option>
           <option>День рождения</option>
-          <option>Корпоратив</option>
+          <option>Корпоративы и тимбилдинги</option>
           <option>Свадьба</option>
-          <option>Вечерика</option>
+          <option>Вечеринка</option>
           <option>Детский праздник</option>
           <option>Новый год</option>
           <option>Другое</option>
@@ -2992,10 +3177,17 @@
     const closeBtn = document.querySelector(".close");
     const form = document.getElementById("consultationForm");
 
-    // открытие модалки по кнопке "Получить консультацию"
     document.querySelectorAll(".service-button, .horizontal-button").forEach(btn => {
       btn.addEventListener("click", () => {
         modal.style.display = "flex";
+
+        // берём тип мероприятия из кнопки
+        const eventType = btn.getAttribute("data-event");
+        if (eventType) {
+          document.getElementById("eventType").value = eventType;
+        } else {
+          document.getElementById("eventType").value = ""; // если кнопка без типа
+        }
       });
     });
 
@@ -3040,6 +3232,43 @@
 
       modal.style.display = "none";
       form.reset();
+    });
+
+    const appForm = document.getElementById("applicationForm");
+
+    appForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("appName").value;
+      const eventType = document.getElementById("appEvent").value;
+      const dateRaw = document.getElementById("appDate").value;
+      const pack = document.getElementById("appPackage").value;
+      const messageText = document.getElementById("appMessage").value;
+
+      // форматируем дату в дд.мм.гггг
+      let formattedDate = "";
+      if (dateRaw) {
+        const dateObj = new Date(dateRaw);
+        formattedDate = ("0" + dateObj.getDate()).slice(-2) + "." +
+          ("0" + (dateObj.getMonth() + 1)).slice(-2) + "." +
+          dateObj.getFullYear();
+      }
+
+      let message = `Здравствуйте! Хочу оставить заявку%0AИмя: ${name}%0AТип мероприятия: ${eventType}`;
+      if (formattedDate) {
+        message += `%0AДата: ${formattedDate}`;
+      }
+      message += `%0AПакет: ${pack}`;
+
+      if (messageText.trim() !== "") {
+        message += `%0AСообщение: ${messageText}`;
+      }
+
+      // ⚡ Укажите ваш WhatsApp-номер (без +)
+      const phone = "77055885385";
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+
+      appForm.reset();
     });
   </script>
 </body>
