@@ -27,6 +27,7 @@
       background-color: rgba(255, 255, 255, 0.2);
       /*#151515;*/
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(8px);
       /* Размытие фона под хедером */
       padding: 10px;
       display: flex;
@@ -41,6 +42,7 @@
       border-radius: 50px;
       width: 85%;
       margin: 0 auto;
+      border: 1px solid #ffaa00;
     }
 
     /* WhatsApp Button Styles */
@@ -296,7 +298,7 @@
     .section h2 {
       color: #ffaa00;
       /* цвет текста h2 */
-      font-size: 52px;
+      font-size: 44px;
       margin-bottom: 1px;
       z-index: 2;
       position: relative;
@@ -460,6 +462,7 @@
       transition: background-color 0.3s ease;
       margin-top: auto;
       /* Прижимаем кнопку к низу */
+      
     }
 
     .service-button:hover {
@@ -483,7 +486,7 @@
       z-index: 2;
       border: 2px solid #ffaa00;
       /* Желтая рамка */
-      height: 210px;
+      height: 250px;
     }
 
     .horizontal-card:hover {
@@ -492,7 +495,7 @@
 
     .horizontal-card img {
       width: 50%;
-      height: 210px;
+      height: 245px;
       object-fit: cover;
       border-radius: 10px;
       /* Закругляем углы изображения */
@@ -736,11 +739,6 @@
       color: #fff;
       text-align: center;
       background-image: url(templates/background6.png);
-
-
-
-
-
       background-size: auto;
       /* Растягивает изображение, сохраняя пропорции */
       background-position: center;
@@ -945,10 +943,9 @@
       backdrop-filter: blur(10px);
       /* Размытие фона под хедером */
       /*#151515*/
-      ;
       color: white;
       text-align: center;
-      padding: 20px;
+      padding: 5px;
       position: relative;
       bottom: 0;
       width: 100%;
@@ -1377,7 +1374,7 @@
       transform: translateY(1px);
     }
 
-    /* Иконка WhatsApp (опционально) */
+    /* Иконка WhatsApp */
     .whatsapp-button::before {
       content: '';
       display: inline-block;
@@ -1403,7 +1400,7 @@
       background-color: #1a1a1a;
       position: relative;
       overflow: hidden;
-      padding-top: 350px;
+      padding-top: 310px;
       padding-bottom: 30px;
     }
 
@@ -1439,6 +1436,16 @@
     .what-is-show h4 {
       color: #ffaa00;
       font-size: 56px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 70px;
+      line-height: 1.0;
+      text-transform: uppercase;
+    }
+
+    .what-is-show h3 {
+      color: #ffaa00;
+      font-size: 20px;
       font-weight: bold;
       text-align: center;
       margin-bottom: 70px;
@@ -1488,13 +1495,13 @@
       background-color: rgba(255, 255, 255, 0.05);
       /* Очень легкий фон для выделения блока */
       border: 2px solid rgba(255, 170, 0, 1);
-      padding: 25px;
+      padding: 30px;
       /* Внутренние отступы */
       border-radius: 16px;
       /* Небольшое скругление углов */
       width: 350px;
       /* Фиксированная ширина */
-      height: 270px;
+      height: 220px;
       /* Фиксированная высота */
       box-sizing: border-box;
       /* Чтобы padding не увеличивал общую ширину */
@@ -1502,7 +1509,7 @@
 
     .column h3 {
       color: #ffaa00;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
       margin-top: 0;
       /* Убираем верхний отступ, т.к. есть отступ у .svg-placeholder */
@@ -1513,7 +1520,7 @@
     .column p {
       color: #ffffff;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 1.5;
       margin-bottom: 0;
     }
@@ -1561,7 +1568,7 @@
 
     .additional-content h2 {
       margin-bottom: 10px;
-      font-size: 56px;
+      font-size: 54px;
       color: #ffffff;
     }
 
@@ -1570,7 +1577,7 @@
       /* Чтобы элемент занимал только необходимую ширину */
       background-color: #ffaa00;
       /* Задаем желтый фон */
-      font-size: 56px;
+      font-size: 54px;
       margin-bottom: 30px;
       color: #000;
       z-index: 2;
@@ -1687,6 +1694,82 @@
     html {
       scroll-behavior: smooth;
       touch-action: block;
+    }
+
+    /* Модальное окно */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.2);
+      /*#151515;*/
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #ffffff;
+    }
+
+    .modal-content {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 15px;
+      width: 350px;
+      text-align: left;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffaa00;
+    }
+
+    .modal-content label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      /* полупрозрачный тёмный фон */
+      border: 1px solid #444;
+      /* тонкая граница */
+      color: #fff;
+      /* белый текст */
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 12px;
+      background: #25D366;
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background: #20b358;
+    }
+
+    .close {
+      position: absolute;
+      top: 0px;
+      right: 15px;
+      font-size: 26px;
+      cursor: pointer;
     }
 
     /* Мобильная версия */
@@ -1859,12 +1942,12 @@
       .horizontal-card {
         flex-direction: column;
         max-width: 300px;
-        height: 430px;
+        height: auto;
       }
 
       .horizontal-card img {
         width: 100%;
-        height: 150px;
+        height: 100%;
         border-radius: 25px;
       }
 
@@ -2151,6 +2234,7 @@
         /* Размещает затемнение позади контента */
       }
 
+
       #additionally {
         background-size: contain;
         background-repeat: repeat;
@@ -2161,13 +2245,13 @@
       }
 
       .section.additional-content h2 {
-        font-size: 25px;
+        font-size: 30px;
         margin-bottom: 40px;
         color: #ffffff;
       }
 
       .additional-content h2 span {
-        font-size: 25px;
+        font-size: 30px;
         color: #000;
         padding: 1px 10px;
       }
@@ -2176,6 +2260,7 @@
         flex-direction: column;
         align-items: center;
         gap: 30px;
+
       }
 
       .additional-column {
@@ -2197,12 +2282,11 @@
 
       .additional-column h3 {
         font-size: 18px;
-        /* Smaller text */
         font-weight: bold;
       }
 
       .section h2 {
-        font-size: 30px;
+        font-size: 20px;
         color: #ffaa00;
       }
 
@@ -2243,14 +2327,46 @@
       }
 
       #services {
-        padding: 0px;
+        padding: 20px;
         background-repeat: repeat;
-        /* Предотвращает повторение изображения */
+        background-size: contain;
       }
 
       #gallery {
         padding-top: 100px;
         padding-bottom: 10px;
+      }
+
+      .whatsapp-order a {
+        font-size: 16px;
+      }
+
+      .modal-content {
+        width: 90%;
+        padding: 15px;
+      }
+
+      .modal-content h2 {
+        font-size: 20px;
+      }
+
+      .modal-content label {
+        font-size: 14px;
+      }
+
+      .modal-content input,
+      .modal-content select {
+        padding: 6px;
+        font-size: 14px;
+      }
+
+      .modal-content button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      .close {
+        font-size: 26px;
       }
     }
   </style>
@@ -2308,7 +2424,7 @@
         <div class="column">
           <div class="svg-placeholder"></div>
           <div class="column-content">
-            <h3>ФОРМАТ</h3>
+            <h3>СОВРЕМЕННЫЙ ФОРМАТ ⚡️</h3>
             <p>Проведем ваше мероприятие в современном формате акцентируя внимание на настроении и веселье, завлекаем
               всех гостей принимать участие в празднике</p>
           </div>
@@ -2316,14 +2432,14 @@
         <div class="column">
           <div class="svg-placeholder"></div>
           <div class="column-content">
-            <h3>ИГРЫ</h3>
+            <h3>ТРЕНДОВЫЕ ИГРЫ 🎯</h3>
             <p>Современные, трендовые игры которые не заставят скучать ваших гостей</p>
           </div>
         </div>
         <div class="column">
           <div class="svg-placeholder"></div>
           <div class="column-content">
-            <h3>ВЕДУЩИЙ</h3>
+            <h3>ОПЫТНЫЙ ВЕДУЩИЙ 🎤</h3>
             <p>Только опытные и веселые ведущие, которые найдут подход к любому гостю и создадут атмосферу праздника</p>
           </div>
         </div>
@@ -2333,7 +2449,7 @@
 
   <section class="section additional-content" id="additionally">
     <div class="additional-content">
-      <h2>ФОРМАТ <span>под ключ</span></h2>
+      <h2>У НАС ЕСТЬ ФОРМАТ <span>под ключ</span></h2>
       <div class="additional-columns">
         <div class="additional-column">
           <div class="additional-svg-placeholder">
@@ -2429,7 +2545,7 @@
               подарите праздник себе и близким. С размахом отметьте главный
               праздник в году!
             </p>
-            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+            <a>
               <button class="service-button">Получить консультацию</button>
             </a>
           </div>
@@ -2442,7 +2558,7 @@
               Отличите от рабочей рутины и организуйте незабываемый вечер для
               коллег. Ваш праздник еще долго будут обсуждать!
             </p>
-            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+            <a>
               <button class="service-button">Получить консультацию</button>
             </a>
           </div>
@@ -2454,7 +2570,7 @@
             <p>
               Мы превратим ваш особенный день в незабываемое событие, которое гости будут вспоминать с восторгом, а вы –
               пересматривать, как любимый сериал</p>
-            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+            <a>
               <button class="service-button">Получить консультацию</button>
             </a>
           </div>
@@ -2468,7 +2584,7 @@
             <h3>Вечеринки</h3>
             <p>Вечеринки по вашим предпочтениям. Незабываемое шоу, игры и веселье, организуем праздник по вашему заказу
             </p>
-            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+            <a>
               <button class="service-button">Получить консультацию</button>
             </a>
           </div>
@@ -2476,10 +2592,10 @@
         <div class="service-card">
           <img src="templates/service_kidsparty.png" alt="Детский праздник" />
           <div class="service-content">
-            <h3>Детскиe(ChoTam Kids)</h3>
-            <p>Долой скучный и банальный день рождения. Супер интересный и новый формат для детских мероприятий,
+            <h3>Детскиe<br>(ChoTam Kids)</br></h3>
+            <p>Супер интересный и новый формат для детских мероприятий,
               программа которая понравится каждому ребенку!</p>
-            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+            <a>
               <button class="service-button">Получить консультацию</button>
             </a>
           </div>
@@ -2490,7 +2606,7 @@
             <h3>Новый год</h3>
             <p>Устроим зажигательный джингл беллс на новогоднем корпоративе. Отметим самый большой праздник года в
               лучшем настроении</p>
-            <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+            <a>
               <button class="service-button">Получить консультацию</button>
             </a>
           </div>
@@ -2503,6 +2619,7 @@
           <p>
             Без проблем! Создадим сценарий для мероприятия, чтобы вы провели время ярко и с пользой.
           </p>
+          <h3>Расскажите о ваших предпочтениях ⬇️</h3>
           <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
             <button class="horizontal-button">Обсудить мероприятие</button>
           </a>
@@ -2584,7 +2701,7 @@
 
   <section class="section" id="packages">
     <h2>АКТУАЛЬНЫЕ ПАКЕТЫ МЕРОПРИЯТИЙ</h2>
-    <h6>Выберите тот, который подходит именно вам 👇</h6>
+    <h6>Найдите свой идеальный вариант ⬇️</h6>
     <div class="package-container">
       <div class="package-display">
         <div class="package-image active" data-package="xs">
@@ -2680,9 +2797,9 @@
         <div class="package-info" data-package="xxl">
           <h3>Пакет XXL</h3>
           <h4>Масштабный формат</h4>
-          <p>Полный фарш! Лучшая организация мероприятия!</p>
-          <p>Воспоминания от этого праздника останутся на долго!</p>
-          <p>Максимум веселья, максимум эмоций!</p>
+          <p>Лучшая организация мероприятия! 👑</p>
+          <p>Воспоминания от этого праздника останутся на долго! 💯</p>
+          <p>Максимум веселья, максимум эмоций! 🔥</p>
           <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
         </div>
         <div class="package-buttons">
@@ -2741,10 +2858,48 @@
   </a>
 
   <footer>
+    <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие."> Политика
+      конфиденциальности</a>
     <p>Copyright 2025 © Все права защищены</p>
-    <a>Политика конфиденциальности</a>
   </footer>
 
+  <!-- Модальное окно -->
+  <div id="consultationModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Получить консультацию</h2>
+      <form id="consultationForm">
+        <label>Как вас зовут?</label>
+        <input type="name" id="names" placeholder="Ваше имя" required>
+
+        <label>Количество гостей:</label>
+        <input type="number" id="guests" placeholder="Пример: 20" required>
+
+        <label>Дата мероприятия:</label>
+        <input type="date" id="date" required>
+
+        <label>Тип мероприятия:</label>
+        <select id="eventType" required>
+          <option value="">Выберите...</option>
+          <option>День рождения</option>
+          <option>Корпоратив</option>
+          <option>Свадьба</option>
+          <option>Вечерика</option>
+          <option>Детский праздник</option>
+          <option>Новый год</option>
+          <option>Другое</option>
+        </select>
+
+        <label>Количество времени (часов):</label>
+        <input type="number" id="hours" placeholder="Например: 4" required>
+
+        <label>Дополнительные комментарии:</label>
+        <input type="comment" id="comments">
+
+        <button type="submit">Отправить</button>
+      </form>
+    </div>
+  </div>
   <script>
     const toggleButton = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector(".nav-links");
@@ -2831,6 +2986,60 @@
         gallery.classList.remove('show-all');
         reviewsSection.scrollIntoView({ behavior: 'smooth' });
       });
+    });
+
+    const modal = document.getElementById("consultationModal");
+    const closeBtn = document.querySelector(".close");
+    const form = document.getElementById("consultationForm");
+
+    // открытие модалки по кнопке "Получить консультацию"
+    document.querySelectorAll(".service-button, .horizontal-button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        modal.style.display = "flex";
+      });
+    });
+
+    // закрытие окна
+    closeBtn.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+
+    // очистка раннее введенных данных 
+    closeBtn.onclick = () => {
+      form.reset();
+      modal.style.display = "none";
+    };
+    window.onclick = (e) => {
+      if (e.target == modal) {
+        form.reset();
+        modal.style.display = "none";
+      }
+    };
+
+    // обработка формы
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const names = document.getElementById("names").value;
+      const guests = document.getElementById("guests").value;
+      const dateRaw = document.getElementById("date").value;
+      // формат даты в дд.мм.гг
+      const dateObj = new Date(dateRaw);
+      const formattedDate = ("0" + dateObj.getDate()).slice(-2) + "." +
+        ("0" + (dateObj.getMonth() + 1)).slice(-2) + "." + dateObj.getFullYear();
+      const eventType = document.getElementById("eventType").value;
+      const hours = document.getElementById("hours").value;
+      const comments = document.getElementById("comments").value;
+
+      let message = `Здравствуйте! Хочу консультацию%0AИмя: ${names}%0AКоличество гостей: ${guests}%0AДата: ${formattedDate}%0AТип: ${eventType}%0AКоличество времени: ${hours} час(ов)`;
+
+      if (comments.trim() !== "") {
+        message += `%0AКомментарий: ${comments}`;
+      }
+      // ⚡ Укажите ваш номер WhatsApp (без +, только цифры)
+      const phone = "77055885385";
+      window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+
+      modal.style.display = "none";
+      form.reset();
     });
   </script>
 </body>
