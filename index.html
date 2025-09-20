@@ -82,40 +82,57 @@
       height: 36px;
     }
 
-    .menu-toggle {
-      display: none;
-      font-size: 26px;
-      color: white;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
     .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-      /* Центрирование ссылок */
-      flex-grow: 1;
-      /* Растягиваем ссылки, чтобы они заняли доступное пространство по центру */
-      margin-left: -100px;
-      gap: 10px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
 
-    .nav-links a {
-      color: white;
-      font-size: 16px;
-      /* font-weight: bold; */
+    @media (min-width: 769px) {
+
+      .mobile-nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .desktop-nav {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-grow: 1;
+        margin-left: -100px;
+        gap: 10px;
+        position: static;
+        transform: none;
+        flex-direction: row;
+        z-index: 1;
+      }
+
+      .desktop-nav a {
+        position: relative;
+        z-index: 1;
+      }
     }
 
     .nav-links a:hover {
       color: #ffaa00;
     }
 
+    .menu-toggle,
+    .nav-links,
+    .overlay {
+      display: none;
+      /* скрыто на ПК */
+    }
+
     nav {
-      display: flex;
-      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     nav a {
@@ -304,6 +321,16 @@
       position: relative;
       padding-bottom: 1px;
       width: 100%;
+    }
+
+    .additional-content h4 {
+      color: #ffffff;
+      /* цвет текста h2 */
+      font-size: 22px;
+      margin-bottom: 35px;
+      margin-top: 50px;
+      z-index: 2;
+      position: relative;
     }
 
     section h6 {
@@ -629,7 +656,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 94%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
       /* Затемнение: цвет и прозрачность */
       z-index: 0;
@@ -798,7 +825,7 @@
       height: 400px;
       /* Fixed height for all cards except the last in third column */
       position: relative;
-      border: 3px solid #ffaa00;
+      border: 2px solid #ffaa00;
       /* Желтая рамка */
     }
 
@@ -833,6 +860,7 @@
       /* Height of the blur effect */
       background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       /* Static blur effect */
       z-index: 1;
     }
@@ -1655,7 +1683,7 @@
 
     .additional-column h3 {
       color: #ffffff;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
     }
 
@@ -1759,6 +1787,9 @@
       /* тонкая граница */
       color: #fff;
       /* белый текст */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      height: 35px;
     }
 
     .modal-content button {
@@ -1784,15 +1815,39 @@
       cursor: pointer;
     }
 
+    #application {
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      z-index: 1;
+      position: relative;
+    }
+
+    #application::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      z-index: -1;
+      /* Размещает затемнение позади контента */
+    }
+
     .application-section {
-      width: 85%;
+      width: 100%;
       margin: 50px auto;
-      padding: 30px;
-      background-color: rgba(0, 0, 0, 0.85);
-      border: 1px solid #ffaa00;
+      padding: 0px;
       border-radius: 20px;
       color: #fff;
+      z-index: 2;
       text-align: center;
+      position: relative;
+
     }
 
     .application-section select {
@@ -1807,13 +1862,14 @@
       margin-bottom: 30px;
       font-size: 32px;
       text-transform: uppercase;
+      z-index: 3;
     }
 
     .application-section form {
+      flex: 2;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      align-items: stretch;
     }
 
     .application-section label {
@@ -1837,7 +1893,6 @@
       color: #ffffff;
       font-size: 16px;
       outline: none;
-
       box-sizing: border-box;
       /* ✅ одинаковый учёт padding */
       line-height: 1.4;
@@ -1889,29 +1944,100 @@
       background: linear-gradient(90deg, #ff8800, #ffaa00);
     }
 
+    .application-section {
+      padding: 40px;
+      color: #fff;
+      border-radius: 20px;
+      max-width: auto;
+      margin: 40px auto;
+      z-index: 2;
+    }
+
+    .application-section h2 {
+      text-align: center;
+      color: #ffaa00;
+      margin-bottom: 30px;
+      z-index: 3;
+    }
+
+    .application-wrapper {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      align-items: flex-start;
+      z-index: 2;
+      background-color: #2e2e2e;
+      /* серый фон */
+      border-radius: 20px;
+      /* округление краёв */
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      /* чтобы не касалось краёв экрана */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      /* лёгкая тень */
+    }
+
+    /* Правая часть: контакты */
+    .application-contacts {
+      flex: 2;
+      background-color: #3a3a3a;
+      /* чуть светлее/темнее для контраста */
+      padding: 15px 15px;
+      border-radius: 16px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+
+    }
+
+    .application-contacts h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      color: #ffaa00;
+      margin-bottom: 10px;
+    }
+
+    .application-contacts p {
+      margin-bottom: 20px;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .application-contacts a {
+      color: #0099ff;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .application-contacts a:hover {
+      text-decoration: underline;
+    }
+
+
+
     /* Мобильная версия */
     @media (max-width: 768px) {
+
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 28px;
+        cursor: pointer;
+        z-index: 2000;
+      }
+
+      .close-menu:hover {
+        color: #ffaa00;
+      }
 
       footer {
         font-size: 14px;
         padding: 10px;
-      }
-
-      .menu-toggle {
-        background-color: rgba(255, 255, 255, 0.1);
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        padding: 0;
-        position: relative;
-        /* Добавляем для псевдоэлемента */
-        font-size: 32px;
-        padding-bottom: 5px;
       }
 
       .whatsapp-button1 {
@@ -1926,6 +2052,27 @@
         height: 30px;
       }
 
+      .menu-toggle {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        font-size: 32px;
+        padding-bottom: 5px;
+        color: #fff;
+        position: absolute;
+        right: 20px;
+        /* прижим к краю экрана */
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+
       .menu-toggle::before {
         content: "";
         /* Используем псевдоэлемент для иконки */
@@ -1938,41 +2085,74 @@
         left: 50%;
         transform: translate(-50%, -50%);
         /* Точное центрирование */
+        z-index: 1100;
       }
 
       header {
         justify-content: space-between;
-        padding: 5px;
+        padding: 8px;
+        align-items: center;
+        position: fixed;
       }
 
-      .nav-links {
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 60%;
+        max-width: 400px;
+        background-color: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        /* ✅ полупрозрачный фон */
+        -webkit-backdrop-filter: blur(8px);
+        /* тёмный фон */
         display: flex;
         flex-direction: column;
-        background-color: rgba(255, 255, 255, 0.2);
-        /*#151515;*/
-        backdrop-filter: blur(10px);
-        /* Размытие фона под хедером */
-        /*#151515*/
-        ;
-        position: absolute;
-        top: 100%;
-        left: 100px;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 80px 30px;
+        box-sizing: border-box;
+        transform: translateX(100%);
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        z-index: 1001;
+      }
+
+      .mobile-nav.active {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-nav a {
+        display: block;
         width: 100%;
-        transform: scaleY(0);
-        transform-origin: top;
+        font-size: 20px;
+        color: #fff;
+        margin: 10px 0;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Подложка */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
         opacity: 0;
         pointer-events: none;
-        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-        border-radius: 20px;
+        transition: opacity 0.3s ease;
+        z-index: 900;
       }
 
-      .nav-links a {
-        margin: 1px 0;
-        padding: 5px;
-      }
-
-      .nav-links.active {
-        transform: scaleY(1);
+      .overlay.active {
         opacity: 1;
         pointer-events: auto;
       }
@@ -1989,7 +2169,6 @@
         padding: 0;
         margin: 0;
         transition: max-height 0.3s ease, opacity 0.3s ease;
-        overflow: hidden;
         max-height: 0;
         opacity: 0;
         flex-direction: column;
@@ -2374,10 +2553,13 @@
       }
 
       .additional-columns {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 в ряд */
+        gap: 20px;
+        /* расстояние между иконками */
+        justify-items: center;
+        /* центрируем иконки в колонках */
       }
 
       .additional-column {
@@ -2415,6 +2597,10 @@
       .section h4 {
         color: #ffffff;
         font-size: 40px;
+      }
+
+      .additional-content h4 {
+        font-size: 18px;
       }
 
       .package-info h4 {
@@ -2468,13 +2654,13 @@
       }
 
       .modal-content label {
-        font-size: 14px;
+        font-size: 20px;
       }
 
       .modal-content input,
       .modal-content select {
         padding: 6px;
-        font-size: 14px;
+        font-size: 16px;
       }
 
       .modal-content button {
@@ -2487,7 +2673,7 @@
       }
 
       .application-section {
-        width: 95%;
+        width: 100%;
         padding: 20px;
       }
 
@@ -2496,13 +2682,13 @@
       }
 
       .application-section label {
-        font-size: 14px;
+        font-size: 18px;
       }
 
       .application-section input,
       .application-section select,
       .application-section textarea {
-        font-size: 14px;
+        font-size: 16px;
         padding: 10px;
         width: 100%;
       }
@@ -2512,6 +2698,60 @@
         padding: 14px;
         width: auto;
       }
+
+      .application-wrapper {
+        flex-direction: column;
+      }
+
+      .application-contacts {
+        margin-top: 30px;
+      }
+
+      .application-form,
+      .application-form input,
+      .application-form select,
+      .application-form textarea,
+      .application-form button {
+        width: 100% !important;
+        /* игнорирует все max-width */
+        max-width: 100% !important;
+        box-sizing: border-box;
+      }
+
+      .application-wrapper {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        /* центрируем все дочерние блоки */
+      }
+
+      .application-contacts {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* ✅ текст + иконки по центру */
+        text-align: center;
+        margin: 0 auto;
+        /* ✅ центрируем сам блок */
+        padding: 20px;
+        width: 90%;
+        /* ✅ отступы слева и справа */
+        max-width: 500px;
+        /* ✅ чтобы не было слишком растянуто */
+        border-radius: 15px;
+        width: 100% !important;
+        /* игнорирует все max-width */
+        max-width: 100% !important;
+      }
+
+      .application-section form,
+      .application-section button {
+        width: 90%;
+        /* форма тоже с отступами */
+        max-width: 500px;
+        margin: 0 auto;
+      }
     }
   </style>
 </head>
@@ -2520,7 +2760,9 @@
   <header>
     <img src="/templates/logo_white.PNG" alt="Логотип" />
     <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
-    <nav class="nav-links">
+
+    <!-- Десктопное меню -->
+    <nav class="desktop-nav">
       <a href="#home">О нас</a>
       <a href="#services">Услуги</a>
       <a href="#gallery">Галерея</a>
@@ -2540,10 +2782,23 @@
           viewBox="0 0 16 16">
           <path
             d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
-        </svg>
-      </a>
+        </svg></a>
     </nav>
   </header>
+
+  <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
+  <!-- Мобильное меню -->
+  <nav class="mobile-nav">
+    <button class="close-menu">✖</button>
+    <a href="#home">О нас</a>
+    <a href="#services">Услуги</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#packages">Цена</a>
+    <a href="#team">Команда</a>
+  </nav>
+
+  <div class="overlay"></div>
 
   <section class="hero">
     <h1>
@@ -2562,7 +2817,7 @@
   <section class="section what-is-show" id="home">
     <div class="container">
       <h2>ЧТО ТАКОЕ<br>
-        <h4>CHOTAM! SHOW?</h4>
+        <h4>CHOTAM! SHOW ?</h4>
       </h2>
       <div class="info-columns">
         <div class="column">
@@ -2671,6 +2926,7 @@
           </div>
         </div>
       </div>
+      <h4>А ТАК ЖЕ ДРУГИЕ УСЛУГИ ПО ОРГАНИЗАЦИИ ЛУЧШЕГО МЕРОПРИЯТИЯ</h4>
     </div>
     <!--<img src="templates/line.png" class="overlay-image"> -->
   </section>
@@ -2806,7 +3062,7 @@
   </section>
 
   <section class="section" id="reviews">
-    <h2>БОЛЕЕ 1000 ДОВОЛЬНЫХ КЛИЕНТОВ</h2>
+    <h2>БОЛЕЕ 4000 ДОВОЛЬНЫХ КЛИЕНТОВ</h2>
     <h6>Прочитайте, что пишут о нас наши клиенты</h6>
     <div class="container">
       <div class="reviews-gallery">
@@ -2820,22 +3076,22 @@
           <img src="templates/otzyv8.jpg" alt="Отзыв 3" />
         </div>
         <div class="review-card card-4">
-          <img src="templates/otzyv7.jpg" alt="Отзыв 4" />
+          <img src="templates/otzyv4.jpg" alt="Отзыв 4" />
         </div>
         <div class="review-card card-5">
-          <img src="templates/otzyv3.png" alt="Отзыв 5" />
+          <img src="templates/otzyv5.jpg" alt="Отзыв 5" />
         </div>
         <div class="review-card card-6">
-          <img src="templates/otzyv6.jpg" alt="Отзыв 6" />
+          <img src="templates/otzyv9.jpg" alt="Отзыв 6" />
         </div>
         <div class="review-card card-7">
-          <img src="templates/otzyv4.jpg" alt="Отзыв 7" />
+          <img src="templates/otzyv7.jpg" alt="Отзыв 7" />
         </div>
         <div class="review-card card-8">
-          <img src="templates/otzyv5.jpg" alt="Отзыв 8" />
+          <img src="templates/otzyv3.png" alt="Отзыв 8" />
         </div>
         <div class="review-card card-9">
-          <img src="templates/otzyv9.jpg" alt="Отзыв 9" />
+          <img src="templates/otzyv6.jpg" alt="Отзыв 9" />
         </div>
       </div>
       <button id="more-reviews-btn" class="more-reviews-btn">БОЛЬШЕ ОТЗЫВОВ</button>
@@ -3004,42 +3260,91 @@
   <section id="application" class="application-section">
     <h2>ПОНРАВИЛСЯ НАШ ФОРМАТ?</h2>
     <h6>ТОГДА СКОРЕЕ ПИШИ НАМ ⬇️</h6>
-    <form id="applicationForm">
-      <label for="appName">ИМЯ</label>
-      <input type="text" id="appName" placeholder="Ваше имя" required>
 
-      <label for="appEvent">ТИП МЕРОПРИЯТИЯ:</label>
-      <select id="appEvent" required>
-        <option value="">Выберите тип...</option>
-        <option value="День рождения">День рождения</option>
-        <option value="Свадьба">Свадьба</option>
-        <option value="Корпоратив">Корпоратив</option>
-        <option value="Юбилей">Юбилей</option>
-        <option value="Выпускной">Выпускной</option>
-        <option value="Другое">Другое</option>
-      </select>
+    <div class="application-wrapper">
+      <!-- Левая часть: форма -->
+      <form id="applicationForm" class="application-form">
+        <label for="appName">ИМЯ</label>
+        <input type="text" id="appName" placeholder="Ваше имя" required>
 
-      <label for="appDate">ДАТА МЕРОПРИЯТИЯ:</label>
-      <input type="date" id="appDate" required>
+        <label for="appEvent">ТИП МЕРОПРИЯТИЯ:</label>
+        <select id="appEvent" required>
+          <option value="">Выберите тип...</option>
+          <option value="День рождения">День рождения</option>
+          <option value="Свадьба">Свадьба</option>
+          <option value="Корпоратив">Корпоратив</option>
+          <option value="Юбилей">Юбилей</option>
+          <option value="Выпускной">Выпускной</option>
+          <option value="Другое">Другое</option>
+        </select>
 
-      <label for="appPackage">ПАКЕТ МЕРОПРИЯТИЯ:</label>
-      <select id="appPackage" required>
-        <option value="">Выберите пакет...</option>
-        <option value="XS">XS</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-        <option value="XXL">XXL</option>
-      </select>
+        <label for="appDate">ДАТА МЕРОПРИЯТИЯ:</label>
+        <input type="date" id="appDate" required>
 
-      <label for="appMessage">СООБЩЕНИЕ</label>
-      <textarea id="appMessage" placeholder="Ваше сообщение (по желанию)"></textarea>
+        <label for="appPackage">ПАКЕТ МЕРОПРИЯТИЯ:</label>
+        <select id="appPackage" required>
+          <option value="">Выберите пакет...</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
 
-      <button type="submit">ОТПРАВИТЬ ЗАЯВКУ!</button>
-    </form>
+        <label for="appMessage">СООБЩЕНИЕ</label>
+        <textarea id="appMessage" placeholder="Ваше сообщение (по желанию)"></textarea>
+
+        <button type="submit">ОТПРАВИТЬ ЗАЯВКУ!</button>
+      </form>
+
+      <!-- Правая часть: контакты -->
+      <div class="application-contacts">
+        <h3>
+          <!-- Телефон -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#ffffff" class="bi bi-telephone"
+            viewBox="0 0 16 16">
+            <path
+              d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+          </svg>
+          НАШ МЕНЕДЖЕР
+        </h3>
+        <p><a href="tel:77055885385" target="_blank">+7 705 588 5385</a></p>
+
+        <h3>
+          <!-- WhatsApp -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#25D366" viewBox="0 0 24 24">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.547 4.103 
+               1.497 5.823L0 24l6.356-1.467A11.947 
+               11.947 0 0 0 12 24c6.627 0 12-5.373 
+               12-12S18.627 0 12 0zm.002 21.5c-1.953 
+               0-3.789-.566-5.343-1.547l-.383-.229-3.772.87.805-3.685-.25-.377A9.467 
+               9.467 0 0 1 2.5 12c0-5.243 4.257-9.5 
+               9.502-9.5S21.5 6.757 21.5 12s-4.257 
+               9.5-9.498 9.5zm5.297-7.206c-.297-.149-1.758-.867-2.031-.965-.273-.1-.473-.148-.672.149-.199.297-.77.964-.943 
+               1.162-.174.199-.348.224-.646.075-.297-.149-1.255-.463-2.39-1.477-.883-.788-1.48-1.761-1.654-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.348.447-.522.149-.174.199-.298.298-.497.099-.199.05-.373-.025-.522-.075-.149-.672-1.611-.92-2.204-.242-.579-.487-.5-.672-.51-.173-.008-.373-.01-.572-.01-.199 
+               0-.522.075-.796.373s-1.045 1.02-1.045 2.479 1.07 2.876 
+               1.219 3.074c.149.199 2.107 3.222 5.107 
+               4.52.714.308 1.27.493 1.705.63.715.228 
+               1.366.195 1.88.118.573-.085 1.758-.719 
+               2.006-1.414.248-.695.248-1.29.173-1.414-.074-.124-.272-.199-.57-.348z" />
+          </svg>
+          НАШ WHATSAPP
+        </h3>
+        <p><a href="https://wa.me/77000000000" target="_blank">НАПИСАТЬ</a></p>
+
+        <h3>
+          <!-- Instagram -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#E1306C" class="bi bi-instagram"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+          </svg>
+          НАШ INSTAGRAM
+        </h3>
+        <p><a href="https://instagram.com/chotam_astana" target="_blank">@chotam_astana</a></p>
+      </div>
   </section>
-
 
   <footer>
     <img src="/templates/logo_white.PNG" alt="Логотип" />
@@ -3086,11 +3391,25 @@
     </div>
   </div>
   <script>
-    const toggleButton = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
 
-    toggleButton.addEventListener("click", () => {
-      navLinks.classList.toggle("active");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileNav = document.querySelector(".mobile-nav");
+    const overlay = document.querySelector(".overlay");
+    const closeMenu = document.querySelector(".close-menu");
+
+    menuToggle.addEventListener("click", () => {
+      mobileNav.classList.add("active");
+      overlay.classList.add("active");
+    });
+
+    closeMenu.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+      overlay.classList.remove("active");
     });
 
     const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
