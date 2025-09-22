@@ -342,7 +342,6 @@
     #services {
       display: flex;
       flex-direction: column;
-      gap: 30px;
       background-color: #1a1a1a;
       /* Темный фон */
       padding: 100px;
@@ -589,9 +588,7 @@
     }
 
     .section {
-      padding: 50px 20px;
       text-align: center;
-      scroll-margin-top: 80px;
     }
 
     .section-gal {
@@ -1188,7 +1185,7 @@
       border: 1px solid #ffaa00;
       padding: 10px 0;
       border-radius: 25px;
-      font-size: 18px;
+      font-size: 17px;
       cursor: pointer;
       transition: background-color 0.3s ease, color 0.3s ease;
       position: relative;
@@ -1210,7 +1207,7 @@
     }
 
     .package-button.new::after {
-      content: "NEW";
+      content: "ТОП";
       position: absolute;
       top: -10px;
       right: -10px;
@@ -1573,6 +1570,32 @@
       margin-top: 10px;
     }
 
+    .section h4h {
+      margin-top: 40px;
+      /* единый верхний отступ */
+      background: rgba(0, 0, 0, 0.3);
+      background-color: rgba(255, 255, 255, 0.2);
+      /*#151515;*/
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(8px);
+      /* лёгкий фон для читаемости */
+      font-size: 22px;
+      font-weight: bold;
+      color: #fff;
+      z-index: 1000;
+      position: relative;
+      border: 2px solid #ffaa00;
+      /* рамка жёлтым */
+      border-radius: 15px;
+      /* скруглим углы для красоты */
+      padding: 20px 30px;
+      /* внутренние отступы */
+      text-align: center;
+      /* центрируем текст */
+      display: inline-block;
+      /* чтобы рамка подстраивалась под текст */
+    }
+
     .additional-content h2 {
       margin-bottom: 10px;
       font-size: 54px;
@@ -1826,14 +1849,6 @@
       /* место под иконку */
     }
 
-    .application-section h2 {
-      color: #ffaa00;
-      margin-bottom: 30px;
-      font-size: 32px;
-      text-transform: uppercase;
-      z-index: 3;
-    }
-
     .application-section form {
       flex: 2;
       display: flex;
@@ -1913,21 +1928,7 @@
       background: linear-gradient(90deg, #ff8800, #ffaa00);
     }
 
-    .application-section {
-      padding: 40px;
-      color: #fff;
-      border-radius: 20px;
-      max-width: auto;
-      margin: 40px auto;
-      z-index: 2;
-    }
 
-    .application-section h2 {
-      text-align: center;
-      color: #ffaa00;
-      margin-bottom: 30px;
-      z-index: 3;
-    }
 
     .application-wrapper {
       display: flex;
@@ -2005,6 +2006,17 @@
       font-size: 25px;
       z-index: 1000;
       position: relative;
+    }
+
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    [data-animate].visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Мобильная версия */
@@ -2109,10 +2121,10 @@
         position: fixed;
         top: 0;
         right: 0;
-        height: 100%;
+        height: 100vh;
         width: 60%;
         max-width: 400px;
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(19, 17, 17, 0.1);
         backdrop-filter: blur(10px);
         /* ✅ полупрозрачный фон */
         -webkit-backdrop-filter: blur(8px);
@@ -2138,10 +2150,11 @@
         display: block;
         width: 100%;
         font-size: 20px;
-        color: #fff;
+        color: #ffaa00;
         margin: 10px 0;
         padding: 12px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
       }
 
       /* Подложка */
@@ -2175,13 +2188,12 @@
         padding: 0;
         margin: 0;
         transition: max-height 0.3s ease, opacity 0.3s ease;
-        max-height: 0;
         opacity: 0;
         flex-direction: column;
       }
 
       nav.active {
-        max-height: 150px;
+        max-height: auto;
         /* подбирается по высоте контента */
         opacity: 1;
       }
@@ -2562,8 +2574,9 @@
       }
 
       .column h3 {
+        margin-top: 20px;
         font-size: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
       }
 
       .column p {
@@ -2590,6 +2603,7 @@
         position: relative;
         overflow: hidden;
         padding: 0px;
+        margin-bottom: 100px;
       }
 
       .what-is-show::before {
@@ -2660,14 +2674,24 @@
         font-size: 18px;
         font-weight: bold;
       }
-      
+
       .section h4 {
         color: #ffffff;
-        font-size: 40px;
+        font-size: 38px;
       }
 
       .additional-content h4 {
         font-size: 18px;
+      }
+
+      .what-is-show h4 {
+        color: #ffaa00;
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 70px;
+        line-height: 1.0;
+        text-transform: uppercase;
       }
 
       .package-info h4 {
@@ -2847,12 +2871,12 @@
 </head>
 
 <body>
-  <header>
+  <header data-animate>
     <img src="/templates/logo_white.PNG" alt="Логотип" />
     <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
-
     <!-- Десктопное меню -->
     <nav class="desktop-nav">
+      <a href="#main">Главная</a>
       <a href="#home">О нас</a>
       <a href="#services">Услуги</a>
       <a href="#gallery">Галерея</a>
@@ -2880,6 +2904,7 @@
   <!-- Мобильное меню -->
   <nav class="mobile-nav">
     <button class="close-menu">✖</button>
+    <a href="#main">Главная</a>
     <a href="#home">О нас</a>
     <a href="#services">Услуги</a>
     <a href="#gallery">Галерея</a>
@@ -2890,7 +2915,7 @@
 
   <div class="overlay"></div>
 
-  <section class="hero">
+  <section class="hero" id="main" data-animate>
     <h1>
       <h8 class="highligted1">CHOTAM! SHOW</h8> - Лучшая организация мероприятий
     </h1>
@@ -2906,7 +2931,7 @@
 
   <section class="section what-is-show" id="home">
     <div class="container">
-      <h2>ЧТО ТАКОЕ<br>
+      <h2>ЧТО ЗНАЧИТ<br>
         <h4>CHOTAM! SHOW ?</h4>
       </h2>
       <div class="info-columns">
@@ -2936,7 +2961,7 @@
     </div>
   </section>
 
-  <section class="section additional-content" id="additionally">
+  <!--<section class="section additional-content" id="additionally" data-animate>
     <div class="additional-content">
       <h2>У НАС ЕСТЬ ФОРМАТ <span>под ключ</span></h2>
       <div class="additional-columns">
@@ -3016,14 +3041,14 @@
           </div>
         </div>
       </div>
-      <h4>А ТАК ЖЕ ДРУГИЕ УСЛУГИ ПО ОРГАНИЗАЦИИ ЛУЧШЕГО МЕРОПРИЯТИЯ</h4>
+      <h4h>А ТАК ЖЕ ДРУГИЕ УСЛУГИ ПО ОРГАНИЗАЦИИ ЛУЧШЕГО МЕРОПРИЯТИЯ</h4h>
     </div>
-    <!--<img src="templates/line.png" class="overlay-image"> -->
-  </section>
+    <img src="templates/line.png" class="overlay-image">
+  </section> -->
 
-  <section class="section" id="services">
+  <section class="section" id="services" data-animate>
     <h2 class="section-title">МЫ ПРОВОДИМ МЕРОПРИЯТИЯ ЛЮБОГО ФОРМАТА</h2>
-    <h6 class="section-subtitle">От деловых конференций до пышных свадеб и уютных семейных праздников</h6>
+    <h6 class="section-subtitle">От дней рождения до больших корпоративов и свадеб</h6>
     <div class="service-grid">
       <!-- Первый ряд: 3 карточки -->
       <div class="service-row">
@@ -3108,18 +3133,17 @@
         <div class="horizontal-content">
           <h3>У вас другой повод?</h3>
           <p>
-            Без проблем! Создадим сценарий для мероприятия, чтобы вы провели время ярко и с пользой.
+            Без проблем! Создадим сценарий для мероприятия, чтобы вы провели время ярко и с пользой
           </p>
           <h3>Расскажите о ваших предпочтениях ⬇️</h3>
-          <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
-            <button class="horizontal-button">Обсудить мероприятие</button>
+          <button class="horizontal-button">Обсудить мероприятие</button>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="gallery">
+  <section class="section" id="gallery" data-animate>
     <!-- <div class="ribbon-bg1"></div> -->
     <h2 class="section-title">ГАЛЕРЕЯ НАШИХ МЕРОПРИЯТИЙ</h2>
     <h6 class="section-subtitle">Улыбки наших гостей говорят что праздник удался на славу!</h6>
@@ -3152,7 +3176,7 @@
     <button class="gallery-button">СМОТРЕТЬ ДАЛЬШЕ!</button>
   </section>
 
-  <section class="section" id="reviews">
+  <section class="section" id="reviews" data-animate>
     <h2 class="section-title">БОЛЕЕ 4000 ДОВОЛЬНЫХ КЛИЕНТОВ</h2>
     <h6 class="section-subtitle">Прочитайте, что пишут о нас наши клиенты</h6>
     <div class="container">
@@ -3190,7 +3214,7 @@
     </div>
   </section>
 
-  <section class="section" id="packages">
+  <section class="section" id="packages" data-animate>
     <h2 class="section-title">АКТУАЛЬНЫЕ ПАКЕТЫ МЕРОПРИЯТИЙ</h2>
     <h6 class="section-subtitle">Найдите свой идеальный вариант ⬇️</h6>
     <div class="package-container">
@@ -3198,55 +3222,55 @@
         <div class="package-info active" data-package="xs">
           <h3>Пакет XS</h3>
           <h4>Лайтовый формат</h4>
-          <p>Быстрое вовлечение гостей и заряд настроения ⚡️</p>
-          <p>Компактный формат для легкого старта 👑</p>
-          <p>3-5 веселых игр для незабываемого отдыха! 🤩</p>
+          <p>Быстрое вовлечение гостей и заряд настроения⚡️</p>
+          <p>Компактный формат для легкого старта👑</p>
+          <p>3-5 веселых игр для незабываемого отдыха!🤩</p>
           <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
           <p1>Выберите свой подходящий пакет ⬇️</p1>
         </div>
         <div class="package-info" data-package="s">
           <h3>Пакет S</h3>
           <h4>Универсальный формат</h4>
-          <p>Динамика, азарт и максимум взаимодействия 💥</p>
-          <p>Больше игр, больше эмоций, больше веселья 😎</p>
-          <p>Интересный формат с 4-6 увлекательными играми 💃</p>
+          <p>Динамика, азарт и максимум взаимодействия💥</p>
+          <p>Больше игр, больше эмоций, больше веселья😎</p>
+          <p>Интересный формат с 4-6 увлекательными играми💃</p>
           <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
           <p1>Выберите свой подходящий пакет ⬇️</p1>
         </div>
         <div class="package-info" data-package="m">
           <h3>Пакет M</h3>
           <h4>Продвинутый формат</h4>
-          <p>Баланс активных и интеллектуальных игр 💃</p>
-          <p>Идеальный ритм для яркого мероприятия ⚡️</p>
-          <p>Полноценная программа с 5-7 играми 🎲</p>
+          <p>Баланс активных и интеллектуальных игр💃</p>
+          <p>Идеальный ритм для яркого мероприятия⚡️</p>
+          <p>Полноценная программа с 5-7 играми🎲</p>
           <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
           <p1>Выберите свой подходящий пакет ⬇️</p1>
         </div>
         <div class="package-info" data-package="l">
           <h3>Пакет L</h3>
           <h4>Премиум формат</h4>
-          <p>Настоящее шоу с драйвом и эмоциями 🔥</p>
-          <p>Интерактив, который не даст заскучать 🎉</p>
-          <p>Расширенный формат с 6-10 разнообразными играми 🎲</p>
+          <p>Настоящее шоу с драйвом и эмоциями🔥</p>
+          <p>Интерактив, который не даст заскучать🎉</p>
+          <p>Полный формат с 6-10 разнообразными играми🎲</p>
           <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
           <p1>Выберите свой подходящий пакет ⬇️</p1>
         </div>
         <div class="package-info" data-package="xl">
           <h3>Пакет XL</h3>
           <h4>Эксклюзивный формат</h4>
-          <p>Яркий праздник с полным погружением гостей 🎊</p>
-          <p>Максимум возможностей для незабываемого вечера 🥇</p>
-          <p>Полный контроль за атмосферой и эмоциями ⭐️</p>
+          <p>Яркий праздник с полным погружением гостей🎊</p>
+          <p>Максимум возможностей для яркого вечера🥇</p>
+          <p>Полный контроль за атмосферой и эмоциями⭐️</p>
           <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
           <p1>Выберите свой подходящий пакет ⬇️</p1>
         </div>
         <div class="package-info" data-package="xxl">
-          <h3>Пакет XXL</h3>
-          <h4>Масштабный формат</h4>
-          <p>Лучшая организация мероприятия! 👑</p>
-          <p>Воспоминания от этого праздника останутся на долго! 💯</p>
-          <p>Максимум веселья, максимум эмоций! 🔥</p>
-          <h4>Заряд энергии + крутые воспоминания = твоя вечеринка на высшем уровне!</h4>
+          <h3>Пакет под ключ</h3>
+          <h4>Индивидуальный формат</h4>
+          <p>Мы берем на себя не только проведение мероприятия</p>
+          <p>но и остальные организационные моменты такие как</p>
+          <p>фото-видео съемка, певцы, артисты и оформление</p>
+          <h4>а так же другие моменты для лучшего качества праздника!</h4>
           <p1>Выберите свой подходящий пакет ⬇️</p1>
         </div>
         <div class="package-buttons">
@@ -3255,7 +3279,7 @@
           <button class="package-button xit" data-package="m">Пакет M</button>
           <button class="package-button" data-package="l">Пакет L</button>
           <button class="package-button" data-package="xl">Пакет XL</button>
-          <button class="package-button new" data-package="xxl">Пакет XXL</button>
+          <button class="package-button new" data-package="xxl">Пакет под ключ</button>
         </div>
       </div>
       <div class="package-display">
@@ -3311,7 +3335,7 @@
     </div>
   </section>
 
-  <!--<section class="section" id="team">
+  <!--<section class="section" id="team" data-animate>
     <h2 class="section-title">КОМАНДА</h2>
     <h6 class="section-subtitle">Доверьте проведение вашего мероприятия профессионалам</h6>
     <div class="team-grid">
@@ -3354,7 +3378,7 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
 
-  <section id="application" class="application-section">
+  <section id="application" class="application-section" data-animate>
     <h2 class="section-title">ПОНРАВИЛСЯ НАШ ФОРМАТ?</h2>
     <h6 class="section-subtitle">ТОГДА СКОРЕЕ ПИШИ НАМ ⬇️</h6>
     <div class="application-wrapper">
@@ -3448,7 +3472,7 @@
   </footer>
 
   <!-- Модальное окно -->
-  <div id="consultationModal" class="modal">
+  <div id="consultationModal" class="modal" data-animate>
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Получить консультацию</h2>
@@ -3504,6 +3528,16 @@
     overlay.addEventListener("click", () => {
       mobileNav.classList.remove("active");
       overlay.classList.remove("active");
+    });
+
+    // Закрытие меню при клике на ссылку
+    const navLinks = document.querySelectorAll(".mobile-nav a");
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+        overlay.classList.remove("active");
+      });
     });
 
     const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
@@ -3682,6 +3716,18 @@
       window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
       appForm.reset();
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-animate]").forEach((el) => {
+      observer.observe(el);
     });
   </script>
 </body>
