@@ -2,9 +2,21 @@
 <html lang="ru">
 
 <head>
+  <link rel="icon" type="image/png" href="/favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
-  <title>CHOTAM! SHOW</title>
+  <meta name="description"
+    content="CHOTAM SHOW – лучшая организация мероприятий в Астане. Свадьбы, корпоративы, дни рождения, детские праздники, тимбилдинги, вечеринки и шоу-программы под ключ. Более 4000 довольных клиентов.">
+  <meta name="keywords"
+    content="Chotam Show, организация мероприятий, ивенты, праздники Казахстан, Астана, Алматы, День рождения, Свадьба, Корпоратив, Девичник, Детский праздник, Новый год, Тимбилдинг">
+  <meta property="og:title" content="CHOTAM! SHOW – Организация мероприятий в Астане">
+  <meta property="og:description"
+    content="Организация мероприятий, шоу-программы, свадьбы, корпоративы, дни рождения. Более 4000 довольных клиентов.">
+  <meta property="og:image" content="https://chotamshow.kz/templates/logo_black.PNG">
+  <meta property="og:url" content="https://chotamshow.kz">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://chotamshow.kz/">
+  <title>CHOTAM! SHOW - Лучшая организация мероприятий в Астане | Event агентство</title>
   <style>
     * {
       margin: 0;
@@ -92,6 +104,20 @@
 
       .mobile-nav {
         display: none;
+      }
+
+      /* Center quiz on mobile and adjust spacing */
+      .quiz-wrapper {
+        min-height: 100vh;
+        padding: 5px 12px;
+        align-items: center;
+      }
+
+      .quiz-card {
+        padding: 24px;
+        max-width: 720px;
+        width: 100%;
+        margin: 0 auto;
       }
 
       .menu-toggle {
@@ -464,15 +490,22 @@
       width: 100%;
       text-transform: uppercase;
       font-weight: bold;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s ease;
       margin-top: auto;
       /* Прижимаем кнопку к низу */
-
+      position: relative;
+      z-index: 100;
+      pointer-events: auto !important;
     }
 
     .service-button:hover {
       background-color: #e69500;
       /* Темнее при наведении */
+      transform: scale(1.05);
+    }
+
+    .service-button:active {
+      transform: scale(0.98);
     }
 
     /* Стили для горизонтальной карточки */
@@ -543,26 +576,22 @@
       max-width: 300px;
       text-transform: uppercase;
       font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .horizontal-button::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
-      background-repeat: no-repeat;
-      margin-right: 10px;
-      vertical-align: middle;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      position: relative;
+      z-index: 100;
+      pointer-events: auto !important;
     }
 
     .horizontal-button:hover {
       background-color: #25D366;
-      transform: translateY(-2px);
+      transform: translateY(-2px) scale(1.05);
       box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
       text-decoration: none;
       /* Убедимся, что подчеркивания нет */
+    }
+
+    .horizontal-button:active {
+      transform: translateY(0) scale(0.98);
     }
 
     /* Удаляем старые стили для service-item, так как они больше не нужны */
@@ -1016,6 +1045,7 @@
       /* переносим padding сюда */
       box-sizing: border-box;
       /* учитываем padding внутри блока */
+      padding-bottom: 0px;
     }
 
     .package-image.active {
@@ -1063,6 +1093,7 @@
       border-radius: 15px;
       padding-left: 30px;
       padding-top: 20px;
+      justify-content: space-between;
     }
 
     .package-info {
@@ -1779,6 +1810,7 @@
       /* тонкая граница */
       color: #fff;
       /* белый текст */
+      appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
       height: 35px;
@@ -2017,6 +2049,673 @@
     [data-animate].visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .quiz-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 120px 16px 40px 16px;
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      position: relative;
+      min-height: 80vh;
+    }
+
+    .quiz-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Затемнение: цвет и прозрачность */
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .quiz-card {
+      max-width: 980px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.172);
+      backdrop-filter: blur(10px);
+      /* ✅ полупрозрачный фон */
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 40px;
+      color: #fff;
+      position: relative;
+      z-index: 10;
+    }
+
+    .quiz-title {
+      font-size: 34px;
+      margin-bottom: 30px;
+    }
+
+    .quiz-title span {
+      color: #f5b301;
+    }
+
+    .quiz-steps {
+      min-height: 220px;
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quiz-step {
+      display: none !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      pointer-events: none;
+      animation: fadeOut 0.3s ease forwards;
+    }
+
+    .quiz-step.active {
+      display: block !important;
+      position: relative;
+      opacity: 1;
+      pointer-events: auto;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+
+    .quiz-step label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    #guestCount {
+      color: #f5b301;
+      font-weight: bold;
+      font-size: 18px;
+      transition: all 0.1s ease;
+    }
+
+    .quiz-step input,
+    .quiz-step select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      background: #1f1f1f;
+      border: 2px solid #333;
+      color: #fff;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .quiz-step input:focus,
+    .quiz-step select:focus {
+      outline: none;
+      border-color: #f5b301;
+      box-shadow: 0 0 8px rgba(245, 179, 1, 0.3);
+    }
+
+    .quiz-step input:valid,
+    .quiz-step select:valid {
+      border-color: #ffaa00;
+    }
+
+    /* Стили для ползунка */
+    /* Date input styling */
+    .quiz-step input[type="date"] {
+      cursor: pointer;
+      padding: 14px;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    /* Скрываем дефолтный текст дате инпута и показываем отформатированный */
+    .quiz-step input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      width: 100%;
+      padding: 0;
+    }
+
+    .quiz-step input[type="date"]::after {
+      content: attr(data-display);
+      position: absolute;
+      left: 14px;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    /* Range slider styling */
+    .quiz-step input[type="range"] {
+      width: 100%;
+      height: 6px;
+      padding: 0;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      background: linear-gradient(to right, #f5b301 0%, #f5b301 var(--value), #333 var(--value), #333 100%);
+      border-radius: 3px;
+    }
+
+    /* Guest count buttons */
+    .guests-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .guests-buttons button {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #f5b301;
+      background: #000;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 200ms ease;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .guests-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.12);
+    }
+
+    .guests-buttons button.active {
+      background: #f5b301;
+      color: #000;
+      box-shadow: 0 6px 20px rgba(245, 179, 1, 0.28);
+    }
+
+    @media (max-width: 768px) {
+      .guests-buttons {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .quiz-step input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f5b301;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(245, 179, 1, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .quiz-step input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.8);
+    }
+
+    /* Thumb для ползунка (Firefox) */
+    .quiz-step input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f5b301;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(245, 179, 1, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .quiz-step input[type="range"]::-moz-range-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.8);
+    }
+
+    .quiz-format {
+      display: flex;
+      gap: 16px;
+    }
+
+    .quiz-format button {
+      flex: 1;
+      padding: 16px;
+      background: #111;
+      border: 1px solid #ffaa00;
+      border-radius: 16px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 10;
+      pointer-events: auto !important;
+    }
+
+    .quiz-format button:hover {
+      border-color: #f5b301;
+      transform: translateY(-2px);
+    }
+
+    .quiz-format button.active {
+      background: #f5b301;
+      border-color: #f5b301;
+      color: #000;
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.3);
+    }
+
+    /* Format submenu and details styling */
+    .format-submenu,
+    .format-details {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .format-submenu button,
+    .format-details button {
+      flex: 1 1 calc(50% - 12px);
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #f5b301;
+      background: #000;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 160ms ease;
+      text-align: left;
+    }
+
+    .format-submenu .highlight,
+    .format-details .highlight {
+      color: #f5b301;
+      font-weight: 700;
+    }
+
+    .format-submenu button:hover,
+    .format-details button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 179, 1, 0.10);
+    }
+
+    .format-submenu button.active,
+    .format-details button.active {
+      background: #f5b301;
+      color: #000;
+      border-color: #f5b301;
+      box-shadow: 0 8px 26px rgba(245, 179, 1, 0.22);
+    }
+
+    /* Goals grid - multi-select buttons */
+    .goal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .goal-grid button {
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid #f5b301;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-align: left;
+      font-weight: 600;
+      text-transform: lowercase;
+    }
+
+    .goal-grid button::first-letter {
+      text-transform: uppercase;
+    }
+
+    .goal-grid button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.08);
+    }
+
+    .goal-grid button.active {
+      background: #f5b301;
+      border-color: #f5b301;
+      color: #000;
+      box-shadow: 0 6px 20px rgba(245, 179, 1, 0.28);
+    }
+
+    @media (max-width: 768px) {
+      .goal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Custom "Другое" input */
+    /* Custom "Другое" input - always visible */
+    .goal-other {
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+
+    .goal-other input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid #f5b301;
+      background: #1f1f1f;
+      color: #fff;
+      font-weight: 600;
+      box-sizing: border-box;
+      transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      font-size: 12px;
+    }
+
+    .goal-other input::placeholder {
+      color: #888;
+      font-weight: 500;
+    }
+
+    .goal-other input:focus {
+      border-color: #f5b301;
+      outline: none;
+      box-shadow: 0 6px 18px rgba(245, 179, 1, 0.16);
+      background: #2a2a2a;
+    }
+
+    .quiz-submit {
+      margin-top: 20px;
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: none;
+      background: #f5b301;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-submit:hover:not(:disabled) {
+      background: #ffb703;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(245, 179, 1, 0.4);
+    }
+
+    .quiz-submit:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .quiz-privacy {
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* Next button on goals step */
+    .quiz-next {
+      display: flex;
+      justify-content: center;
+      /* Центрирование по горизонтали */
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 16px;
+      background: #f5b301;
+      color: #000;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+      box-shadow: 0 6px 18px rgba(245, 179, 1, 0.14);
+    }
+
+    .quiz-next:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(245, 179, 1, 0.28);
+      filter: brightness(1.02);
+    }
+
+    .quiz-next:active {
+      transform: translateY(0) scale(0.995);
+    }
+
+    .quiz-next:focus {
+      outline: 3px solid rgba(245, 179, 1, 0.22);
+      outline-offset: 3px;
+    }
+
+    /* Center the "Далее" button inside the goals step */
+    .quiz-step[data-step="4"] .quiz-next {
+      display: block;
+      margin: 16px auto 0 auto;
+      width: auto;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    /* Нижняя навигация */
+    .quiz-nav {
+      margin-top: 30px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      position: relative;
+      z-index: 20;
+      pointer-events: auto;
+    }
+
+    .nav-btn {
+      flex: 1;
+      padding: 14px;
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      z-index: 100 !important;
+      pointer-events: auto !important;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      color: #333;
+      text-transform: uppercase;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .nav-btn:hover {
+      background: rgba(245, 179, 1, 0.1);
+      border-color: #f5b301;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+
+    .nav-btn.active {
+      background: #f5b301 !important;
+      color: #000 !important;
+      border-color: #f5b301 !important;
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.3);
+      pointer-events: auto !important;
+    }
+
+    /* Notification Banner */
+    .notification-banner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background: rgba(31, 31, 31, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid #f5b301;
+      border-radius: 28px;
+      padding: 48px 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(245, 179, 1, 0.3), 0 0 40px rgba(245, 179, 1, 0.15);
+      animation: slideInBanner 0.4s ease-out;
+      color: #fff;
+      display: none;
+    }
+
+    .notification-banner.success {
+      border-color: #4CAF50;
+      box-shadow: 0 20px 60px rgba(76, 175, 80, 0.3), 0 0 40px rgba(76, 175, 80, 0.15);
+    }
+
+    .notification-banner.error {
+      border-color: #f44336;
+      box-shadow: 0 20px 60px rgba(244, 67, 54, 0.3), 0 0 40px rgba(244, 67, 54, 0.15);
+    }
+
+    .notification-banner-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .notification-banner-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .notification-banner-text {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .notification-banner-button {
+      background: #f5b301;
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .notification-banner-button:hover {
+      background: #ffb703;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(245, 179, 1, 0.4);
+    }
+
+    .notification-banner-button:active {
+      transform: translateY(0);
+    }
+
+    .notification-banner.success .notification-banner-button {
+      background: #4CAF50;
+    }
+
+    .notification-banner.success .notification-banner-button:hover {
+      background: #66BB6A;
+    }
+
+    .notification-banner.error .notification-banner-button {
+      background: #f44336;
+    }
+
+    .notification-banner.error .notification-banner-button:hover {
+      background: #ef5350;
+    }
+
+    .banner-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9998;
+      display: none;
+      animation: fadeInOverlay 0.3s ease-out;
+    }
+
+    .banner-overlay.visible {
+      display: block;
+    }
+
+    @keyframes slideInBanner {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @keyframes fadeInOverlay {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Мобильная версия */
@@ -2403,6 +3102,10 @@
       }
 
       .package-button {
+        flex: 1 1 140px;
+        /* 🔥 одинаковая ширина кнопок */
+        max-width: 150px;
+        /* 🔥 ограничим, чтобы не расползались */
         min-width: 120px;
         /* одинаковая ширина кнопок */
         font-size: 16px;
@@ -2426,11 +3129,13 @@
         gap: 10px;
         width: 300px;
         align-items: center;
+        justify-content: center;
+        display: flex;
       }
 
       .action-button {
         width: 100%;
-        max-width: 360px;
+        max-width: width - 50px;
       }
 
       .package-info h3 {
@@ -2458,6 +3163,21 @@
 
       .package-description .detail-item .icon {
         color: #ffaa00 !important;
+        margin-bottom: 5px;
+      }
+
+      .package-image,
+      .package-actions {
+        width: 100%;
+        max-width: 400px;
+        /* 🔥 одинаковый max-width */
+        margin: 20 auto;
+        box-sizing: border-box;
+      }
+
+      .package-actions .action-button.participate {
+        width: 100%;
+        /* 🔥 тянется ровно по фону */
       }
 
       #team {
@@ -2562,8 +3282,8 @@
 
       /* Если будете использовать SVG через класс .column-icon-svg */
       .column-icon-svg {
-        /* width: 60px; */
-        /* height: 60px; */
+        width: 60px;
+        height: 60px;
       }
 
       .column-content {
@@ -2716,10 +3436,6 @@
         font-size: 18px;
       }
 
-      .action-button.participate {
-        font-size: 15px;
-      }
-
       #services {
         padding: 10px;
         background-repeat: repeat;
@@ -2866,6 +3582,52 @@
         z-index: 2000;
         position: relative;
       }
+
+      .quiz-wrapper {
+        padding: 24px 12px;
+      }
+
+      .quiz-card {
+        padding: 22px 18px;
+        border-radius: 22px;
+      }
+
+      .quiz-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+
+      .quiz-step input,
+      .quiz-step select {
+        font-size: 16px;
+        padding: 14px;
+        width: 100%;
+      }
+
+      .quiz-format {
+        flex-direction: column;
+      }
+
+      .quiz-format button {
+        padding: 14px;
+        border-radius: 14px;
+      }
+
+      .quiz-nav {
+        gap: 6px;
+        padding: 6px;
+      }
+
+      .nav-btn {
+        padding: 10px 6px;
+        font-size: 12px;
+        border-radius: 12px;
+      }
+
+      .quiz-submit {
+        padding: 14px;
+        font-size: 16px;
+      }
     }
   </style>
 </head>
@@ -2878,6 +3640,7 @@
     <nav class="desktop-nav">
       <a href="#main">Главная</a>
       <a href="#home">О нас</a>
+      <a href="quiz.html">Квиз</a>
       <a href="#services">Услуги</a>
       <a href="#gallery">Галерея</a>
       <a href="#reviews">Отзывы</a>
@@ -2890,7 +3653,7 @@
             d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
         </svg>
       </a>
-      <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." class="social-icon"
+      <a href="https://wa.me/7021656123?text=Здравствуйте! Хочу организовать мероприятие." class="social-icon"
         target="_blank">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp"
           viewBox="0 0 16 16">
@@ -2906,6 +3669,7 @@
     <button class="close-menu">✖</button>
     <a href="#main">Главная</a>
     <a href="#home">О нас</a>
+    <a href="quiz.html">Квиз</a>
     <a href="#services">Услуги</a>
     <a href="#gallery">Галерея</a>
     <a href="#reviews">Отзывы</a>
@@ -2920,11 +3684,11 @@
       <h8 class="highligted1">CHOTAM! SHOW</h8> - Лучшая организация мероприятий
     </h1>
     <p>Развлекательные программы для любых мероприятий и вечеринок</p>
-    <h2>Организуем мероприятие любого масштаба под ключ!</h2>
+    <h2>Организуем мероприятие любого масштаба под ключ !</h2>
     <p>
-      <h8 class="highligted">Более 4000</h8> довольных клиентов
+      <h8 class="highligted">Более 150 000</h8> довольных гостей
     </p>
-    <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
+    <a href="https://wa.me/7021656123?text=Здравствуйте! Хочу организовать мероприятие." target="_blank">
       <button>Связаться с нами</button>
     </a>
   </section>
@@ -3046,6 +3810,151 @@
     <img src="templates/line.png" class="overlay-image">
   </section> -->
 
+  <section class="quiz-wrapper" id="quiz" data-animate>
+    <h2 class="section-title">Пройдите опрос - получите цену идеального праздника</h2>
+    <h6 class="section-subtitle">Это бесплатно и займёт меньше минуты</h6>
+    <div class="quiz-card">
+
+      <h2 class="quiz-title">
+        <span>Сколько стоит</span><span></span><br>ваш праздник мечты? 💥
+      </h2>
+
+      <!-- ШАГИ -->
+      <div class="quiz-steps">
+
+        <!-- 1. Тип мероприятия + Дата -->
+        <div class="quiz-step active" data-step="1">
+          <label>Тип мероприятия</label>
+          <select id="eventTypeSelect">
+            <option value="">Выберите тип</option>
+            <option value="День рождения">День рождения</option>
+            <option value="Корпоратив">Корпоратив</option>
+            <option value="Тимбилдинг">Тимбилдинг</option>
+            <option value="1 жас тусау кесу">1 жас тусау кесу</option>
+            <option value="Девичник">Девичник</option>
+            <option value="Коммерческое(открытие магазина, розыгрыш и.т.д)">Коммерческое(открытие магазина, розыгрыш
+              и.т.д)</option>
+            <option value="Вечеринка">Вечеринка</option>
+            <option value="Другое">Другое</option>
+          </select>
+
+          <label style="margin-top:16px">Дата мероприятия</label>
+          <div style="position: relative; width: 100%;">
+            <input type="date" id="eventDateInput">
+            <span id="eventDateDisplay" style="position: absolute; left: 14px; top: 14px; color: #fff; pointer-events: none; font-size: 16px;"></span>
+          </div>
+        </div>
+
+        <!-- 2. Гости -->
+        <div class="quiz-step" data-step="2">
+          <label>Количество гостей</label>
+          <div class="guests-buttons">
+            <button type="button" data-guests="до 30" data-value="30">До 30 человек</button>
+            <button type="button" data-guests="30-60" data-value="45">30-60</button>
+            <button type="button" data-guests="60-100" data-value="80">60-100</button>
+            <button type="button" data-guests="100+" data-value="150">100+</button>
+          </div>
+
+          <label style="margin-top:16px">Средний возраст</label>
+          <input type="number" placeholder="Например: 28">
+        </div>
+
+        <!-- 3. Формат -->
+        <div class="quiz-step" data-step="3">
+          <label>Формат мероприятия</label>
+          <div class="quiz-format">
+            <button type="button">Шоу программа с играми на 1-2 часа</button>
+            <button type="button">Проведение мероприятия Ведущим от 3 до 6 часов</button>
+          </div>
+
+          <!-- Tempo submenu (appears after selecting a main format) -->
+          <div class="format-submenu" aria-hidden="true" style="display:none; margin-top:12px">
+            <button type="button"
+              data-tempo="Активная программа, где завлекаются все гости, больше активностей, танцев, музыки (тотальное веселье)"><span
+                class="highlight">Активная программа</span>, где завлекаются все гости, больше активностей, танцев,
+              музыки (тотальное веселье)</button>
+            <button type="button"
+              data-tempo="Более спокойная программа, сильно не тревожит гостей, больше застольных интерактивов (спокойно, но не скучно)"><span
+                class="highlight">Более спокойная программа</span>, сильно не тревожит гостей, больше застольных
+              интерактивов (спокойно, но не скучно)</button>
+            <button type="button"
+              data-tempo="Комбинированная программа, где сочетаются переходы от душевных моментов к зажигательным блокам — идеально для разной компании"><span
+                class="highlight">Комбинированная программа</span>, где сочетаются переходы от душевных моментов к
+              зажигательным блокам - идеально для разной компании</button>
+          </div>
+        </div>
+
+        <!-- 4. Цель (мультивыбор) -->
+        <div class="quiz-step" data-step="4">
+          <label>Цель мероприятия</label>
+          <div class="goal-grid">
+            <button type="button"
+              data-goal="гости из разных компаний, хочу объеденить их чтобы не было неловкостей">гости из разных
+              компаний, хочу объеденить их чтобы не было неловкостей</button>
+            <button type="button" data-goal="провожу мероприятие впервые, не знаю как это должно выглядеть">провожу
+              мероприятие впервые, не знаю как это должно выглядеть </button>
+            <button type="button"
+              data-goal="не хочу тянуть весь праздник на себе и развлекать самостоятельно гостей, хочу сам(-а) отдохнуть">не
+              хочу тянуть весь праздник на себе и развлекать самостоятельно гостей, хочу сам(-а) отдохнуть</button>
+            <button type="button" data-goal="хочу чтобы гостям сильно понравился праздник">хочу чтобы гостям сильно
+              понравился праздник</button>
+            <button type="button" data-goal="я опытный(-ая) в организации праздников, всегда делаю лучшие тусовки">я
+              опытный(-ая) в организации праздников, всегда делаю лучшие тусовки</button>
+            <button type="button" data-goal="на празднике будут не смеющиеся гости и нужно их развеселить">на празднике
+              будут не смеющиеся гости и нужно их развеселить</button>
+            <button type="button" data-goal="позвал(-а) «серьезных» гостей и нужно показать уровень">позвал(-а)
+              «серьезных» гостей и нужно показать уровень</button>
+            <button type="button" data-goal="будут гости разных возрастов, хочу завлечь всех">будут гости разных
+              возрастов, хочу завлечь всех</button>
+            <button type="button"
+              data-goal="не хочу однотипный праздник - посидеть, покушать, выпить, А хочу нормально повеселиться">не
+              хочу однотипный праздник - посидеть, покушать, выпить, А хочу нормально повеселиться</button>
+            <button type="button"
+              data-goal="будут максимально близкие люди и можно добавить в программу нотку 21+ тематики">будут
+              максимально близкие люди и можно добавить в программу нотку 21+ тематики</button>
+          </div>
+          <div class="goal-other">
+            <input type="text" placeholder="Опишите вашу цель если не нашли подходящее" />
+          </div>
+          <div style="margin-top:16px">
+            <button type="button" class="quiz-next">Далее</button>
+          </div>
+        </div>
+
+        <!-- 5. Контакты -->
+        <div class="quiz-step" data-step="5">
+          <label>Ваше имя</label>
+          <input type="text" placeholder="Например: Бекзат" />
+
+          <label style="margin-top:16px">Телефон</label>
+          <input type="tel" placeholder="+7 ___ ___ __ __">
+          <button class="quiz-submit">Отправить заявку</button>
+          <p class="quiz-privacy">Нажимая на кнопку вы даете согласие на обработку персональных данных<br>и соглашаетесь с политикой конфиденциальности</p>
+        </div>
+
+      </div>
+
+      <div class="quiz-nav">
+        <button type="button" class="nav-btn active" data-target="1">Дата, Тип 📅</button>
+        <button type="button" class="nav-btn" data-target="2">Гости ❤️</button>
+        <button type="button" class="nav-btn" data-target="3">Формат 🤩</button>
+        <button type="button" class="nav-btn" data-target="4">Цель ✅</button>
+        <button type="button" class="nav-btn" data-target="5">Связь ☎️</button>
+      </div>
+
+      <!-- Notification Banner -->
+      <div class="banner-overlay" id="bannerOverlay"></div>
+      <div class="notification-banner" id="notificationBanner">
+        <span class="notification-banner-icon" id="bannerIcon">✅</span>
+        <div class="notification-banner-title" id="bannerTitle">Успешно!</div>
+        <div class="notification-banner-text" id="bannerText">Ваша заявка отправлена</div>
+        <button class="notification-banner-button" id="bannerButton">Закрыть</button>
+      </div>
+  </section>
+
+
+
+
   <section class="section" id="services" data-animate>
     <h2 class="section-title">МЫ ПРОВОДИМ МЕРОПРИЯТИЯ ЛЮБОГО ФОРМАТА</h2>
     <h6 class="section-subtitle">От дней рождения до больших корпоративов и свадеб</h6>
@@ -3061,9 +3970,7 @@
               подарите праздник себе и близким. С размахом отметьте главный
               праздник в году!
             </p>
-            <a>
-              <button class="service-button" data-event="День рождения">Получить консультацию</button>
-            </a>
+            <button class="service-button" data-event="День рождения">Получить консультацию</button>
           </div>
         </div>
         <div class="service-card">
@@ -3074,9 +3981,7 @@
               Отличите от рабочей рутины и организуйте незабываемый вечер для
               коллег. Ваш праздник еще долго будут обсуждать!
             </p>
-            <a>
-              <button class="service-button" data-event="Корпоративы и тимбилдинги">Получить консультацию</button>
-            </a>
+            <button class="service-button" data-event="Корпоративы и тимбилдинги">Получить консультацию</button>
           </div>
         </div>
         <div class="service-card">
@@ -3086,23 +3991,19 @@
             <p>
               Мы превратим ваш особенный день в незабываемое событие, которое гости будут вспоминать с восторгом, а вы –
               пересматривать, как любимый сериал</p>
-            <a>
-              <button class="service-button" data-event="Свадьба">Получить консультацию</button>
-            </a>
+            <button class="service-button" data-event="Свадьба">Получить консультацию</button>
           </div>
         </div>
       </div>
       <!-- Второй ряд: 3 карточки -->
       <div class="service-row">
         <div class="service-card">
-          <img src="templates/service_party.png" alt="Конференции" />
+          <img src="templates/service_party.png" alt="Вечеринка" />
           <div class="service-content">
             <h3>Вечеринки</h3>
             <p>Вечеринки по вашим предпочтениям. Незабываемое шоу, игры и веселье, организуем праздник по вашему заказу
             </p>
-            <a>
-              <button class="service-button" data-event="Вечеринка">Получить консультацию</button>
-            </a>
+            <button class="service-button" data-event="Вечеринка">Получить консультацию</button>
           </div>
         </div>
         <div class="service-card">
@@ -3111,9 +4012,7 @@
             <h3>Детскиe<br>(ChoTam Kids)</br></h3>
             <p>Супер интересный и новый формат для детских мероприятий,
               программа которая понравится каждому ребенку!</p>
-            <a>
-              <button class="service-button" data-event="Детский праздник">Получить консультацию</button>
-            </a>
+            <button class="service-button" data-event="Детский праздник">Получить консультацию</button>
           </div>
         </div>
         <div class="service-card">
@@ -3122,14 +4021,12 @@
             <h3>Новый год</h3>
             <p>Устроим зажигательный джингл беллс на новогоднем корпоративе. Отметим самый большой праздник года в
               лучшем настроении</p>
-            <a>
-              <button class="service-button" data-event="Новый год">Получить консультацию</button>
-            </a>
+            <button class="service-button" data-event="Новый год">Получить консультацию</button>
           </div>
         </div>
       </div>
       <div class="horizontal-card">
-        <img src="templates/povod1.jpg" alt="Команда" />
+        <img src="templates/povod1.jpg" alt="У вас другой повод?" />
         <div class="horizontal-content">
           <h3>У вас другой повод?</h3>
           <p>
@@ -3137,7 +4034,6 @@
           </p>
           <h3>Расскажите о ваших предпочтениях ⬇️</h3>
           <button class="horizontal-button">Обсудить мероприятие</button>
-          </a>
         </div>
       </div>
     </div>
@@ -3149,28 +4045,28 @@
     <h6 class="section-subtitle">Улыбки наших гостей говорят что праздник удался на славу!</h6>
     <div class="gallery-grid">
       <div class="gallery-item">
-        <img src="templates/gallery1.jpg" alt="Свадьба" />
+        <img src="templates/gallery1.jpg" alt="Тимбилдинг" />
       </div>
       <div class="gallery-item">
         <img src="templates/gallery2.jpg" alt="Корпоратив" />
       </div>
       <div class="gallery-item">
-        <img src="templates/gallery3.jpg" alt="Конференция" />
+        <img src="templates/gallery3.jpg" alt="Свадьба" />
       </div>
       <div class="gallery-item">
-        <img src="templates/gallery4.jpg" alt="Конференция" />
+        <img src="templates/gallery4.jpg" alt="День рождения" />
       </div>
       <div class="gallery-item">
-        <img src="templates/gallery5.jpg" alt="Конференция" />
+        <img src="templates/gallery5.jpg" alt="Новый год" />
       </div>
       <div class="gallery-item">
-        <img src="templates/gallery6.jpg" alt="Конференция" />
+        <img src="templates/gallery6.jpg" alt="Детский праздник" />
       </div>
       <div class="gallery-item">
-        <img src="templates/gallery7.jpg" alt="Конференция" />
+        <img src="templates/gallery7.jpg" alt="Девичник" />
       </div>
       <div class="gallery-item">
-        <img src="templates/gallery8.jpg" alt="Конференция" />
+        <img src="templates/gallery8.jpg" alt="Вечеринка" />
       </div>
     </div>
     <button class="gallery-button">СМОТРЕТЬ ДАЛЬШЕ!</button>
@@ -3326,7 +4222,7 @@
           </div>
         </div>
         <div class="package-actions">
-          <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие" target="_blank"
+          <a href="https://wa.me/7021656123?text=Здравствуйте! Хочу организовать мероприятие" target="_blank"
             class="action-button participate">
             Обсудить мероприятие
           </a>
@@ -3367,13 +4263,13 @@
       </div>
     </div>
     <div class="whatsapp-order">
-      <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." class="whatsapp-button">
+      <a href="https://wa.me/7021656123?text=Здравствуйте! Хочу организовать мероприятие." class="whatsapp-button">
         Заказать мероприятие!
       </a>
     </div>
   </section> -->
 
-  <a href="https://wa.me/7055885385?text=Здравствуйте! Хочу организовать мероприятие." target="_blank"
+  <a href="https://wa.me/7021656123?text=Здравствуйте! Хочу организовать мероприятие." target="_blank"
     class="whatsapp-button1">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
   </a>
@@ -3429,7 +4325,7 @@
           </svg>
           НАШ МЕНЕДЖЕР
         </h3>
-        <p><a href="tel:77055885385" target="_blank">+7 705 588 5385</a></p>
+        <p><a href="tel:+7 702 165 6123" target="_blank">+7 702 165 6123</a></p>
 
         <h3>
           <!-- WhatsApp -->
@@ -3451,7 +4347,7 @@
           </svg>
           НАШ WHATSAPP
         </h3>
-        <p><a href="https://wa.me/77000000000" target="_blank">НАПИСАТЬ</a></p>
+        <p><a href="https://wa.me/7021656123" target="_blank">НАПИСАТЬ</a></p>
 
         <h3>
           <!-- Instagram -->
@@ -3622,7 +4518,7 @@
 
     const modal = document.getElementById("consultationModal");
     const closeBtn = document.querySelector(".close");
-    const form = document.getElementById("consultationForm");
+    const consultationForm = document.getElementById("consultationForm");
 
     document.querySelectorAll(".service-button, .horizontal-button").forEach(btn => {
       btn.addEventListener("click", () => {
@@ -3649,13 +4545,13 @@
     };
     window.onclick = (e) => {
       if (e.target == modal) {
-        form.reset();
+        consultationForm.reset();
         modal.style.display = "none";
       }
     };
 
     // обработка формы
-    form.addEventListener("submit", function (e) {
+    consultationForm.addEventListener("submit", function (e) {
       e.preventDefault();
       const names = document.getElementById("names").value;
       const guests = document.getElementById("guests").value;
@@ -3673,8 +4569,7 @@
       if (comments.trim() !== "") {
         message += `%0AКомментарий: ${comments}`;
       }
-      // ⚡ Укажите ваш номер WhatsApp (без +, только цифры)
-      const phone = "77055885385";
+      const phone = "77021656123";
       window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
       modal.style.display = "none";
@@ -3712,7 +4607,7 @@
       }
 
       // ⚡ Укажите ваш WhatsApp-номер (без +)
-      const phone = "77055885385";
+      const phone = "77021656123";
       window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
       appForm.reset();
@@ -3729,6 +4624,576 @@
     document.querySelectorAll("[data-animate]").forEach((el) => {
       observer.observe(el);
     });
+
+    // ========================================
+    // QUIZ NAV - Переключение между шагами
+    // ========================================
+
+    // Берём элементы ТОЛЬКО из нужного quiz-wrapper
+    const quizWrapper = document.querySelector('.quiz-wrapper');
+
+    if (quizWrapper) {
+      console.log('✓ Quiz wrapper found');
+
+      // Функция для показа баннера уведомления
+      function showBanner(title, text, icon = '✅', type = 'success') {
+        const banner = quizWrapper.querySelector('#notificationBanner');
+        const overlay = quizWrapper.querySelector('#bannerOverlay');
+        const bannerTitle = banner.querySelector('#bannerTitle');
+        const bannerText = banner.querySelector('#bannerText');
+        const bannerIcon = banner.querySelector('#bannerIcon');
+        const bannerButton = banner.querySelector('#bannerButton');
+
+        // Устанавливаем содержимое
+        bannerTitle.textContent = title;
+        bannerText.textContent = text;
+        bannerIcon.textContent = icon;
+
+        // Устанавливаем тип (success/error)
+        banner.className = 'notification-banner ' + type;
+
+        // Показываем баннер и оверлей
+        overlay.classList.add('visible');
+        banner.style.display = 'block';
+
+        // Обработчик закрытия
+        bannerButton.onclick = () => {
+          overlay.classList.remove('visible');
+          banner.style.display = 'none';
+        };
+
+        // Закрытие по клику на оверлей
+        overlay.onclick = () => {
+          overlay.classList.remove('visible');
+          banner.style.display = 'none';
+        };
+      }
+
+      // Селекторы специфичны для этого quiz-wrapper
+      const navBtns = quizWrapper.querySelectorAll('.nav-btn');
+      const quizSteps = quizWrapper.querySelectorAll('.quiz-step');
+
+      console.log('✓ Nav buttons found:', navBtns.length);
+      console.log('✓ Quiz steps found:', quizSteps.length);
+      console.log('✓ Nav buttons:', Array.from(navBtns).map(b => `[${b.dataset.target}] ${b.textContent}`));
+      console.log('✓ Steps:', Array.from(quizSteps).map(s => `[${s.dataset.step}]`));
+
+      /* Функция переключения шага */
+      function goToStep(stepNumber) {
+        console.log('Going to step:', stepNumber);
+
+        // Убираем активный класс со всех кнопок и шагов
+        navBtns.forEach(btn => {
+          btn.classList.remove('active');
+          console.log('Removing active from button:', btn.dataset.target);
+        });
+
+        quizSteps.forEach(step => {
+          step.classList.remove('active');
+          console.log('Removing active from step:', step.dataset.step);
+        });
+
+        // Добавляем активный класс нужным элементам
+        const activeBtn = quizWrapper.querySelector(`.nav-btn[data-target="${stepNumber}"]`);
+        const activeStep = quizWrapper.querySelector(`.quiz-step[data-step="${stepNumber}"]`);
+
+        console.log('Active button:', activeBtn?.textContent || 'NOT FOUND');
+        console.log('Active step:', activeStep?.dataset.step || 'NOT FOUND');
+
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+          console.log('✓ Button activated:', activeBtn.textContent);
+        }
+        if (activeStep) {
+          activeStep.classList.add('active');
+          console.log('✓ Step activated:', activeStep.dataset.step);
+        }
+
+        // Скроллируем к верху квиза
+        setTimeout(() => {
+          quizWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+
+      /* Клик по кнопкам навигации */
+      navBtns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const target = btn.dataset.target;
+          console.log('QUIZ NAV BUTTON CLICKED - target:', target, 'button text:', btn.textContent);
+          goToStep(target);
+        }, true);
+      });
+
+      // ========================================
+      // АВТОПЕРЕХОДЫ ПО ЗАПОЛНЕНИЮ QUIZ
+      // ========================================
+
+      /* 1. Тип мероприятия + Дата → Гости (переход когда оба поля заполнены) */
+      const eventTypeSelect = quizWrapper.querySelector('[data-step="1"] #eventTypeSelect');
+      const eventDateInput = quizWrapper.querySelector('[data-step="1"] #eventDateInput');
+
+      // Require explicit date confirmation (via 'change') before auto-advancing
+      let dateConfirmed = false;
+      function checkStep1Complete() {
+        console.log('Checking step 1 - Type:', eventTypeSelect?.value, 'Date:', eventDateInput?.value, 'dateConfirmed=', dateConfirmed);
+        if (eventTypeSelect?.value && eventDateInput?.value && dateConfirmed) {
+          console.log('✓ Both type and confirmed date filled, moving to step 2');
+          setTimeout(() => goToStep(2), 300);
+        }
+      }
+
+      if (eventTypeSelect) {
+        eventTypeSelect.addEventListener('change', () => {
+          console.log('✓ Event type selected:', eventTypeSelect.value);
+          checkStep1Complete();
+        });
+      }
+
+      if (eventDateInput) {
+        // Helper function to format date as DD.MM.YYYY
+        function formatDateDisplay(dateString) {
+          if (!dateString) return '';
+          const [year, month, day] = dateString.split('-');
+          return `${day}.${month}.${year}`;
+        }
+
+        // Helper function to convert DD.MM.YYYY to YYYY-MM-DD for internal storage
+        function formatDateForStorage(dateString) {
+          if (!dateString) return '';
+          if (dateString.includes('-')) return dateString; // Already in YYYY-MM-DD format
+          const [day, month, year] = dateString.split('.');
+          return `${year}-${month}-${day}`;
+        }
+
+        // Store formatted date in a data attribute and update display
+        eventDateInput.addEventListener('change', () => {
+          if (eventDateInput.value) {
+            const formatted = formatDateDisplay(eventDateInput.value);
+            console.log('✓ Date selected (YYYY-MM-DD):', eventDateInput.value, '(formatted: ' + formatted + ')');
+            eventDateInput.dataset.formattedDate = formatted;
+            // Display formatted date in the span next to input
+            const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
+            if (dateDisplay) {
+              dateDisplay.textContent = formatted;
+            }
+            // mark that user has explicitly confirmed a date via the native picker
+            dateConfirmed = true;
+          }
+          checkStep1Complete();
+        });
+
+        // Do not auto-advance on blur — wait for explicit date selection (change event)
+        // Removing blur-based auto-advance prevents premature navigation when the
+        // native datepicker opens. Advancement happens on 'change' only.
+      }
+
+      /* 2. Гости + возраст → Формат (переход ПОСЛЕ выбора гостей и возраста) */
+      const guestButtons = quizWrapper.querySelectorAll('[data-step="2"] .guests-buttons button');
+      let selectedGuests = null;
+      const ageInput = quizWrapper.querySelector('[data-step="2"] input[type="number"]');
+
+      guestButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // Убираем active с остальных
+          guestButtons.forEach(b => b.classList.remove('active'));
+          // Добавляем active текущей кнопке
+          btn.classList.add('active');
+          selectedGuests = btn.dataset.value;
+          console.log('✓ Guests selected:', btn.dataset.guests, 'value:', selectedGuests);
+          updateSubmitButtonState();
+          // Проверяем готовность перейти
+          if (ageInput?.value) {
+            checkGuestsStep();
+          }
+        }, true);
+      });
+
+      function checkGuestsStep() {
+        console.log('Guests step check - Selected:', selectedGuests, 'Age:', ageInput?.value);
+        if (selectedGuests && ageInput?.value) {
+          console.log('✓ Both guests and age filled, moving to step 3');
+          goToStep(3);
+        }
+      }
+
+      // Используем 'blur' для number input (когда пользователь уходит с поля)
+      if (ageInput) {
+        ageInput.addEventListener('input', updateSubmitButtonState);
+        ageInput.addEventListener('blur', () => {
+          console.log('Age input blur, value:', ageInput.value);
+          updateSubmitButtonState();
+          // Проверяем, заполнены ли оба поля
+          if (selectedGuests && ageInput.value) {
+            checkGuestsStep();
+          }
+        });
+      }
+
+      /* 3. Формат → многоступенчатый выбор (main -> tempo -> detail) */
+      const formatButtons = quizWrapper.querySelectorAll('[data-step="3"] .quiz-format button');
+      const formatSubmenu = quizWrapper.querySelector('[data-step="3"] .format-submenu');
+      const formatDetails = quizWrapper.querySelector('[data-step="3"] .format-details');
+      const quizTitleEl = quizWrapper.querySelector('.quiz-title');
+      const originalQuizTitleHTML = quizTitleEl?.innerHTML || '';
+
+      console.log('Format buttons found:', formatButtons.length);
+
+      // state
+      let selectedFormatMain = null;
+      let selectedFormatTempo = null;
+      const originalFormatHtml = quizWrapper.querySelector('[data-step="3"] .quiz-format')?.innerHTML || '';
+
+      // Clicking a main format shows tempo submenu
+      formatButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // mark main selection
+          formatButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedFormatMain = (btn.textContent || '').trim();
+          console.log('Main format selected:', selectedFormatMain);
+          updateSubmitButtonState();
+
+          // show submenu
+          if (formatSubmenu) {
+            formatSubmenu.style.display = 'flex';
+            formatSubmenu.setAttribute('aria-hidden', 'false');
+            // change title to ask about tempo
+            if (quizTitleEl) quizTitleEl.textContent = 'Какой темп праздника предпочитаете?';
+            // reset submenu
+            selectedFormatTempo = null;
+            formatSubmenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            formatDetails.style.display = 'none';
+            formatDetails.innerHTML = '';
+          }
+        }, true);
+      });
+
+      // Tempo buttons (second level)
+      const tempoButtons = quizWrapper.querySelectorAll('[data-step="3"] .format-submenu button');
+      tempoButtons.forEach(tb => {
+        tb.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          tempoButtons.forEach(b => b.classList.remove('active'));
+          tb.classList.add('active');
+          selectedFormatTempo = tb.dataset.tempo || (tb.textContent || '').trim();
+          console.log('Tempo selected:', selectedFormatTempo);
+          updateSubmitButtonState();
+
+          // After tempo selection, go directly to step 4 (no third level)
+          setTimeout(() => goToStep(4), 220);
+        }, true);
+      });
+
+      // ========================================
+      // ЦЕЛИ - мультивыбор (step 4)
+      // ========================================
+      const goalButtons = quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button');
+      console.log('Goal buttons found:', goalButtons.length);
+
+      // Other input wrapper + field
+      const otherWrapper = quizWrapper.querySelector('[data-step="4"] .goal-other');
+      const otherInput = otherWrapper?.querySelector('input');
+      const otherBtn = quizWrapper.querySelector('[data-step="4"] .goal-grid button[data-goal="Другое"]');
+
+      goalButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          btn.classList.toggle('active');
+          console.log('Goal toggled:', btn.dataset.goal, 'active=', btn.classList.contains('active'));
+          updateSubmitButtonState();
+        }, true);
+      });
+
+      // Если пользователь вводит текст в поле 'Другое', автоматически отметить кнопку
+      if (otherInput && otherBtn) {
+        otherInput.addEventListener('input', () => {
+          const has = otherInput.value.trim().length > 0;
+          if (has) otherBtn.classList.add('active');
+          else otherBtn.classList.remove('active');
+          updateSubmitButtonState();
+        });
+      }
+
+      const quizNext = quizWrapper.querySelector('[data-step="4"] .quiz-next');
+      if (quizNext) {
+        quizNext.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Proceeding from goals to contacts');
+          goToStep(5);
+        }, true);
+      }
+
+      // ========================================
+      // ОТПРАВКА ДАННЫХ В BITRIX24
+      // ========================================
+      const submitBtn = quizWrapper.querySelector('.quiz-submit');
+
+      // Добавляем слушатели для Step 5 (имя и телефон)
+      const nameInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
+      const phoneInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+      if (nameInputStep5) {
+        nameInputStep5.addEventListener('input', updateSubmitButtonState);
+      }
+      if (phoneInputStep5) {
+        phoneInputStep5.addEventListener('input', updateSubmitButtonState);
+      }
+
+      // Функция проверки всех полей квиза
+      function checkAllFieldsComplete() {
+        // Step 1: Тип мероприятия + Дата
+        const step1Complete = eventTypeSelect?.value && eventDateInput?.value && dateConfirmed;
+        
+        // Step 2: Гости + Возраст
+        const guestBtn = quizWrapper.querySelector('[data-step="2"] .guests-buttons button.active');
+        const step2Complete = guestBtn && ageInput?.value;
+        
+        // Step 3: Формат (основной + темп)
+        const formatMainBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
+        const formatTempoBtn = quizWrapper.querySelector('[data-step="3"] .format-submenu button.active');
+        const step3Complete = formatMainBtn && formatTempoBtn;
+        
+        // Step 4: Цель (минимум один выбран)
+        const anyGoal = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
+        const step4Complete = anyGoal;
+        
+        // Step 5: Имя + Телефон
+        const nameInputField = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
+        const phoneInputField = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+        const step5Complete = nameInputField?.value?.trim() && phoneInputField?.value?.trim() && phoneInputField?.value !== '+7 ___ ___ __ __';
+        
+        const allComplete = step1Complete && step2Complete && step3Complete && step4Complete && step5Complete;
+        console.log('Quiz completion check:', { step1Complete, step2Complete, step3Complete, step4Complete, step5Complete, allComplete });
+        return allComplete;
+      }
+
+      // Функция обновления состояния кнопки
+      function updateSubmitButtonState() {
+        if (submitBtn) {
+          const isComplete = checkAllFieldsComplete();
+          submitBtn.disabled = !isComplete;
+          console.log('Submit button state:', isComplete ? 'enabled' : 'disabled');
+        }
+      }
+
+      // Изначально кнопка отключена
+      if (submitBtn) {
+        submitBtn.disabled = true;
+      }
+
+      // Добавляем слушатели на все поля для проверки состояния
+      // Step 1 listeners
+      if (eventTypeSelect) {
+        eventTypeSelect.addEventListener('change', updateSubmitButtonState);
+      }
+      if (eventDateInput) {
+        eventDateInput.addEventListener('change', updateSubmitButtonState);
+      }
+
+      // Step 2 listeners - используем уже определенные переменные guestButtons и ageInput
+      // slushately добавляем слушатели для проверки состояния
+      // Step 3 listeners - используем уже определенные переменные formatButtons и tempoButtons
+      // Step 4 listeners - используем уже определенные переменные goalButtons и otherInput
+      // Step 5 listeners добавим отдельно после определения инпутов
+
+      if (submitBtn) {
+        submitBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Quiz submit button clicked!');
+
+          // Собираем данные из формы
+          const name = nameInputStep5?.value || 'Не указано';
+          const eventType = eventTypeSelect?.value || 'Не указано';
+          // Get formatted date (DD.MM.YYYY) from data attribute, fallback to raw value
+          let eventDate = 'Не указано';
+          if (eventDateInput?.value) {
+            const rawDate = eventDateInput.value;
+            const [year, month, day] = rawDate.split('-');
+            eventDate = `${day}.${month}.${year}`;
+          }
+          const guests = selectedGuests || '0';
+          const age = ageInput?.value || 'Не указано';
+          const phoneInput = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+          let phone = phoneInput?.value || '';
+          // Очищаем телефон от маски и лишних символов
+          phone = phone.replace(/\s+/g, '').replace(/[_\-\+]/g, '').trim();
+          if (!phone || phone === '' || phone.length < 10) {
+            phone = 'Не указано';
+          }
+
+          // Get main format (from state or from active button)
+          const activeFormatBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
+          let formatMain = selectedFormatMain;
+          if (!formatMain && activeFormatBtn) {
+            formatMain = activeFormatBtn.textContent.trim();
+          }
+          formatMain = formatMain || 'Не выбрано';
+
+          // Extract only tempo name (before comma) from full description
+          let formatTempo = '';
+          const activeTempoBtn = quizWrapper.querySelector('[data-step="3"] .format-submenu button.active');
+          if (typeof selectedFormatTempo !== 'undefined' && selectedFormatTempo) {
+            formatTempo = selectedFormatTempo.split(',')[0].trim();
+          } else if (activeTempoBtn?.dataset?.tempo) {
+            formatTempo = activeTempoBtn.dataset.tempo.split(',')[0].trim();
+          } else if (activeTempoBtn?.textContent) {
+            formatTempo = activeTempoBtn.textContent.split(',')[0].trim();
+          }
+
+          const format = [formatMain, formatTempo].filter(f => f && f !== 'Не выбрано').join(' | ') || 'Не выбрано';
+          const otherVal = otherInput?.value?.trim();
+          const selectedGoals = Array.from(quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button.active')).map(b => {
+            const goal = (b.dataset.goal || b.textContent || '').trim();
+            if (goal.toLowerCase() === 'другое') {
+              return otherVal || 'Другое';
+            }
+            return goal;
+          }).filter(Boolean);
+
+          console.log('Collected data:', { eventType, eventDate, guests, age, phone, format, selectedGoals });
+
+          // Проверяем телефон после очистки
+          if (!phone || phone === 'Не указано' || phone.length < 10) {
+            showBanner('Ошибка ввода', 'Пожалуйста, введите корректный номер телефона', '⚠️', 'error');
+            return;
+          }
+
+          try {
+            const goalsStr = selectedGoals.length ? selectedGoals.join(', ') : 'Не указано';
+            
+            // Отправляем данные на backend
+            const quizData = {
+              name: name,
+              phone: phone,
+              eventType: eventType,
+              eventDate: eventDate,
+              guests: guests,
+              age: age,
+              formatMain: formatMain,
+              formatTempo: formatTempo,
+              selectedGoals: selectedGoals
+            };
+
+            console.log('📤 Sending quiz data to backend:', quizData);
+
+            let response;
+            try {
+              response = await fetch('quiz.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(quizData)
+              });
+              console.log('📥 Response received:', response.status, response.statusText);
+            } catch (fetchError) {
+              console.error('❌ Fetch error:', fetchError);
+              showBanner('Ошибка подключения', 'Не удалось подключиться к серверу. Убедитесь, что файлы открыты через веб-сервер (не file://).', '📡', 'error');
+              return;
+            }
+
+            // Проверяем статус ответа
+            if (!response.ok) {
+              const errorText = await response.text();
+              console.error('HTTP Error:', response.status, response.statusText, errorText);
+              let errorMessage = 'Ошибка при отправке заявки';
+              
+              // Специальная обработка для 405 ошибки (Method Not Allowed)
+              if (response.status === 405) {
+                errorMessage = 'Ошибка: Веб-сервер не поддерживает PHP. Пожалуйста, используйте встроенный PHP сервер. Запустите в терминале: php -S localhost:8000';
+                console.error('⚠️ Live Server не поддерживает PHP! Используйте: php -S localhost:8000');
+              } else {
+                try {
+                  const errorJson = JSON.parse(errorText);
+                  errorMessage = errorJson.error || errorMessage;
+                  if (errorJson.received_method) {
+                    console.error('Received method:', errorJson.received_method, 'Expected: POST');
+                  }
+                } catch (e) {
+                  errorMessage = `Ошибка сервера (${response.status}): ${response.statusText}`;
+                }
+              }
+              showBanner('Ошибка', errorMessage, '❌', 'error');
+              return;
+            }
+
+            // Парсим JSON ответ
+            let result;
+            try {
+              const responseText = await response.text();
+              result = JSON.parse(responseText);
+            } catch (parseError) {
+              console.error('JSON Parse Error:', parseError);
+              showBanner('Ошибка', 'Неверный формат ответа от сервера. Пожалуйста, попробуйте позже.', '❌', 'error');
+              return;
+            }
+
+            if (result.success) {
+              console.log('✓ Quiz submitted successfully:', result);
+              showBanner('Спасибо!', 'Ваша заявка отправлена. Менеджер скоро свяжется с вами!', '✅', 'success');
+              // Очищаем форму
+              eventTypeSelect.value = '';
+              eventDateInput.value = '';
+              const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
+              if (dateDisplay) dateDisplay.textContent = '';
+              dateConfirmed = false;
+              delete eventDateInput.dataset.formattedDate;
+              // reset guests buttons
+              document.querySelectorAll('[data-step="2"] .guests-buttons button').forEach(b => b.classList.remove('active'));
+              selectedGuests = null;
+              ageInput.value = '';
+              nameInputStep5.value = '';
+              phoneInput.value = '';
+              activeFormatBtn?.classList.remove('active');
+              // reset multi-stage format selections and UI
+              try {
+                selectedFormatMain = null;
+                selectedFormatTempo = null;
+                const fs = quizWrapper.querySelector('[data-step="3"] .format-submenu'); if (fs) fs.style.display = 'none';
+                const fd = quizWrapper.querySelector('[data-step="3"] .format-details'); if (fd) fd.style.display = 'none';
+                if (quizTitleEl && typeof originalQuizTitleHTML !== 'undefined') quizTitleEl.innerHTML = originalQuizTitleHTML;
+              } catch (err) { console.warn('Reset format UI error', err); }
+              // Очистим цели
+              quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button.active').forEach(b => b.classList.remove('active'));
+              if (otherInput) otherInput.value = '';
+              // Возвращаемся на первый шаг
+              goToStep(1);
+            } else {
+              console.error('Backend error:', result.error);
+              showBanner('Ошибка', result.error || 'Ошибка при отправке заявки. Пожалуйста, попробуйте позже.', '❌', 'error');
+            }
+          } catch (error) {
+            console.error('Network Error:', error);
+            showBanner('Ошибка подключения', 'Не удалось подключиться к серверу. Пожалуйста, проверьте интернет соединение и попробуйте позже.', '📡', 'error');
+          }
+        });
+      }
+
+      console.log('✓ Quiz fully initialized');
+    } else {
+      console.error('Quiz wrapper not found!');
+    }
+
+    //заметка 2 <!-- TikTok Pixel Code Start -->
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+        for (
+          var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+      }, ttq.load = function (e, n) {
+        var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+          ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+      };
+      ttq.load('D5V1LTBC77U581RV47UG');
+      ttq.page();
+    }(window, document, 'ttq');
+    //<!-- TikTok Pixel Code End -->
   </script>
 </body>
 

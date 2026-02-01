@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="description"
+    content="CHOTAM SHOW – лучшая организация мероприятий в Астане. Свадьбы, корпоративы, дни рождения, детские праздники, тимбилдинги, вечеринки и шоу-программы под ключ. Более 4000 довольных клиентов.">
+  <meta name="keywords"
+    content="Chotam Show, организация мероприятий, ивенты, праздники Казахстан, Астана, Алматы, День рождения, Свадьба, Корпоратив, Девичник, Детский праздник, Новый год, Тимбилдинг">
+  <meta property="og:title" content="CHOTAM! SHOW – Организация мероприятий в Астане">
+  <meta property="og:description"
+    content="Организация мероприятий, шоу-программы, свадьбы, корпоративы, дни рождения. Более 4000 довольных клиентов.">
+  <meta property="og:image" content="https://chotamshow.kz/templates/logo_black.PNG">
+  <meta property="og:url" content="https://chotamshow.kz">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://chotamshow.kz/">
+  <title>Квиз - CHOTAM! SHOW</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #020202;
+      color: #333;
+      line-height: 1.6;
+      padding-top: 100px;
+    }
+
+    header {
+      background-color: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      border-radius: 50px;
+      width: 85%;
+      margin: 0 auto;
+      border: 1px solid #ffaa00;
+    }
+
+    header img {
+      height: 50px;
+      align-items: left;
+      margin-left: 10px;
+    }
+
+    .nav-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (min-width: 769px) {
+      .mobile-nav {
+        display: none;
+      }
+
+      .quiz-wrapper {
+        min-height: 100vh;
+        padding: 10px;
+        align-items: center;
+      }
+
+      .quiz-card {
+        padding: 24px;
+        max-width: 720px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .desktop-nav {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-grow: 1;
+        margin-left: -100px;
+        gap: 10px;
+        position: static;
+        transform: none;
+        flex-direction: row;
+        z-index: 1;
+      }
+
+      .desktop-nav a {
+        position: relative;
+        z-index: 1;
+      }
+    }
+
+    .nav-links a:hover {
+      color: #ffaa00;
+    }
+
+    .menu-toggle,
+    .nav-links,
+    .overlay {
+      display: none;
+    }
+
+    nav {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: #ffaa00;
+    }
+
+    .social-icon {
+      margin-left: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .social-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: white;
+    }
+
+    .social-icon:hover svg {
+      fill: #ffaa00;
+    }
+
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;
+    }
+
+    [data-animate].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quiz-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 16px 15px 16px;
+      background-image: url(templates/background6.png);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      position: relative;
+      min-height: 80vh;
+    }
+
+    .quiz-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .quiz-card {
+      max-width: 980px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.172);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 40px;
+      color: #fff;
+      position: relative;
+      z-index: 10;
+    }
+
+    .quiz-title {
+      font-size: 34px;
+      margin-bottom: 30px;
+    }
+
+    .quiz-title span {
+      color: #f5b301;
+    }
+
+    .quiz-steps {
+      min-height: 220px;
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .quiz-step {
+      display: none !important;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      pointer-events: none;
+      animation: fadeOut 0.3s ease forwards;
+    }
+
+    .quiz-step.active {
+      display: block !important;
+      position: relative;
+      opacity: 1;
+      pointer-events: auto;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+
+    .quiz-step label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .quiz-step label1 {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #ffaa00;
+      font-weight: 600;
+    }
+
+    #guestCount {
+      color: #f5b301;
+      font-weight: bold;
+      font-size: 18px;
+      transition: all 0.1s ease;
+    }
+
+    .quiz-step input,
+    .quiz-step select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      background: #1f1f1f;
+      border: 2px solid #333;
+      color: #fff;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .quiz-step input:focus,
+    .quiz-step select:focus {
+      outline: none;
+      border-color: #f5b301;
+      box-shadow: 0 0 8px rgba(245, 179, 1, 0.3);
+    }
+
+    .quiz-step input:valid,
+    .quiz-step select:valid {
+      border-color: #ffaa00;
+    }
+
+    .quiz-step input[type="date"] {
+      cursor: pointer;
+      padding: 14px;
+      font-size: 16px;
+      color: #fff;
+    }
+
+    .quiz-step input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      width: 100%;
+      padding: 0;
+    }
+
+    .quiz-step input[type="date"]::after {
+      content: attr(data-display);
+      position: absolute;
+      left: 14px;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    /* Скрываем дублирующийся span с датой на мобильных устройствах */
+    @media (max-width: 768px) {
+      #eventDateDisplay {
+        display: none !important;
+      }
+    }
+
+    /* Показываем span с датой на десктопе */
+    @media (min-width: 769px) {
+      #eventDateDisplay {
+        display: block !important;
+      }
+    }
+
+    .quiz-step input[type="range"] {
+      width: 100%;
+      height: 6px;
+      padding: 0;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      background: linear-gradient(to right, #f5b301 0%, #f5b301 var(--value), #333 var(--value), #333 100%);
+      border-radius: 3px;
+    }
+
+    .guests-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .guests-buttons button {
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid #f5b301;
+      background: #000;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 200ms ease;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .guests-buttons button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.12);
+    }
+
+    .guests-buttons button.active {
+      background: #f5b301;
+      color: #000;
+      box-shadow: 0 6px 20px rgba(245, 179, 1, 0.28);
+    }
+
+    @media (max-width: 768px) {
+      .guests-buttons {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .quiz-step input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f5b301;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(245, 179, 1, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .quiz-step input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.8);
+    }
+
+    .quiz-step input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f5b301;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 8px rgba(245, 179, 1, 0.5);
+      transition: all 0.2s ease;
+    }
+
+    .quiz-step input[type="range"]::-moz-range-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.8);
+    }
+
+    .quiz-format {
+      display: flex;
+      gap: 16px;
+    }
+
+    .quiz-format button {
+      flex: 1;
+      padding: 16px;
+      background: #111;
+      border: 1px solid #ffaa00;
+      border-radius: 16px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 10;
+      pointer-events: auto !important;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .quiz-format button:hover {
+      border-color: #f5b301;
+      transform: translateY(-2px);
+    }
+
+    .quiz-format button.active {
+      background: #f5b301;
+      border-color: #f5b301;
+      color: #000;
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.3);
+    }
+
+    .format-submenu,
+    .format-details {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .format-submenu button,
+    .format-details button {
+      flex: 1 1 calc(50% - 12px);
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid #f5b301;
+      background: #000;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 160ms ease;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .format-submenu .highlight,
+    .format-details .highlight {
+      color: #f5b301;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .format-submenu button:hover,
+    .format-details button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(245, 179, 1, 0.10);
+    }
+
+    .format-submenu button.active,
+    .format-details button.active {
+      background: #f5b301;
+      color: #000;
+      border-color: #f5b301;
+      box-shadow: 0 8px 26px rgba(245, 179, 1, 0.22);
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .goal-grid button {
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid #f5b301;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      text-align: left;
+      font-weight: 600;
+      text-transform: lowercase;
+      font-size: 14px;
+    }
+
+    .goal-grid button::first-letter {
+      text-transform: uppercase;
+    }
+
+    .goal-grid button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.08);
+    }
+
+    .goal-grid button.active {
+      background: #f5b301;
+      border-color: #f5b301;
+      color: #000;
+      box-shadow: 0 6px 20px rgba(245, 179, 1, 0.28);
+    }
+
+    @media (max-width: 768px) {
+      .goal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .goal-other {
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .goal-other input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid #f5b301;
+      background: #1f1f1f;
+      color: #fff;
+      font-weight: 600;
+      box-sizing: border-box;
+      transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      font-size: 14px;
+    }
+
+    .goal-other input::placeholder {
+      color: #888;
+      font-weight: 500;
+    }
+
+    .goal-other input:focus {
+      border-color: #f5b301;
+      outline: none;
+      box-shadow: 0 6px 18px rgba(245, 179, 1, 0.16);
+      background: #2a2a2a;
+    }
+
+    .quiz-submit {
+      margin-top: 20px;
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: none;
+      background: #f5b301;
+      color: #000;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-submit:hover:not(:disabled) {
+      background: #ffb703;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(245, 179, 1, 0.4);
+    }
+
+    .quiz-submit:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .quiz-privacy {
+      margin-top: 16px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .quiz-next {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 18px;
+      border-radius: 16px;
+      background: #f5b301;
+      color: #000;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+      box-shadow: 0 6px 18px rgba(245, 179, 1, 0.14);
+    }
+
+    .quiz-next:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(245, 179, 1, 0.28);
+      filter: brightness(1.02);
+    }
+
+    .quiz-next:active {
+      transform: translateY(0) scale(0.995);
+    }
+
+    .quiz-next:focus {
+      outline: 3px solid rgba(245, 179, 1, 0.22);
+      outline-offset: 3px;
+    }
+
+    .quiz-step[data-step="1"] .quiz-next,
+    .quiz-step[data-step="4"] .quiz-next {
+      display: block;
+      margin: 16px auto 0 auto;
+      width: auto;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .quiz-nav {
+      margin-top: 30px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      position: relative;
+      z-index: 20;
+      pointer-events: auto;
+    }
+
+    .nav-btn {
+      flex: 1;
+      padding: 14px;
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      z-index: 100 !important;
+      pointer-events: auto !important;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      color: #333;
+      text-transform: uppercase;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .nav-btn:hover {
+      background: rgba(245, 179, 1, 0.1);
+      border-color: #f5b301;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+
+    .nav-btn.active {
+      background: #f5b301 !important;
+      color: #000 !important;
+      border-color: #f5b301 !important;
+      box-shadow: 0 4px 12px rgba(245, 179, 1, 0.3);
+      pointer-events: auto !important;
+    }
+
+    .notification-banner {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      background: rgba(31, 31, 31, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid #f5b301;
+      border-radius: 28px;
+      padding: 48px 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(245, 179, 1, 0.3), 0 0 40px rgba(245, 179, 1, 0.15);
+      animation: slideInBanner 0.4s ease-out;
+      color: #fff;
+      display: none;
+    }
+
+    .notification-banner.success {
+      border-color: #4CAF50;
+      box-shadow: 0 20px 60px rgba(76, 175, 80, 0.3), 0 0 40px rgba(76, 175, 80, 0.15);
+    }
+
+    .notification-banner.error {
+      border-color: #f44336;
+      box-shadow: 0 20px 60px rgba(244, 67, 54, 0.3), 0 0 40px rgba(244, 67, 54, 0.15);
+    }
+
+    .notification-banner-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .notification-banner-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .notification-banner-text {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .notification-banner-button {
+      background: #f5b301;
+      color: #000;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .notification-banner-button:hover {
+      background: #ffb703;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(245, 179, 1, 0.4);
+    }
+
+    .notification-banner-button:active {
+      transform: translateY(0);
+    }
+
+    .notification-banner.success .notification-banner-button {
+      background: #4CAF50;
+    }
+
+    .notification-banner.success .notification-banner-button:hover {
+      background: #66BB6A;
+    }
+
+    .notification-banner.error .notification-banner-button {
+      background: #f44336;
+    }
+
+    .notification-banner.error .notification-banner-button:hover {
+      background: #ef5350;
+    }
+
+    .banner-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9998;
+      display: none;
+      animation: fadeInOverlay 0.3s ease-out;
+    }
+
+    .banner-overlay.visible {
+      display: block;
+    }
+
+    @keyframes slideInBanner {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @keyframes fadeInOverlay {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .section-title {
+      font-size: 45px;
+      font-weight: bold;
+      color: #ffaa00;
+      margin-bottom: 1px;
+      text-align: center;
+      z-index: 1000;
+      position: relative;
+    }
+
+    .section-subtitle {
+      font-weight: normal;
+      color: #fff;
+      margin-bottom: 40px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 25px;
+      z-index: 1000;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 20px;
+      }
+
+      .section-subtitle {
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .quiz-wrapper {
+        padding: 20px 12px 20px 12px;
+      }
+
+      .quiz-card {
+        padding: 24px;
+      }
+
+      .quiz-title {
+        font-size: 24px;
+      }
+
+      .quiz-step input,
+      .quiz-step select {
+        font-size: 16px;
+        padding: 14px;
+        width: 100%;
+      }
+
+      .quiz-format {
+        flex-direction: column;
+      }
+
+      .quiz-format button {
+        padding: 14px;
+        border-radius: 14px;
+      }
+
+      .quiz-nav {
+        gap: 6px;
+        padding: 6px;
+      }
+
+      .nav-btn {
+        padding: 10px 6px;
+        font-size: 12px;
+        border-radius: 12px;
+      }
+
+      .quiz-submit {
+        padding: 14px;
+        font-size: 16px;
+      }
+
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 28px;
+        cursor: pointer;
+        z-index: 2000;
+      }
+
+      .close-menu:hover {
+        color: #ffaa00;
+      }
+
+      .menu-toggle {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        font-size: 32px;
+        padding-bottom: 5px;
+        color: #fff;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+
+      .menu-toggle::before {
+        content: "";
+        font-size: 32px;
+        display: block;
+        line-height: 1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1100;
+      }
+
+      header {
+        justify-content: space-between;
+        padding: 2px;
+        align-items: center;
+        position: fixed;
+      }
+
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 60%;
+        max-width: 400px;
+        background-color: rgba(19, 17, 17, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 80px 30px;
+        box-sizing: border-box;
+        transform: translateX(100%);
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        z-index: 1001;
+      }
+
+      .mobile-nav.active {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .mobile-nav a {
+        display: block;
+        width: 100%;
+        font-size: 20px;
+        color: #ffaa00;
+        margin: 10px 0;
+        padding: 12px 0;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header data-animate>
+    <a href="index.html" style="display: inline-block; text-decoration: none;">
+      <img src="/templates/logo_white.PNG" alt="Логотип" />
+    </a>
+    <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
+    <!-- Десктопное меню -->
+    <nav class="desktop-nav">
+      <a href="index.html" style="color: #ffaa00; font-weight: bold;">← Вернуться на сайт</a>
+      <a href="index.html#main">Главная</a>
+      <a href="index.html#home">О нас</a>
+      <a href="quiz.html#quiz">Квиз</a>
+      <a href="index.html#services">Услуги</a>
+      <a href="index.html#gallery">Галерея</a>
+      <a href="index.html#reviews">Отзывы</a>
+      <a href="index.html#packages">Цена</a>
+      <a href="https://instagram.com/chotam_astana" class="social-icon" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+        </svg>
+      </a>
+      <a href="https://wa.me/7021656123?text=Здравствуйте! Хочу организовать мероприятие." class="social-icon"
+        target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp"
+          viewBox="0 0 16 16">
+          <path
+            d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+        </svg></a>
+    </nav>
+  </header>
+
+  <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
+  <!-- Мобильное меню -->
+  <nav class="mobile-nav">
+    <button class="close-menu">✖</button>
+    <a href="index.html" style="color: #ffaa00; font-weight: bold; font-size: 22px;">← Вернуться на сайт</a>
+    <a href="index.html#main">Главная</a>
+    <a href="index.html#home">О нас</a>
+    <a href="quiz.html#quiz">Квиз</a>
+    <a href="index.html#services">Услуги</a>
+    <a href="index.html#gallery">Галерея</a>
+    <a href="index.html#reviews">Отзывы</a>
+    <a href="index.html#packages">Цена</a>
+  </nav>
+
+  <div class="overlay"></div>
+
+  <section class="quiz-wrapper" id="quiz" data-animate>
+    <h2 class="section-title">Пройдите опрос - получите цену идеального праздника</h2>
+    <h6 class="section-subtitle">Это бесплатно и займёт меньше минуты</h6>
+    <div class="quiz-card">
+
+      <h2 class="quiz-title">
+        <span>Сколько стоит</span><span></span><br>ваш праздник мечты? 💥
+      </h2>
+
+      <!-- ШАГИ -->
+      <div class="quiz-steps">
+
+        <!-- 1. Тип мероприятия + Дата -->
+        <div class="quiz-step active" data-step="1">
+          <label>Тип мероприятия</label>
+          <select id="eventTypeSelect">
+            <option value="">Выберите тип</option>
+            <option value="День рождения">День рождения</option>
+            <option value="Корпоратив">Корпоратив</option>
+            <option value="Тимбилдинг">Тимбилдинг</option>
+            <option value="1 жас тусау кесу">1 жас тусау кесу</option>
+            <option value="Девичник">Девичник</option>
+            <option value="Коммерческое(открытие магазина, розыгрыш и.т.д)">Коммерческое(открытие магазина, розыгрыш
+              и.т.д)</option>
+            <option value="Вечеринка">Вечеринка</option>
+            <option value="Другое">Другое</option>
+          </select>
+
+          <label style="margin-top:16px">Дата мероприятия</label>
+          <div style="position: relative; width: 100%;">
+            <input type="date" id="eventDateInput">
+            <span id="eventDateDisplay"
+              style="position: absolute; left: 14px; top: 14px; color: #fff; pointer-events: none; font-size: 16px;"></span>
+          </div>
+          <div style="margin-top:16px">
+            <button type="button" class="quiz-next">Далее</button>
+          </div>
+        </div>
+
+        <!-- 2. Гости -->
+        <div class="quiz-step" data-step="2">
+          <label>Количество гостей</label>
+          <div class="guests-buttons">
+            <button type="button" data-guests="до 30" data-value="до 30">До 30 человек</button>
+            <button type="button" data-guests="30-60" data-value="30-60">30-60</button>
+            <button type="button" data-guests="60-100" data-value="60-100">60-100</button>
+            <button type="button" data-guests="100+" data-value="100+">100+</button>
+          </div>
+
+          <label style="margin-top:16px">Средний возраст</label>
+          <input type="number" placeholder="Например: 28">
+        </div>
+
+        <!-- 3. Формат -->
+        <div class="quiz-step" data-step="3">
+          <label>Формат мероприятия</label>
+          <div class="quiz-format">
+            <button type="button">Шоу программа с играми на 1-2 часа</button>
+            <button type="button">Проведение мероприятия Ведущим от 3 до 6 часов</button>
+          </div>
+
+          <!-- Tempo submenu (appears after selecting a main format) -->
+          <div class="format-submenu" aria-hidden="true" style="display:none; margin-top:12px">
+            <button type="button"
+              data-tempo="Активная программа, где завлекаются все гости, больше активностей, танцев, музыки (тотальное веселье)"><span
+                class="highlight">Активная программа</span>, где завлекаются все гости, больше активностей, танцев,
+              музыки (тотальное веселье)</button>
+            <button type="button"
+              data-tempo="Более спокойная программа, сильно не тревожит гостей, больше застольных интерактивов (спокойно, но не скучно)"><span
+                class="highlight">Более спокойная программа</span>, сильно не тревожит гостей, больше застольных
+              интерактивов (спокойно, но не скучно)</button>
+            <button type="button"
+              data-tempo="Комбинированная программа, где сочетаются переходы от душевных моментов к зажигательным блокам — идеально для разной компании"><span
+                class="highlight">Комбинированная программа</span>, где сочетаются переходы от душевных моментов к
+              зажигательным блокам - идеально для разной компании</button>
+          </div>
+        </div>
+
+        <!-- 4. Цель (мультивыбор) -->
+        <div class="quiz-step" data-step="4">
+          <label>Цель вашего мероприятия</label>
+          <label1>Выберите несколько вариантов:</label1>
+          <div class="goal-grid">
+            <button type="button"
+              data-goal="гости из разных компаний, хочу объеденить их чтобы не было неловкостей">гости из разных
+              компаний, хочу объеденить их чтобы не было неловкостей</button>
+            <button type="button" data-goal="провожу мероприятие впервые, не знаю как это должно выглядеть">провожу
+              мероприятие впервые, не знаю как это должно выглядеть </button>
+            <button type="button"
+              data-goal="не хочу тянуть весь праздник на себе и развлекать самостоятельно гостей, хочу сам(-а) отдохнуть">не
+              хочу тянуть весь праздник на себе и развлекать самостоятельно гостей, хочу сам(-а) отдохнуть</button>
+            <button type="button" data-goal="хочу чтобы гостям сильно понравился праздник">хочу чтобы гостям сильно
+              понравился праздник</button>
+            <button type="button" data-goal="я опытный(-ая) в организации праздников, всегда делаю лучшие тусовки">я
+              опытный(-ая) в организации праздников, всегда делаю лучшие тусовки</button>
+            <button type="button" data-goal="на празднике будут не смеющиеся гости и нужно их развеселить">на празднике
+              будут не смеющиеся гости и нужно их развеселить</button>
+            <button type="button" data-goal="позвал(-а) «серьезных» гостей и нужно показать уровень">позвал(-а)
+              «серьезных» гостей и нужно показать уровень</button>
+            <button type="button" data-goal="будут гости разных возрастов, хочу завлечь всех">будут гости разных
+              возрастов, хочу завлечь всех</button>
+            <button type="button"
+              data-goal="не хочу однотипный праздник - посидеть, покушать, выпить, А хочу нормально повеселиться">не
+              хочу однотипный праздник - посидеть, покушать, выпить, А хочу нормально повеселиться</button>
+            <button type="button"
+              data-goal="будут максимально близкие люди и можно добавить в программу нотку 21+ тематики">будут
+              максимально близкие люди и можно добавить в программу нотку 21+ тематики</button>
+            <button type="button" data-goal="Другое">Другое (опишите в свободной форме)</button>
+          </div>
+          <div class="goal-other">
+            <input type="text" placeholder="Опишите вашу цель если не нашли подходящее" />
+          </div>
+          <div style="margin-top:16px">
+            <button type="button" class="quiz-next">Далее</button>
+          </div>
+        </div>
+
+        <!-- 5. Контакты -->
+        <div class="quiz-step" data-step="5">
+          <label>Ваше имя</label>
+          <input type="text" placeholder="Например: Бекзат" />
+
+          <label style="margin-top:16px">Телефон</label>
+          <input type="tel" placeholder="+7 ___ ___ __ __">
+          <button class="quiz-submit">Отправить заявку</button>
+          <p class="quiz-privacy">Нажимая на кнопку вы даете согласие на обработку персональных данных<br>и соглашаетесь
+            с политикой конфиденциальности</p>
+        </div>
+
+      </div>
+
+      <div class="quiz-nav">
+        <button type="button" class="nav-btn active" data-target="1">Дата, Тип 📅</button>
+        <button type="button" class="nav-btn" data-target="2">Гости ❤️</button>
+        <button type="button" class="nav-btn" data-target="3">Формат 🤩</button>
+        <button type="button" class="nav-btn" data-target="4">Цель ✅</button>
+        <button type="button" class="nav-btn" data-target="5">Связь ☎️</button>
+      </div>
+
+      <!-- Notification Banner -->
+      <div class="banner-overlay" id="bannerOverlay"></div>
+      <div class="notification-banner" id="notificationBanner">
+        <span class="notification-banner-icon" id="bannerIcon">✅</span>
+        <div class="notification-banner-title" id="bannerTitle">Успешно!</div>
+        <div class="notification-banner-text" id="bannerText">Ваша заявка отправлена</div>
+        <button class="notification-banner-button" id="bannerButton">Закрыть</button>
+      </div>
+  </section>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileNav = document.querySelector(".mobile-nav");
+    const overlay = document.querySelector(".overlay");
+    const closeMenu = document.querySelector(".close-menu");
+
+    menuToggle.addEventListener("click", () => {
+      mobileNav.classList.add("active");
+      overlay.classList.add("active");
+    });
+
+    closeMenu.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    overlay.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    const navLinks = document.querySelectorAll(".mobile-nav a");
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+        overlay.classList.remove("active");
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-animate]").forEach((el) => {
+      observer.observe(el);
+    });
+
+    // ========================================
+    // QUIZ NAV - Переключение между шагами
+    // ========================================
+
+    const quizWrapper = document.querySelector('.quiz-wrapper');
+
+    if (quizWrapper) {
+      console.log('✓ Quiz wrapper found');
+
+      function showBanner(title, text, icon = '✅', type = 'success') {
+        const banner = quizWrapper.querySelector('#notificationBanner');
+        const overlay = quizWrapper.querySelector('#bannerOverlay');
+        const bannerTitle = banner.querySelector('#bannerTitle');
+        const bannerText = banner.querySelector('#bannerText');
+        const bannerIcon = banner.querySelector('#bannerIcon');
+        const bannerButton = banner.querySelector('#bannerButton');
+
+        bannerTitle.textContent = title;
+        bannerText.textContent = text;
+        bannerIcon.textContent = icon;
+
+        banner.className = 'notification-banner ' + type;
+
+        overlay.classList.add('visible');
+        banner.style.display = 'block';
+
+        bannerButton.onclick = () => {
+          overlay.classList.remove('visible');
+          banner.style.display = 'none';
+        };
+
+        overlay.onclick = () => {
+          overlay.classList.remove('visible');
+          banner.style.display = 'none';
+        };
+      }
+
+      const navBtns = quizWrapper.querySelectorAll('.nav-btn');
+      const quizSteps = quizWrapper.querySelectorAll('.quiz-step');
+
+      console.log('✓ Nav buttons found:', navBtns.length);
+      console.log('✓ Quiz steps found:', quizSteps.length);
+      console.log('✓ Nav buttons:', Array.from(navBtns).map(b => `[${b.dataset.target}] ${b.textContent}`));
+      console.log('✓ Steps:', Array.from(quizSteps).map(s => `[${s.dataset.step}]`));
+
+      function goToStep(stepNumber) {
+        console.log('Going to step:', stepNumber);
+
+        navBtns.forEach(btn => {
+          btn.classList.remove('active');
+          console.log('Removing active from button:', btn.dataset.target);
+        });
+
+        quizSteps.forEach(step => {
+          step.classList.remove('active');
+          console.log('Removing active from step:', step.dataset.step);
+        });
+
+        const activeBtn = quizWrapper.querySelector(`.nav-btn[data-target="${stepNumber}"]`);
+        const activeStep = quizWrapper.querySelector(`.quiz-step[data-step="${stepNumber}"]`);
+
+        console.log('Active button:', activeBtn?.textContent || 'NOT FOUND');
+        console.log('Active step:', activeStep?.dataset.step || 'NOT FOUND');
+
+        if (activeBtn) {
+          activeBtn.classList.add('active');
+          console.log('✓ Button activated:', activeBtn.textContent);
+        }
+        if (activeStep) {
+          activeStep.classList.add('active');
+          console.log('✓ Step activated:', activeStep.dataset.step);
+        }
+
+        setTimeout(() => {
+          quizWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      }
+
+      navBtns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const target = btn.dataset.target;
+          console.log('QUIZ NAV BUTTON CLICKED - target:', target, 'button text:', btn.textContent);
+          goToStep(target);
+        }, true);
+      });
+
+      // ========================================
+      // АВТОПЕРЕХОДЫ ПО ЗАПОЛНЕНИЮ QUIZ
+      // ========================================
+
+      const eventTypeSelect = quizWrapper.querySelector('[data-step="1"] #eventTypeSelect');
+      const eventDateInput = quizWrapper.querySelector('[data-step="1"] #eventDateInput');
+
+      let dateConfirmed = false;
+
+      // Убрали автоматический переход - теперь используется кнопка "Далее"
+      function checkStep1Complete() {
+        const isComplete = eventTypeSelect?.value && eventDateInput?.value && dateConfirmed;
+        console.log('Checking step 1 - Type:', eventTypeSelect?.value, 'Date:', eventDateInput?.value, 'dateConfirmed=', dateConfirmed, 'isComplete=', isComplete);
+        return isComplete;
+      }
+
+      if (eventTypeSelect) {
+        eventTypeSelect.addEventListener('change', () => {
+          console.log('✓ Event type selected:', eventTypeSelect.value);
+          updateSubmitButtonState();
+        });
+      }
+
+      if (eventDateInput) {
+        function formatDateDisplay(dateString) {
+          if (!dateString) return '';
+          const [year, month, day] = dateString.split('-');
+          return `${day}.${month}.${year}`;
+        }
+
+        eventDateInput.addEventListener('change', () => {
+          if (eventDateInput.value) {
+            const formatted = formatDateDisplay(eventDateInput.value);
+            console.log('✓ Date selected (YYYY-MM-DD):', eventDateInput.value, '(formatted: ' + formatted + ')');
+            eventDateInput.dataset.formattedDate = formatted;
+            // Display formatted date in the span next to input
+            const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
+            if (dateDisplay) {
+              dateDisplay.textContent = formatted;
+            }
+            dateConfirmed = true;
+            updateSubmitButtonState();
+          } else {
+            const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
+            if (dateDisplay) {
+              dateDisplay.textContent = '';
+            }
+            dateConfirmed = false;
+            updateSubmitButtonState();
+          }
+        });
+      }
+
+      // Кнопка "Далее" для первого шага
+      const quizNextStep1 = quizWrapper.querySelector('[data-step="1"] .quiz-next');
+      if (quizNextStep1) {
+        quizNextStep1.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (checkStep1Complete()) {
+            console.log('Proceeding from step 1 to step 2');
+            goToStep(2);
+          } else {
+            console.log('Step 1 not complete, cannot proceed');
+            // Можно показать сообщение пользователю
+            if (!eventTypeSelect?.value) {
+              alert('Пожалуйста, выберите тип мероприятия');
+            } else if (!eventDateInput?.value || !dateConfirmed) {
+              alert('Пожалуйста, выберите дату мероприятия');
+            }
+          }
+        }, true);
+      }
+
+      const guestButtons = quizWrapper.querySelectorAll('[data-step="2"] .guests-buttons button');
+      let selectedGuests = null;
+      const ageInput = quizWrapper.querySelector('[data-step="2"] input[type="number"]');
+
+      guestButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          guestButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedGuests = btn.dataset.value;
+          console.log('✓ Guests selected:', btn.dataset.guests, 'value:', selectedGuests);
+          updateSubmitButtonState();
+          if (ageInput?.value) {
+            checkGuestsStep();
+          }
+        }, true);
+      });
+
+      function checkGuestsStep() {
+        console.log('Guests step check - Selected:', selectedGuests, 'Age:', ageInput?.value);
+        if (selectedGuests && ageInput?.value) {
+          console.log('✓ Both guests and age filled, moving to step 3');
+          goToStep(3);
+        }
+      }
+
+      if (ageInput) {
+        ageInput.addEventListener('input', updateSubmitButtonState);
+        ageInput.addEventListener('blur', () => {
+          console.log('Age input blur, value:', ageInput.value);
+          updateSubmitButtonState();
+          if (selectedGuests && ageInput.value) {
+            checkGuestsStep();
+          }
+        });
+      }
+
+      const formatButtons = quizWrapper.querySelectorAll('[data-step="3"] .quiz-format button');
+      const formatSubmenu = quizWrapper.querySelector('[data-step="3"] .format-submenu');
+      const formatDetails = quizWrapper.querySelector('[data-step="3"] .format-details');
+      const quizTitleEl = quizWrapper.querySelector('.quiz-title');
+      const originalQuizTitleHTML = quizTitleEl?.innerHTML || '';
+
+      console.log('Format buttons found:', formatButtons.length);
+
+      let selectedFormatMain = null;
+      let selectedFormatTempo = null;
+      const originalFormatHtml = quizWrapper.querySelector('[data-step="3"] .quiz-format')?.innerHTML || '';
+
+      formatButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          formatButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedFormatMain = (btn.textContent || '').trim();
+          console.log('Main format selected:', selectedFormatMain);
+          updateSubmitButtonState();
+
+          if (formatSubmenu) {
+            formatSubmenu.style.display = 'flex';
+            formatSubmenu.setAttribute('aria-hidden', 'false');
+            if (quizTitleEl) quizTitleEl.textContent = 'Какой темп праздника предпочитаете?';
+            selectedFormatTempo = null;
+            formatSubmenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            if (formatDetails) {
+              formatDetails.style.display = 'none';
+              formatDetails.innerHTML = '';
+            }
+          }
+        }, true);
+      });
+
+      const tempoButtons = quizWrapper.querySelectorAll('[data-step="3"] .format-submenu button');
+      tempoButtons.forEach(tb => {
+        tb.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          tempoButtons.forEach(b => b.classList.remove('active'));
+          tb.classList.add('active');
+          selectedFormatTempo = tb.dataset.tempo || (tb.textContent || '').trim();
+          console.log('Tempo selected:', selectedFormatTempo);
+          updateSubmitButtonState();
+
+          setTimeout(() => goToStep(4), 220);
+        }, true);
+      });
+
+      const goalButtons = quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button');
+      console.log('Goal buttons found:', goalButtons.length);
+
+      const otherWrapper = quizWrapper.querySelector('[data-step="4"] .goal-other');
+      const otherInput = otherWrapper?.querySelector('input');
+      const otherBtn = quizWrapper.querySelector('[data-step="4"] .goal-grid button[data-goal="Другое"]');
+
+      goalButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          btn.classList.toggle('active');
+          console.log('Goal toggled:', btn.dataset.goal, 'active=', btn.classList.contains('active'));
+          updateSubmitButtonState();
+        }, true);
+      });
+
+      if (otherInput && otherBtn) {
+        otherInput.addEventListener('input', () => {
+          const has = otherInput.value.trim().length > 0;
+          if (has) otherBtn.classList.add('active');
+          else otherBtn.classList.remove('active');
+          updateSubmitButtonState();
+        });
+      }
+
+      const quizNext = quizWrapper.querySelector('[data-step="4"] .quiz-next');
+      if (quizNext) {
+        quizNext.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Proceeding from goals to contacts');
+          goToStep(5);
+        }, true);
+      }
+
+      const submitBtn = quizWrapper.querySelector('.quiz-submit');
+
+      const nameInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
+      const phoneInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+      if (nameInputStep5) {
+        nameInputStep5.addEventListener('input', updateSubmitButtonState);
+      }
+      if (phoneInputStep5) {
+        phoneInputStep5.addEventListener('input', updateSubmitButtonState);
+      }
+
+      function checkStep4Complete() {
+        const anyGoalButton = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
+        const otherInput = quizWrapper.querySelector('[data-step="4"] input[name="other-goal"], [data-step="4"] textarea[name="other-goal"], [data-step="4"] input[placeholder*="другое"], [data-step="4"] input[data-type="other"]');
+
+        const hasSelectedGoal = !!anyGoalButton;
+        const hasOtherText = otherInput && otherInput.value.trim().length >= 2; // можно поставить минимальную длину 1–3 символа
+
+        return hasSelectedGoal || hasOtherText;
+      }
+      function checkAllFieldsComplete() {
+        const step1Complete = checkStep1Complete();
+
+        const guestBtn = quizWrapper.querySelector('[data-step="2"] .guests-buttons button.active');
+        const step2Complete = guestBtn && ageInput?.value;
+
+        const formatMainBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
+        const formatTempoBtn = quizWrapper.querySelector('[data-step="3"] .format-submenu button.active');
+        const step3Complete = formatMainBtn && formatTempoBtn;
+
+        const anyGoal = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
+        const step4Complete = checkStep4Complete();
+
+        const nameInputField = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
+        const phoneInputField = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+        const step5Complete = nameInputField?.value?.trim() && phoneInputField?.value?.trim() && phoneInputField?.value !== '+7 ___ ___ __ __';
+
+        const allComplete = step1Complete && step2Complete && step3Complete && step4Complete && step5Complete;
+        console.log('Quiz completion check:', { step1Complete, step2Complete, step3Complete, step4Complete, step5Complete, allComplete });
+        return allComplete;
+      }
+      function updateSubmitButtonState() {
+        if (submitBtn) {
+          const isComplete = checkAllFieldsComplete();
+          submitBtn.disabled = !isComplete;
+          console.log('Submit button state:', isComplete ? 'enabled' : 'disabled');
+        }
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+      }
+
+      if (eventTypeSelect) {
+        eventTypeSelect.addEventListener('change', updateSubmitButtonState);
+      }
+      if (eventDateInput) {
+        eventDateInput.addEventListener('change', updateSubmitButtonState);
+      }
+
+      if (submitBtn) {
+        submitBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('📤 Quiz submit button clicked!');
+
+          const name = nameInputStep5?.value || 'Не указано';
+          const eventType = eventTypeSelect?.value || 'Не указано';
+          let eventDate = 'Не указано';
+          if (eventDateInput?.value) {
+            const rawDate = eventDateInput.value;
+            const [year, month, day] = rawDate.split('-');
+            eventDate = `${day}.${month}.${year}`;
+          }
+          const guests = selectedGuests || '0';
+          const age = ageInput?.value || 'Не указано';
+          const phoneInput = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+          let phone = phoneInput?.value || '';
+          // Очищаем телефон от маски и лишних символов
+          phone = phone.replace(/\s+/g, '').replace(/[_\-\+]/g, '').trim();
+          if (!phone || phone === '' || phone.length < 10) {
+            phone = 'Не указано';
+          }
+
+          const activeFormatBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
+          let formatMain = selectedFormatMain;
+          if (!formatMain && activeFormatBtn) {
+            formatMain = activeFormatBtn.textContent.trim();
+          }
+          formatMain = formatMain || 'Не выбрано';
+
+          let formatTempo = '';
+          const activeTempoBtn = quizWrapper.querySelector('[data-step="3"] .format-submenu button.active');
+          if (typeof selectedFormatTempo !== 'undefined' && selectedFormatTempo) {
+            formatTempo = selectedFormatTempo.split(',')[0].trim();
+          } else if (activeTempoBtn?.dataset?.tempo) {
+            formatTempo = activeTempoBtn.dataset.tempo.split(',')[0].trim();
+          } else if (activeTempoBtn?.textContent) {
+            formatTempo = activeTempoBtn.textContent.split(',')[0].trim();
+          }
+
+          const format = [formatMain, formatTempo].filter(f => f && f !== 'Не выбрано').join(' | ') || 'Не выбрано';
+          const otherVal = otherInput?.value?.trim();
+          const selectedGoals = Array.from(quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button.active')).map(b => {
+            const goal = (b.dataset.goal || b.textContent || '').trim();
+            if (goal.toLowerCase() === 'другое') {
+              return otherVal || 'Другое';
+            }
+            return goal;
+          }).filter(Boolean);
+
+          console.log('Collected data:', { eventType, eventDate, guests, age, phone, format, selectedGoals });
+
+          // Проверяем телефон после очистки
+          if (!phone || phone === 'Не указано' || phone.length < 10) {
+            showBanner('Ошибка ввода', 'Пожалуйста, введите корректный номер телефона', '⚠️', 'error');
+            return;
+          }
+
+          try {
+            const goalsStr = selectedGoals.length ? selectedGoals.join(', ') : 'Не указано';
+
+            // Отправляем данные на backend
+            const quizData = {
+              name: name,
+              phone: phone,
+              eventType: eventType,
+              eventDate: eventDate,
+              guests: guests,
+              age: age,
+              formatMain: formatMain,
+              formatTempo: formatTempo,
+              selectedGoals: selectedGoals
+            };
+
+            console.log('📤 Sending quiz data to backend:', quizData);
+
+            let response;
+            try {
+              response = await fetch('quiz.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(quizData)
+              });
+              console.log('📥 Response received:', response.status, response.statusText);
+            } catch (fetchError) {
+              console.error('❌ Fetch error:', fetchError);
+              showBanner('Ошибка подключения', 'Не удалось подключиться к серверу. Убедитесь, что файлы открыты через веб-сервер (не file://).', '📡', 'error');
+              return;
+            }
+
+            // Проверяем статус ответа
+            if (!response.ok) {
+              const errorText = await response.text();
+              console.error('HTTP Error:', response.status, response.statusText, errorText);
+              let errorMessage = 'Ошибка при отправке заявки';
+
+              // Специальная обработка для 405 ошибки (Method Not Allowed)
+              if (response.status === 405) {
+                errorMessage = 'Ошибка: Веб-сервер не поддерживает PHP. Пожалуйста, используйте встроенный PHP сервер. Запустите в терминале: php -S localhost:8000';
+                console.error('⚠️ Live Server не поддерживает PHP! Используйте: php -S localhost:8000');
+              } else {
+                try {
+                  const errorJson = JSON.parse(errorText);
+                  errorMessage = errorJson.error || errorMessage;
+                  if (errorJson.received_method) {
+                    console.error('Received method:', errorJson.received_method, 'Expected: POST');
+                  }
+                } catch (e) {
+                  errorMessage = `Ошибка сервера (${response.status}): ${response.statusText}`;
+                }
+              }
+              showBanner('Ошибка', errorMessage, '❌', 'error');
+              return;
+            }
+
+            // Парсим JSON ответ
+            let result;
+            try {
+              const responseText = await response.text();
+              result = JSON.parse(responseText);
+            } catch (parseError) {
+              console.error('JSON Parse Error:', parseError);
+              showBanner('Ошибка', 'Неверный формат ответа от сервера. Пожалуйста, попробуйте позже.', '❌', 'error');
+              return;
+            }
+
+            if (result.success) {
+              console.log('✓ Quiz submitted successfully:', result);
+              showBanner('Спасибо!', 'Ваша заявка отправлена. Менеджер скоро свяжется с вами!', '✅', 'success');
+              eventTypeSelect.value = '';
+              eventDateInput.value = '';
+              const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
+              if (dateDisplay) dateDisplay.textContent = '';
+              dateConfirmed = false;
+              delete eventDateInput.dataset.formattedDate;
+              document.querySelectorAll('[data-step="2"] .guests-buttons button').forEach(b => b.classList.remove('active'));
+              selectedGuests = null;
+              ageInput.value = '';
+              nameInputStep5.value = '';
+              phoneInput.value = '';
+              activeFormatBtn?.classList.remove('active');
+              try {
+                selectedFormatMain = null;
+                selectedFormatTempo = null;
+                const fs = quizWrapper.querySelector('[data-step="3"] .format-submenu'); if (fs) fs.style.display = 'none';
+                const fd = quizWrapper.querySelector('[data-step="3"] .format-details'); if (fd) fd.style.display = 'none';
+                if (quizTitleEl && typeof originalQuizTitleHTML !== 'undefined') quizTitleEl.innerHTML = originalQuizTitleHTML;
+              } catch (err) { console.warn('Reset format UI error', err); }
+              quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button.active').forEach(b => b.classList.remove('active'));
+              if (otherInput) otherInput.value = '';
+              goToStep(1);
+            } else {
+              console.error('Backend error:', result.error);
+              showBanner('Ошибка', result.error || 'Ошибка при отправке заявки. Пожалуйста, попробуйте позже.', '❌', 'error');
+            }
+          } catch (error) {
+            console.error('Network Error:', error);
+            showBanner('Ошибка подключения', 'Не удалось подключиться к серверу. Пожалуйста, проверьте интернет соединение и попробуйте позже.', '📡', 'error');
+          }
+        });
+      }
+
+      console.log('✓ Quiz fully initialized');
+    } else {
+      console.error('Quiz wrapper not found!');
+    }
+
+    //заметка 2 <!-- TikTok Pixel Code Start -->
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+        for (
+          var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+      }, ttq.load = function (e, n) {
+        var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+          ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+      };
+      ttq.load('D5V1LTBC77U581RV47UG');
+      ttq.page();
+    }(window, document, 'ttq');
+    //<!-- TikTok Pixel Code End -->
+  </script>
+</body>
+
+</html>
