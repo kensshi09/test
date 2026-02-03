@@ -32,22 +32,26 @@ if ($requestMethod === 'OPTIONS') {
 $input = file_get_contents('php://input');
 $hasRequestBody = ($input !== false && $input !== '' && strlen(trim($input)) > 0);
 
-// Если есть данные в теле запроса - обрабатываем как POST (независимо от REQUEST_METHOD)
-// Это помогает обойти проблемы с определением метода на некоторых серверах
-if (!$hasRequestBody) {
-    // Если нет данных в теле запроса и метод не POST - ошибка
-    if ($requestMethod !== 'POST') {
-        http_response_code(405);
-        echo json_encode([
-            'success' => false, 
-            'error' => 'Method not allowed. Use POST method with JSON body.',
-            'received_method' => $requestMethod
-        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        exit;
-    }
-    // Если метод POST, но нет данных - тоже ошибка
+
+// Разрешаем ТОЛЬКО POST
+if ($requestMethod !== 'POST') {
+    http_response_code(405);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Method not allowed. Use POST.'
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    exit;
+}
+
+// Получаем тело запроса
+$input = file_get_contents('php://input');
+
+if (!$input || trim($input) === '') {
     http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'Empty request body'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Empty request body'
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     exit;
 }
 
@@ -160,7 +164,7 @@ try {
     
     // 2. Создаем сделку (даже если контакт не создался)
     $dealTitle = "$name | $phone | $eventType | $eventDate | $guests гостей | $age лет | $formatMain | $formatTempo | $goalsStr";
-    $dealComments = "📋 ДАННЫЕ ИЗ QUIZ:\nИмя: $name\nТелефон: $phone\nТип мероприятия: $eventType\nДата: $eventDate\nГостей: $guests\nСредний возраст: $age\nФормат основной: $formatMain\nПрограмма: $formatTempo\nЦели: $goalsStr";
+    $dealComments = "ДАННЫЕ ИЗ QUIZ:\nИмя: $name\nТелефон: $phone\nТип мероприятия: $eventType\nДата: $eventDate\nГостей: $guests\nСредний возраст: $age\nФормат основной: $formatMain\nПрограмма: $formatTempo\nЦели: $goalsStr";
     
     // STAGE_ID для новой сделки (по умолчанию UC_NV0WXG)
     $stageId = isset($data['stageId']) ? htmlspecialchars($data['stageId'], ENT_QUOTES, 'UTF-8') : 'UC_NV0WXG';

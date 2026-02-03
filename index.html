@@ -109,7 +109,7 @@
       /* Center quiz on mobile and adjust spacing */
       .quiz-wrapper {
         min-height: 100vh;
-        padding: 5px 12px;
+        padding: 10px;
         align-items: center;
       }
 
@@ -2056,7 +2056,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 120px 16px 40px 16px;
+      padding: 15px 16px 15px 16px;
       background-image: url(templates/background6.png);
       background-size: cover;
       background-position: center;
@@ -2074,7 +2074,6 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.9);
-      /* Затемнение: цвет и прозрачность */
       pointer-events: none;
       z-index: 0;
     }
@@ -2084,7 +2083,6 @@
       width: 100%;
       background-color: rgba(255, 255, 255, 0.172);
       backdrop-filter: blur(10px);
-      /* ✅ полупрозрачный фон */
       -webkit-backdrop-filter: blur(8px);
       border-radius: 28px;
       padding: 40px;
@@ -2157,6 +2155,26 @@
       display: block;
       margin-bottom: 8px;
       font-size: 15px;
+      font-weight: 600;
+      width: 100%;
+    }
+
+    .quiz-step label1 {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #ffaa00;
+      font-weight: 600;
+    }
+
+    .quiz-step select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg ...></svg>");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 12px;
+      font-weight: 600;
     }
 
     #guestCount {
@@ -2267,8 +2285,8 @@
     .quiz-step input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 100%;
+      height: auto;
       border-radius: 50%;
       background: #f5b301;
       cursor: pointer;
@@ -2284,8 +2302,8 @@
 
     /* Thumb для ползунка (Firefox) */
     .quiz-step input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
+      width: 100%;
+      height: auto;
       border-radius: 50%;
       background: #f5b301;
       cursor: pointer;
@@ -2316,6 +2334,8 @@
       position: relative;
       z-index: 10;
       pointer-events: auto !important;
+      font-weight: 600;
+      font-size: 14px;
     }
 
     .quiz-format button:hover {
@@ -2350,12 +2370,14 @@
       cursor: pointer;
       transition: all 160ms ease;
       text-align: left;
+      font-size: 14px;
     }
 
     .format-submenu .highlight,
     .format-details .highlight {
       color: #f5b301;
       font-weight: 700;
+      font-size: 14px;
     }
 
     .format-submenu button:hover,
@@ -2392,6 +2414,7 @@
       text-align: left;
       font-weight: 600;
       text-transform: lowercase;
+      font-size: 14px;
     }
 
     .goal-grid button::first-letter {
@@ -2422,6 +2445,9 @@
       display: block;
       margin-top: 16px;
       margin-bottom: 16px;
+      font-size: 14px;
+      color: #ffaa00;
+      font-weight: 600;
     }
 
     .goal-other input {
@@ -2440,6 +2466,7 @@
     .goal-other input::placeholder {
       color: #888;
       font-weight: 500;
+      font-size: 13px;
     }
 
     .goal-other input:focus {
@@ -2486,7 +2513,6 @@
     .quiz-next {
       display: flex;
       justify-content: center;
-      /* Центрирование по горизонтали */
       align-items: center;
       padding: 12px 18px;
       border-radius: 16px;
@@ -2515,7 +2541,9 @@
     }
 
     /* Center the "Далее" button inside the goals step */
-    .quiz-step[data-step="4"] .quiz-next {
+    .quiz-step[data-step="1"] .quiz-next,
+    .quiz-step[data-step="4"] .quiz-next,
+    .quiz-step[data-step="2"] .quiz-next {
       display: block;
       margin: 16px auto 0 auto;
       width: auto;
@@ -3584,17 +3612,15 @@
       }
 
       .quiz-wrapper {
-        padding: 24px 12px;
+        padding: 20px 12px 20px 12px;
       }
 
       .quiz-card {
-        padding: 22px 18px;
-        border-radius: 22px;
+        padding: 24px;
       }
 
       .quiz-title {
-        font-size: 22px;
-        margin-bottom: 20px;
+        font-size: 24px;
       }
 
       .quiz-step input,
@@ -3839,9 +3865,11 @@
           </select>
 
           <label style="margin-top:16px">Дата мероприятия</label>
-          <div style="position: relative; width: 100%;">
-            <input type="date" id="eventDateInput">
-            <span id="eventDateDisplay" style="position: absolute; left: 14px; top: 14px; color: #fff; pointer-events: none; font-size: 16px;"></span>
+          <div style="width: 100%;">
+            <input type="date" id="eventDateInput" class="quiz-field">
+          </div>
+          <div style="margin-top:16px">
+            <button type="button" class="quiz-next" style="width: 100%;">Далее</button>
           </div>
         </div>
 
@@ -3849,14 +3877,17 @@
         <div class="quiz-step" data-step="2">
           <label>Количество гостей</label>
           <div class="guests-buttons">
-            <button type="button" data-guests="до 30" data-value="30">До 30 человек</button>
-            <button type="button" data-guests="30-60" data-value="45">30-60</button>
-            <button type="button" data-guests="60-100" data-value="80">60-100</button>
-            <button type="button" data-guests="100+" data-value="150">100+</button>
+            <button type="button" data-guests="до 30" data-value="до 30">До 30 человек</button>
+            <button type="button" data-guests="30-60" data-value="30-60">30-60</button>
+            <button type="button" data-guests="60-100" data-value="60-100">60-100</button>
+            <button type="button" data-guests="100+" data-value="100+">100+</button>
           </div>
 
           <label style="margin-top:16px">Средний возраст</label>
-          <input type="number" placeholder="Например: 28">
+          <input type="number" min="5" max="70" placeholder="Например: 25">
+          <div style="margin-top:16px">
+            <button type="button" class="quiz-next" style="width: 100%;">Далее</button>
+          </div>
         </div>
 
         <!-- 3. Формат -->
@@ -3869,6 +3900,7 @@
 
           <!-- Tempo submenu (appears after selecting a main format) -->
           <div class="format-submenu" aria-hidden="true" style="display:none; margin-top:12px">
+            <label style="display: block; margin-bottom: 16px;">Выберите темп мероприятия ⬇️</label>
             <button type="button"
               data-tempo="Активная программа, где завлекаются все гости, больше активностей, танцев, музыки (тотальное веселье)"><span
                 class="highlight">Активная программа</span>, где завлекаются все гости, больше активностей, танцев,
@@ -3886,7 +3918,8 @@
 
         <!-- 4. Цель (мультивыбор) -->
         <div class="quiz-step" data-step="4">
-          <label>Цель мероприятия</label>
+          <label>Цель вашего мероприятия</label>
+          <label1>Выберите несколько вариантов:</label1>
           <div class="goal-grid">
             <button type="button"
               data-goal="гости из разных компаний, хочу объеденить их чтобы не было неловкостей">гости из разных
@@ -3912,6 +3945,7 @@
             <button type="button"
               data-goal="будут максимально близкие люди и можно добавить в программу нотку 21+ тематики">будут
               максимально близкие люди и можно добавить в программу нотку 21+ тематики</button>
+            <button type="button" data-goal="Другое">Другое (опишите в свободной форме)</button>
           </div>
           <div class="goal-other">
             <input type="text" placeholder="Опишите вашу цель если не нашли подходящее" />
@@ -3925,11 +3959,11 @@
         <div class="quiz-step" data-step="5">
           <label>Ваше имя</label>
           <input type="text" placeholder="Например: Бекзат" />
-
           <label style="margin-top:16px">Телефон</label>
           <input type="tel" placeholder="+7 ___ ___ __ __">
           <button class="quiz-submit">Отправить заявку</button>
-          <p class="quiz-privacy">Нажимая на кнопку вы даете согласие на обработку персональных данных<br>и соглашаетесь с политикой конфиденциальности</p>
+          <p class="quiz-privacy">Нажимая на кнопку вы даете согласие на обработку персональных данных<br>и соглашаетесь
+            с политикой конфиденциальности</p>
         </div>
 
       </div>
@@ -3951,9 +3985,6 @@
         <button class="notification-banner-button" id="bannerButton">Закрыть</button>
       </div>
   </section>
-
-
-
 
   <section class="section" id="services" data-animate>
     <h2 class="section-title">МЫ ПРОВОДИМ МЕРОПРИЯТИЯ ЛЮБОГО ФОРМАТА</h2>
@@ -4629,13 +4660,11 @@
     // QUIZ NAV - Переключение между шагами
     // ========================================
 
-    // Берём элементы ТОЛЬКО из нужного quiz-wrapper
     const quizWrapper = document.querySelector('.quiz-wrapper');
 
     if (quizWrapper) {
       console.log('✓ Quiz wrapper found');
 
-      // Функция для показа баннера уведомления
       function showBanner(title, text, icon = '✅', type = 'success') {
         const banner = quizWrapper.querySelector('#notificationBanner');
         const overlay = quizWrapper.querySelector('#bannerOverlay');
@@ -4644,32 +4673,26 @@
         const bannerIcon = banner.querySelector('#bannerIcon');
         const bannerButton = banner.querySelector('#bannerButton');
 
-        // Устанавливаем содержимое
         bannerTitle.textContent = title;
         bannerText.textContent = text;
         bannerIcon.textContent = icon;
 
-        // Устанавливаем тип (success/error)
         banner.className = 'notification-banner ' + type;
 
-        // Показываем баннер и оверлей
         overlay.classList.add('visible');
         banner.style.display = 'block';
 
-        // Обработчик закрытия
         bannerButton.onclick = () => {
           overlay.classList.remove('visible');
           banner.style.display = 'none';
         };
 
-        // Закрытие по клику на оверлей
         overlay.onclick = () => {
           overlay.classList.remove('visible');
           banner.style.display = 'none';
         };
       }
 
-      // Селекторы специфичны для этого quiz-wrapper
       const navBtns = quizWrapper.querySelectorAll('.nav-btn');
       const quizSteps = quizWrapper.querySelectorAll('.quiz-step');
 
@@ -4678,11 +4701,9 @@
       console.log('✓ Nav buttons:', Array.from(navBtns).map(b => `[${b.dataset.target}] ${b.textContent}`));
       console.log('✓ Steps:', Array.from(quizSteps).map(s => `[${s.dataset.step}]`));
 
-      /* Функция переключения шага */
       function goToStep(stepNumber) {
         console.log('Going to step:', stepNumber);
 
-        // Убираем активный класс со всех кнопок и шагов
         navBtns.forEach(btn => {
           btn.classList.remove('active');
           console.log('Removing active from button:', btn.dataset.target);
@@ -4693,7 +4714,6 @@
           console.log('Removing active from step:', step.dataset.step);
         });
 
-        // Добавляем активный класс нужным элементам
         const activeBtn = quizWrapper.querySelector(`.nav-btn[data-target="${stepNumber}"]`);
         const activeStep = quizWrapper.querySelector(`.quiz-step[data-step="${stepNumber}"]`);
 
@@ -4709,13 +4729,11 @@
           console.log('✓ Step activated:', activeStep.dataset.step);
         }
 
-        // Скроллируем к верху квиза
         setTimeout(() => {
           quizWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
       }
 
-      /* Клик по кнопкам навигации */
       navBtns.forEach((btn) => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -4730,44 +4748,32 @@
       // АВТОПЕРЕХОДЫ ПО ЗАПОЛНЕНИЮ QUIZ
       // ========================================
 
-      /* 1. Тип мероприятия + Дата → Гости (переход когда оба поля заполнены) */
       const eventTypeSelect = quizWrapper.querySelector('[data-step="1"] #eventTypeSelect');
       const eventDateInput = quizWrapper.querySelector('[data-step="1"] #eventDateInput');
 
-      // Require explicit date confirmation (via 'change') before auto-advancing
       let dateConfirmed = false;
+
+      // Убрали автоматический переход - теперь используется кнопка "Далее"
       function checkStep1Complete() {
-        console.log('Checking step 1 - Type:', eventTypeSelect?.value, 'Date:', eventDateInput?.value, 'dateConfirmed=', dateConfirmed);
-        if (eventTypeSelect?.value && eventDateInput?.value && dateConfirmed) {
-          console.log('✓ Both type and confirmed date filled, moving to step 2');
-          setTimeout(() => goToStep(2), 300);
-        }
+        const isComplete = eventTypeSelect?.value && eventDateInput?.value && dateConfirmed;
+        console.log('Checking step 1 - Type:', eventTypeSelect?.value, 'Date:', eventDateInput?.value, 'dateConfirmed=', dateConfirmed, 'isComplete=', isComplete);
+        return isComplete;
       }
 
       if (eventTypeSelect) {
         eventTypeSelect.addEventListener('change', () => {
           console.log('✓ Event type selected:', eventTypeSelect.value);
-          checkStep1Complete();
+          updateSubmitButtonState();
         });
       }
 
       if (eventDateInput) {
-        // Helper function to format date as DD.MM.YYYY
         function formatDateDisplay(dateString) {
           if (!dateString) return '';
           const [year, month, day] = dateString.split('-');
           return `${day}.${month}.${year}`;
         }
 
-        // Helper function to convert DD.MM.YYYY to YYYY-MM-DD for internal storage
-        function formatDateForStorage(dateString) {
-          if (!dateString) return '';
-          if (dateString.includes('-')) return dateString; // Already in YYYY-MM-DD format
-          const [day, month, year] = dateString.split('.');
-          return `${year}-${month}-${day}`;
-        }
-
-        // Store formatted date in a data attribute and update display
         eventDateInput.addEventListener('change', () => {
           if (eventDateInput.value) {
             const formatted = formatDateDisplay(eventDateInput.value);
@@ -4778,62 +4784,110 @@
             if (dateDisplay) {
               dateDisplay.textContent = formatted;
             }
-            // mark that user has explicitly confirmed a date via the native picker
             dateConfirmed = true;
+            updateSubmitButtonState();
+          } else {
+            const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
+            if (dateDisplay) {
+              dateDisplay.textContent = '';
+            }
+            dateConfirmed = false;
+            updateSubmitButtonState();
           }
-          checkStep1Complete();
         });
-
-        // Do not auto-advance on blur — wait for explicit date selection (change event)
-        // Removing blur-based auto-advance prevents premature navigation when the
-        // native datepicker opens. Advancement happens on 'change' only.
       }
 
-      /* 2. Гости + возраст → Формат (переход ПОСЛЕ выбора гостей и возраста) */
+      // Кнопка "Далее" для первого шага
+      const quizNextStep1 = quizWrapper.querySelector('[data-step="1"] .quiz-next');
+      if (quizNextStep1) {
+        quizNextStep1.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (checkStep1Complete()) {
+            console.log('Proceeding from step 1 to step 2');
+            goToStep(2);
+          } else {
+            console.log('Step 1 not complete, cannot proceed');
+            // Можно показать сообщение пользователю
+            if (!eventTypeSelect?.value) {
+              alert('Пожалуйста, выберите тип мероприятия');
+            } else if (!eventDateInput?.value || !dateConfirmed) {
+              alert('Пожалуйста, выберите дату мероприятия');
+            }
+          }
+        }, true);
+      }
+
+      // Кнопка "Далее" для второго шага
+      const quizNextStep2 = quizWrapper.querySelector('[data-step="2"] .quiz-next');
+
+      quizNextStep2.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (!checkGuestsStep()) {
+          alert('Пожалуйста, выберите количество гостей и укажите возраст');
+          return;
+        }
+
+        goToStep(3);
+      });
+
       const guestButtons = quizWrapper.querySelectorAll('[data-step="2"] .guests-buttons button');
       let selectedGuests = null;
       const ageInput = quizWrapper.querySelector('[data-step="2"] input[type="number"]');
 
-      guestButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          // Убираем active с остальных
-          guestButtons.forEach(b => b.classList.remove('active'));
-          // Добавляем active текущей кнопке
-          btn.classList.add('active');
-          selectedGuests = btn.dataset.value;
-          console.log('✓ Guests selected:', btn.dataset.guests, 'value:', selectedGuests);
-          updateSubmitButtonState();
-          // Проверяем готовность перейти
-          if (ageInput?.value) {
-            checkGuestsStep();
-          }
-        }, true);
-      });
-
       function checkGuestsStep() {
-        console.log('Guests step check - Selected:', selectedGuests, 'Age:', ageInput?.value);
-        if (selectedGuests && ageInput?.value) {
-          console.log('✓ Both guests and age filled, moving to step 3');
-          goToStep(3);
-        }
+        return Boolean(selectedGuests && ageInput?.value);
       }
 
-      // Используем 'blur' для number input (когда пользователь уходит с поля)
       if (ageInput) {
         ageInput.addEventListener('input', updateSubmitButtonState);
         ageInput.addEventListener('blur', () => {
-          console.log('Age input blur, value:', ageInput.value);
           updateSubmitButtonState();
-          // Проверяем, заполнены ли оба поля
-          if (selectedGuests && ageInput.value) {
-            checkGuestsStep();
-          }
         });
       }
 
-      /* 3. Формат → многоступенчатый выбор (main -> tempo -> detail) */
+      guestButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          guestButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          selectedGuests = btn.dataset.value;
+          updateSubmitButtonState();
+        });
+      });
+      if (ageInput) {
+        ageInput.addEventListener('input', () => {
+          let value = ageInput.value;
+
+          // Убираем всё кроме цифр
+          value = value.replace(/\D/g, '');
+
+          // Ограничиваем длину (макс 2 цифры)
+          if (value.length > 2) {
+            value = value.slice(0, 2);
+          }
+
+          const num = Number(value);
+
+          if (num > 70) value = '70';
+          if (num < 5 && value.length === 2) value = '5';
+
+          ageInput.value = value;
+
+          updateSubmitButtonState();
+        });
+
+        ageInput.addEventListener('blur', () => {
+          const num = Number(ageInput.value);
+
+          if (!num || num < 5 || num > 70) {
+            ageInput.value = '';
+          }
+
+          updateSubmitButtonState();
+        });
+      }
+
       const formatButtons = quizWrapper.querySelectorAll('[data-step="3"] .quiz-format button');
       const formatSubmenu = quizWrapper.querySelector('[data-step="3"] .format-submenu');
       const formatDetails = quizWrapper.querySelector('[data-step="3"] .format-details');
@@ -4842,39 +4896,33 @@
 
       console.log('Format buttons found:', formatButtons.length);
 
-      // state
       let selectedFormatMain = null;
       let selectedFormatTempo = null;
       const originalFormatHtml = quizWrapper.querySelector('[data-step="3"] .quiz-format')?.innerHTML || '';
 
-      // Clicking a main format shows tempo submenu
       formatButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
-          // mark main selection
           formatButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           selectedFormatMain = (btn.textContent || '').trim();
           console.log('Main format selected:', selectedFormatMain);
           updateSubmitButtonState();
-
-          // show submenu
+          
           if (formatSubmenu) {
             formatSubmenu.style.display = 'flex';
             formatSubmenu.setAttribute('aria-hidden', 'false');
-            // change title to ask about tempo
-            if (quizTitleEl) quizTitleEl.textContent = 'Какой темп праздника предпочитаете?';
-            // reset submenu
             selectedFormatTempo = null;
             formatSubmenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            formatDetails.style.display = 'none';
-            formatDetails.innerHTML = '';
+            if (formatDetails) {
+              formatDetails.style.display = 'none';
+              formatDetails.innerHTML = '';
+            }
           }
         }, true);
       });
 
-      // Tempo buttons (second level)
       const tempoButtons = quizWrapper.querySelectorAll('[data-step="3"] .format-submenu button');
       tempoButtons.forEach(tb => {
         tb.addEventListener('click', (e) => {
@@ -4886,18 +4934,13 @@
           console.log('Tempo selected:', selectedFormatTempo);
           updateSubmitButtonState();
 
-          // After tempo selection, go directly to step 4 (no third level)
           setTimeout(() => goToStep(4), 220);
         }, true);
       });
 
-      // ========================================
-      // ЦЕЛИ - мультивыбор (step 4)
-      // ========================================
       const goalButtons = quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button');
       console.log('Goal buttons found:', goalButtons.length);
 
-      // Other input wrapper + field
       const otherWrapper = quizWrapper.querySelector('[data-step="4"] .goal-other');
       const otherInput = otherWrapper?.querySelector('input');
       const otherBtn = quizWrapper.querySelector('[data-step="4"] .goal-grid button[data-goal="Другое"]');
@@ -4912,7 +4955,6 @@
         }, true);
       });
 
-      // Если пользователь вводит текст в поле 'Другое', автоматически отметить кнопку
       if (otherInput && otherBtn) {
         otherInput.addEventListener('input', () => {
           const has = otherInput.value.trim().length > 0;
@@ -4932,12 +4974,8 @@
         }, true);
       }
 
-      // ========================================
-      // ОТПРАВКА ДАННЫХ В BITRIX24
-      // ========================================
       const submitBtn = quizWrapper.querySelector('.quiz-submit');
 
-      // Добавляем слушатели для Step 5 (имя и телефон)
       const nameInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
       const phoneInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
       if (nameInputStep5) {
@@ -4947,35 +4985,37 @@
         phoneInputStep5.addEventListener('input', updateSubmitButtonState);
       }
 
-      // Функция проверки всех полей квиза
+      function checkStep4Complete() {
+        const anyGoalButton = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
+        const otherInput = quizWrapper.querySelector('[data-step="4"] input[name="other-goal"], [data-step="4"] textarea[name="other-goal"], [data-step="4"] input[placeholder*="другое"], [data-step="4"] input[data-type="other"]');
+
+        const hasSelectedGoal = !!anyGoalButton;
+        const hasOtherText = otherInput && otherInput.value.trim().length >= 2; // можно поставить минимальную длину 1–3 символа
+
+        return hasSelectedGoal || hasOtherText;
+      }
       function checkAllFieldsComplete() {
-        // Step 1: Тип мероприятия + Дата
-        const step1Complete = eventTypeSelect?.value && eventDateInput?.value && dateConfirmed;
-        
-        // Step 2: Гости + Возраст
+        const step1Complete = checkStep1Complete();
+
         const guestBtn = quizWrapper.querySelector('[data-step="2"] .guests-buttons button.active');
         const step2Complete = guestBtn && ageInput?.value;
-        
-        // Step 3: Формат (основной + темп)
+
         const formatMainBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
         const formatTempoBtn = quizWrapper.querySelector('[data-step="3"] .format-submenu button.active');
-        const step3Complete = formatMainBtn && formatTempoBtn;
-        
-        // Step 4: Цель (минимум один выбран)
+        const step3Complete = !!formatMainBtn;
+        //было обязательно  const step3Complete = formatMainBtn && formatTempoBtn;
+
         const anyGoal = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
-        const step4Complete = anyGoal;
-        
-        // Step 5: Имя + Телефон
+        const step4Complete = checkStep4Complete();
+
         const nameInputField = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
         const phoneInputField = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
         const step5Complete = nameInputField?.value?.trim() && phoneInputField?.value?.trim() && phoneInputField?.value !== '+7 ___ ___ __ __';
-        
+
         const allComplete = step1Complete && step2Complete && step3Complete && step4Complete && step5Complete;
         console.log('Quiz completion check:', { step1Complete, step2Complete, step3Complete, step4Complete, step5Complete, allComplete });
         return allComplete;
       }
-
-      // Функция обновления состояния кнопки
       function updateSubmitButtonState() {
         if (submitBtn) {
           const isComplete = checkAllFieldsComplete();
@@ -4984,13 +5024,10 @@
         }
       }
 
-      // Изначально кнопка отключена
       if (submitBtn) {
         submitBtn.disabled = true;
       }
 
-      // Добавляем слушатели на все поля для проверки состояния
-      // Step 1 listeners
       if (eventTypeSelect) {
         eventTypeSelect.addEventListener('change', updateSubmitButtonState);
       }
@@ -4998,22 +5035,14 @@
         eventDateInput.addEventListener('change', updateSubmitButtonState);
       }
 
-      // Step 2 listeners - используем уже определенные переменные guestButtons и ageInput
-      // slushately добавляем слушатели для проверки состояния
-      // Step 3 listeners - используем уже определенные переменные formatButtons и tempoButtons
-      // Step 4 listeners - используем уже определенные переменные goalButtons и otherInput
-      // Step 5 listeners добавим отдельно после определения инпутов
-
       if (submitBtn) {
         submitBtn.addEventListener('click', async (e) => {
           e.preventDefault();
           e.stopPropagation();
-          console.log('Quiz submit button clicked!');
+          console.log('📤 Quiz submit button clicked!');
 
-          // Собираем данные из формы
           const name = nameInputStep5?.value || 'Не указано';
           const eventType = eventTypeSelect?.value || 'Не указано';
-          // Get formatted date (DD.MM.YYYY) from data attribute, fallback to raw value
           let eventDate = 'Не указано';
           if (eventDateInput?.value) {
             const rawDate = eventDateInput.value;
@@ -5030,7 +5059,6 @@
             phone = 'Не указано';
           }
 
-          // Get main format (from state or from active button)
           const activeFormatBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
           let formatMain = selectedFormatMain;
           if (!formatMain && activeFormatBtn) {
@@ -5038,7 +5066,6 @@
           }
           formatMain = formatMain || 'Не выбрано';
 
-          // Extract only tempo name (before comma) from full description
           let formatTempo = '';
           const activeTempoBtn = quizWrapper.querySelector('[data-step="3"] .format-submenu button.active');
           if (typeof selectedFormatTempo !== 'undefined' && selectedFormatTempo) {
@@ -5069,7 +5096,7 @@
 
           try {
             const goalsStr = selectedGoals.length ? selectedGoals.join(', ') : 'Не указано';
-            
+
             // Отправляем данные на backend
             const quizData = {
               name: name,
@@ -5104,7 +5131,7 @@
               const errorText = await response.text();
               console.error('HTTP Error:', response.status, response.statusText, errorText);
               let errorMessage = 'Ошибка при отправке заявки';
-              
+
               // Специальная обработка для 405 ошибки (Method Not Allowed)
               if (response.status === 405) {
                 errorMessage = 'Ошибка: Веб-сервер не поддерживает PHP. Пожалуйста, используйте встроенный PHP сервер. Запустите в терминале: php -S localhost:8000';
@@ -5138,21 +5165,18 @@
             if (result.success) {
               console.log('✓ Quiz submitted successfully:', result);
               showBanner('Спасибо!', 'Ваша заявка отправлена. Менеджер скоро свяжется с вами!', '✅', 'success');
-              // Очищаем форму
               eventTypeSelect.value = '';
               eventDateInput.value = '';
               const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
               if (dateDisplay) dateDisplay.textContent = '';
               dateConfirmed = false;
               delete eventDateInput.dataset.formattedDate;
-              // reset guests buttons
               document.querySelectorAll('[data-step="2"] .guests-buttons button').forEach(b => b.classList.remove('active'));
               selectedGuests = null;
               ageInput.value = '';
               nameInputStep5.value = '';
               phoneInput.value = '';
               activeFormatBtn?.classList.remove('active');
-              // reset multi-stage format selections and UI
               try {
                 selectedFormatMain = null;
                 selectedFormatTempo = null;
@@ -5160,10 +5184,8 @@
                 const fd = quizWrapper.querySelector('[data-step="3"] .format-details'); if (fd) fd.style.display = 'none';
                 if (quizTitleEl && typeof originalQuizTitleHTML !== 'undefined') quizTitleEl.innerHTML = originalQuizTitleHTML;
               } catch (err) { console.warn('Reset format UI error', err); }
-              // Очистим цели
               quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button.active').forEach(b => b.classList.remove('active'));
               if (otherInput) otherInput.value = '';
-              // Возвращаемся на первый шаг
               goToStep(1);
             } else {
               console.error('Backend error:', result.error);
