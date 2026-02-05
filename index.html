@@ -2194,6 +2194,7 @@
       color: #fff;
       font-size: 16px;
       transition: border-color 0.3s ease;
+      border-color: #ffaa00;
     }
 
     .quiz-step input:focus,
@@ -2208,28 +2209,53 @@
       border-color: #ffaa00;
     }
 
-    /* Стили для ползунка */
-    /* Date input styling */
     .quiz-step input[type="date"] {
       cursor: pointer;
       padding: 14px;
       font-size: 16px;
       color: #fff;
+      position: relative;
+      color: #fff;
     }
 
-    /* Скрываем дефолтный текст дате инпута и показываем отформатированный */
     .quiz-step input[type="date"]::-webkit-calendar-picker-indicator {
       cursor: pointer;
+      filter: invert(1);
+      opacity: 0;
+      /* Делаем невидимым, но кликабельным */
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
       width: 100%;
-      padding: 0;
+      height: 100%;
     }
 
-    .quiz-step input[type="date"]::after {
-      content: attr(data-display);
-      position: absolute;
-      left: 14px;
+    /* Для Firefox */
+    .quiz-step input[type="date"]::-moz-calendar-picker-indicator {
+      cursor: pointer;
+      filter: invert(1);
+      opacity: 0.8;
+    }
+
+    /* Цвет текста даты для разных браузеров */
+    .quiz-step input[type="date"]::-webkit-datetime-edit {
       color: #fff;
-      pointer-events: none;
+    }
+
+    .quiz-step input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+      color: #fff;
+    }
+
+    .quiz-step input[type="date"]::-webkit-datetime-edit-text {
+      color: #fff;
+    }
+
+    .quiz-step input[type="date"]::-webkit-datetime-edit-month-field,
+    .quiz-step input[type="date"]::-webkit-datetime-edit-day-field,
+    .quiz-step input[type="date"]::-webkit-datetime-edit-year-field {
+      color: #fff;
     }
 
     /* Range slider styling */
@@ -2378,6 +2404,11 @@
       color: #f5b301;
       font-weight: 700;
       font-size: 14px;
+    }
+
+    .format-submenu button.active .highlight {
+      color: #ffffff;
+      /* Или white */
     }
 
     .format-submenu button:hover,
@@ -3866,7 +3897,7 @@
 
           <label style="margin-top:16px">Дата мероприятия</label>
           <div style="width: 100%;">
-            <input type="date" id="eventDateInput" class="quiz-field">
+            <input type="date" id="eventDateInput" class="quiz-field" required>
           </div>
           <div style="margin-top:16px">
             <button type="button" class="quiz-next" style="width: 100%;">Далее</button>
@@ -4909,7 +4940,7 @@
           selectedFormatMain = (btn.textContent || '').trim();
           console.log('Main format selected:', selectedFormatMain);
           updateSubmitButtonState();
-          
+
           if (formatSubmenu) {
             formatSubmenu.style.display = 'flex';
             formatSubmenu.setAttribute('aria-hidden', 'false');
