@@ -266,7 +266,7 @@
     }
 
     .quiz-step {
-      display: none !important;
+      display: none;
       position: absolute;
       top: 0;
       left: 0;
@@ -277,7 +277,7 @@
     }
 
     .quiz-step.active {
-      display: block !important;
+      display: block;
       position: relative;
       opacity: 1;
       pointer-events: auto;
@@ -1475,32 +1475,13 @@
 
       // ✅ ИСПРАВЛЕНИЕ ДЛЯ iOS - убираем stopPropagation и добавляем touch события
       navBtns.forEach((btn) => {
-        let touchHandled = false;
-
-        btn.addEventListener('touchend', (e) => {
-          e.preventDefault();
-          touchHandled = true;
-          const target = btn.dataset.target;
-          console.log('QUIZ NAV BUTTON TOUCHED - target:', target);
-          goToStep(target);
-
-          // Сбрасываем флаг через небольшую задержку
-          setTimeout(() => { touchHandled = false; }, 300);
-        }, { passive: false });
-
         btn.addEventListener('click', (e) => {
-          // Предотвращаем двойное срабатывание на мобильных
-          if (touchHandled) {
-            e.preventDefault();
-            return;
-          }
-
           e.preventDefault();
           const target = btn.dataset.target;
-          console.log('QUIZ NAV BUTTON CLICKED - target:', target);
           goToStep(target);
         });
       });
+
 
       // ========================================
       // АВТОПЕРЕХОДЫ ПО ЗАПОЛНЕНИЮ QUIZ
@@ -1572,7 +1553,7 @@
           }
         };
 
-        addTouchClickHandler(quizNextStep1, handleNext1);
+        quizNextStep1.addEventListener('click', handleNext1);
       }
 
       // Кнопка "Далее" для второго шага
@@ -1587,7 +1568,7 @@
           goToStep(3);
         };
 
-        addTouchClickHandler(quizNextStep2, handleNext2);
+        quizNextStep2.addEventListener('click', handleNext2);
       }
 
       const guestButtons = quizWrapper.querySelectorAll('[data-step="2"] .guests-buttons button');
