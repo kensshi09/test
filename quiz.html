@@ -4,7 +4,7 @@
 <head>
   <link rel="icon" type="image/png" href="/favicon.png">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description"
     content="CHOTAM SHOW – лучшая организация мероприятий в Астане. Свадьбы, корпоративы, дни рождения, детские праздники, тимбилдинги, вечеринки и шоу-программы под ключ. Более 4000 довольных клиентов.">
   <meta name="keywords"
@@ -167,6 +167,45 @@
     [data-animate].visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .nav-btn,
+    .quiz-next,
+    .guests-buttons button,
+    .quiz-format button,
+    .format-submenu button,
+    .goal-grid button,
+    .quiz-submit,
+    .notification-banner-button {
+      -webkit-tap-highlight-color: rgba(245, 179, 1, 0.3);
+      -webkit-touch-callout: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Убираем все конфликты с pointer-events */
+    .quiz-nav,
+    .nav-btn {
+      pointer-events: auto !important;
+    }
+
+    /* Увеличиваем область клика для iOS */
+    .nav-btn {
+      position: relative;
+      min-height: 44px;
+      /* Минимальный размер для iOS */
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      z-index: -1;
     }
 
     .quiz-wrapper {
@@ -1328,6 +1367,42 @@
 
     if (quizWrapper) {
       console.log('✓ Quiz wrapper found');
+      // ========================================
+      // ✅ ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ДЛЯ iOS - ВСТАВЬ СЮДА!
+      // ========================================
+
+      function addTouchClickHandler(element, handler) {
+        let touchStartY = 0;
+        let touchStartX = 0;
+        let touchMoved = false;
+
+        element.addEventListener('touchstart', (e) => {
+          touchStartY = e.touches[0].clientY;
+          touchStartX = e.touches[0].clientX;
+          touchMoved = false;
+        }, { passive: true });
+
+        element.addEventListener('touchmove', (e) => {
+          const touchY = e.touches[0].clientY;
+          const touchX = e.touches[0].clientX;
+          const deltaY = Math.abs(touchY - touchStartY);
+          const deltaX = Math.abs(touchX - touchStartX);
+
+          if (deltaY > 10 || deltaX > 10) {
+            touchMoved = true;
+          }
+        }, { passive: true });
+
+        element.addEventListener('touchend', (e) => {
+          // Срабатываем только если НЕ было скролла
+          if (!touchMoved) {
+            handler(e);
+          }
+        });
+
+        // Обычный клик для десктопа
+        element.addEventListener('click', handler);
+      }
 
       function showBanner(title, text, icon = '✅', type = 'success') {
         const banner = quizWrapper.querySelector('#notificationBanner');
@@ -1398,14 +1473,33 @@
         }, 50);
       }
 
+      // ✅ ИСПРАВЛЕНИЕ ДЛЯ iOS - убираем stopPropagation и добавляем touch события
       navBtns.forEach((btn) => {
-        btn.addEventListener('click', (e) => {
+        let touchHandled = false;
+
+        btn.addEventListener('touchend', (e) => {
           e.preventDefault();
-          e.stopPropagation();
+          touchHandled = true;
           const target = btn.dataset.target;
-          console.log('QUIZ NAV BUTTON CLICKED - target:', target, 'button text:', btn.textContent);
+          console.log('QUIZ NAV BUTTON TOUCHED - target:', target);
           goToStep(target);
-        }, true);
+
+          // Сбрасываем флаг через небольшую задержку
+          setTimeout(() => { touchHandled = false; }, 300);
+        }, { passive: false });
+
+        btn.addEventListener('click', (e) => {
+          // Предотвращаем двойное срабатывание на мобильных
+          if (touchHandled) {
+            e.preventDefault();
+            return;
+          }
+
+          e.preventDefault();
+          const target = btn.dataset.target;
+          console.log('QUIZ NAV BUTTON CLICKED - target:', target);
+          goToStep(target);
+        });
       });
 
       // ========================================
@@ -1464,37 +1558,37 @@
       // Кнопка "Далее" для первого шага
       const quizNextStep1 = quizWrapper.querySelector('[data-step="1"] .quiz-next');
       if (quizNextStep1) {
-        quizNextStep1.addEventListener('click', (e) => {
+        const handleNext1 = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           if (checkStep1Complete()) {
             console.log('Proceeding from step 1 to step 2');
             goToStep(2);
           } else {
-            console.log('Step 1 not complete, cannot proceed');
-            // Можно показать сообщение пользователю
             if (!eventTypeSelect?.value) {
               alert('Пожалуйста, выберите тип мероприятия');
             } else if (!eventDateInput?.value || !dateConfirmed) {
               alert('Пожалуйста, выберите дату мероприятия');
             }
           }
-        }, true);
+        };
+
+        addTouchClickHandler(quizNextStep1, handleNext1);
       }
 
       // Кнопка "Далее" для второго шага
       const quizNextStep2 = quizWrapper.querySelector('[data-step="2"] .quiz-next');
+      if (quizNextStep2) {
+        const handleNext2 = (e) => {
+          e.preventDefault();
+          if (!checkGuestsStep()) {
+            alert('Пожалуйста, выберите количество гостей и укажите возраст');
+            return;
+          }
+          goToStep(3);
+        };
 
-      quizNextStep2.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        if (!checkGuestsStep()) {
-          alert('Пожалуйста, выберите количество гостей и укажите возраст');
-          return;
-        }
-
-        goToStep(3);
-      });
+        addTouchClickHandler(quizNextStep2, handleNext2);
+      }
 
       const guestButtons = quizWrapper.querySelectorAll('[data-step="2"] .guests-buttons button');
       let selectedGuests = null;
@@ -1512,13 +1606,17 @@
       }
 
       guestButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
+        const handleGuestClick = (e) => {
+          e.preventDefault();
           guestButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           selectedGuests = btn.dataset.value;
           updateSubmitButtonState();
-        });
+        };
+
+        addTouchClickHandler(btn, handleGuestClick);
       });
+
       if (ageInput) {
         ageInput.addEventListener('input', () => {
           let value = ageInput.value;
@@ -1565,41 +1663,38 @@
       const originalFormatHtml = quizWrapper.querySelector('[data-step="3"] .quiz-format')?.innerHTML || '';
 
       formatButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        const handleFormatClick = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           formatButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           selectedFormatMain = (btn.textContent || '').trim();
           console.log('Main format selected:', selectedFormatMain);
           updateSubmitButtonState();
 
+          const formatSubmenu = quizWrapper.querySelector('[data-step="3"] .format-submenu');
           if (formatSubmenu) {
             formatSubmenu.style.display = 'flex';
-            formatSubmenu.setAttribute('aria-hidden', 'false');
             selectedFormatTempo = null;
             formatSubmenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-            if (formatDetails) {
-              formatDetails.style.display = 'none';
-              formatDetails.innerHTML = '';
-            }
           }
-        }, true);
+        };
+
+        addTouchClickHandler(btn, handleFormatClick);
       });
 
       const tempoButtons = quizWrapper.querySelectorAll('[data-step="3"] .format-submenu button');
       tempoButtons.forEach(tb => {
-        tb.addEventListener('click', (e) => {
+        const handleTempoClick = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           tempoButtons.forEach(b => b.classList.remove('active'));
           tb.classList.add('active');
           selectedFormatTempo = tb.dataset.tempo || (tb.textContent || '').trim();
           console.log('Tempo selected:', selectedFormatTempo);
           updateSubmitButtonState();
-
           setTimeout(() => goToStep(4), 220);
-        }, true);
+        };
+
+        addTouchClickHandler(tb, handleTempoClick);
       });
 
       const goalButtons = quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button');
@@ -1610,13 +1705,14 @@
       const otherBtn = quizWrapper.querySelector('[data-step="4"] .goal-grid button[data-goal="Другое"]');
 
       goalButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        const handleGoalClick = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           btn.classList.toggle('active');
           console.log('Goal toggled:', btn.dataset.goal, 'active=', btn.classList.contains('active'));
           updateSubmitButtonState();
-        }, true);
+        };
+
+        addTouchClickHandler(btn, handleGoalClick);
       });
 
       if (otherInput && otherBtn) {
@@ -1630,12 +1726,13 @@
 
       const quizNext = quizWrapper.querySelector('[data-step="4"] .quiz-next');
       if (quizNext) {
-        quizNext.addEventListener('click', (e) => {
+        const handleNext4 = (e) => {
           e.preventDefault();
-          e.stopPropagation();
           console.log('Proceeding from goals to contacts');
           goToStep(5);
-        }, true);
+        };
+
+        addTouchClickHandler(quizNext, handleNext4);
       }
 
       const submitBtn = quizWrapper.querySelector('.quiz-submit');
