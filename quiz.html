@@ -180,14 +180,20 @@
       -webkit-tap-highlight-color: rgba(245, 179, 1, 0.3);
       -webkit-touch-callout: none;
       cursor: pointer;
-      touch-action: manipulation;
-      user-select: none;
-      -webkit-user-select: none;
+      touch-action: auto !important;
+      /* Принудительный z-index */
+      position: relative !important;
+      z-index: 100 !important;
+
+      /* Убираем transform который может мешать */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
     }
 
-    /* Убираем все конфликты с pointer-events */
+    /* Убираем pointer-events: none с родителей */
+    .quiz-step,
     .quiz-nav,
-    .nav-btn {
+    .quiz-card {
       pointer-events: auto !important;
     }
 
@@ -1318,99 +1324,93 @@
   </section>
 
   <script>
-    const menuToggle = document.querySelector(".menu-toggle");
-    const mobileNav = document.querySelector(".mobile-nav");
-    const overlay = document.querySelector(".overlay");
-    const closeMenu = document.querySelector(".close-menu");
+    document.addEventListener('DOMContentLoaded', () => {
 
-    menuToggle.addEventListener("click", () => {
-      mobileNav.classList.add("active");
-      overlay.classList.add("active");
-    });
+      /* =========================
+         MOBILE MENU
+      ========================= */
+      const menuToggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.querySelector(".mobile-nav");
+      const overlay = document.querySelector(".overlay");
+      const closeMenu = document.querySelector(".close-menu");
 
-    closeMenu.addEventListener("click", () => {
-      mobileNav.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    overlay.addEventListener("click", () => {
-      mobileNav.classList.remove("active");
-      overlay.classList.remove("active");
-    });
-
-    const navLinks = document.querySelectorAll(".mobile-nav a");
-
-    navLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        mobileNav.classList.remove("active");
-        overlay.classList.remove("active");
-      });
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    });
-
-    document.querySelectorAll("[data-animate]").forEach((el) => {
-      observer.observe(el);
-    });
-
-    // ========================================
-    // QUIZ NAV - Переключение между шагами
-    // ========================================
-
-    const quizWrapper = document.querySelector('.quiz-wrapper');
-
-    if (quizWrapper) {
-      console.log('✓ Quiz wrapper found');
-      // ========================================
-      // ✅ ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ДЛЯ iOS - ВСТАВЬ СЮДА!
-      // ========================================
-
-      function addTouchClickHandler(element, handler) {
-        let touchStartY = 0;
-        let touchStartX = 0;
-        let touchMoved = false;
-
-        element.addEventListener('touchstart', (e) => {
-          touchStartY = e.touches[0].clientY;
-          touchStartX = e.touches[0].clientX;
-          touchMoved = false;
-        }, { passive: true });
-
-        element.addEventListener('touchmove', (e) => {
-          const touchY = e.touches[0].clientY;
-          const touchX = e.touches[0].clientX;
-          const deltaY = Math.abs(touchY - touchStartY);
-          const deltaX = Math.abs(touchX - touchStartX);
-
-          if (deltaY > 10 || deltaX > 10) {
-            touchMoved = true;
-          }
-        }, { passive: true });
-
-        element.addEventListener('touchend', (e) => {
-          // Срабатываем только если НЕ было скролла
-          if (!touchMoved) {
-            handler(e);
-          }
+      if (menuToggle && mobileNav && overlay && closeMenu) {
+        menuToggle.addEventListener("click", () => {
+          mobileNav.classList.add("active");
+          overlay.classList.add("active");
         });
 
-        // Обычный клик для десктопа
-        element.addEventListener('click', handler);
+        closeMenu.addEventListener("click", () => {
+          mobileNav.classList.remove("active");
+          overlay.classList.remove("active");
+        });
+
+        overlay.addEventListener("click", () => {
+          mobileNav.classList.remove("active");
+          overlay.classList.remove("active");
+        });
+
+        document.querySelectorAll(".mobile-nav a").forEach(link => {
+          link.addEventListener("click", () => {
+            mobileNav.classList.remove("active");
+            overlay.classList.remove("active");
+          });
+        });
       }
 
+      /* =========================
+         ANIMATION OBSERVER
+      ========================= */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      });
+
+      document.querySelectorAll("[data-animate]").forEach(el => observer.observe(el));
+
+      /* =========================
+         QUIZ
+      ========================= */
+      const quizWrapper = document.querySelector('.quiz-wrapper');
+      if (!quizWrapper) return;
+
+      console.log('✓ Quiz wrapper found');
+
+      // ========================================
+      // ОБЪЯВЛЕНИЕ ВСЕХ ПЕРЕМЕННЫХ
+      // ========================================
+      const navBtns = quizWrapper.querySelectorAll('.nav-btn');
+      const quizSteps = quizWrapper.querySelectorAll('.quiz-step');
+      const submitBtn = quizWrapper.querySelector('.quiz-submit');
+
+      const eventTypeSelect = quizWrapper.querySelector('#eventTypeSelect');
+      const eventDateInput = quizWrapper.querySelector('#eventDateInput');
+      const ageInput = quizWrapper.querySelector('[data-step="2"] input[type="number"]');
+      const nameInput = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
+      const phoneInput = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+      const otherInput = quizWrapper.querySelector('[data-step="4"] .goal-other input');
+
+      let dateConfirmed = false;
+      let selectedGuests = null;
+      let selectedFormatMain = null;
+      let selectedFormatTempo = null;
+
+      // ========================================
+      // ФУНКЦИЯ ПОКАЗА БАННЕРА
+      // ========================================
       function showBanner(title, text, icon = '✅', type = 'success') {
         const banner = quizWrapper.querySelector('#notificationBanner');
-        const overlay = quizWrapper.querySelector('#bannerOverlay');
-        const bannerTitle = banner.querySelector('#bannerTitle');
-        const bannerText = banner.querySelector('#bannerText');
-        const bannerIcon = banner.querySelector('#bannerIcon');
-        const bannerButton = banner.querySelector('#bannerButton');
+        const bannerOverlay = quizWrapper.querySelector('#bannerOverlay');
+        const bannerTitle = banner?.querySelector('#bannerTitle');
+        const bannerText = banner?.querySelector('#bannerText');
+        const bannerIcon = banner?.querySelector('#bannerIcon');
+        const bannerButton = banner?.querySelector('#bannerButton');
+
+        if (!banner || !bannerOverlay) {
+          console.error('Banner elements not found');
+          return;
+        }
 
         bannerTitle.textContent = title;
         bannerText.textContent = text;
@@ -1418,129 +1418,123 @@
 
         banner.className = 'notification-banner ' + type;
 
-        overlay.classList.add('visible');
+        bannerOverlay.classList.add('visible');
         banner.style.display = 'block';
 
         bannerButton.onclick = () => {
-          overlay.classList.remove('visible');
+          bannerOverlay.classList.remove('visible');
           banner.style.display = 'none';
         };
 
-        overlay.onclick = () => {
-          overlay.classList.remove('visible');
+        bannerOverlay.onclick = () => {
+          bannerOverlay.classList.remove('visible');
           banner.style.display = 'none';
         };
       }
 
-      const navBtns = quizWrapper.querySelectorAll('.nav-btn');
-      const quizSteps = quizWrapper.querySelectorAll('.quiz-step');
+      // ========================================
+      // ФУНКЦИЯ ПЕРЕХОДА МЕЖДУ ШАГАМИ
+      // ========================================
+      function goToStep(step) {
+        console.log('Going to step:', step);
 
-      console.log('✓ Nav buttons found:', navBtns.length);
-      console.log('✓ Quiz steps found:', quizSteps.length);
-      console.log('✓ Nav buttons:', Array.from(navBtns).map(b => `[${b.dataset.target}] ${b.textContent}`));
-      console.log('✓ Steps:', Array.from(quizSteps).map(s => `[${s.dataset.step}]`));
+        navBtns.forEach(b => b.classList.remove('active'));
+        quizSteps.forEach(s => s.classList.remove('active'));
 
-      function goToStep(stepNumber) {
-        console.log('Going to step:', stepNumber);
+        const activeBtn = quizWrapper.querySelector(`.nav-btn[data-target="${step}"]`);
+        const activeStep = quizWrapper.querySelector(`.quiz-step[data-step="${step}"]`);
 
-        navBtns.forEach(btn => {
-          btn.classList.remove('active');
-          console.log('Removing active from button:', btn.dataset.target);
-        });
-
-        quizSteps.forEach(step => {
-          step.classList.remove('active');
-          console.log('Removing active from step:', step.dataset.step);
-        });
-
-        const activeBtn = quizWrapper.querySelector(`.nav-btn[data-target="${stepNumber}"]`);
-        const activeStep = quizWrapper.querySelector(`.quiz-step[data-step="${stepNumber}"]`);
-
-        console.log('Active button:', activeBtn?.textContent || 'NOT FOUND');
-        console.log('Active step:', activeStep?.dataset.step || 'NOT FOUND');
-
-        if (activeBtn) {
-          activeBtn.classList.add('active');
-          console.log('✓ Button activated:', activeBtn.textContent);
-        }
-        if (activeStep) {
-          activeStep.classList.add('active');
-          console.log('✓ Step activated:', activeStep.dataset.step);
-        }
+        if (activeBtn) activeBtn.classList.add('active');
+        if (activeStep) activeStep.classList.add('active');
 
         setTimeout(() => {
           quizWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 50);
       }
 
-      // ✅ ИСПРАВЛЕНИЕ ДЛЯ iOS - убираем stopPropagation и добавляем touch события
-      navBtns.forEach((btn) => {
-        btn.addEventListener('click', (e) => {
+      // ========================================
+      // НАВИГАЦИОННЫЕ КНОПКИ
+      // ========================================
+      navBtns.forEach(btn => {
+        btn.addEventListener('click', e => {
           e.preventDefault();
           const target = btn.dataset.target;
+          console.log('NAV BUTTON CLICKED - target:', target);
           goToStep(target);
         });
       });
 
-
       // ========================================
-      // АВТОПЕРЕХОДЫ ПО ЗАПОЛНЕНИЮ QUIZ
+      // ФУНКЦИИ ПРОВЕРКИ ЗАПОЛНЕНИЯ
       // ========================================
-
-      const eventTypeSelect = quizWrapper.querySelector('[data-step="1"] #eventTypeSelect');
-      const eventDateInput = quizWrapper.querySelector('[data-step="1"] #eventDateInput');
-
-      let dateConfirmed = false;
-
-      // Убрали автоматический переход - теперь используется кнопка "Далее"
       function checkStep1Complete() {
-        const isComplete = eventTypeSelect?.value && eventDateInput?.value && dateConfirmed;
-        console.log('Checking step 1 - Type:', eventTypeSelect?.value, 'Date:', eventDateInput?.value, 'dateConfirmed=', dateConfirmed, 'isComplete=', isComplete);
-        return isComplete;
+        return Boolean(eventTypeSelect?.value && eventDateInput?.value && dateConfirmed);
       }
 
-      if (eventTypeSelect) {
-        eventTypeSelect.addEventListener('change', () => {
-          console.log('✓ Event type selected:', eventTypeSelect.value);
-          updateSubmitButtonState();
+      function checkGuestsStep() {
+        return Boolean(selectedGuests && ageInput?.value);
+      }
+
+      function checkStep4Complete() {
+        const anyGoalButton = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
+        const hasOtherText = otherInput && otherInput.value.trim().length >= 2;
+        return anyGoalButton || hasOtherText;
+      }
+
+      function checkAllFieldsComplete() {
+        const step1Complete = checkStep1Complete();
+        const step2Complete = checkGuestsStep();
+        const step3Complete = Boolean(selectedFormatMain);
+        const step4Complete = checkStep4Complete();
+        const step5Complete = nameInput?.value?.trim() && phoneInput?.value?.trim() && phoneInput?.value !== '+7 ___ ___ __ __';
+
+        console.log('Quiz completion check:', {
+          step1Complete,
+          step2Complete,
+          step3Complete,
+          step4Complete,
+          step5Complete
         });
+
+        return step1Complete && step2Complete && step3Complete && step4Complete && step5Complete;
       }
 
-      if (eventDateInput) {
-        function formatDateDisplay(dateString) {
-          if (!dateString) return '';
-          const [year, month, day] = dateString.split('-');
-          return `${day}.${month}.${year}`;
+      function updateSubmitButtonState() {
+        if (submitBtn) {
+          const isComplete = checkAllFieldsComplete();
+          submitBtn.disabled = !isComplete;
+          console.log('Submit button state:', isComplete ? 'enabled' : 'disabled');
         }
-
-        eventDateInput.addEventListener('change', () => {
-          if (eventDateInput.value) {
-            const formatted = formatDateDisplay(eventDateInput.value);
-            console.log('✓ Date selected (YYYY-MM-DD):', eventDateInput.value, '(formatted: ' + formatted + ')');
-            eventDateInput.dataset.formattedDate = formatted;
-            // Display formatted date in the span next to input
-            const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
-            if (dateDisplay) {
-              dateDisplay.textContent = formatted;
-            }
-            dateConfirmed = true;
-            updateSubmitButtonState();
-          } else {
-            const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
-            if (dateDisplay) {
-              dateDisplay.textContent = '';
-            }
-            dateConfirmed = false;
-            updateSubmitButtonState();
-          }
-        });
       }
 
-      // Кнопка "Далее" для первого шага
-      const quizNextStep1 = quizWrapper.querySelector('[data-step="1"] .quiz-next');
-      if (quizNextStep1) {
-        const handleNext1 = (e) => {
+      // ========================================
+      // ШАГ 1: ТИП И ДАТА МЕРОПРИЯТИЯ
+      // ========================================
+      eventTypeSelect?.addEventListener('change', () => {
+        console.log('Event type selected:', eventTypeSelect.value);
+        updateSubmitButtonState();
+      });
+
+      eventDateInput?.addEventListener('change', () => {
+        if (eventDateInput.value) {
+          const [year, month, day] = eventDateInput.value.split('-');
+          const formatted = `${day}.${month}.${year}`;
+          console.log('Date selected:', eventDateInput.value, '(formatted:', formatted + ')');
+          eventDateInput.dataset.formattedDate = formatted;
+          dateConfirmed = true;
+          updateSubmitButtonState();
+        } else {
+          dateConfirmed = false;
+          updateSubmitButtonState();
+        }
+      });
+
+      // Кнопка "Далее" на шаге 1
+      const step1NextBtn = quizWrapper.querySelector('[data-step="1"] .quiz-next');
+      if (step1NextBtn) {
+        step1NextBtn.addEventListener('click', e => {
           e.preventDefault();
+          console.log('Step 1 Next clicked');
           if (checkStep1Complete()) {
             console.log('Proceeding from step 1 to step 2');
             goToStep(2);
@@ -1551,106 +1545,71 @@
               alert('Пожалуйста, выберите дату мероприятия');
             }
           }
-        };
-
-        quizNextStep1.addEventListener('click', handleNext1);
-      }
-
-      // Кнопка "Далее" для второго шага
-      const quizNextStep2 = quizWrapper.querySelector('[data-step="2"] .quiz-next');
-      if (quizNextStep2) {
-        const handleNext2 = (e) => {
-          e.preventDefault();
-          if (!checkGuestsStep()) {
-            alert('Пожалуйста, выберите количество гостей и укажите возраст');
-            return;
-          }
-          goToStep(3);
-        };
-
-        quizNextStep2.addEventListener('click', handleNext2);
-      }
-
-      const guestButtons = quizWrapper.querySelectorAll('[data-step="2"] .guests-buttons button');
-      let selectedGuests = null;
-      const ageInput = quizWrapper.querySelector('[data-step="2"] input[type="number"]');
-
-      function checkGuestsStep() {
-        return Boolean(selectedGuests && ageInput?.value);
-      }
-
-      if (ageInput) {
-        ageInput.addEventListener('input', updateSubmitButtonState);
-        ageInput.addEventListener('blur', () => {
-          updateSubmitButtonState();
         });
       }
 
+      // ========================================
+      // ШАГ 2: ГОСТИ И ВОЗРАСТ
+      // ========================================
+      const guestButtons = quizWrapper.querySelectorAll('[data-step="2"] .guests-buttons button');
       guestButtons.forEach(btn => {
-        const handleGuestClick = (e) => {
+        btn.addEventListener('click', e => {
           e.preventDefault();
           guestButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           selectedGuests = btn.dataset.value;
+          console.log('Guest selected:', selectedGuests);
           updateSubmitButtonState();
-        };
-
-        addTouchClickHandler(btn, handleGuestClick);
+        });
       });
 
       if (ageInput) {
         ageInput.addEventListener('input', () => {
           let value = ageInput.value;
-
-          // Убираем всё кроме цифр
           value = value.replace(/\D/g, '');
-
-          // Ограничиваем длину (макс 2 цифры)
-          if (value.length > 2) {
-            value = value.slice(0, 2);
-          }
-
+          if (value.length > 2) value = value.slice(0, 2);
           const num = Number(value);
-
           if (num > 70) value = '70';
           if (num < 5 && value.length === 2) value = '5';
-
           ageInput.value = value;
-
           updateSubmitButtonState();
         });
 
         ageInput.addEventListener('blur', () => {
           const num = Number(ageInput.value);
-
           if (!num || num < 5 || num > 70) {
             ageInput.value = '';
           }
-
           updateSubmitButtonState();
         });
       }
 
+      // Кнопка "Далее" на шаге 2
+      const step2NextBtn = quizWrapper.querySelector('[data-step="2"] .quiz-next');
+      if (step2NextBtn) {
+        step2NextBtn.addEventListener('click', e => {
+          e.preventDefault();
+          console.log('Step 2 Next clicked');
+          if (checkGuestsStep()) {
+            console.log('Proceeding from step 2 to step 3');
+            goToStep(3);
+          } else {
+            alert('Пожалуйста, выберите количество гостей и укажите возраст');
+          }
+        });
+      }
+
+      // ========================================
+      // ШАГ 3: ФОРМАТ МЕРОПРИЯТИЯ
+      // ========================================
       const formatButtons = quizWrapper.querySelectorAll('[data-step="3"] .quiz-format button');
-      const formatSubmenu = quizWrapper.querySelector('[data-step="3"] .format-submenu');
-      const formatDetails = quizWrapper.querySelector('[data-step="3"] .format-details');
-      const quizTitleEl = quizWrapper.querySelector('.quiz-title');
-      const originalQuizTitleHTML = quizTitleEl?.innerHTML || '';
-
-      console.log('Format buttons found:', formatButtons.length);
-
-      let selectedFormatMain = null;
-      let selectedFormatTempo = null;
-      const originalFormatHtml = quizWrapper.querySelector('[data-step="3"] .quiz-format')?.innerHTML || '';
-
       formatButtons.forEach(btn => {
-        const handleFormatClick = (e) => {
+        btn.addEventListener('click', e => {
           e.preventDefault();
           formatButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          selectedFormatMain = (btn.textContent || '').trim();
-          console.log('Main format selected:', selectedFormatMain);
-          updateSubmitButtonState();
+          selectedFormatMain = btn.textContent.trim();
+          console.log('Format selected:', selectedFormatMain);
 
           const formatSubmenu = quizWrapper.querySelector('[data-step="3"] .format-submenu');
           if (formatSubmenu) {
@@ -1658,144 +1617,89 @@
             selectedFormatTempo = null;
             formatSubmenu.querySelectorAll('button').forEach(b => b.classList.remove('active'));
           }
-        };
-
-        addTouchClickHandler(btn, handleFormatClick);
+          updateSubmitButtonState();
+        });
       });
 
       const tempoButtons = quizWrapper.querySelectorAll('[data-step="3"] .format-submenu button');
-      tempoButtons.forEach(tb => {
-        const handleTempoClick = (e) => {
+      tempoButtons.forEach(btn => {
+        btn.addEventListener('click', e => {
           e.preventDefault();
           tempoButtons.forEach(b => b.classList.remove('active'));
-          tb.classList.add('active');
-          selectedFormatTempo = tb.dataset.tempo || (tb.textContent || '').trim();
+          btn.classList.add('active');
+          selectedFormatTempo = btn.dataset.tempo || btn.textContent.trim();
           console.log('Tempo selected:', selectedFormatTempo);
           updateSubmitButtonState();
           setTimeout(() => goToStep(4), 220);
-        };
-
-        addTouchClickHandler(tb, handleTempoClick);
+        });
       });
 
+      // ========================================
+      // ШАГ 4: ЦЕЛЬ МЕРОПРИЯТИЯ
+      // ========================================
       const goalButtons = quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button');
-      console.log('Goal buttons found:', goalButtons.length);
-
-      const otherWrapper = quizWrapper.querySelector('[data-step="4"] .goal-other');
-      const otherInput = otherWrapper?.querySelector('input');
       const otherBtn = quizWrapper.querySelector('[data-step="4"] .goal-grid button[data-goal="Другое"]');
 
       goalButtons.forEach(btn => {
-        const handleGoalClick = (e) => {
+        btn.addEventListener('click', e => {
           e.preventDefault();
           btn.classList.toggle('active');
           console.log('Goal toggled:', btn.dataset.goal, 'active=', btn.classList.contains('active'));
           updateSubmitButtonState();
-        };
-
-        addTouchClickHandler(btn, handleGoalClick);
+        });
       });
 
       if (otherInput && otherBtn) {
         otherInput.addEventListener('input', () => {
-          const has = otherInput.value.trim().length > 0;
-          if (has) otherBtn.classList.add('active');
+          const hasText = otherInput.value.trim().length > 0;
+          if (hasText) otherBtn.classList.add('active');
           else otherBtn.classList.remove('active');
           updateSubmitButtonState();
         });
       }
 
-      const quizNext = quizWrapper.querySelector('[data-step="4"] .quiz-next');
-      if (quizNext) {
-        const handleNext4 = (e) => {
+      // Кнопка "Далее" на шаге 4
+      const step4NextBtn = quizWrapper.querySelector('[data-step="4"] .quiz-next');
+      if (step4NextBtn) {
+        step4NextBtn.addEventListener('click', e => {
           e.preventDefault();
-          console.log('Proceeding from goals to contacts');
+          console.log('Proceeding from step 4 to step 5');
           goToStep(5);
-        };
-
-        addTouchClickHandler(quizNext, handleNext4);
+        });
       }
 
-      const submitBtn = quizWrapper.querySelector('.quiz-submit');
+      // ========================================
+      // ШАГ 5: КОНТАКТЫ
+      // ========================================
+      nameInput?.addEventListener('input', updateSubmitButtonState);
+      phoneInput?.addEventListener('input', updateSubmitButtonState);
 
-      const nameInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
-      const phoneInputStep5 = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
-      if (nameInputStep5) {
-        nameInputStep5.addEventListener('input', updateSubmitButtonState);
-      }
-      if (phoneInputStep5) {
-        phoneInputStep5.addEventListener('input', updateSubmitButtonState);
-      }
+      // Инициализация состояния кнопки отправки
+      if (submitBtn) submitBtn.disabled = true;
 
-      function checkStep4Complete() {
-        const anyGoalButton = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
-        const otherInput = quizWrapper.querySelector('[data-step="4"] input[name="other-goal"], [data-step="4"] textarea[name="other-goal"], [data-step="4"] input[placeholder*="другое"], [data-step="4"] input[data-type="other"]');
-
-        const hasSelectedGoal = !!anyGoalButton;
-        const hasOtherText = otherInput && otherInput.value.trim().length >= 2; // можно поставить минимальную длину 1–3 символа
-
-        return hasSelectedGoal || hasOtherText;
-      }
-      function checkAllFieldsComplete() {
-        const step1Complete = checkStep1Complete();
-
-        const guestBtn = quizWrapper.querySelector('[data-step="2"] .guests-buttons button.active');
-        const step2Complete = guestBtn && ageInput?.value;
-
-        const formatMainBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
-        const formatTempoBtn = quizWrapper.querySelector('[data-step="3"] .format-submenu button.active');
-        const step3Complete = !!formatMainBtn;
-        //было обязательно  const step3Complete = formatMainBtn && formatTempoBtn;
-
-        const anyGoal = quizWrapper.querySelector('[data-step="4"] .goal-grid button.active');
-        const step4Complete = checkStep4Complete();
-
-        const nameInputField = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
-        const phoneInputField = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
-        const step5Complete = nameInputField?.value?.trim() && phoneInputField?.value?.trim() && phoneInputField?.value !== '+7 ___ ___ __ __';
-
-        const allComplete = step1Complete && step2Complete && step3Complete && step4Complete && step5Complete;
-        console.log('Quiz completion check:', { step1Complete, step2Complete, step3Complete, step4Complete, step5Complete, allComplete });
-        return allComplete;
-      }
-      function updateSubmitButtonState() {
-        if (submitBtn) {
-          const isComplete = checkAllFieldsComplete();
-          submitBtn.disabled = !isComplete;
-          console.log('Submit button state:', isComplete ? 'enabled' : 'disabled');
-        }
-      }
-
-      if (submitBtn) {
-        submitBtn.disabled = true;
-      }
-
-      if (eventTypeSelect) {
-        eventTypeSelect.addEventListener('change', updateSubmitButtonState);
-      }
-      if (eventDateInput) {
-        eventDateInput.addEventListener('change', updateSubmitButtonState);
-      }
-
+      // ========================================
+      // ОТПРАВКА ФОРМЫ
+      // ========================================
       if (submitBtn) {
         submitBtn.addEventListener('click', async (e) => {
           e.preventDefault();
           e.stopPropagation();
           console.log('📤 Quiz submit button clicked!');
 
-          const name = nameInputStep5?.value || 'Не указано';
+          const name = nameInput?.value || 'Не указано';
           const eventType = eventTypeSelect?.value || 'Не указано';
+
           let eventDate = 'Не указано';
           if (eventDateInput?.value) {
             const rawDate = eventDateInput.value;
             const [year, month, day] = rawDate.split('-');
             eventDate = `${day}.${month}.${year}`;
           }
+
           const guests = selectedGuests || '0';
           const age = ageInput?.value || 'Не указано';
-          const phoneInput = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+
           let phone = phoneInput?.value || '';
-          // Очищаем телефон от маски и лишних символов
           phone = phone.replace(/\s+/g, '').replace(/[_\-\+]/g, '').trim();
           if (!phone || phone === '' || phone.length < 10) {
             phone = 'Не указано';
@@ -1819,6 +1723,7 @@
           }
 
           const format = [formatMain, formatTempo].filter(f => f && f !== 'Не выбрано').join(' | ') || 'Не выбрано';
+
           const otherVal = otherInput?.value?.trim();
           const selectedGoals = Array.from(quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button.active')).map(b => {
             const goal = (b.dataset.goal || b.textContent || '').trim();
@@ -1837,8 +1742,6 @@
           }
 
           try {
-            const goalsStr = selectedGoals.length ? selectedGoals.join(', ') : 'Не указано';
-
             // Отправляем данные на backend
             const quizData = {
               name: name,
@@ -1874,7 +1777,6 @@
               console.error('HTTP Error:', response.status, response.statusText, errorText);
               let errorMessage = 'Ошибка при отправке заявки';
 
-              // Специальная обработка для 405 ошибки (Method Not Allowed)
               if (response.status === 405) {
                 errorMessage = 'Ошибка: Веб-сервер не поддерживает PHP. Пожалуйста, используйте встроенный PHP сервер. Запустите в терминале: php -S localhost:8000';
                 console.error('⚠️ Live Server не поддерживает PHP! Используйте: php -S localhost:8000');
@@ -1907,27 +1809,32 @@
             if (result.success) {
               console.log('✓ Quiz submitted successfully:', result);
               showBanner('Спасибо!', 'Ваша заявка отправлена. Менеджер скоро свяжется с вами!', '✅', 'success');
+
+              // Сброс формы
               eventTypeSelect.value = '';
               eventDateInput.value = '';
               const dateDisplay = quizWrapper.querySelector('#eventDateDisplay');
               if (dateDisplay) dateDisplay.textContent = '';
               dateConfirmed = false;
               delete eventDateInput.dataset.formattedDate;
-              document.querySelectorAll('[data-step="2"] .guests-buttons button').forEach(b => b.classList.remove('active'));
+
+              guestButtons.forEach(b => b.classList.remove('active'));
               selectedGuests = null;
               ageInput.value = '';
-              nameInputStep5.value = '';
+              nameInput.value = '';
               phoneInput.value = '';
-              activeFormatBtn?.classList.remove('active');
-              try {
-                selectedFormatMain = null;
-                selectedFormatTempo = null;
-                const fs = quizWrapper.querySelector('[data-step="3"] .format-submenu'); if (fs) fs.style.display = 'none';
-                const fd = quizWrapper.querySelector('[data-step="3"] .format-details'); if (fd) fd.style.display = 'none';
-                if (quizTitleEl && typeof originalQuizTitleHTML !== 'undefined') quizTitleEl.innerHTML = originalQuizTitleHTML;
-              } catch (err) { console.warn('Reset format UI error', err); }
-              quizWrapper.querySelectorAll('[data-step="4"] .goal-grid button.active').forEach(b => b.classList.remove('active'));
+
+              formatButtons.forEach(b => b.classList.remove('active'));
+              tempoButtons.forEach(b => b.classList.remove('active'));
+              selectedFormatMain = null;
+              selectedFormatTempo = null;
+
+              const formatSubmenu = quizWrapper.querySelector('[data-step="3"] .format-submenu');
+              if (formatSubmenu) formatSubmenu.style.display = 'none';
+
+              goalButtons.forEach(b => b.classList.remove('active'));
               if (otherInput) otherInput.value = '';
+
               goToStep(1);
             } else {
               console.error('Backend error:', result.error);
@@ -1940,25 +1847,31 @@
         });
       }
 
-      console.log('✓ Quiz fully initialized');
-    } else {
-      console.error('Quiz wrapper not found!');
-    }
+      console.log('✓ Quiz fully initialized (iOS safe + full functionality)');
+    });
 
-    //заметка 2 <!-- TikTok Pixel Code Start -->
+    /* =========================
+       TIKTOK PIXEL
+    ========================= */
     !function (w, d, t) {
-      w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
-        for (
-          var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
-      }, ttq.load = function (e, n) {
-        var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
-          ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+      w.TiktokAnalyticsObject = t;
+      var ttq = w[t] = w[t] || [];
+      ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"];
+      ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } };
+      for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
+      ttq.load = function (e) {
+        var n = document.createElement("script");
+        n.type = "text/javascript";
+        n.async = true;
+        n.src = "https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=" + e;
+        var a = document.getElementsByTagName("script")[0];
+        a.parentNode.insertBefore(n, a);
       };
       ttq.load('D5V1LTBC77U581RV47UG');
       ttq.page();
     }(window, document, 'ttq');
-    //<!-- TikTok Pixel Code End -->
   </script>
+
 </body>
 
 </html>
