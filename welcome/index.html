@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <meta name="description"
+        content="CHOTAM SHOW – лучшая организация мероприятий в Астане. Свадьбы, корпоративы, дни рождения, детские праздники, тимбилдинги, вечеринки и шоу-программы под ключ. Более 4000 довольных клиентов.">
+    <meta name="keywords"
+        content="Chotam Show, организация мероприятий, ивенты, праздники Казахстан, Астана, Алматы, День рождения, Свадьба, Корпоратив, Девичник, Детский праздник, Новый год, Тимбилдинг">
+    <meta property="og:title" content="CHOTAM! SHOW – Организация мероприятий в Астане">
+    <meta property="og:description"
+        content="Организация мероприятий, шоу-программы, свадьбы, корпоративы, дни рождения. Более 4000 довольных клиентов.">
+    <meta property="og:image" content="https://chotamshow.kz/templates/logo_black.PNG">
+    <meta property="og:url" content="https://chotamshow.kz">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://chotamshow.kz/">
+    <title>CHOTAM! SHOW - Лучшая организация мероприятий в Астане | Welcome
+        агентство</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #020202;
+            /* было #1a1a1a; */
+            color: #333;
+            line-height: 1.6;
+            padding-top: 100px;
+            /* отступ под фиксированный хедер */
+        }
+
+        header {
+            /* нав-бар */
+            background-color: rgba(255, 255, 255, 0.2);
+            /*#151515;*/
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(8px);
+            /* Размытие фона под хедером */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            /* фиксация нав-бара */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-radius: 50px;
+            width: 85%;
+            margin: 0 auto;
+            border: 1px solid #ffaa00;
+        }
+
+        header img {
+            height: 50px;
+            /* размер лого на десктоп */
+            align-items: left;
+            margin-left: 10px;
+        }
+
+        /* WhatsApp Button Styles */
+        .whatsapp-button1 {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            /* WhatsApp green */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            /* Ensure it stays above other content */
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .whatsapp-button1:hover {
+            background-color: #20b358;
+            /* Slightly darker green on hover */
+            transform: scale(1.2);
+        }
+
+        .whatsapp-button1 img {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (min-width: 769px) {
+
+            .mobile-nav {
+                display: none;
+            }
+
+            /* Center quiz on mobile and adjust spacing */
+            .quiz-wrapper {
+                min-height: 100vh;
+                padding: 10px;
+                align-items: center;
+            }
+
+            .quiz-card {
+                padding: 24px;
+                max-width: 720px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .desktop-nav {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: center;
+                flex-grow: 1;
+                margin-left: -100px;
+                gap: 10px;
+                position: static;
+                transform: none;
+                flex-direction: row;
+                z-index: 1;
+            }
+
+            .desktop-nav a {
+                position: relative;
+                z-index: 1;
+            }
+        }
+
+        .nav-links a:hover {
+            color: #ffaa00;
+        }
+
+        .menu-toggle,
+        .nav-links,
+        .overlay {
+            display: none;
+            /* скрыто на ПК */
+        }
+
+        nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #ffaa00;
+        }
+
+        .social-icon {
+            margin-left: 20px;
+            display: inline-flex;
+            /* Используем flex для центрирования */
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.2);
+            /* Полупрозрачный белый */
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            /* Плавные переходы */
+        }
+
+        .social-icon:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            /* Увеличиваем прозрачность при наведении */
+        }
+
+        .social-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: white;
+        }
+
+        .social-icon:hover svg {
+            fill: #ffaa00;
+        }
+
+        .hero {
+            justify-content: center;
+            text-align: center;
+            padding: 150px 0px;
+            background-image: url(templates/background6.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Затемнение: цвет и прозрачность */
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 1px;
+            color: white;
+            z-index: 2;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .hero h2 {
+            font-size: 20px;
+            margin-bottom: 1px;
+            color: white;
+            z-index: 2;
+            position: relative;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+        }
+
+        .hero h8.highligted {
+            display: inline;
+            background-color: #ffaa00;
+            /* Задаем желтый фон */
+            font-size: 30px;
+            margin-bottom: 30px;
+            color: #000;
+            z-index: 2;
+            position: relative;
+            text-transform: uppercase;
+            border: 5px solid #ffaa00;
+            border-radius: 35px;
+            padding: 5px 10px;
+            /* Небольшие внутренние отступы */
+            font-weight: bold;
+        }
+
+        .hero h8.highligted1 {
+            display: inline;
+            /* Чтобы элемент занимал только необходимую ширину */
+            background-color: #ffaa00;
+            /* Задаем желтый фон */
+            font-size: 40px;
+            margin-bottom: 30px;
+            color: #000;
+            z-index: 2;
+            position: relative;
+            text-transform: uppercase;
+            border: 5px solid #ffaa00;
+            border-radius: 35px;
+            padding: 5px 10px;
+            /* Небольшие внутренние отступы */
+        }
+
+        .hero p {
+            font-size: 30px;
+            margin-bottom: 100px;
+            color: #ffaa00;
+            font-weight: bold;
+            z-index: 2;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        .hero button {
+            background-color: #ffaa00;
+            /* Желтый цвет кнопки */
+            color: #1a1a1a;
+            /* цвет текста в самой кнопке */
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 250px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            z-index: 2;
+            position: relative;
+            margin-top: 1px;
+            animation: pulseGlow 2.8s ease-in-out infinite;
+        }
+
+        /* Иконка WhatsApp (опционально) */
+        .hero button::before {
+            content: '';
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>');
+            background-repeat: no-repeat;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .hero button:hover {
+            background-color: #25D366;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            /* Убедимся, что подчеркивания нет */
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (min-width: 769px) {
+
+            .mobile-nav {
+                display: none;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-grow: 1;
+            margin-left: -100px;
+            gap: 10px;
+            position: static;
+            transform: none;
+            flex-direction: row;
+            z-index: 1;
+        }
+
+        .desktop-nav a {
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-links a:hover {
+            color: #ffaa00;
+        }
+
+        .menu-toggle,
+        .nav-links,
+        .overlay {
+            display: none;
+            /* скрыто на ПК */
+        }
+
+        nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #ffaa00;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 4px 15px rgba(255, 170, 0, 0.35);
+                transform: scale(1);
+            }
+
+            50% {
+                box-shadow: 0 8px 28px rgba(255, 170, 0, 0.75);
+                transform: scale(1.02);
+            }
+
+            100% {
+                box-shadow: 0 4px 15px rgba(255, 170, 0, 0.35);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulseWave {
+            0% {
+                transform: scale(0.85);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(1.15);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .close-menu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                color: #ffffff;
+                font-size: 28px;
+                cursor: pointer;
+                z-index: 2000;
+            }
+
+            .close-menu:hover {
+                color: #ffaa00;
+            }
+
+            .menu-toggle {
+                background-color: rgba(255, 255, 255, 0.1);
+                border: none;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                font-size: 32px;
+                padding-bottom: 5px;
+                color: #fff;
+                position: absolute;
+                right: 20px;
+                /* прижим к краю экрана */
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+
+            .menu-toggle::before {
+                content: "";
+                /* Используем псевдоэлемент для иконки */
+                font-size: 32px;
+                display: block;
+                line-height: 1;
+                /* Убираем лишнее пространство */
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                /* Точное центрирование */
+                z-index: 1100;
+            }
+
+            header {
+                justify-content: space-between;
+                padding: 8px;
+                align-items: center;
+                position: fixed;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 60%;
+                max-width: 400px;
+                background-color: rgba(19, 17, 17, 0.1);
+                backdrop-filter: blur(10px);
+                /* ✅ полупрозрачный фон */
+                -webkit-backdrop-filter: blur(8px);
+                /* тёмный фон */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding: 80px 30px;
+                box-sizing: border-box;
+                transform: translateX(100%);
+                transition: transform 0.4s ease, opacity 0.4s ease;
+                z-index: 1001;
+            }
+
+            .mobile-nav.active {
+                transform: translateX(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-nav a {
+                display: block;
+                width: 100%;
+                font-size: 20px;
+                color: #ffaa00;
+                margin: 10px 0;
+                padding: 12px 0;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            }
+
+            /* Подложка */
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+                z-index: 900;
+            }
+
+            .overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            header img {
+                height: 40px;
+                /* размер лого в мобилке */
+            }
+
+            nav {
+                list-style: none;
+                display: flex;
+                gap: 20px;
+                padding: 0;
+                margin: 0;
+                transition: max-height 0.3s ease, opacity 0.3s ease;
+                opacity: 0;
+                flex-direction: column;
+            }
+
+            nav.active {
+                max-height: auto;
+                /* подбирается по высоте контента */
+                opacity: 1;
+            }
+
+            body {
+                padding-top: 0px;
+            }
+
+            .hero {
+                padding: 200px 20px;
+                background-size: contain;
+                background-repeat: repeat;
+                padding-bottom: 10px;
+            }
+
+            .hero h1 {
+                /* chotam! show */
+                font-size: 22px;
+                max-width: 800px;
+                margin-bottom: 50px;
+            }
+
+            .hero p {
+                /* организуем мероприятия */
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 50px;
+            }
+
+            .hero h2 {
+                /* более 1000 довольных */
+                font-size: 16px;
+                margin-bottom: 50px;
+            }
+
+            .hero h8.highligted {
+                font-size: 18px;
+                padding: 2px 2px;
+                /* Небольшие внутренние отступы */
+            }
+
+            .hero h8.highligted1 {
+                /* h1 */
+                font-size: 22px;
+                padding: 3px 3px;
+                /* Небольшие внутренние отступы */
+            }
+
+            .hero button {
+                margin-top: 20px;
+                margin-bottom: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header data-animate>
+        <img src="/templates/logo_white.PNG" alt="Логотип" />
+        <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
+        <!-- Десктопное меню -->
+        <nav class="desktop-nav">
+            <a href="index.html#main">Главная</a>
+            <a href="index.html#home">О нас</a>
+            <a href="quiz.html">Квиз</a>
+            <a href="index.html#services">Услуги</a>
+            <a href="index.html#gallery">Галерея</a>
+            <a href="index.html#reviews">Отзывы</a>
+            <a href="index.html#packages">Цена</a>
+            <!--<a href="#team">Команда</a> -->
+            <a href="https://instagram.com/chotam_astana" class="social-icon" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+                </svg>
+            </a>
+            <a href="https://wa.me/7021656123?text=Здравствуйте, пишу с TikTok! Хочу организовать мероприятие."
+                class="social-icon" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-whatsapp" viewBox="0 0 16 16">
+                    <path
+                        d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+                </svg></a>
+        </nav>
+    </header>
+
+    <button class="menu-toggle" aria-label="Открыть меню">&#9776;</button>
+    <!-- Мобильное меню -->
+    <nav class="mobile-nav">
+        <button class="close-menu">✖</button>
+        <a href="index.html#main">Главная</a>
+        <a href="index.html#home">О нас</a>
+        <a href="quiz.html">Квиз</a>
+        <a href="index.html#services">Услуги</a>
+        <a href="index.html#gallery">Галерея</a>
+        <a href="index.html#reviews">Отзывы</a>
+        <a href="index.html#packages">Цена</a>
+        <!--<a href="#team">Команда</a> -->
+    </nav>
+
+    <div class="overlay"></div>
+
+    <section class="hero" id="main" data-animate>
+        <h1>
+            <h8 class="highligted1">CHOTAM! SHOW</h8> - Лучшая организация
+            мероприятий
+        </h1>
+        <p>Развлекательные программы для любых мероприятий и вечеринок</p>
+        <h2>Организуем мероприятие любого масштаба под ключ !</h2>
+        <p>
+            <h8 class="highligted">Более 150 000</h8> довольных гостей
+        </p>
+        <a href="https://wa.me/7021656123?text=Здравствуйте, пишу с TikTok! Хочу организовать мероприятие."
+            target="_blank">
+            <button>Связаться с нами</button>
+        </a>
+    </section>
+
+    <script>
+
+        const menuToggle = document.querySelector(".menu-toggle");
+        const mobileNav = document.querySelector(".mobile-nav");
+        const overlay = document.querySelector(".overlay");
+        const closeMenu = document.querySelector(".close-menu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileNav.classList.add("active");
+            overlay.classList.add("active");
+        });
+
+        closeMenu.addEventListener("click", () => {
+            mobileNav.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+
+        overlay.addEventListener("click", () => {
+            mobileNav.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+
+        // Закрытие меню при клике на ссылку
+        const navLinks = document.querySelectorAll(".mobile-nav a");
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                mobileNav.classList.remove("active");
+                overlay.classList.remove("active");
+            });
+        });
+
+        const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+
+        navItems.forEach((link) => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute("href").substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: "smooth" });
+                    navLinks.classList.remove("active"); // скрываем меню после перехода
+                }
+            });
+        });
+        //заметка 2 <!-- TikTok Pixel Code Start -->
+        !function (w, d, t) {
+            w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {
+                for (
+                    var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++)ttq.setAndDefer(e, ttq.methods[n]); return e
+            }, ttq.load = function (e, n) {
+                var r = "https://analytics.tiktok.com/i18n/pixel/events.js", o = n && n.partner; ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = r, ttq._t = ttq._t || {}, ttq._t[e] = +new Date, ttq._o = ttq._o || {}, ttq._o[e] = n || {}; n = document.createElement("script")
+                    ; n.type = "text/javascript", n.async = !0, n.src = r + "?sdkid=" + e + "&lib=" + t; e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n, e)
+            };
+            ttq.load('D5V1LTBC77U581RV47UG');
+            ttq.page();
+        }(window, document, 'ttq');
+        //<!-- TikTok Pixel Code End -->
+    </script>
+
+</body>
+
+</html>

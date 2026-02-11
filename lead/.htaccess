@@ -1,0 +1,22 @@
+# Разрешаем POST запросы к PHP файлам
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Разрешаем POST и OPTIONS запросы к quiz.php
+    RewriteCond %{REQUEST_METHOD} ^(POST|OPTIONS)$ [NC]
+    RewriteCond %{REQUEST_URI} ^/.*send\.php$ [NC]
+    RewriteRule ^ - [L]
+</IfModule>
+
+# Разрешаем CORS для quiz.php
+<IfModule mod_headers.c>
+    <FilesMatch "send\.php$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "POST, OPTIONS"
+        Header set Access-Control-Allow-Headers "Content-Type"
+    </FilesMatch>
+</IfModule>
+
+# Разрешаем выполнение PHP скриптов
+<FilesMatch "\.php$">
+    SetHandler application/x-httpd-php
+</FilesMatch>
