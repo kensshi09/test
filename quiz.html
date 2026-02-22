@@ -340,6 +340,15 @@
       font-weight: 600;
     }
 
+    /* Серый плейсхолдер для select пока не выбрано значение */
+    select.placeholder-active {
+      color: #888 !important;
+    }
+
+    select.placeholder-active option:not([value=""]) {
+      color: #fff;
+    }
+
     #guestCount {
       color: #f5b301;
       font-weight: bold;
@@ -1298,6 +1307,11 @@
           <input type="text" placeholder="Например: Бекзат" />
           <label style="margin-top:16px">Телефон</label>
           <input type="tel" placeholder="+7 ___ ___ __ __">
+          <select id="citySelect" style="margin-top:16px">
+            <option value="" disabled selected hidden>Выберите город</option>
+            <option value="Астана">Астана</option>
+            <option value="Алматы">Алматы</option>
+          </select>
           <button class="quiz-submit">Отправить заявку</button>
           <p class="quiz-privacy">Нажимая на кнопку вы даете согласие на обработку персональных данных<br>и соглашаетесь
             с политикой конфиденциальности</p>
@@ -1388,6 +1402,7 @@
       const ageInput = quizWrapper.querySelector('[data-step="2"] input[type="number"]');
       const nameInput = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
       const phoneInput = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+      const citySelect = quizWrapper.querySelector('#citySelect');
       const otherInput = quizWrapper.querySelector('[data-step="4"] .goal-other input');
 
       let dateConfirmed = false;
@@ -1485,7 +1500,7 @@
         const step2Complete = checkGuestsStep();
         const step3Complete = Boolean(selectedFormatMain);
         const step4Complete = checkStep4Complete();
-        const step5Complete = nameInput?.value?.trim() && phoneInput?.value?.trim() && phoneInput?.value !== '+7 ___ ___ __ __';
+        const step5Complete = nameInput?.value?.trim() && phoneInput?.value?.trim() && phoneInput?.value !== '+7 ___ ___ __ __' && citySelect?.value;
 
         console.log('Quiz completion check:', {
           step1Complete,
@@ -1672,6 +1687,19 @@
       // ========================================
       nameInput?.addEventListener('input', updateSubmitButtonState);
       phoneInput?.addEventListener('input', updateSubmitButtonState);
+      citySelect?.addEventListener('change', updateSubmitButtonState);
+
+      // Серый плейсхолдер для citySelect
+      if (citySelect) {
+        citySelect.classList.add('placeholder-active');
+        citySelect.addEventListener('change', () => {
+          if (citySelect.value) {
+            citySelect.classList.remove('placeholder-active');
+          } else {
+            citySelect.classList.add('placeholder-active');
+          }
+        });
+      }
 
       // Инициализация состояния кнопки отправки
       if (submitBtn) submitBtn.disabled = true;
@@ -1740,11 +1768,18 @@
             return;
           }
 
+          const city = citySelect?.value || '';
+          if (!city) {
+            showBanner('Ошибка ввода', 'Пожалуйста, выберите город', '⚠️', 'error');
+            return;
+          }
+
           try {
             // Отправляем данные на backend
             const quizData = {
               name: name,
               phone: phone,
+              city: city,
               eventType: eventType,
               eventDate: eventDate,
               guests: guests,
@@ -1822,6 +1857,7 @@
               ageInput.value = '';
               nameInput.value = '';
               phoneInput.value = '';
+              if (citySelect) { citySelect.value = ''; citySelect.classList.add('placeholder-active'); }
 
               formatButtons.forEach(b => b.classList.remove('active'));
               tempoButtons.forEach(b => b.classList.remove('active'));

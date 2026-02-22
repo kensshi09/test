@@ -66,6 +66,7 @@ $guests = isset($data['guests']) ? htmlspecialchars($data['guests'], ENT_QUOTES,
 $age = isset($data['age']) ? htmlspecialchars($data['age'], ENT_QUOTES, 'UTF-8') : 'Не указано';
 $formatMain = isset($data['formatMain']) ? htmlspecialchars($data['formatMain'], ENT_QUOTES, 'UTF-8') : 'Не выбрано';
 $formatTempo = isset($data['formatTempo']) ? htmlspecialchars($data['formatTempo'], ENT_QUOTES, 'UTF-8') : '';
+$city = isset($data['city']) ? htmlspecialchars($data['city'], ENT_QUOTES, 'UTF-8') : 'Не указано';
 $selectedGoals = isset($data['selectedGoals']) && is_array($data['selectedGoals']) ? $data['selectedGoals'] : [];
 
 $goalsStr = !empty($selectedGoals)
@@ -111,6 +112,7 @@ function sendToTelegram($botToken, $chatId, $payload) {
         "🚀 Новая заявка с квиза\n\n" .
         "👤 Имя: {$payload['name']}\n" .
         "📞 Телефон: {$payload['phone']}\n" .
+        "🏙️ Город: {$payload['city']}\n" .
         "🎉 Тип мероприятия: {$payload['eventType']}\n" .
         "📅 Дата: {$payload['eventDate']}\n" .
         "👥 Гостей: {$payload['guests']}\n" .
@@ -149,12 +151,13 @@ try {
     $contactResponse = sendToBitrix($bitrixDomain . '/crm.contact.add.json', $contactPayload);
     $contactId = $contactResponse['result'] ?? null;
 
-    $dealTitle = "$name | $phone | $eventType | $eventDate | $guests гостей | $age лет | $formatMain | $formatTempo | $goalsStr";
+    $dealTitle = "$name | $phone | $city | $eventType | $eventDate | $guests гостей | $age лет | $formatMain | $formatTempo | $goalsStr";
 
     $dealComments =
     "ДАННЫЕ ИЗ QUIZ:\n" .
     "Имя: $name\n" .
     "Телефон: $phone\n" .
+    "Город: $city\n" .
     "Тип мероприятия: $eventType\n" .
     "Дата: $eventDate\n" .
     "Гостей: $guests\n" .
@@ -190,6 +193,7 @@ try {
         sendToTelegram($telegramBotToken, $telegramChatId, [
             'name' => $name,
             'phone' => $phone,
+            'city' => $city,
             'eventType' => $eventType,
             'eventDate' => $eventDate,
             'guests' => $guests,
