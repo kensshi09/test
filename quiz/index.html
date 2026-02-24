@@ -349,6 +349,89 @@
       color: #fff;
     }
 
+    /* Кастомный дропдаун города */
+    .city-dropdown {
+      position: relative;
+      width: 100%;
+    }
+
+    .city-dropdown-trigger {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      background: #1f1f1f;
+      border: 2px solid #ffaa00;
+      color: #888;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .city-dropdown-trigger.selected {
+      color: #fff;
+    }
+
+    .city-dropdown-trigger.open {
+      border-color: #f5b301;
+      box-shadow: 0 0 8px rgba(245, 179, 1, 0.3);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .city-dropdown-trigger svg {
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .city-dropdown-trigger.open svg {
+      transform: rotate(180deg);
+    }
+
+    .city-dropdown-trigger.open svg path {
+      stroke: #f5b301;
+    }
+
+    .city-dropdown-list {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #1f1f1f;
+      border: 2px solid #f5b301;
+      border-top: none;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      overflow: hidden;
+      z-index: 999;
+    }
+
+    .city-dropdown-list.open {
+      display: block;
+    }
+
+    .city-dropdown-item {
+      padding: 14px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .city-dropdown-item:hover,
+    .city-dropdown-item.active {
+      background: #f5b301;
+      color: #000;
+    }
+
     #guestCount {
       color: #f5b301;
       font-weight: bold;
@@ -1306,12 +1389,21 @@
           <label>Ваше имя</label>
           <input type="text" placeholder="Например: Бекзат" />
           <label style="margin-top:16px">Телефон</label>
-          <input type="tel" placeholder="+7 ___ ___ __ __">
-          <select id="citySelect" style="margin-top:16px">
-            <option value="" disabled selected hidden>Выберите город</option>
-            <option value="Астана">Астана</option>
-            <option value="Алматы">Алматы</option>
-          </select>
+          <input type="tel" id="phoneInput" placeholder="+7 (7__) ___-__-__" maxlength="18" autocomplete="tel">
+          <div class="city-dropdown" id="cityDropdown" style="margin-top:16px">
+            <div class="city-dropdown-trigger" id="cityTrigger">
+              <span id="cityLabel">Выберите город</span>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="cityArrow">
+                <path d="M2 4L6 8L10 4" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="city-dropdown-list" id="cityList">
+              <div class="city-dropdown-item" data-value="Астана">Астана</div>
+              <div class="city-dropdown-item" data-value="Алматы">Алматы</div>
+            </div>
+          </div>
+          <!-- скрытый input для совместимости с остальным кодом -->
+          <input type="hidden" id="citySelect" value="">
           <button class="quiz-submit">Отправить заявку</button>
           <p class="quiz-privacy">Нажимая на кнопку вы даете согласие на обработку персональных данных<br>и соглашаетесь
             с политикой конфиденциальности</p>
@@ -1401,7 +1493,7 @@
       const eventDateInput = quizWrapper.querySelector('#eventDateInput');
       const ageInput = quizWrapper.querySelector('[data-step="2"] input[type="number"]');
       const nameInput = quizWrapper.querySelector('[data-step="5"] input[type="text"]');
-      const phoneInput = quizWrapper.querySelector('[data-step="5"] input[type="tel"]');
+      const phoneInput = quizWrapper.querySelector('#phoneInput');
       const citySelect = quizWrapper.querySelector('#citySelect');
       const otherInput = quizWrapper.querySelector('[data-step="4"] .goal-other input');
 
@@ -1500,7 +1592,7 @@
         const step2Complete = checkGuestsStep();
         const step3Complete = Boolean(selectedFormatMain);
         const step4Complete = checkStep4Complete();
-        const step5Complete = nameInput?.value?.trim() && phoneInput?.value?.trim() && phoneInput?.value !== '+7 ___ ___ __ __' && citySelect?.value;
+        const step5Complete = nameInput?.value?.trim() && phoneInput?.value?.length === 18 && citySelect?.value;
 
         console.log('Quiz completion check:', {
           step1Complete,
@@ -1685,18 +1777,111 @@
       // ========================================
       // ШАГ 5: КОНТАКТЫ
       // ========================================
+      // ========================================
+      // МАСКА ТЕЛЕФОНА: +7 (7xx) xxx-xx-xx
+      // ========================================
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function (e) {
+          // Берём только цифры из того что ввёл пользователь
+          let digits = this.value.replace(/\D/g, '');
+
+          // Убираем ведущие 8 или 7 если пользователь сам их вписал
+          if (digits.startsWith('87') || digits.startsWith('77')) {
+            digits = digits.slice(1);
+          } else if (digits.startsWith('8')) {
+            digits = digits.slice(1);
+          } else if (digits.startsWith('7') && digits.length > 10) {
+            digits = digits.slice(1);
+          }
+
+          // Ограничиваем до 10 цифр (код оператора + номер)
+          digits = digits.slice(0, 10);
+
+          // Форматируем: +7 (7xx) xxx-xx-xx
+          let formatted = '+7 (';
+          if (digits.length === 0) {
+            formatted = '';
+          } else if (digits.length <= 3) {
+            formatted += digits + ')'.slice(0, digits.length < 3 ? 0 : 1);
+            if (digits.length === 3) formatted = '+7 (' + digits + ') ';
+            else formatted = '+7 (' + digits;
+          } else if (digits.length <= 6) {
+            formatted = '+7 (' + digits.slice(0, 3) + ') ' + digits.slice(3);
+          } else if (digits.length <= 8) {
+            formatted = '+7 (' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+          } else {
+            formatted = '+7 (' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6, 8) + '-' + digits.slice(8, 10);
+          }
+
+          this.value = formatted;
+          updateSubmitButtonState();
+        });
+
+        // Не даём вводить нечисловые символы (кроме допустимых)
+        phoneInput.addEventListener('keydown', function (e) {
+          const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+          if (allowed.includes(e.key)) return;
+          if (!/^\d$/.test(e.key)) e.preventDefault();
+        });
+
+        // На paste — обрабатываем вставленный номер
+        phoneInput.addEventListener('paste', function (e) {
+          e.preventDefault();
+          const pasted = (e.clipboardData || window.clipboardData).getData('text');
+          let digits = pasted.replace(/\D/g, '');
+          if (digits.startsWith('87') || digits.startsWith('77')) digits = digits.slice(1);
+          else if (digits.startsWith('8')) digits = digits.slice(1);
+          else if (digits.startsWith('7') && digits.length > 10) digits = digits.slice(1);
+          digits = digits.slice(0, 10);
+          // Симулируем input событие
+          this.value = digits;
+          this.dispatchEvent(new Event('input'));
+        });
+      }
+
       nameInput?.addEventListener('input', updateSubmitButtonState);
       phoneInput?.addEventListener('input', updateSubmitButtonState);
-      citySelect?.addEventListener('change', updateSubmitButtonState);
 
-      // Серый плейсхолдер для citySelect
-      if (citySelect) {
-        citySelect.classList.add('placeholder-active');
-        citySelect.addEventListener('change', () => {
-          if (citySelect.value) {
-            citySelect.classList.remove('placeholder-active');
-          } else {
-            citySelect.classList.add('placeholder-active');
+      // ========================================
+      // КАСТОМНЫЙ ДРОПДАУН ГОРОДА
+      // ========================================
+      const cityDropdown = quizWrapper.querySelector('#cityDropdown');
+      const cityTrigger = quizWrapper.querySelector('#cityTrigger');
+      const cityList = quizWrapper.querySelector('#cityList');
+      const cityLabel = quizWrapper.querySelector('#cityLabel');
+      const cityItems = quizWrapper.querySelectorAll('.city-dropdown-item');
+
+      if (cityTrigger && cityList) {
+        cityTrigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = cityList.classList.contains('open');
+          cityList.classList.toggle('open', !isOpen);
+          cityTrigger.classList.toggle('open', !isOpen);
+        });
+
+        cityItems.forEach(item => {
+          item.addEventListener('click', () => {
+            const val = item.dataset.value;
+            // Обновляем скрытый input
+            citySelect.value = val;
+            // Обновляем лейбл
+            cityLabel.textContent = val;
+            cityTrigger.classList.add('selected');
+            // Снимаем active со всех, ставим на выбранный
+            cityItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            // Закрываем
+            cityList.classList.remove('open');
+            cityTrigger.classList.remove('open');
+            updateSubmitButtonState();
+          });
+        });
+
+        // Закрываем при клике вне
+        document.addEventListener('click', (e) => {
+          if (!cityDropdown.contains(e.target)) {
+            cityList.classList.remove('open');
+            cityTrigger.classList.remove('open');
           }
         });
       }
@@ -1727,10 +1912,9 @@
           const age = ageInput?.value || 'Не указано';
 
           let phone = phoneInput?.value || '';
-          phone = phone.replace(/\s+/g, '').replace(/[_\-\+]/g, '').trim();
-          if (!phone || phone === '' || phone.length < 10) {
-            phone = 'Не указано';
-          }
+          // Маска уже содержит +7, просто берём все цифры → 77055885385 (11 цифр)
+          const phoneDigits = phone.replace(/\D/g, '');
+          phone = phoneDigits; // уже будет 77055885385
 
           const activeFormatBtn = quizWrapper.querySelector('[data-step="3"] .quiz-format button.active');
           let formatMain = selectedFormatMain;
@@ -1763,7 +1947,7 @@
           console.log('Collected data:', { eventType, eventDate, guests, age, phone, format, selectedGoals });
 
           // Проверяем телефон после очистки
-          if (!phone || phone === 'Не указано' || phone.length < 10) {
+          if (phoneDigits.length !== 11) {
             showBanner('Ошибка ввода', 'Пожалуйста, введите корректный номер телефона', '⚠️', 'error');
             return;
           }
@@ -1793,7 +1977,7 @@
 
             let response;
             try {
-              response = await fetch('quiz.php', {
+              response = await fetch('/quiz/quiz.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(quizData)
@@ -1857,7 +2041,11 @@
               ageInput.value = '';
               nameInput.value = '';
               phoneInput.value = '';
-              if (citySelect) { citySelect.value = ''; citySelect.classList.add('placeholder-active'); }
+              if (citySelect) { citySelect.value = ''; }
+              if (cityLabel) { cityLabel.textContent = 'Выберите город'; }
+              if (cityTrigger) { cityTrigger.classList.remove('selected', 'open'); }
+              if (cityList) { cityList.classList.remove('open'); }
+              if (cityItems) { cityItems.forEach(i => i.classList.remove('active')); }
 
               formatButtons.forEach(b => b.classList.remove('active'));
               tempoButtons.forEach(b => b.classList.remove('active'));
