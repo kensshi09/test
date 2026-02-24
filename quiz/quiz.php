@@ -20,7 +20,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
-/* антидубль сделок в битрикс начало */
+/* НАЧАЛО антидубль сделок в битрикс */
 header('Content-Type: application/json');
 
 $data = json_decode(file_get_contents("php://input"), true);
@@ -63,7 +63,7 @@ foreach ($files as $file) {
     }
 
 }
-/* конец */
+/* КОНЕЦ */
 
 $requestMethod = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN');
 
