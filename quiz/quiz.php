@@ -20,6 +20,51 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
+/* антидубль сделок в битрикс начало */
+header('Content-Type: application/json');
+
+$data = json_decode(file_get_contents("php://input"), true);
+
+if (!$data) {
+    echo json_encode(["status" => "error"]);
+    exit;
+}
+
+/*
+Антидубликат:
+одинаковый телефон + дата мероприятия + тип события
+в течение 60 секунд = одна заявка
+*/
+
+$hash = md5(
+    $data['phone'] .
+    $data['eventDate'] .
+    $data['eventType']
+);
+
+$lockFile = __DIR__ . "/lock_" . $hash;
+
+if (file_exists($lockFile)) {
+
+    echo json_encode([
+        "status" => "success"
+    ]);
+
+    exit;
+}
+
+file_put_contents($lockFile, time());
+$files = glob(__DIR__ . "/lock_*"); /* автоматическое удаление временных файлов */
+
+foreach ($files as $file) {
+
+    if (time() - filemtime($file) > 3600) {
+        unlink($file);
+    }
+
+}
+/* конец */
+
 $requestMethod = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN');
 
 if ($requestMethod === 'OPTIONS') {

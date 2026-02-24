@@ -1393,8 +1393,9 @@
           <div class="city-dropdown" id="cityDropdown" style="margin-top:16px">
             <div class="city-dropdown-trigger" id="cityTrigger">
               <span id="cityLabel">Выберите город</span>
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" id="cityArrow">
-                <path d="M2 4L6 8L10 4" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"
+                id="cityArrow">
+                <path d="M2 4L6 8L10 4" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="city-dropdown-list" id="cityList">
@@ -1501,6 +1502,7 @@
       let selectedGuests = null;
       let selectedFormatMain = null;
       let selectedFormatTempo = null;
+      let requestSent = false;
 
       // ========================================
       // ФУНКЦИЯ ПОКАЗА БАННЕРА
@@ -1975,17 +1977,41 @@
 
             console.log('📤 Sending quiz data to backend:', quizData);
 
+            if (requestSent) {
+              showBanner(
+                'Заявка отправлена',
+                'Мы уже получили вашу заявку и скоро свяжемся с вами.',
+                '✅',
+                'success'
+              );
+              return;
+            }
+
+            requestSent = true;
+
             let response;
+
             try {
+
               response = await fetch('/quiz/quiz.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(quizData)
               });
+
               console.log('📥 Response received:', response.status, response.statusText);
+
             } catch (fetchError) {
-              console.error('❌ Fetch error:', fetchError);
-              showBanner('Ошибка подключения', 'Не удалось подключиться к серверу. Убедитесь, что файлы открыты через веб-сервер (не file://).', '📡', 'error');
+
+              requestSent = false;
+
+              showBanner(
+                'Ошибка подключения',
+                'Не удалось подключиться к серверу.',
+                '📡',
+                'error'
+              );
+
               return;
             }
 
