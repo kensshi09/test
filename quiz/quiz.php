@@ -58,7 +58,7 @@ $files = glob(__DIR__ . "/lock_*"); /* автоматическое удален
 
 foreach ($files as $file) {
 
-    if (time() - filemtime($file) > 3600) {
+    if (time() - filemtime($file) > 60) {
         unlink($file);
     }
 
