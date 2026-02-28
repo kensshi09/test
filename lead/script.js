@@ -161,10 +161,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             // Формируем данные для отправки
+            const tracking = typeof window.getTrackingData === 'function' ? window.getTrackingData() : {};
             const leadData = {
                 name: name,
                 phone: phone,
-                source: 'quick_lead' // Маркер для идентификации источника заявки
+                source: 'quick_lead', // Маркер для идентификации источника заявки
+                tracking: tracking
             };
 
             console.log('📤 Sending lead data to backend:', leadData);

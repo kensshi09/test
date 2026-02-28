@@ -18,6 +18,7 @@
     <link rel="canonical" href="https://chotamshow.kz/">
     <title>CHOTAM! SHOW - Лучшая организация мероприятий в Астане | Welcome
         агентство</title>
+    <script src="/assets/js/tracking.js" defer></script>
     <style>
         * {
             margin: 0;
@@ -684,7 +685,7 @@
         <p>
             <h8 class="highligted">Более 150 000</h8> довольных гостей
         </p>
-        <a href="https://wa.me/7021656123?text=Здравствуйте, пишу с TikTok! Хочу организовать мероприятие."
+        <a id="welcome-whatsapp-main" href="https://wa.me/7021656123?text=Здравствуйте, пишу с TikTok! Хочу организовать мероприятие."
             target="_blank">
             <button>Связаться с нами</button>
         </a>
@@ -736,6 +737,27 @@
                 }
             });
         });
+
+        // Добавляем атрибуцию в WhatsApp-ссылку (основной оффер)
+        const waMain = document.getElementById('welcome-whatsapp-main');
+        if (waMain && typeof window.getTrackingData === 'function') {
+            const t = window.getTrackingData();
+            let url = new URL(waMain.href);
+            let text = url.searchParams.get('text') || 'Здравствуйте, пишу с TikTok! Хочу организовать мероприятие.';
+
+            if (t.citySlug) {
+                text += ` (город: ${t.citySlug})`;
+            }
+            if (t.landingPage) {
+                text += ` [страница: ${t.landingPage}]`;
+            }
+            if (t.utm_source || t.utm_medium || t.utm_campaign) {
+                text += ` [UTM: source=${t.utm_source || ''}; medium=${t.utm_medium || ''}; campaign=${t.utm_campaign || ''}]`;
+            }
+
+            url.searchParams.set('text', text);
+            waMain.href = url.toString();
+        }
         //заметка 2 <!-- TikTok Pixel Code Start -->
         !function (w, d, t) {
             w.TiktokAnalyticsObject = t; var ttq = w[t] = w[t] || []; ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias", "group", "enableCookie", "disableCookie", "holdConsent", "revokeConsent", "grantConsent"], ttq.setAndDefer = function (t, e) { t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }; for (var i = 0; i < ttq.methods.length; i++)ttq.setAndDefer(ttq, ttq.methods[i]); ttq.instance = function (t) {

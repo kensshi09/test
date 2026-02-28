@@ -1,7 +1,24 @@
-# Разрешаем POST запросы к PHP файлам
+# Разрешаем POST запросы к PHP файлам и настраиваем роутинг городов
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    # Разрешаем POST и OPTIONS запросы к quiz.php
+
+    # 1. Не трогаем существующие файлы и директории
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 2. Роутинг городов:
+    #    /{citySlug}/
+    #    /{citySlug}/quiz/
+    #    /{citySlug}/lead/
+    #    /{citySlug}/welcome/
+    #
+    #    Исключаем основные технические / существующие директории.
+    RewriteCond %{REQUEST_URI} !^/(quiz|lead|welcome|templates|vendor|whatsapp_astana|config|city)(/|$) [NC]
+    RewriteCond %{REQUEST_URI} !^/(favicon\.png|style\.css|script\.js|start-server\.sh|start-server\.bat)$ [NC]
+    RewriteRule ^([a-zA-Z0-9_-]+)/(quiz|lead|welcome)?/?$ city/router.php?city=$1&page=$2 [L,QSA]
+
+    # 3. Разрешаем POST и OPTIONS запросы к quiz.php
     RewriteCond %{REQUEST_METHOD} ^(POST|OPTIONS)$ [NC]
     RewriteCond %{REQUEST_URI} ^/.*quiz\.php$ [NC]
     RewriteRule ^ - [L]

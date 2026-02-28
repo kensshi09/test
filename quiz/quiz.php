@@ -118,6 +118,25 @@ $goalsStr = !empty($selectedGoals)
     ? implode(', ', array_map(fn($goal) => htmlspecialchars($goal, ENT_QUOTES, 'UTF-8'), $selectedGoals))
     : 'Не указано';
 
+// Трекинг-данные (utm / landing / referrer / city_slug и т.д.)
+$tracking = isset($data['tracking']) && is_array($data['tracking']) ? $data['tracking'] : [];
+
+$utm_source = isset($tracking['utm_source']) ? htmlspecialchars($tracking['utm_source'], ENT_QUOTES, 'UTF-8') : '';
+$utm_medium = isset($tracking['utm_medium']) ? htmlspecialchars($tracking['utm_medium'], ENT_QUOTES, 'UTF-8') : '';
+$utm_campaign = isset($tracking['utm_campaign']) ? htmlspecialchars($tracking['utm_campaign'], ENT_QUOTES, 'UTF-8') : '';
+$utm_content = isset($tracking['utm_content']) ? htmlspecialchars($tracking['utm_content'], ENT_QUOTES, 'UTF-8') : '';
+$utm_term = isset($tracking['utm_term']) ? htmlspecialchars($tracking['utm_term'], ENT_QUOTES, 'UTF-8') : '';
+
+$landingPage = isset($tracking['landingPage']) ? htmlspecialchars($tracking['landingPage'], ENT_QUOTES, 'UTF-8') : '';
+$firstLandingPage = isset($tracking['firstLandingPage']) ? htmlspecialchars($tracking['firstLandingPage'], ENT_QUOTES, 'UTF-8') : '';
+$referrer = isset($tracking['referrer']) ? htmlspecialchars($tracking['referrer'], ENT_QUOTES, 'UTF-8') : '';
+$citySlug = isset($tracking['citySlug']) ? htmlspecialchars($tracking['citySlug'], ENT_QUOTES, 'UTF-8') : '';
+
+$gclid = isset($tracking['gclid']) ? htmlspecialchars($tracking['gclid'], ENT_QUOTES, 'UTF-8') : '';
+$yclid = isset($tracking['yclid']) ? htmlspecialchars($tracking['yclid'], ENT_QUOTES, 'UTF-8') : '';
+$fbclid = isset($tracking['fbclid']) ? htmlspecialchars($tracking['fbclid'], ENT_QUOTES, 'UTF-8') : '';
+$ttclid = isset($tracking['ttclid']) ? htmlspecialchars($tracking['ttclid'], ENT_QUOTES, 'UTF-8') : '';
+
 
 function sendToBitrix($url, $payload) {
     $ch = curl_init($url);
@@ -197,19 +216,42 @@ try {
     $contactId = $contactResponse['result'] ?? null;
 
     $dealTitle = "$name | $phone | $city | $eventType | $eventDate | $guests гостей | $age лет | $formatMain | $formatTempo | $goalsStr";
+    if ($citySlug) {
+        $dealTitle .= " | slug: $citySlug";
+    }
 
     $dealComments =
     "ДАННЫЕ ИЗ QUIZ:\n" .
     "Имя: $name\n" .
     "Телефон: $phone\n" .
-    "Город: $city\n" .
+    "Город: $city\n";
+    if ($citySlug) {
+        $dealComments .= "Город (slug): $citySlug\n";
+    }
+    $dealComments .=
     "Тип мероприятия: $eventType\n" .
     "Дата: $eventDate\n" .
     "Гостей: $guests\n" .
     "Средний возраст: $age\n" .
     "Формат основной: $formatMain\n" .
     "Программа: $formatTempo\n" .
-    "Цели: $goalsStr";
+    "Цели: $goalsStr\n";
+
+    if ($landingPage) {
+        $dealComments .= "Текущая страница: $landingPage\n";
+    }
+    if ($firstLandingPage) {
+        $dealComments .= "Первая страница входа: $firstLandingPage\n";
+    }
+    if ($referrer) {
+        $dealComments .= "Referrer: $referrer\n";
+    }
+    if ($utm_source || $utm_medium || $utm_campaign || $utm_content || $utm_term) {
+        $dealComments .= "UTM: source=$utm_source; medium=$utm_medium; campaign=$utm_campaign; content=$utm_content; term=$utm_term\n";
+    }
+    if ($gclid || $yclid || $fbclid || $ttclid) {
+        $dealComments .= "Click IDs: gclid=$gclid; yclid=$yclid; fbclid=$fbclid; ttclid=$ttclid\n";
+    }
 
     $stageId = isset($data['stageId'])
         ? htmlspecialchars($data['stageId'], ENT_QUOTES, 'UTF-8')
@@ -225,6 +267,23 @@ try {
             'COMMENTS' => $dealComments
         ]
     ];
+
+    // UTM-поля Bitrix24, если заданы
+    if ($utm_source !== '') {
+        $dealPayload['fields']['UTM_SOURCE'] = $utm_source;
+    }
+    if ($utm_medium !== '') {
+        $dealPayload['fields']['UTM_MEDIUM'] = $utm_medium;
+    }
+    if ($utm_campaign !== '') {
+        $dealPayload['fields']['UTM_CAMPAIGN'] = $utm_campaign;
+    }
+    if ($utm_content !== '') {
+        $dealPayload['fields']['UTM_CONTENT'] = $utm_content;
+    }
+    if ($utm_term !== '') {
+        $dealPayload['fields']['UTM_TERM'] = $utm_term;
+    }
 
     if ($contactId) {
         $dealPayload['fields']['CONTACT_ID'] = $contactId;

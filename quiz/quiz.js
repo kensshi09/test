@@ -530,6 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // Отправляем данные на backend
+                const tracking = typeof window.getTrackingData === 'function' ? window.getTrackingData() : {};
                 const quizData = {
                     name: name,
                     phone: phone,
@@ -540,7 +541,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     age: age,
                     formatMain: formatMain,
                     formatTempo: formatTempo,
-                    selectedGoals: selectedGoals
+                    selectedGoals: selectedGoals,
+                    tracking: tracking
                 };
 
                 console.log('📤 Sending quiz data to backend:', quizData);

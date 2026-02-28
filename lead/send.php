@@ -96,6 +96,25 @@ $name = htmlspecialchars($data['name'], ENT_QUOTES, 'UTF-8');
 $phone = htmlspecialchars($data['phone'], ENT_QUOTES, 'UTF-8');
 $source = isset($data['source']) ? htmlspecialchars($data['source'], ENT_QUOTES, 'UTF-8') : 'quick_lead';
 
+// Трекинг-данные (utm / landing / referrer / city_slug и т.д.)
+$tracking = isset($data['tracking']) && is_array($data['tracking']) ? $data['tracking'] : [];
+
+$utm_source = isset($tracking['utm_source']) ? htmlspecialchars($tracking['utm_source'], ENT_QUOTES, 'UTF-8') : '';
+$utm_medium = isset($tracking['utm_medium']) ? htmlspecialchars($tracking['utm_medium'], ENT_QUOTES, 'UTF-8') : '';
+$utm_campaign = isset($tracking['utm_campaign']) ? htmlspecialchars($tracking['utm_campaign'], ENT_QUOTES, 'UTF-8') : '';
+$utm_content = isset($tracking['utm_content']) ? htmlspecialchars($tracking['utm_content'], ENT_QUOTES, 'UTF-8') : '';
+$utm_term = isset($tracking['utm_term']) ? htmlspecialchars($tracking['utm_term'], ENT_QUOTES, 'UTF-8') : '';
+
+$landingPage = isset($tracking['landingPage']) ? htmlspecialchars($tracking['landingPage'], ENT_QUOTES, 'UTF-8') : '';
+$firstLandingPage = isset($tracking['firstLandingPage']) ? htmlspecialchars($tracking['firstLandingPage'], ENT_QUOTES, 'UTF-8') : '';
+$referrer = isset($tracking['referrer']) ? htmlspecialchars($tracking['referrer'], ENT_QUOTES, 'UTF-8') : '';
+$citySlug = isset($tracking['citySlug']) ? htmlspecialchars($tracking['citySlug'], ENT_QUOTES, 'UTF-8') : '';
+
+$gclid = isset($tracking['gclid']) ? htmlspecialchars($tracking['gclid'], ENT_QUOTES, 'UTF-8') : '';
+$yclid = isset($tracking['yclid']) ? htmlspecialchars($tracking['yclid'], ENT_QUOTES, 'UTF-8') : '';
+$fbclid = isset($tracking['fbclid']) ? htmlspecialchars($tracking['fbclid'], ENT_QUOTES, 'UTF-8') : '';
+$ttclid = isset($tracking['ttclid']) ? htmlspecialchars($tracking['ttclid'], ENT_QUOTES, 'UTF-8') : '';
+
 // Валидация имени (минимум 2 символа)
 if (mb_strlen($name) < 2) {
     http_response_code(400);
@@ -193,10 +212,32 @@ try {
     // 2. СОЗДАЕМ СДЕЛКУ
     // =============================================
     $dealTitle = "Быстрая заявка | $name | $phone";
+    if ($citySlug) {
+        $dealTitle .= " | город: $citySlug";
+    }
+
     $dealComments = "БЫСТРАЯ ЗАЯВКА (упрощенная форма):\n";
     $dealComments .= "Имя: $name\n";
     $dealComments .= "Телефон: $phone\n";
     $dealComments .= "Источник: $source\n";
+    if ($citySlug) {
+        $dealComments .= "Город (slug): $citySlug\n";
+    }
+    if ($landingPage) {
+        $dealComments .= "Текущая страница: $landingPage\n";
+    }
+    if ($firstLandingPage) {
+        $dealComments .= "Первая страница входа: $firstLandingPage\n";
+    }
+    if ($referrer) {
+        $dealComments .= "Referrer: $referrer\n";
+    }
+    if ($utm_source || $utm_medium || $utm_campaign || $utm_content || $utm_term) {
+        $dealComments .= "UTM: source=$utm_source; medium=$utm_medium; campaign=$utm_campaign; content=$utm_content; term=$utm_term\n";
+    }
+    if ($gclid || $yclid || $fbclid || $ttclid) {
+        $dealComments .= "Click IDs: gclid=$gclid; yclid=$yclid; fbclid=$fbclid; ttclid=$ttclid\n";
+    }
     $dealComments .= "Дата заявки: " . date('d.m.Y H:i:s');
     
     $dealPayload = [
@@ -209,6 +250,23 @@ try {
             'COMMENTS' => $dealComments
         ]
     ];
+
+    // UTM-поля Bitrix24, если заданы
+    if ($utm_source !== '') {
+        $dealPayload['fields']['UTM_SOURCE'] = $utm_source;
+    }
+    if ($utm_medium !== '') {
+        $dealPayload['fields']['UTM_MEDIUM'] = $utm_medium;
+    }
+    if ($utm_campaign !== '') {
+        $dealPayload['fields']['UTM_CAMPAIGN'] = $utm_campaign;
+    }
+    if ($utm_content !== '') {
+        $dealPayload['fields']['UTM_CONTENT'] = $utm_content;
+    }
+    if ($utm_term !== '') {
+        $dealPayload['fields']['UTM_TERM'] = $utm_term;
+    }
     
     // Добавляем CONTACT_ID только если контакт был создан
     if ($contactId) {
